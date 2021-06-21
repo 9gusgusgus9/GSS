@@ -25,4 +25,16 @@ public class Payment extends Entity {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public String getNamePrimaryKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setPrimaryKey(int primaryKey) {
+		// TODO Auto-generated method stub
+		
+	}
 }

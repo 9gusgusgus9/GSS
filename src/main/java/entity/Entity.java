@@ -33,4 +33,8 @@ public abstract class Entity {
 	public abstract String getColumnList();
 	
 	public abstract String getValues();
+	
+	public abstract String getNamePrimaryKey();
+
+	public abstract void setPrimaryKey(int primaryKey);
 }

@@ -85,4 +85,16 @@ public class Person extends Entity{
 	public String getValues() {
 		return this.codiceFiscale + ", " + this.nome + ", " + this.cognome + ", ";
 	}
+
+	@Override
+	public String getNamePrimaryKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setPrimaryKey(int primaryKey) {
+		// TODO Auto-generated method stub
+		
+	}
 }
