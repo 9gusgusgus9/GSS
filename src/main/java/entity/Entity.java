@@ -14,6 +14,7 @@ public abstract class Entity {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			
 		}
 	}
 	
