@@ -1,13 +1,15 @@
 package entity;
 
+import java.awt.image.BufferedImage;
+
 public class Document extends Entity{
 	public final static String TABLENAME="possesso";
 	private final static String COLUMNS="(CodDocumento, CF, File)";
 	
 	private int CodDocumento;
-	private String 
+	private String CF;
+	private BufferedImage file;
 	
-
 	@Override
 	public String getTableName() {
 		return null;

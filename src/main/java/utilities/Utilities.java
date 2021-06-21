@@ -1,13 +1,19 @@
 package utilities;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import entity.Category;
 import entity.Entity;
+import entity.Event;
+import entity.Payment;
 
 public class Utilities {
 
@@ -30,12 +36,18 @@ public class Utilities {
 			e.printStackTrace();
 		}
 
+		//InputStream is = new FileInputStream("C:\\Users\\tbrin\\Desktop\\b1SB.png");
+		//PreparedStatement ps = conn.prepareStatement("INSERT INTO immagine(IdImmagine, Nome, TipoFile, DatiFile) VALUES ('1', 'bomber','.png', ?)");
+		//ps.setBlob(1, is);
+		//ps.execute();
+		//stmt.executeUpdate("INSERT INTO IMMAGINE(IdImmagine,Nome,TipoFile)");
+
 		String query = "INSERT INTO " + entity.getTableName() + " " + entity.getColumnList() + " VALUES "
 				+ entity.getValues();
 		stmt.executeUpdate(query);
 		query = "SELECT * FROM " + entity.getTableName() + " ORDER BY " + entity.getNamePrimaryKey() + " DESC LIMIT 1";
 		ResultSet rs = stmt.executeQuery(query);
-		if(rs.next()) {
+		if (rs.next() && (entity.getClass().equals(Category.class) || entity.getClass().equals(Event.class) || entity.getClass().equals(Payment.class))) {
 			entity.setPrimaryKey(Integer.parseInt(rs.getString(1)));
 		}
 		conn.close();
@@ -54,17 +66,18 @@ public class Utilities {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		stmt.executeUpdate("DELETE FROM " + entity.getTableName() + " AS e WHERE e." + entity.getNamePrimaryKey() + "=" + entity.getPrimaryKey());
+
+		stmt.executeUpdate("DELETE FROM " + entity.getTableName() + " AS e WHERE e." + entity.getNamePrimaryKey() + "="
+				+ entity.getPrimaryKey());
 		conn.close();
 		stmt.close();
 	}
 
 	// InputStream is = new FileInputStream("C:\\Users\\tbrin\\Desktop\\b1SB.png");
-		// PreparedStatement ps = conn.prepareStatement("INSERT INTO immagine
-		// (IdImmagine, Nome, TipoFile, DatiFimmagineimmagineile) VALUES ('1', 'bomber',
-		// '.png', ?)");
-		// ps.setBlob(1, is);
-		// ps.execute();
-		// stmt.executeUpdate("INSERT INTO IMMAGINE(IdImmagine,Nome,TipoFile)");
+	// PreparedStatement ps = conn.prepareStatement("INSERT INTO immagine
+	// (IdImmagine, Nome, TipoFile, DatiFimmagineimmagineile) VALUES ('1', 'bomber',
+	// '.png', ?)");
+	// ps.setBlob(1, is);
+	// ps.execute();
+	// stmt.executeUpdate("INSERT INTO IMMAGINE(IdImmagine,Nome,TipoFile)");
 }
