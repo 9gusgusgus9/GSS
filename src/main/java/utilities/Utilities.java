@@ -9,6 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import entity.Category;
 import entity.Entity;
@@ -23,24 +26,22 @@ public class Utilities {
 	static {
 
 	}
-
-	public static void insertEntity(Entity entity) throws SQLException, FileNotFoundException {
+	
+	private static void dbConnection() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/team_management", "root",
-					"Tommasocalcio10");
+					"Rr10112810");
 			stmt = conn.createStatement();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
 
-		//InputStream is = new FileInputStream("C:\\Users\\tbrin\\Desktop\\b1SB.png");
-		//PreparedStatement ps = conn.prepareStatement("INSERT INTO immagine(IdImmagine, Nome, TipoFile, DatiFile) VALUES ('1', 'bomber','.png', ?)");
-		//ps.setBlob(1, is);
-		//ps.execute();
-		//stmt.executeUpdate("INSERT INTO IMMAGINE(IdImmagine,Nome,TipoFile)");
+	public static void insertEntity(Entity entity) throws SQLException, FileNotFoundException {
+		dbConnection();
 
 		String query = "INSERT INTO " + entity.getTableName() + " " + entity.getColumnList() + " VALUES "
 				+ entity.getValues();
@@ -56,28 +57,36 @@ public class Utilities {
 	};
 
 	public static void deleteEntity(Entity entity) throws SQLException {
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/team_management", "root",
-					"Tommasocalcio10");
-			stmt = conn.createStatement();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
+		dbConnection();
+		
 		stmt.executeUpdate("DELETE FROM " + entity.getTableName() + " AS e WHERE e." + entity.getNamePrimaryKey() + "="
 				+ entity.getPrimaryKey());
 		conn.close();
 		stmt.close();
 	}
+	
+	public static void update(Entity entity, List<Pair<String, String>> fields) throws SQLException, FileNotFoundException {
+		dbConnection();
+		
+		Iterator<Pair<String, String>> it = fields.iterator();
 
-	// InputStream is = new FileInputStream("C:\\Users\\tbrin\\Desktop\\b1SB.png");
-	// PreparedStatement ps = conn.prepareStatement("INSERT INTO immagine
-	// (IdImmagine, Nome, TipoFile, DatiFimmagineimmagineile) VALUES ('1', 'bomber',
-	// '.png', ?)");
-	// ps.setBlob(1, is);
-	// ps.execute();
-	// stmt.executeUpdate("INSERT INTO IMMAGINE(IdImmagine,Nome,TipoFile)");
+		String query = "UPDATE " + entity.getTableName() + " SET";
+		
+		boolean check = it.hasNext();
+		
+		while (check) {
+			Pair<String, String> nxt = it.next();
+			query += " " + nxt.getX() + " = '" + nxt.getY() + "'";
+			check = it.hasNext();
+			if (check) {
+				query += ",";
+			}
+		}
+		
+		query += " WHERE " + entity.getNamePrimaryKey() + " = '" + entity.getPrimaryKey() + "'";
+		stmt.executeUpdate(query);
+		stmt.close();
+
+	};
+
 }

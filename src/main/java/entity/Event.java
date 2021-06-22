@@ -4,8 +4,9 @@ import utilities.DateTime;
 
 public class Event extends Entity {
 	public final static String TABLENAME="eventi";
-	private final static String COLUMNS="(Inizio, Fine, CodPartitaIva, NomeAvversario, Risultato, Descrizione_generico, CodCategoria)";
-	
+	private final static String MATCH_COLUMN="(Inizio, Fine, CodPartitaIva, NomeAvversario, Risultato, CodCategoria)";
+	private final static String TRAINING_COLUMN="(Inizio, Fine, CodPartitaIva, CodCategoria)";
+	private final static String EVENT_COLUMN="(Inizio, Fine, CodPartitaIva, Descrizione_generico)";
 	// Inserire le colonne per i tre tipi di eventi e testarlo
 	
 	
@@ -56,16 +57,32 @@ public class Event extends Entity {
 
 	@Override
 	public String getColumnList() {
-		return Event.COLUMNS;
+		if (this.codCategoria == 0) {
+			return Event.EVENT_COLUMN;
+		} else if (this.nomeAvversario != null) {
+			return Event.MATCH_COLUMN;
+		} else {
+			return Event.TRAINING_COLUMN;
+		}
 	}
 
 	public void setRisultato(String risultato) {
 		this.risultato=risultato;
 	}
 	
+	public String getRisultato() {
+		return this.risultato;
+	}
+	
 	@Override
 	public String getValues() {
-		return "('" + this.inizio.getDate() + "', '" + this.fine.getDate() + "', '" + this.codPartitaIva + "', '" + this.nomeAvversario + "', '" + this.risultato + "', '" + this.descrizione_generico + "', '" + this.codCategoria + "')";
+		if (this.codCategoria == 0) {
+			return "('" + this.inizio.getDate() + "', '" + this.fine.getDate() + "', '" + this.codPartitaIva + "', '" + this.descrizione_generico + "')";
+		} else if (this.nomeAvversario != null) {
+			return "('" + this.inizio.getDate() + "', '" + this.fine.getDate() + "', '" + this.codPartitaIva + "', '" + this.nomeAvversario + "', '" + this.risultato + "', '" + this.codCategoria + "')";
+		} else {
+			return "('" + this.inizio.getDate() + "', '" + this.fine.getDate() + "', '" + this.codPartitaIva + "', '" + this.codCategoria + "')";
+		}
 	}
 
 	@Override
