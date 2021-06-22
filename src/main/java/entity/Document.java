@@ -16,7 +16,7 @@ public class Document extends Entity{
 	@Override
 	public Object getPrimaryKey() {
 		// TODO Auto-generated method stub
-		return ;
+		return null;
 	}
 
 	@Override
