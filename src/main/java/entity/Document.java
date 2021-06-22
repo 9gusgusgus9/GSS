@@ -8,33 +8,39 @@ public class Document extends Entity{
 	private String cF;
 	private int codImmagine;
 	
+	public Document(int codDocumento, String cF, int codImmagine) {
+		super();
+		this.codDocumento = codDocumento;
+		this.cF = cF;
+		this.codImmagine = codImmagine;
+	}
+
 	@Override
 	public String getTableName() {
-		return this.TABLENAME;
+		return Document.TABLENAME;
 	}
 
 	@Override
 	public Object getPrimaryKey() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getValues();
 	}
 
 	@Override
 	public String getColumnList() {
 		// TODO Auto-generated method stub
-		return null;
+		return Document.COLUMNS;
 	}
 
 	@Override
 	public String getValues() {
 		// TODO Auto-generated method stub
-		return null;
+		return "(" + this.codDocumento+", " + this.cF + ", " + this.codImmagine + ")";
 	}
 
 	@Override
 	public String getNamePrimaryKey() {
 		// TODO Auto-generated method stub
-		return null;
+		return Document.COLUMNS;
 	}
 
 	@Override

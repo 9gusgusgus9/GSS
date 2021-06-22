@@ -1,39 +1,39 @@
 package entity;
-import java.awt.image.BufferedImage;
 
 import utilities.DateTime;
 
 public class Person extends Entity{
 	public final static String TABLENAME="persona";
+	public final static String COLUMNS="(CF, CodPagamento, Nome, Cognome, Data, Matricola_tesserino, CodSesso, CodPartitaIVA, CodImmagine, CodRuoloPersona";
 	private String codiceFiscale;
 	private String nome;
 	private String cognome;
 	private DateTime data;
 	private String codSesso;
 	private int matricola;
-	private BufferedImage image;
+	private int codImmagine;
 	
 	
 		
 	public Person(String codiceFiscale, String nome, String cognome, DateTime data, String codSesso,
-			BufferedImage image) {
+			int image) {
 		this.codiceFiscale = codiceFiscale;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.data = data;
 		this.codSesso = codSesso;
-		this.image = image;
+		this.codImmagine = image;
 		this.matricola = 0;
 	}
 
 	public Person(String codiceFiscale, String nome, String cognome, DateTime data, String codSesso,
-			BufferedImage image, int matricola) {
+			int image, int matricola) {
 		this.codiceFiscale = codiceFiscale;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.data = data;
 		this.codSesso = codSesso;
-		this.image = image;
+		this.codImmagine = image;
 		this.matricola = matricola;
 	}
 
@@ -57,8 +57,8 @@ public class Person extends Entity{
 		return matricola;
 	}
 
-	public BufferedImage getImage() {
-		return image;
+	public int getImage() {
+		return codImmagine;
 	}
 
 	@Override
@@ -73,17 +73,13 @@ public class Person extends Entity{
 
 	@Override
 	public String getColumnList() {
-		if(this.matricola == 0) {
-			return "(CF, Nome, Cognome, Data, CodSesso, CodImmagine, ";
-		} else {
-			return "(CF, Nome, Cognome, Matricola, ";
-		}
+		return "";
 		
 	}
 
 	@Override
 	public String getValues() {
-		return this.codiceFiscale + ", " + this.nome + ", " + this.cognome + ", ";
+		return "('" + this.codiceFiscale + "', '" + this.nome + "', '" + this.cognome + "', '" + this.data.getDate() + " " + this.data.getTime() + "', '" + this.matricola + "', '" + this.codSesso + "', " + this.codImmagine;
 	}
 
 	@Override

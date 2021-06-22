@@ -42,12 +42,12 @@ public class Utilities {
 
 	public static void insertEntity(Entity entity) throws SQLException, FileNotFoundException {
 		dbConnection();
-
-		//InputStream is = new FileInputStream("C:\\Users\\tbrin\\Desktop\\b1SB.png");
-		//PreparedStatement ps = conn.prepareStatement("INSERT INTO immagine(IdImmagine, Nome, TipoFile, DatiFile) VALUES ('1', 'bomber','.png', ?)");
-		//ps.setBlob(1, is);
-		//ps.execute();
-		
+//
+//		InputStream is = new FileInputStream("src/main/resources/img/pallavolo.jpg");
+//		PreparedStatement ps = conn.prepareStatement("INSERT INTO immagine(IdImmagine, Nome, TipoFile, DatiFile) VALUES ('1', 'bomber','.jpg', ?)");
+//		ps.setBlob(1, is);
+//		ps.execute();
+//		
 
 		String query = "INSERT INTO " + entity.getTableName() + " " + entity.getColumnList() + " VALUES "
 				+ entity.getValues();
