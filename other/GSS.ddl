@@ -99,8 +99,8 @@ create table PERSONA (
 create table POSSESSO (
      CodDocumento int not null,
      CF varchar(16) not null,
-     File bigint not null,
-     constraint IDPOSSESSO primary key (CodDocumento, CF));
+     CodImmagine int not null,
+     constraint IDPOSSESSO primary key (CodDocumento, CF, CodImmagine));
 
 create table RUOLO_DIRIGENTE (
      IdRuoloDirigente varchar(5) not null,
@@ -243,6 +243,10 @@ alter table POSSESSO add constraint FKRCodPersona
 alter table POSSESSO add constraint FKCodTipoDocumento
      foreign key (CodDocumento)
      references TIPO_DOCUMENTO (IdDocumento);
+
+alter table POSSESSO add constraint FKRiferimento
+     foreign key (CodImmagine)
+     references IMMAGINE (IdImmagine);
 
 alter table SOCIETA add constraint FKpratica
      foreign key (CodSport)
