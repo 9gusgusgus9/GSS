@@ -3,6 +3,22 @@ package utilities;
 public class DateTime {
 	private int anno, mese, giorno, ora, minuto;
 	
+	public DateTime(int anno, int mese, int giorno, int ora, int minuto) {
+		this.anno = anno;
+		this.mese = mese;
+		this.giorno = giorno;
+		this.ora = ora;
+		this.minuto = minuto;
+	}
+	
+	public DateTime(int anno, int mese, int giorno) {
+		this.anno = anno;
+		this.mese = mese;
+		this.giorno = giorno;
+		this.ora = 0;
+		this.minuto = 0;
+	}
+	
 	public int getAnno() {
 		return anno;
 	}
@@ -23,22 +39,6 @@ public class DateTime {
 		return minuto;
 	}
 
-	public DateTime(int anno, int mese, int giorno, int ora, int minuto) {
-		this.anno = anno;
-		this.mese = mese;
-		this.giorno = giorno;
-		this.ora = ora;
-		this.minuto = minuto;
-	}
-	
-	public DateTime(int anno, int mese, int giorno) {
-		this.anno = anno;
-		this.mese = mese;
-		this.giorno = giorno;
-		this.ora = 0;
-		this.minuto = 0;
-	}
-	
 	public String getDate() {
 		return this.giorno+"/"+this.mese+"/"+this.anno;
 	}

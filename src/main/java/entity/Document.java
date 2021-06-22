@@ -1,8 +1,15 @@
 package entity;
 
+import java.awt.image.BufferedImage;
+
 public class Document extends Entity{
 	public final static String TABLENAME="possesso";
-
+	private final static String COLUMNS="(CodDocumento, CF, File)";
+	
+	private int CodDocumento;
+	private String CF;
+	private BufferedImage file;
+	
 	@Override
 	public String getTableName() {
 		return null;
@@ -24,5 +31,17 @@ public class Document extends Entity{
 	public String getValues() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public String getNamePrimaryKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setPrimaryKey(int primaryKey) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -9,6 +9,7 @@
 -- ********************************************* 
 
 
+
 -- Database Section
 -- ________________ 
 
@@ -68,7 +69,7 @@ create table IMMAGINE (
      IdImmagine int not null auto_increment,
      Nome varchar(255) not null,
      TipoFile varchar(128) not null,
-     DatiFimmagineimmagineile longblob not null,
+     DatiFile longblob not null,
      constraint IDFOTO primary key (IdImmagine));
 
 create table MANO_PIEDE_PREFERITO (

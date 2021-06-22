@@ -5,16 +5,15 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import entity.Category;
-import entity.Document;
 import entity.Entity;
 import entity.Event;
 import entity.Payment;
-import entity.Person;
-import entity.Society;
 
 public class Utilities {
 
@@ -26,93 +25,59 @@ public class Utilities {
 	}
 
 	public static void insertEntity(Entity entity) throws SQLException, FileNotFoundException {
-		if (entity.getClass().equals(Society.class)) {
-			try {
-				Class.forName("com.mysql.cj.jdbc.Driver");
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/team_management", "root",
-						"Tommasocalcio10");
-				stmt = conn.createStatement();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-			String query = "";
-
-			switch (entity.getTableName()) {
-			case Society.TABLENAME:
-				Society society = (Society) entity;
-				query = "INSERT INTO " + Society.TABLENAME + " (PartitaIVA, Nome, CodSport, CodImmagine) VALUES ('"
-						+ society.getPrimaryKey() + "', '" + society.getNome() + "', '1','1')";
-				break;
-			case Category.TABLENAME:
-				Category category = (Category) entity;
-				query = "INSERT INTO " + category.getTableName()
-						+ " (PartitaIVA, Nome, CodSport, CodImmagine) VALUES ('" + category.getPrimaryKey() + "', '"
-						+ category.getNome() + "', '1','1')";
-				break;
-			case Document.TABLENAME:
-				Document document = (Document) entity;
-				query = "INSERT INTO " + document.getTableName()
-						+ " (PartitaIVA, Nome, CodSport, CodImmagine) VALUES ('" + document.getPrimaryKey()
-						+ "', '', '1','1')";
-				break;
-			case Event.TABLENAME:
-				Event event = (Event) entity;
-				query = "INSERT INTO " + event.getTableName() + " (PartitaIVA, Nome, CodSport, CodImmagine) VALUES ('"
-						+ event.getPrimaryKey() + "', '', '1','1')";
-				break;
-			case Payment.TABLENAME:
-				Payment payment = (Payment) entity;
-				query = "INSERT INTO " + payment.getTableName() + " (PartitaIVA, Nome, CodSport, CodImmagine) VALUES ('"
-						+ payment.getPrimaryKey() + "', '', '1','1')";
-				break;
-			case Person.TABLENAME:
-				Person person = (Person) entity;
-				break;
-			}
-
-			InputStream is = new FileInputStream("C:\\Users\\tbrin\\Desktop\\b1SB.png");
-			// PreparedStatement ps = conn.prepareStatement("INSERT INTO immagine
-			// (IdImmagine, Nome, TipoFile, DatiFimmagineimmagineile) VALUES ('1', 'bomber',
-			// '.png', ?)");
-			// ps.setBlob(1, is);
-			// ps.execute();
-			// stmt.executeUpdate("INSERT INTO IMMAGINE(IdImmagine,Nome,TipoFile)");
-//			stmt.executeUpdate("INSERT INTO " +entity.getTableName() + " (PartitaIVA, Nome, CodSport, CodImmagine) VALUES ('" + society.getPrimaryKey() +"', '" + society.getNome() + "', '1','1')" );
-			stmt.executeUpdate(query);
-			conn.close();
-			stmt.close();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/team_management", "root",
+					"Tommasocalcio10");
+			stmt = conn.createStatement();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+
+		//InputStream is = new FileInputStream("C:\\Users\\tbrin\\Desktop\\b1SB.png");
+		//PreparedStatement ps = conn.prepareStatement("INSERT INTO immagine(IdImmagine, Nome, TipoFile, DatiFile) VALUES ('1', 'bomber','.png', ?)");
+		//ps.setBlob(1, is);
+		//ps.execute();
+		//stmt.executeUpdate("INSERT INTO IMMAGINE(IdImmagine,Nome,TipoFile)");
+
+		String query = "INSERT INTO " + entity.getTableName() + " " + entity.getColumnList() + " VALUES "
+				+ entity.getValues();
+		stmt.executeUpdate(query);
+		query = "SELECT * FROM " + entity.getTableName() + " ORDER BY " + entity.getNamePrimaryKey() + " DESC LIMIT 1";
+		ResultSet rs = stmt.executeQuery(query);
+		if (rs.next() && (entity.getClass().equals(Category.class) || entity.getClass().equals(Event.class) || entity.getClass().equals(Payment.class))) {
+			entity.setPrimaryKey(Integer.parseInt(rs.getString(1)));
+		}
+		conn.close();
+		stmt.close();
 
 	};
 
 	public static void deleteEntity(Entity entity) throws SQLException {
-		if (entity.getClass().equals(Society.class)) {
-			try {
-				Class.forName("com.mysql.cj.jdbc.Driver");
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/team_management", "root",
-						"Tommasocalcio10");
-				stmt = conn.createStatement();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			Society society = (Society) entity;
-			// InputStream is = new FileInputStream("C:\\Users\\tbrin\\Desktop\\b1SB.png");
-			// PreparedStatement ps = conn.prepareStatement("INSERT INTO immagine
-			// (IdImmagine, Nome, TipoFile, DatiFimmagineimmagineile) VALUES ('1', 'bomber',
-			// '.png', ?)");
-			// ps.setBlob(1, is);
-			// ps.execute();
-			// stmt.executeUpdate("INSERT INTO IMMAGINE(IdImmagine,Nome,TipoFile)");
-			stmt.executeUpdate("DELETE FROM societa AS s WHERE s.PartitaIVA=" + society.getPrimaryKey());
-			conn.close();
-			stmt.close();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/team_management", "root",
+					"Tommasocalcio10");
+			stmt = conn.createStatement();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 
-	};
+		stmt.executeUpdate("DELETE FROM " + entity.getTableName() + " AS e WHERE e." + entity.getNamePrimaryKey() + "="
+				+ entity.getPrimaryKey());
+		conn.close();
+		stmt.close();
+	}
 
+	// InputStream is = new FileInputStream("C:\\Users\\tbrin\\Desktop\\b1SB.png");
+	// PreparedStatement ps = conn.prepareStatement("INSERT INTO immagine
+	// (IdImmagine, Nome, TipoFile, DatiFimmagineimmagineile) VALUES ('1', 'bomber',
+	// '.png', ?)");
+	// ps.setBlob(1, is);
+	// ps.execute();
+	// stmt.executeUpdate("INSERT INTO IMMAGINE(IdImmagine,Nome,TipoFile)");
 }
