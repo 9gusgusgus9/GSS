@@ -93,7 +93,6 @@ create table PERSONA (
      CodSesso varchar(10) not null,
      CodPartitaIVA varchar(11) not null,
      CodImmagine int not null,
-     CodRuoloPersona varchar(10) not null,
      constraint IDPERSONA primary key (CF));
 
 create table POSSESSO (
