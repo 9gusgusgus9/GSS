@@ -1,8 +1,11 @@
 package utilities;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -22,16 +25,27 @@ public class Utilities {
 
 	private static Connection conn;
 	private static Statement stmt;
-
+	private static String password = null;
 	static {
 
 	}
 	
 	private static void dbConnection() {
 		try {
+			password.equals(null);
+		}catch(NullPointerException e){
+			System.out.println("Inserire la password di root:");
+			BufferedReader variabile = new BufferedReader(new InputStreamReader(System.in));
+			try {
+				password = variabile.readLine();
+			} catch (IOException e1) {
+				e.printStackTrace();
+			}
+		}
+		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/team_management", "root",
-					"Rr10112810");
+					password);
 			stmt = conn.createStatement();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -51,6 +65,7 @@ public class Utilities {
 
 		String query = "INSERT INTO " + entity.getTableName() + " " + entity.getColumnList() + " VALUES "
 				+ entity.getValues();
+		System.out.println(query);
 		stmt.executeUpdate(query);
 		query = "SELECT * FROM " + entity.getTableName() + " ORDER BY " + entity.getNamePrimaryKey() + " DESC LIMIT 1";
 		ResultSet rs = stmt.executeQuery(query);

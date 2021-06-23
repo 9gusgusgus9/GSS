@@ -5,37 +5,41 @@ import utilities.DateTime;
 public class Person extends Entity{
 	public final static String TABLENAME="persona";
 	public final static String PRIMARY_K_NAME = "CF";
-	public final static String COLUMNS="(CF, CodPagamento, Nome, Cognome, Data, Matricola_tesserino, CodSesso, CodPartitaIVA, CodImmagine, CodRuoloPersona";
+	public final static String COLUMNS="(CF, CodPagamento, Nome, Cognome, Data, Matricola_tesserino, CodSesso, CodPartitaIVA, CodImmagine)";
 	private String codiceFiscale;
+	private int codPagamento;
 	private String nome;
 	private String cognome;
 	private DateTime data;
 	private String codSesso;
 	private int matricola;
 	private int codImmagine;
-	
-	
+	private String codPartitaIva;
 		
-	public Person(String codiceFiscale, String nome, String cognome, DateTime data, String codSesso,
+	public Person(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
 			int image) {
 		this.codiceFiscale = codiceFiscale;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.data = data;
+		this.codPagamento = codPagamento;
 		this.codSesso = codSesso;
 		this.codImmagine = image;
 		this.matricola = 0;
+		this.codPartitaIva=codPartitaIva;
 	}
 
-	public Person(String codiceFiscale, String nome, String cognome, DateTime data, String codSesso,
+	public Person(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
 			int image, int matricola) {
 		this.codiceFiscale = codiceFiscale;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.data = data;
+		this.codPagamento = codPagamento;
 		this.codSesso = codSesso;
 		this.codImmagine = image;
 		this.matricola = matricola;
+		this.codPartitaIva=codPartitaIva;
 	}
 
 	public String getNome() {
@@ -48,6 +52,10 @@ public class Person extends Entity{
 
 	public DateTime getData() {
 		return data;
+	}
+
+	public int getCodPagamento() {
+		return codPagamento;
 	}
 
 	public String getCodSesso() {
@@ -64,7 +72,7 @@ public class Person extends Entity{
 
 	@Override
 	public String getTableName() {
-		return null;
+		return Person.TABLENAME;
 	}
 
 	@Override
@@ -80,13 +88,12 @@ public class Person extends Entity{
 
 	@Override
 	public String getValues() {
-		return "('" + this.codiceFiscale + "', '" + this.nome + "', '" + this.cognome + "', '" + this.data.getDate() + " " + this.data.getTime() + "', '" + this.matricola + "', '" + this.codSesso + "', " + this.codImmagine;
+		return "('" + this.codiceFiscale + "', '" + this.codPagamento + "', '" + this.nome + "', '" + this.cognome + "', '" + this.data.getDate() + "', '" + this.matricola + "', '" + this.codSesso + "', '" + this.codPartitaIva + "', " + this.codImmagine + ")";
 	}
 
 	@Override
 	public String getNamePrimaryKey() {
-		// TODO Auto-generated method stub
-		return Player.PRIMARY_K_NAME;
+		return Person.PRIMARY_K_NAME;
 	}
 
 	@Override

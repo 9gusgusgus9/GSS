@@ -1,11 +1,16 @@
 package entity;
 
-import utilities.DateTime;
+import java.io.FileNotFoundException;
+import java.sql.SQLException;
 
-public class Player extends Person {
+import utilities.DateTime;
+import utilities.Utilities;
+
+public class Player extends Entity {
 	public final static String TABLENAME="giocatore";	
-	private final static String COLUMNS = ", Peso, Altezza, Data_scadenza_certificato, CodRuoloGiocatore, CodCategoria, CodPreferenza)";
+	private final static String COLUMNS = "(CF , Peso, Altezza, Data_scadenza_certificato, CodRuoloGiocatore, CodCategoria, CodPreferenza)";
 	
+	private Person person;
 	private String peso;
 	private String altezza;
 	private DateTime data_scadenza_certificato;
@@ -13,9 +18,9 @@ public class Player extends Person {
 	private int codCategoria;
 	private String codPreferenza;
 
-	public Player(String codiceFiscale, String nome, String cognome, DateTime data, String codSesso,
+	public Player(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
 			int image, int matricola, String peso, String altezza, DateTime data_scadenza_certificato, String codRuolo, int codCategoria, String codPreferenza) {
-		super(codiceFiscale, nome, cognome, data, codSesso, image, matricola);
+		person=new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, image, matricola);
 		this.peso = peso;
 		this.altezza = altezza;
 		this.data_scadenza_certificato = data_scadenza_certificato;
@@ -25,9 +30,9 @@ public class Player extends Person {
 
 	}
 
-	public Player(String codiceFiscale, String nome, String cognome, DateTime data, String codSesso,
+	public Player(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
 			int image, String peso, String altezza, DateTime data_scadenza_certificato, String codRuolo, int codCategoria, String codPreferenza) {
-		super(codiceFiscale, nome, cognome, data, codSesso, image);
+		person=new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, image);
 		this.peso = peso;
 		this.altezza = altezza;
 		this.data_scadenza_certificato = data_scadenza_certificato;
@@ -35,11 +40,15 @@ public class Player extends Person {
 		this.codCategoria = codCategoria;
 		this.codPreferenza = codPreferenza;
 
+	}
+	
+	public Person getPerson() {
+		return person;
 	}
 
 	@Override
 	public String getColumnList() {
-		return super.getColumnList() + Player.COLUMNS;
+		return Player.COLUMNS;
 	}
 
 	public String getPeso() {
@@ -68,7 +77,7 @@ public class Player extends Person {
 	
 	@Override
 	public String getValues() {
-		return super.getValues() +  ", '" + this.peso + "', '" + this.altezza + "', '" + this.data_scadenza_certificato.getDate() + " " + this.data_scadenza_certificato.getTime()+ "', '" + this.codRuolo + "', " + this.codCategoria + ", '" + this.codPreferenza + "') ";
+		return "('" + this.person.getPrimaryKey() +  "', '" + this.peso + "', '" + this.altezza + "', '" + this.data_scadenza_certificato.getDate() + "', '" + this.codRuolo + "', " + this.codCategoria + ", '" + this.codPreferenza + "') ";
 	}
 	
 	@Override
@@ -76,4 +85,31 @@ public class Player extends Person {
 		return Player.TABLENAME;
 	}
 	
+	@Override
+	public void insert() {
+		person.insert();
+		try {
+			Utilities.insertEntity(this);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public Object getPrimaryKey() {
+		return this.person.getPrimaryKey();
+	}
+
+	@Override
+	public String getNamePrimaryKey() {
+		return this.person.getNamePrimaryKey();
+	}
+
+	@Override
+	public void setPrimaryKey(int primaryKey) {
+		// TODO Auto-generated method stub
+		
+	}
 }

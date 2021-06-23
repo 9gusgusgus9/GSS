@@ -1,32 +1,45 @@
 package entity;
 
-import utilities.DateTime;
+import java.io.FileNotFoundException;
+import java.sql.SQLException;
 
-public class Staff extends Person {
+import utilities.DateTime;
+import utilities.Utilities;
+
+public class Staff extends Entity {
 
 	private static final String TABLENAME = "staff";
-	private static final String COLUMNS = ", codCategoria, codRuolo)";
+	private static final String COLUMNS = "(CF, CodCategoria, CodRuoloStaff)";
 	
 	private String codRuolo;
 	private int codCategoria;
+	private Person person;
 	
-	public Staff(String codiceFiscale, String nome, String cognome, DateTime data, String codSesso, int image,
+	public Staff(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva, int image,
 			int matricola, String codRuolo, int codCategoria) {
-		super(codiceFiscale, nome, cognome, data, codSesso, image, matricola);
+		person = new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, image, matricola);
 		this.codCategoria = codCategoria;
 		this.codRuolo = codRuolo;
 	}
 
-	public Staff(String codiceFiscale, String nome, String cognome, DateTime data, String codSesso,
+	public Staff(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
 			int image, String codRuolo, int codCategoria) {
-		super(codiceFiscale, nome, cognome, data, codSesso, image);
+		person = new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, image);
 		this.codCategoria = codCategoria;
 		this.codRuolo = codRuolo;
 	}
 	
+	public int getCodCategoria() {
+		return codCategoria;
+	}
+	
+	public String getCodRuolo() {
+		return codRuolo;
+	}
+
 	@Override
 	public String getColumnList() {
-		return super.getColumnList() + Staff.COLUMNS;
+		return Staff.COLUMNS;
 	}
 	
 	@Override
@@ -36,7 +49,36 @@ public class Staff extends Person {
 	
 	@Override
 	public String getValues() {
-		return super.getValues() + ", '" + this.codCategoria + "', " + this.codRuolo + ")";
+		return "('" + this.person.getPrimaryKey() + "', " + this.codCategoria + ", '" + this.codRuolo + "')";
+	}
+
+	@Override
+	public Object getPrimaryKey() {
+		return this.person.getPrimaryKey();
+	}
+
+	@Override
+	public String getNamePrimaryKey() {
+		// TODO Auto-generated method stub
+		return this.person.getNamePrimaryKey();
+	}
+
+	@Override
+	public void setPrimaryKey(int primaryKey) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void insert() {
+		person.insert();
+		try {
+			Utilities.insertEntity(this);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
