@@ -9,11 +9,12 @@ import entity.Sesso;
 import entity.Society;
 import entity.Sport;
 import utilities.DateTime;
+import utilities.Utilities;
 
 public class Prova {
 
 	public static void main(String[] args) throws SQLException {
-		
+//		Utilities.tableEmpty();
 		Society rick = new Society("12345678920","TOMMI",Sport.CALCIO);
 		rick.insert();		
 		Category allievi = new Category("allievi","12345678920", 1);

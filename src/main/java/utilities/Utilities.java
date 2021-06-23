@@ -29,11 +29,11 @@ public class Utilities {
 	static {
 
 	}
-	
+
 	private static void dbConnection() {
 		try {
 			password.equals(null);
-		}catch(NullPointerException e){
+		} catch (NullPointerException e) {
 			System.out.println("Inserire la password di root:");
 			BufferedReader variabile = new BufferedReader(new InputStreamReader(System.in));
 			try {
@@ -44,8 +44,7 @@ public class Utilities {
 		}
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/team_management", "root",
-					password);
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/team_management", "root", password);
 			stmt = conn.createStatement();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -69,7 +68,8 @@ public class Utilities {
 		stmt.executeUpdate(query);
 		query = "SELECT * FROM " + entity.getTableName() + " ORDER BY " + entity.getNamePrimaryKey() + " DESC LIMIT 1";
 		ResultSet rs = stmt.executeQuery(query);
-		if (rs.next() && (entity.getClass().equals(Category.class) || entity.getClass().equals(Event.class) || entity.getClass().equals(Payment.class))) {
+		if (rs.next() && (entity.getClass().equals(Category.class) || entity.getClass().equals(Event.class)
+				|| entity.getClass().equals(Payment.class))) {
 			entity.setPrimaryKey(Integer.parseInt(rs.getString(1)));
 		}
 		conn.close();
@@ -79,22 +79,23 @@ public class Utilities {
 
 	public static void deleteEntity(Entity entity) throws SQLException {
 		dbConnection();
-		
+
 		stmt.executeUpdate("DELETE FROM " + entity.getTableName() + " AS e WHERE e." + entity.getNamePrimaryKey() + "="
 				+ entity.getPrimaryKey());
 		conn.close();
 		stmt.close();
 	}
-	
-	public static void update(Entity entity, List<Pair<String, String>> fields) throws SQLException, FileNotFoundException {
+
+	public static void update(Entity entity, List<Pair<String, String>> fields)
+			throws SQLException, FileNotFoundException {
 		dbConnection();
-		
+
 		Iterator<Pair<String, String>> it = fields.iterator();
 
 		String query = "UPDATE " + entity.getTableName() + " SET";
-		
+
 		boolean check = it.hasNext();
-		
+
 		while (check) {
 			Pair<String, String> nxt = it.next();
 			query += " " + nxt.getX() + " = '" + nxt.getY() + "'";
@@ -103,11 +104,34 @@ public class Utilities {
 				query += ",";
 			}
 		}
-		
+
 		query += " WHERE " + entity.getNamePrimaryKey() + " = '" + entity.getPrimaryKey() + "'";
 		stmt.executeUpdate(query);
 		stmt.close();
 
 	};
+
+	public static void tableEmpty() throws SQLException {
+		dbConnection();
+		String query = "TRUNCATE TABLE team_management.dirigente";
+		stmt.executeUpdate(query);
+		query = "TRUNCATE TABLE team_management.staff";
+		stmt.executeUpdate(query);
+		query = "TRUNCATE TABLE team_management.giocatore";
+		stmt.executeUpdate(query);
+		query = "TRUNCATE TABLE team_management.convocazioni";
+		stmt.executeUpdate(query);
+		query = "TRUNCATE TABLE team_management.eventi";
+		stmt.executeUpdate(query);
+		query = "TRUNCATE TABLE team_management.persona";
+		stmt.executeUpdate(query);
+		query = "TRUNCATE TABLE team_management.pagamento";
+		stmt.executeUpdate(query);
+		query = "TRUNCATE TABLE team_management.categoria";
+		stmt.executeUpdate(query);
+		query = "TRUNCATE TABLE team_management.societa";
+		stmt.executeUpdate(query);
+		
+	}
 
 }
