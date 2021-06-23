@@ -3,8 +3,8 @@ package entity;
 import utilities.DateTime;
 
 public class Player extends Person {
-	
-	private final static String COLUMNS=Person.COLUMNS + ", Peso, Altezza, Data_scadenza_certificato, CodRuoloGiocatore, CodCategoria, CodPreferenza)";
+	public final static String TABLENAME="giocatore";	
+	private final static String COLUMNS = ", Peso, Altezza, Data_scadenza_certificato, CodRuoloGiocatore, CodCategoria, CodPreferenza)";
 	
 	private String peso;
 	private String altezza;
@@ -39,7 +39,7 @@ public class Player extends Person {
 
 	@Override
 	public String getColumnList() {
-		return COLUMNS;
+		return super.getColumnList() + Player.COLUMNS;
 	}
 
 	public String getPeso() {
@@ -69,6 +69,11 @@ public class Player extends Person {
 	@Override
 	public String getValues() {
 		return super.getValues() +  ", '" + this.peso + "', '" + this.altezza + "', '" + this.data_scadenza_certificato.getDate() + " " + this.data_scadenza_certificato.getTime()+ "', '" + this.codRuolo + "', " + this.codCategoria + ", '" + this.codPreferenza + "') ";
+	}
+	
+	@Override
+	public String getTableName() {
+		return Player.TABLENAME;
 	}
 	
 }

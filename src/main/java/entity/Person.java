@@ -4,6 +4,7 @@ import utilities.DateTime;
 
 public class Person extends Entity{
 	public final static String TABLENAME="persona";
+	public final static String PRIMARY_K_NAME = "CF";
 	public final static String COLUMNS="(CF, CodPagamento, Nome, Cognome, Data, Matricola_tesserino, CodSesso, CodPartitaIVA, CodImmagine, CodRuoloPersona";
 	private String codiceFiscale;
 	private String nome;
@@ -73,7 +74,7 @@ public class Person extends Entity{
 
 	@Override
 	public String getColumnList() {
-		return "";
+		return Person.COLUMNS;
 		
 	}
 
@@ -85,7 +86,7 @@ public class Person extends Entity{
 	@Override
 	public String getNamePrimaryKey() {
 		// TODO Auto-generated method stub
-		return null;
+		return Player.PRIMARY_K_NAME;
 	}
 
 	@Override
