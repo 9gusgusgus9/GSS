@@ -37,7 +37,7 @@ create table GIOCATORE (
      CF varchar(16) not null,
      Peso char(5) not null,
      Altezza char(5) not null,
-     Data_scadenza_certificato char(7) not null,
+     Data_scadenza_certificato varchar(20) not null,
      CodRuoloGiocatore varchar(5) not null,
      CodCategoria int not null,
      CodPreferenza varchar(2) not null,
@@ -56,8 +56,8 @@ create table DIRIGENTE (
 
 create table EVENTI (
      IdEvento int not null auto_increment,
-     Inizio varchar(15) not null,
-     Fine varchar(15) not null,
+     Inizio varchar(20) not null,
+     Fine varchar(20) not null,
      CodPartitaIVA varchar(11) not null,
      NomeAvversario varchar(40),
      Risultato varchar(5),
@@ -88,7 +88,7 @@ create table PERSONA (
      CodPagamento int not null,
      Nome varchar(25) not null,
      Cognome varchar(25) not null,
-     Data date not null,
+     Data varchar(20) not null,
      Matricola_tesserino varchar(20),
      CodSesso varchar(10) not null,
      CodPartitaIVA varchar(11) not null,
