@@ -9,10 +9,10 @@ public class Category extends Entity {
 	private int idCategoria;
 	private String nome;
 	
-	public Category(String nome, String codPartitaIVA, int codImmagine) {
+	public Category(String nome, String codPartitaIVA, Image image) {
 		super();
 		this.codPartitaIVA = codPartitaIVA;
-		this.codImmagine = codImmagine;
+		this.codImmagine = (int) image.getPrimaryKey();
 		this.nome = nome;
 	}
 	

@@ -1,6 +1,10 @@
 package entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import utilities.DateTime;
+import utilities.Pair;
 
 public class Event extends Entity {
 	public final static String TABLENAME="eventi";
@@ -68,6 +72,9 @@ public class Event extends Entity {
 
 	public void setRisultato(String risultato) {
 		this.risultato=risultato;
+		List<Pair<String, String>> list = new ArrayList<>();
+		list.add(new Pair<>("Risultato", this.risultato));
+		this.update(list);
 	}
 	
 	public String getRisultato() {

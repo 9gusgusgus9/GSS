@@ -19,6 +19,7 @@ import java.util.Map;
 import entity.Category;
 import entity.Entity;
 import entity.Event;
+import entity.Image;
 import entity.Payment;
 
 public class Utilities {
@@ -55,7 +56,7 @@ public class Utilities {
 
 	public static void insertEntity(Entity entity) throws SQLException, FileNotFoundException {
 		dbConnection();
-//
+
 //		InputStream is = new FileInputStream("src/main/resources/img/pallavolo.jpg");
 //		PreparedStatement ps = conn.prepareStatement("INSERT INTO immagine(IdImmagine, Nome, TipoFile, DatiFile) VALUES ('1', 'bomber','.jpg', ?)");
 //		ps.setBlob(1, is);
@@ -113,25 +114,41 @@ public class Utilities {
 
 	public static void tableEmpty() throws SQLException {
 		dbConnection();
-		String query = "TRUNCATE TABLE team_management.dirigente";
+		String query = "DELETE TABLE dirigente";
 		stmt.executeUpdate(query);
-		query = "TRUNCATE TABLE team_management.staff";
+		query = "DELETE TABLE team_management.staff";
 		stmt.executeUpdate(query);
-		query = "TRUNCATE TABLE team_management.giocatore";
+		query = "DELETE TABLE team_management.giocatore";
 		stmt.executeUpdate(query);
-		query = "TRUNCATE TABLE team_management.convocazioni";
+		query = "DELETE TABLE team_management.convocazioni";
 		stmt.executeUpdate(query);
-		query = "TRUNCATE TABLE team_management.eventi";
+		query = "DELETE TABLE team_management.eventi";
 		stmt.executeUpdate(query);
-		query = "TRUNCATE TABLE team_management.persona";
+		query = "DELETE TABLE team_management.persona";
 		stmt.executeUpdate(query);
-		query = "TRUNCATE TABLE team_management.pagamento";
+		query = "DELETE TABLE team_management.pagamento";
 		stmt.executeUpdate(query);
-		query = "TRUNCATE TABLE team_management.categoria";
+		query = "DELETE TABLE team_management.categoria";
 		stmt.executeUpdate(query);
-		query = "TRUNCATE TABLE team_management.societa";
+		query = "DELETE TABLE team_management.societa";
 		stmt.executeUpdate(query);
-		
+		conn.close();
+		stmt.close();
 	}
 
+	public static void insertImage(Image image) throws FileNotFoundException, SQLException {
+		dbConnection();
+		PreparedStatement ps = conn.prepareStatement("INSERT INTO immagine"+ image.getColumnList() +" VALUES "+ image.getValues());
+		ps.setBlob(1, image.getImage());
+		ps.execute();
+		String query = "SELECT * FROM " + image.getTableName() + " ORDER BY " + image.getNamePrimaryKey() + " DESC LIMIT 1";
+		ResultSet rs = stmt.executeQuery(query);
+		if (rs.next()) {
+			image.setPrimaryKey(Integer.parseInt(rs.getString(1)));
+		}
+		conn.close();
+		stmt.close();
+	
+	}
+	
 }

@@ -19,7 +19,7 @@ public class Player extends Entity {
 	private String codPreferenza;
 
 	public Player(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
-			int image, int matricola, String peso, String altezza, DateTime data_scadenza_certificato, String codRuolo, int codCategoria, String codPreferenza) {
+			Image image, int matricola, String peso, String altezza, DateTime data_scadenza_certificato, String codRuolo, int codCategoria, String codPreferenza) {
 		person=new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, image, matricola);
 		this.peso = peso;
 		this.altezza = altezza;
@@ -31,8 +31,32 @@ public class Player extends Entity {
 	}
 
 	public Player(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
-			int image, String peso, String altezza, DateTime data_scadenza_certificato, String codRuolo, int codCategoria, String codPreferenza) {
+			Image image, String peso, String altezza, DateTime data_scadenza_certificato, String codRuolo, int codCategoria, String codPreferenza) {
 		person=new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, image);
+		this.peso = peso;
+		this.altezza = altezza;
+		this.data_scadenza_certificato = data_scadenza_certificato;
+		this.codRuolo = codRuolo;
+		this.codCategoria = codCategoria;
+		this.codPreferenza = codPreferenza;
+
+	}
+	
+	public Player(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
+			int matricola, String peso, String altezza, DateTime data_scadenza_certificato, String codRuolo, int codCategoria, String codPreferenza) {
+		person=new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, matricola);
+		this.peso = peso;
+		this.altezza = altezza;
+		this.data_scadenza_certificato = data_scadenza_certificato;
+		this.codRuolo = codRuolo;
+		this.codCategoria = codCategoria;
+		this.codPreferenza = codPreferenza;
+
+	}
+
+	public Player(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
+			String peso, String altezza, DateTime data_scadenza_certificato, String codRuolo, int codCategoria, String codPreferenza) {
+		person=new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva);
 		this.peso = peso;
 		this.altezza = altezza;
 		this.data_scadenza_certificato = data_scadenza_certificato;

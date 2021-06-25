@@ -10,7 +10,7 @@ public class Society extends Entity {
 	private String partitaIVA;
 	private String nome;
 	private Sport sport;
-	private BufferedImage image;
+	private int codImmagine;
 	
 	public Society(String partitaIVA, String nome, Sport sport){
 		this.partitaIVA=partitaIVA;
@@ -18,11 +18,11 @@ public class Society extends Entity {
 		this.sport=sport;
 	}
 	
-	public Society(String partitaIVA, String nome, Sport sport, BufferedImage image){
+	public Society(String partitaIVA, String nome, Sport sport, Image image){
 		this.partitaIVA=partitaIVA;
 		this.nome=nome;
 		this.sport=sport;
-		this.image=image;
+		this.codImmagine = (int) image.getPrimaryKey();
 	}
 	
 	public String getPrimaryKey() {
@@ -38,8 +38,8 @@ public class Society extends Entity {
 		return sport;
 	}
 
-	public BufferedImage getImage() {
-		return image;
+	public int getImage() {
+		return this.codImmagine;
 	}
 
 	@Override
@@ -49,7 +49,6 @@ public class Society extends Entity {
 
 	@Override
 	public String getColumnList() {
-		// TODO Auto-generated method stub
 		return Society.COLUMNS;
 	}
 

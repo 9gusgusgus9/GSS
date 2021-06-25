@@ -17,31 +17,56 @@ public class Person extends Entity{
 	private String codPartitaIva;
 		
 	public Person(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
-			int image) {
+			Image image) {
 		this.codiceFiscale = codiceFiscale;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.data = data;
 		this.codPagamento = codPagamento;
 		this.codSesso = codSesso;
-		this.codImmagine = image;
+		this.codImmagine = (int) image.getPrimaryKey();
 		this.matricola = 0;
 		this.codPartitaIva=codPartitaIva;
 	}
 
 	public Person(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
-			int image, int matricola) {
+			Image image, int matricola) {
 		this.codiceFiscale = codiceFiscale;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.data = data;
 		this.codPagamento = codPagamento;
 		this.codSesso = codSesso;
-		this.codImmagine = image;
+		this.codImmagine = (int) image.getPrimaryKey();
 		this.matricola = matricola;
 		this.codPartitaIva=codPartitaIva;
 	}
 
+	public Person(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva) {
+		this.codiceFiscale = codiceFiscale;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.data = data;
+		this.codPagamento = codPagamento;
+		this.codSesso = codSesso;
+		this.codImmagine=0;
+		this.matricola = 0;
+		this.codPartitaIva=codPartitaIva;
+	}
+
+	public Person(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
+			int matricola) {
+		this.codiceFiscale = codiceFiscale;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.data = data;
+		this.codPagamento = codPagamento;
+		this.codSesso = codSesso;
+		this.codImmagine = 0;
+		this.matricola = matricola;
+		this.codPartitaIva=codPartitaIva;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
