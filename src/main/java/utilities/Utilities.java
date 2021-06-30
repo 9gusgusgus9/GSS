@@ -21,6 +21,7 @@ import entity.Entity;
 import entity.Event;
 import entity.Image;
 import entity.Payment;
+import entity.Sport;
 
 public class Utilities {
 
@@ -78,6 +79,25 @@ public class Utilities {
 
 	};
 
+	public static void insertSport(int codSport) throws SQLException, FileNotFoundException {
+		dbConnection();
+		String query="";
+		switch(codSport) {
+		case 2: 
+			query = "INSERT INTO ruolo_giocatore (IdRuoloGiocatore, Descrizione) VALUES ('PM','Playmaker'),('GU','Guardia'),('AP','Ala Piccola'),('AG','Ala Grande'),('CEN','Centro)";
+			break;
+		case 1:
+			query = "INSERT INTO ruolo_giocatore (IdRuoloGiocatore, Descrizione) VALUES ('POR','Portiere'),('DIF','Difensore'),('CEN','Centrocampista'),('ATT','Attaccante')";
+			break;
+		case 3:
+			query = "INSERT INTO ruolo_giocatore (IdRuoloGiocatore, Descrizione) VALUES ('PAL','Palleggiatore'),('CENT','Centrale'),('SL','Schiacciatore Laterale'),('SO','Schiacciatore Opposto'),('LIB','Libero')";
+			break;
+		}
+		stmt.executeUpdate(query);
+		conn.close();
+		stmt.close();
+	}
+	
 	public static void deleteEntity(Entity entity) throws SQLException {
 		dbConnection();
 

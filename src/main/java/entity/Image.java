@@ -9,7 +9,7 @@ import utilities.Utilities;
 public class Image extends Entity {
 
 	private static final String TABLENAME = "immagine";
-	private static final String COLUMNS = "(IdImmagine, Nome, TipoFile, DatiFile)";
+	private static final String COLUMNS = "(Nome, TipoFile, DatiFile)";
 
 	private int idImmagine;
 	private InputStream image;
@@ -43,7 +43,7 @@ public class Image extends Entity {
 
 	@Override
 	public String getValues() {
-		return "(" + this.idImmagine + ", '" + this.nome + "', '" + this.ext + "', ?)";
+		return "('" + this.nome + "', '" + this.ext + "', ?)";
 	}
 
 	@Override

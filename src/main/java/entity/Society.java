@@ -1,5 +1,10 @@
 package entity;
 
+import java.io.FileNotFoundException;
+import java.sql.SQLException;
+
+import utilities.Utilities;
+
 public class Society extends Entity {
 
 	private final static String TABLENAME = "societa";
@@ -51,7 +56,7 @@ public class Society extends Entity {
 
 	@Override
 	public String getValues() {
-		return "('" + this.getPrimaryKey() + "', '" + this.getNome() + "', '" + this.getSport().getCodice() + "', '1')";
+		return "('" + this.getPrimaryKey() + "', '" + this.getNome() + "', '" + this.getSport().getCodice() + "', " + this.codImmagine + ")";
 	}
 
 	@Override
@@ -64,4 +69,17 @@ public class Society extends Entity {
 		
 	}
 
+	@Override
+	public void insert() {
+		try {
+			Utilities.insertEntity(this);
+			Utilities.insertSport(this.sport.getCodice());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 }
