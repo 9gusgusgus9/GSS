@@ -1,7 +1,10 @@
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
 import java.sql.SQLException;
 
 import entity.Category;
@@ -15,13 +18,18 @@ import entity.Sesso;
 import entity.Society;
 import entity.Sport;
 import entity.Staff;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import utilities.DateTime;
 import utilities.Utilities;
+import javafx.scene.Parent;
 
-public class Prova2 {
+public class Prova2 extends Application{
 
-	public static void main(String[] args) throws SQLException, FileNotFoundException {
+	public static void main(String[] args) throws SQLException, IOException {
 //		// Utilities.tableEmpty();
 //		InputStream immagine = new FileInputStream("src/main/resources/img/pallavolo.jpg");
 //		Image image = new Image(immagine, "pallavolo", ".jpg");
@@ -52,9 +60,31 @@ public class Prova2 {
 //		Manager gus = new Manager("ojubfjwneoufnw90", "gus", "gus", new DateTime(1701, 02, 29),
 //				(int) pagamento.getPrimaryKey(), Sesso.FEMMINA.getKey(), (String) rick.getPrimaryKey(), image, "DS");
 //		gus.insert();
-		
-		 Stage stage = new Stage();
-	     stage.setTitle("");
-	     stage.show();
+		launch(args);
+		 
+	}
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+//	    primaryStage.setTitle("Convertitore da gradi a radianti");
+//        FXMLLoader loader = new FXMLLoader(new URL("\\src\\main\\resources\\viewStyle\\StartView.fxml"));
+//        BorderPane root = (BorderPane) loader.load();
+//        Scene scene = new Scene(root);
+//        primaryStage.setScene(scene);
+//        primaryStage.setResizable(false);
+//        primaryStage.show();
+//        
+        FXMLLoader load = new FXMLLoader(ClassLoader.getSystemResource("viewStyle/StartView.fxml"));
+        Parent parent = null;
+        try {
+            parent = load.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene newScene;
+        newScene = new Scene(parent);
+        primaryStage.setScene(newScene);
+
+        primaryStage.show();
 	}
 }

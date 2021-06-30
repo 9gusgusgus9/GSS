@@ -23,6 +23,10 @@ private ImageView pallavolo;
 @FXML
 private ImageView basket;
 
+public void init() {
+	
+}
+
 public void getFoto() throws IOException, SQLException {
 	BufferedImage imagen = ImageIO.read(Utilities.getImage());
 	Image image = SwingFXUtils.toFXImage(imagen, null );
