@@ -54,7 +54,7 @@ create table DIRIGENTE (
      CodRuoloDirigente varchar(5) not null,
      constraint FKdirige_ID primary key (CF));
 
-create table EVENTI (
+create table EVENTO (
      IdEvento int not null auto_increment,
      Inizio varchar(20) not null,
      Fine varchar(20) not null,
@@ -63,7 +63,7 @@ create table EVENTI (
      Risultato varchar(5),
      Descrizione_generico varchar(40),
      CodCategoria int,
-     constraint IDEVENTI_ID primary key (IdEvento));
+     constraint IDEVENTO_ID primary key (IdEvento));
 
 create table IMMAGINE (
      IdImmagine int not null auto_increment,
@@ -155,7 +155,7 @@ alter table CONVOCAZIONI add constraint FKCodPersona
 
 alter table CONVOCAZIONI add constraint FKCodEvento
      foreign key (CodEvento)
-     references EVENTI (IdEvento);
+     references EVENTO (IdEvento);
 
 alter table GIOCATORE add constraint FKgioca_FK
      foreign key (CF)
@@ -194,19 +194,19 @@ alter table DIRIGENTE add constraint FKruolo1
      references RUOLO_DIRIGENTE (IdRuoloDirigente);
 
 -- Not implemented
--- alter table EVENTI add constraint IDEVENTI_CHK
+-- alter table EVENTO add constraint IDEVENTO_CHK
 --     check(exists(select * from CONVOCAZIONI
 --                  where CONVOCAZIONI.CodEvento = IdEvento)); 
 
-alter table EVENTI add constraint FKcalendarizza
+alter table EVENTO add constraint FKcalendarizza
      foreign key (CodPartitaIVA)
      references SOCIETA (PartitaIVA);
 
-alter table EVENTI add constraint PARTITA
+alter table EVENTO add constraint PARTITA
      check((NomeAvversario is not null and Risultato is not null)
            or (NomeAvversario is null and Risultato is null)); 
 
-alter table EVENTI add constraint GREVENTI
+alter table EVENTO add constraint GREVENTO
      check((Descrizione_generico is not null and CodCategoria is null)
            or (Descrizione_generico is null and CodCategoria is not null)); 
 

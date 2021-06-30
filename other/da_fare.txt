@@ -1,0 +1,18 @@
+QUERY DA IMPLEMENTARE
+- visualizzazione di qualsiasi entità (Giocatori, staff, dirigenti, eventi ecc..)
+- visualizzazione dei componenti di una categoria
+- visualizzazione di tutti i componenti di una società
+- gestione presenze (query di aggiornamento su convocazioni)
+- aggiunta convocati a evento già creato (MODIFICA EVENTO)
+- visualizzazione persone tramite ruolo
+- visualizzare tutti quelli che non hanno pagato / ricevuto stipendio
+
+
+VIEW
+-Creazione nuova società / Accesso società(Username,password)
+-Menu (Categorie, Calendario, Dirigenti, Giocatori, Staff)
+-View degli eventi(tutti o solo un tipo)
+-View della categoria
+-View di tutte le persone divise in staff, dirigenti, giocatori e categorie
+-View della persona singola
+-View di un evento singolo
