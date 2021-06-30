@@ -1,7 +1,6 @@
 package utilities;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,7 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+
+import com.mysql.cj.jdbc.Blob;
 
 import entity.Category;
 import entity.Entity;
@@ -138,17 +138,30 @@ public class Utilities {
 
 	public static void insertImage(Image image) throws FileNotFoundException, SQLException {
 		dbConnection();
-		PreparedStatement ps = conn.prepareStatement("INSERT INTO immagine"+ image.getColumnList() +" VALUES "+ image.getValues());
+		PreparedStatement ps = conn
+				.prepareStatement("INSERT INTO immagine" + image.getColumnList() + " VALUES " + image.getValues());
 		ps.setBlob(1, image.getImage());
 		ps.execute();
-		String query = "SELECT * FROM " + image.getTableName() + " ORDER BY " + image.getNamePrimaryKey() + " DESC LIMIT 1";
+		String query = "SELECT * FROM " + image.getTableName() + " ORDER BY " + image.getNamePrimaryKey()
+				+ " DESC LIMIT 1";
 		ResultSet rs = stmt.executeQuery(query);
 		if (rs.next()) {
 			image.setPrimaryKey(Integer.parseInt(rs.getString(1)));
 		}
 		conn.close();
 		stmt.close();
-	
+
 	}
 	
+	public static InputStream getImage() throws SQLException {
+		dbConnection();
+		String query = "SELECT DatiFile FROM immagine WHERE IdImmagine = 1";
+		ResultSet rs = stmt.executeQuery(query);
+		if(rs.next()) {
+			InputStream image = rs.getBlob(1).getBinaryStream();
+			return image;
+		}
+		return null;
+	}
+
 }

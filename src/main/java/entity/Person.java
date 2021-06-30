@@ -24,6 +24,7 @@ public class Person extends Entity{
 		this.data = data;
 		this.codPagamento = codPagamento;
 		this.codSesso = codSesso;
+		image.insert();
 		this.codImmagine = (int) image.getPrimaryKey();
 		this.matricola = 0;
 		this.codPartitaIva=codPartitaIva;
@@ -37,6 +38,7 @@ public class Person extends Entity{
 		this.data = data;
 		this.codPagamento = codPagamento;
 		this.codSesso = codSesso;
+		image.insert();
 		this.codImmagine = (int) image.getPrimaryKey();
 		this.matricola = matricola;
 		this.codPartitaIva=codPartitaIva;

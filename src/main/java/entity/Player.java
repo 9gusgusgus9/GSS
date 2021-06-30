@@ -7,9 +7,9 @@ import utilities.DateTime;
 import utilities.Utilities;
 
 public class Player extends Entity {
-	public final static String TABLENAME="giocatore";	
+	public final static String TABLENAME = "giocatore";
 	private final static String COLUMNS = "(CF , Peso, Altezza, Data_scadenza_certificato, CodRuoloGiocatore, CodCategoria, CodPreferenza)";
-	
+
 	private Person person;
 	private String peso;
 	private String altezza;
@@ -18,9 +18,11 @@ public class Player extends Entity {
 	private int codCategoria;
 	private String codPreferenza;
 
-	public Player(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
-			Image image, int matricola, String peso, String altezza, DateTime data_scadenza_certificato, String codRuolo, int codCategoria, String codPreferenza) {
-		person=new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, image, matricola);
+	public Player(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso,
+			String codPartitaIva, Image image, int matricola, String peso, String altezza,
+			DateTime data_scadenza_certificato, String codRuolo, int codCategoria, String codPreferenza) {
+		person = new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, image,
+				matricola);
 		this.peso = peso;
 		this.altezza = altezza;
 		this.data_scadenza_certificato = data_scadenza_certificato;
@@ -30,21 +32,10 @@ public class Player extends Entity {
 
 	}
 
-	public Player(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
-			Image image, String peso, String altezza, DateTime data_scadenza_certificato, String codRuolo, int codCategoria, String codPreferenza) {
-		person=new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, image);
-		this.peso = peso;
-		this.altezza = altezza;
-		this.data_scadenza_certificato = data_scadenza_certificato;
-		this.codRuolo = codRuolo;
-		this.codCategoria = codCategoria;
-		this.codPreferenza = codPreferenza;
-
-	}
-	
-	public Player(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
-			int matricola, String peso, String altezza, DateTime data_scadenza_certificato, String codRuolo, int codCategoria, String codPreferenza) {
-		person=new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, matricola);
+	public Player(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso,
+			String codPartitaIva, Image image, String peso, String altezza, DateTime data_scadenza_certificato,
+			String codRuolo, int codCategoria, String codPreferenza) {
+		person = new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, image);
 		this.peso = peso;
 		this.altezza = altezza;
 		this.data_scadenza_certificato = data_scadenza_certificato;
@@ -54,9 +45,10 @@ public class Player extends Entity {
 
 	}
 
-	public Player(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
-			String peso, String altezza, DateTime data_scadenza_certificato, String codRuolo, int codCategoria, String codPreferenza) {
-		person=new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva);
+	public Player(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso,
+			String codPartitaIva, int matricola, String peso, String altezza, DateTime data_scadenza_certificato,
+			String codRuolo, int codCategoria, String codPreferenza) {
+		person = new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, matricola);
 		this.peso = peso;
 		this.altezza = altezza;
 		this.data_scadenza_certificato = data_scadenza_certificato;
@@ -65,7 +57,20 @@ public class Player extends Entity {
 		this.codPreferenza = codPreferenza;
 
 	}
-	
+
+	public Player(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso,
+			String codPartitaIva, String peso, String altezza, DateTime data_scadenza_certificato, String codRuolo,
+			int codCategoria, String codPreferenza) {
+		person = new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva);
+		this.peso = peso;
+		this.altezza = altezza;
+		this.data_scadenza_certificato = data_scadenza_certificato;
+		this.codRuolo = codRuolo;
+		this.codCategoria = codCategoria;
+		this.codPreferenza = codPreferenza;
+
+	}
+
 	public Person getPerson() {
 		return person;
 	}
@@ -98,17 +103,19 @@ public class Player extends Entity {
 	public String getCodPreferenza() {
 		return this.codPreferenza;
 	}
-	
+
 	@Override
 	public String getValues() {
-		return "('" + this.person.getPrimaryKey() +  "', '" + this.peso + "', '" + this.altezza + "', '" + this.data_scadenza_certificato.getDate() + "', '" + this.codRuolo + "', " + this.codCategoria + ", '" + this.codPreferenza + "') ";
+		return "('" + this.person.getPrimaryKey() + "', '" + this.peso + "', '" + this.altezza + "', '"
+				+ this.data_scadenza_certificato.getDate() + "', '" + this.codRuolo + "', " + this.codCategoria + ", '"
+				+ this.codPreferenza + "') ";
 	}
-	
+
 	@Override
 	public String getTableName() {
 		return Player.TABLENAME;
 	}
-	
+
 	@Override
 	public void insert() {
 		person.insert();
@@ -134,6 +141,6 @@ public class Player extends Entity {
 	@Override
 	public void setPrimaryKey(int primaryKey) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

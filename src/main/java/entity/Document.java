@@ -8,11 +8,12 @@ public class Document extends Entity{
 	private String cF;
 	private int codImmagine;
 	
-	public Document(int codDocumento, String cF, int codImmagine) {
+	public Document(int codDocumento, String cF, Image image) {
 		super();
 		this.codDocumento = codDocumento;
 		this.cF = cF;
-		this.codImmagine = codImmagine;
+		image.insert();
+		this.codImmagine = (int) image.getPrimaryKey();
 	}
 
 	@Override
@@ -27,25 +28,21 @@ public class Document extends Entity{
 
 	@Override
 	public String getColumnList() {
-		// TODO Auto-generated method stub
 		return Document.COLUMNS;
 	}
 
 	@Override
 	public String getValues() {
-		// TODO Auto-generated method stub
 		return "(" + this.codDocumento+", " + this.cF + ", " + this.codImmagine + ")";
 	}
 
 	@Override
 	public String getNamePrimaryKey() {
-		// TODO Auto-generated method stub
 		return Document.COLUMNS;
 	}
 
 	@Override
 	public void setPrimaryKey(int primaryKey) {
-		// TODO Auto-generated method stub
 		
 	}
 }

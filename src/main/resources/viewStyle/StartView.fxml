@@ -26,17 +26,17 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                <children>
-                  <ImageView fx:id="calcio" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="calcio" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#getFoto" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/calcio.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="basket" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/basket.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="pallavolo" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/pallavolo.jpg" />
                      </image>
