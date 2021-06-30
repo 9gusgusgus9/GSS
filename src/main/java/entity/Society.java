@@ -1,34 +1,31 @@
 package entity;
 
-import java.awt.image.BufferedImage;
-
-
 public class Society extends Entity {
 
-	private final static String TABLENAME="societa";
-	private final static String COLUMNS="(PartitaIVA, Nome, CodSport, CodImmagine)";
+	private final static String TABLENAME = "societa";
+	private final static String COLUMNS = "(PartitaIVA, Nome, CodSport, CodImmagine)";
 	private String partitaIVA;
 	private String nome;
 	private Sport sport;
-	private BufferedImage image;
-	
-	public Society(String partitaIVA, String nome, Sport sport){
-		this.partitaIVA=partitaIVA;
-		this.nome=nome;
-		this.sport=sport;
+	private int codImmagine;
+
+	public Society(String partitaIVA, String nome, Sport sport) {
+		this.partitaIVA = partitaIVA;
+		this.nome = nome;
+		this.sport = sport;
 	}
-	
-	public Society(String partitaIVA, String nome, Sport sport, BufferedImage image){
-		this.partitaIVA=partitaIVA;
-		this.nome=nome;
-		this.sport=sport;
-		this.image=image;
+
+	public Society(String partitaIVA, String nome, Sport sport, Image image) {
+		this.partitaIVA = partitaIVA;
+		this.nome = nome;
+		this.sport = sport;
+		image.insert();
+		this.codImmagine = (int) image.getPrimaryKey();
 	}
-	
+
 	public String getPrimaryKey() {
 		return this.partitaIVA;
 	}
-
 
 	public String getNome() {
 		return nome;
@@ -38,8 +35,8 @@ public class Society extends Entity {
 		return sport;
 	}
 
-	public BufferedImage getImage() {
-		return image;
+	public int getImage() {
+		return this.codImmagine;
 	}
 
 	@Override
@@ -49,7 +46,6 @@ public class Society extends Entity {
 
 	@Override
 	public String getColumnList() {
-		// TODO Auto-generated method stub
 		return Society.COLUMNS;
 	}
 
@@ -65,7 +61,6 @@ public class Society extends Entity {
 
 	@Override
 	public void setPrimaryKey(int primaryKey) {
-		// TODO Auto-generated method stub
 		
 	}
 

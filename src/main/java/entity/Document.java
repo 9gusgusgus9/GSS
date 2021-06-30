@@ -1,47 +1,48 @@
 package entity;
 
-import java.awt.image.BufferedImage;
-
 public class Document extends Entity{
 	public final static String TABLENAME="possesso";
-	private final static String COLUMNS="(CodDocumento, CF, File)";
+	private final static String COLUMNS="(CodDocumento, CF, CodImmagine)";
 	
-	private int CodDocumento;
-	private String CF;
-	private BufferedImage file;
+	private int codDocumento;
+	private String cF;
+	private int codImmagine;
 	
+	public Document(int codDocumento, String cF, Image image) {
+		super();
+		this.codDocumento = codDocumento;
+		this.cF = cF;
+		image.insert();
+		this.codImmagine = (int) image.getPrimaryKey();
+	}
+
 	@Override
 	public String getTableName() {
-		return null;
+		return Document.TABLENAME;
 	}
 
 	@Override
 	public Object getPrimaryKey() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getValues();
 	}
 
 	@Override
 	public String getColumnList() {
-		// TODO Auto-generated method stub
-		return null;
+		return Document.COLUMNS;
 	}
 
 	@Override
 	public String getValues() {
-		// TODO Auto-generated method stub
-		return null;
+		return "(" + this.codDocumento+", " + this.cF + ", " + this.codImmagine + ")";
 	}
 
 	@Override
 	public String getNamePrimaryKey() {
-		// TODO Auto-generated method stub
-		return null;
+		return Document.COLUMNS;
 	}
 
 	@Override
 	public void setPrimaryKey(int primaryKey) {
-		// TODO Auto-generated method stub
 		
 	}
 }

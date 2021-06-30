@@ -37,7 +37,7 @@ create table GIOCATORE (
      CF varchar(16) not null,
      Peso char(5) not null,
      Altezza char(5) not null,
-     Data_scadenza_certificato char(7) not null,
+     Data_scadenza_certificato varchar(20) not null,
      CodRuoloGiocatore varchar(5) not null,
      CodCategoria int not null,
      CodPreferenza varchar(2) not null,
@@ -56,8 +56,8 @@ create table DIRIGENTE (
 
 create table EVENTI (
      IdEvento int not null auto_increment,
-     Inizio varchar(15) not null,
-     Fine varchar(15) not null,
+     Inizio varchar(20) not null,
+     Fine varchar(20) not null,
      CodPartitaIVA varchar(11) not null,
      NomeAvversario varchar(40),
      Risultato varchar(5),
@@ -88,19 +88,18 @@ create table PERSONA (
      CodPagamento int not null,
      Nome varchar(25) not null,
      Cognome varchar(25) not null,
-     Data date not null,
+     Data varchar(20) not null,
      Matricola_tesserino varchar(20),
      CodSesso varchar(10) not null,
      CodPartitaIVA varchar(11) not null,
      CodImmagine int not null,
-     CodRuoloPersona varchar(10) not null,
      constraint IDPERSONA primary key (CF));
 
 create table POSSESSO (
      CodDocumento int not null,
      CF varchar(16) not null,
-     File bigint not null,
-     constraint IDPOSSESSO primary key (CodDocumento, CF));
+     CodImmagine int not null,
+     constraint IDPOSSESSO primary key (CodDocumento, CF, CodImmagine));
 
 create table RUOLO_DIRIGENTE (
      IdRuoloDirigente varchar(5) not null,
@@ -243,6 +242,10 @@ alter table POSSESSO add constraint FKRCodPersona
 alter table POSSESSO add constraint FKCodTipoDocumento
      foreign key (CodDocumento)
      references TIPO_DOCUMENTO (IdDocumento);
+
+alter table POSSESSO add constraint FKRiferimento
+     foreign key (CodImmagine)
+     references IMMAGINE (IdImmagine);
 
 alter table SOCIETA add constraint FKpratica
      foreign key (CodSport)
