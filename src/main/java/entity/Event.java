@@ -10,7 +10,7 @@ import utilities.Pair;
 import utilities.Utilities;
 
 public class Event extends Entity {
-	public final static String TABLENAME="eventi";
+	public final static String TABLENAME="evento";
 	private final static String MATCH_COLUMN="(Inizio, Fine, CodPartitaIva, NomeAvversario, Risultato, CodCategoria)";
 	private final static String TRAINING_COLUMN="(Inizio, Fine, CodPartitaIva, CodCategoria)";
 	private final static String EVENT_COLUMN="(Inizio, Fine, CodPartitaIva, Descrizione_generico)";
