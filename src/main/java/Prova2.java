@@ -15,13 +15,13 @@ import entity.Sesso;
 import entity.Society;
 import entity.Sport;
 import entity.Staff;
-//import javafx.stage.Stage;
+import javafx.stage.Stage;
 import utilities.DateTime;
 import utilities.Utilities;
 
-public class Prova {
+public class Prova2 {
 
-//	public static void main(String[] args) throws SQLException, FileNotFoundException {
+	public static void main(String[] args) throws SQLException, FileNotFoundException {
 //		// Utilities.tableEmpty();
 //		InputStream immagine = new FileInputStream("src/main/resources/img/pallavolo.jpg");
 //		Image image = new Image(immagine, "pallavolo", ".jpg");
@@ -53,8 +53,8 @@ public class Prova {
 //				(int) pagamento.getPrimaryKey(), Sesso.FEMMINA.getKey(), (String) rick.getPrimaryKey(), image, "DS");
 //		gus.insert();
 		
-//		 Stage stage =new Stage();
-//	     stage.setTitle("");
-//	     stage.show();
-//	}
+		 Stage stage = new Stage();
+	     stage.setTitle("");
+	     stage.show();
+	}
 }
