@@ -3,6 +3,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import entity.Category;
 import entity.Event;
@@ -15,14 +17,13 @@ import entity.Sesso;
 import entity.Society;
 import entity.Sport;
 import entity.Staff;
-import javafx.stage.Stage;
 import utilities.DateTime;
-import utilities.Utilities;
 
 public class Prova {
 
 	public static void main(String[] args) throws SQLException, FileNotFoundException {
 //		// Utilities.tableEmpty();
+		List<Object> convocati = new ArrayList<>();
 		InputStream immagine = new FileInputStream("src/main/resources/img/pallavolo.jpg");
 		Image image = new Image(immagine, "pallavolo", ".jpg");
 //		//la image.insert() non va più richiamata, la fanno automaticamente i costruttori, dopo potete cancellare
@@ -35,9 +36,7 @@ public class Prova {
 		Event generico = new Event(new DateTime(6, 2, 3), new DateTime(6, 3, 4), rick.getPrimaryKey(),
 				"Cena di squadra");
 		Event partita = new Event(new DateTime(2, 2, 3), new DateTime(2, 3, 4), rick.getPrimaryKey(), "Bubano", 4);
-		partita.insert();
-		allenamento.insert();
-		generico.insert();
+		
 //		partita.setRisultato("0-1");
 		Payment pagamento = new Payment(1000, false, Finanze.QUOTA);
 		pagamento.insert();
@@ -52,6 +51,12 @@ public class Prova {
 		Manager gus = new Manager("ojubfjwneoufnw90", "gus", "gus", new DateTime(1701, 02, 29),
 				(int) pagamento.getPrimaryKey(), Sesso.FEMMINA.getKey(), (String) rick.getPrimaryKey(), image, "DS");
 		gus.insert();
-		
+		convocati.add(rambo.getPrimaryKey());
+		convocati.add(ronaldo.getPrimaryKey());
+		convocati.add(gus.getPrimaryKey());
+		generico.setConvocati(convocati);
+		partita.insert();
+		allenamento.insert();
+		generico.insert();
 	}
 }

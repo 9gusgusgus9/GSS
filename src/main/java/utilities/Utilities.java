@@ -14,14 +14,12 @@ import java.sql.Statement;
 import java.util.Iterator;
 import java.util.List;
 
-import com.mysql.cj.jdbc.Blob;
-
 import entity.Category;
 import entity.Entity;
 import entity.Event;
 import entity.Image;
 import entity.Payment;
-import entity.Sport;
+
 
 public class Utilities {
 
@@ -182,6 +180,18 @@ public class Utilities {
 			return image;
 		}
 		return null;
+	}
+	
+	public static void insertConvocati(List<Object> convocati, Object codEvent) throws SQLException {
+		dbConnection();
+		String query = null;
+		for(int i=0; i<convocati.size(); i++) {
+			query = "INSERT INTO convocazioni (codEvento, CF) VALUES (" + (int) codEvent + ",'" + (String) convocati.get(i) + "')";
+			stmt.executeUpdate(query);
+			System.out.println(query);
+		}
+		conn.close();
+		stmt.close();
 	}
 
 }

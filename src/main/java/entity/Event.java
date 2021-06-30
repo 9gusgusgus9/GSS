@@ -1,10 +1,13 @@
 package entity;
 
+import java.io.FileNotFoundException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import utilities.DateTime;
 import utilities.Pair;
+import utilities.Utilities;
 
 public class Event extends Entity {
 	public final static String TABLENAME="eventi";
@@ -22,6 +25,7 @@ public class Event extends Entity {
 	private String nomeAvversario = null;
 	private String risultato = null;
 	private int codCategoria = 0;
+	private List<Object> convocati = new ArrayList<>();
 	
 	//EVENTO GENERICO
 	public Event(DateTime inizio, DateTime fine, String codPartitaIva, String descrizione){
@@ -100,5 +104,22 @@ public class Event extends Entity {
 	@Override
 	public void setPrimaryKey(int primaryKey) {
 		this.idEvento=primaryKey;
+	}
+	
+	public void setConvocati(List<Object> list) {
+		this.convocati = list;
+	}
+	
+	@Override
+	public void insert() {
+		try {
+			Utilities.insertEntity(this);
+			Utilities.insertConvocati(this.convocati, this.getPrimaryKey());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }
