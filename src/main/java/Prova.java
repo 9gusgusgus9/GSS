@@ -36,7 +36,6 @@ public class Prova {
 		Event generico = new Event(new DateTime(6, 2, 3), new DateTime(6, 3, 4), rick.getPrimaryKey(),
 				"Cena di squadra");
 		Event partita = new Event(new DateTime(2, 2, 3), new DateTime(2, 3, 4), rick.getPrimaryKey(), "Bubano", 4);
-		
 //		partita.setRisultato("0-1");
 		Payment pagamento = new Payment(1000, false, Finanze.QUOTA);
 		pagamento.insert();
@@ -59,4 +58,8 @@ public class Prova {
 		allenamento.insert();
 		generico.insert();
 	}
+//		 Stage stage =new Stage();
+//	     stage.setTitle("");
+//	     stage.show();
+//	}
 }
