@@ -84,7 +84,6 @@ public class Prova2 extends Application{
         Scene newScene;
         newScene = new Scene(parent);
         primaryStage.setScene(newScene);
-
         primaryStage.show();
 	}
 }

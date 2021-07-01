@@ -157,6 +157,7 @@ public class Utilities {
 		dbConnection();
 		String query = "SELECT DatiFile FROM immagine WHERE IdImmagine = 1";
 		ResultSet rs = stmt.executeQuery(query);
+		System.out.println(query);
 		if(rs.next()) {
 			InputStream image = rs.getBlob(1).getBinaryStream();
 			return image;
