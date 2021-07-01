@@ -20,7 +20,7 @@ public class Society extends Entity {
 		this.sport = sport;
 	}
 
-	public Society(String partitaIVA, String nome, Sport sport, Image image) {
+	public Society(String partitaIVA, String nome, Sport sport, Immagine image) {
 		this.partitaIVA = partitaIVA;
 		this.nome = nome;
 		this.sport = sport;

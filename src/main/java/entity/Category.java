@@ -9,7 +9,7 @@ public class Category extends Entity {
 	private int idCategoria;
 	private String nome;
 	
-	public Category(String nome, String codPartitaIVA, Image image) {
+	public Category(String nome, String codPartitaIVA, Immagine image) {
 		super();
 		this.codPartitaIVA = codPartitaIVA;
 		image.insert();
@@ -17,7 +17,7 @@ public class Category extends Entity {
 		this.nome = nome;
 	}
 	
-	public Category(int idCategoria, String nome, String codPartitaIVA, Image image) {
+	public Category(int idCategoria, String nome, String codPartitaIVA, Immagine image) {
 		super();
 		this.idCategoria=idCategoria;
 		this.codPartitaIVA = codPartitaIVA;

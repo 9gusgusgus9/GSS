@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import entity.Category;
 import entity.Event;
 import entity.Finanze;
-import entity.Image;
+import entity.Immagine;
 import entity.Manager;
 import entity.Payment;
 import entity.Player;

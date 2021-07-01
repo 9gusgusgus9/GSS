@@ -1,5 +1,6 @@
 package utilities;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,11 +15,15 @@ import java.sql.Statement;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
 import entity.Category;
 import entity.Entity;
 import entity.Event;
-import entity.Image;
+import entity.Immagine;
 import entity.Payment;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
 
 
 public class Utilities {
@@ -154,7 +159,7 @@ public class Utilities {
 		stmt.close();
 	}
 
-	public static void insertImage(Image image) throws FileNotFoundException, SQLException {
+	public static void insertImage(Immagine image) throws FileNotFoundException, SQLException {
 		dbConnection();
 		PreparedStatement ps = conn
 				.prepareStatement("INSERT INTO immagine" + image.getColumnList() + " VALUES " + image.getValues());
@@ -171,14 +176,16 @@ public class Utilities {
 
 	}
 	
-	public static InputStream getImage() throws SQLException {
+	public static Image getImage() throws IOException, SQLException {
 		dbConnection();
 		String query = "SELECT DatiFile FROM immagine WHERE IdImmagine = 1";
 		ResultSet rs = stmt.executeQuery(query);
 		System.out.println(query);
 		if(rs.next()) {
 			InputStream image = rs.getBlob(1).getBinaryStream();
-			return image;
+			BufferedImage imagen = ImageIO.read(image);
+			Image out = SwingFXUtils.toFXImage(imagen, null );
+			return out;
 		}
 		return null;
 	}

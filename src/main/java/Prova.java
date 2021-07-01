@@ -9,7 +9,7 @@ import java.util.List;
 import entity.Category;
 import entity.Event;
 import entity.Finanze;
-import entity.Image;
+import entity.Immagine;
 import entity.Manager;
 import entity.Payment;
 import entity.Player;
@@ -25,7 +25,7 @@ public class Prova {
 //		// Utilities.tableEmpty();
 		List<Object> convocati = new ArrayList<>();
 		InputStream immagine = new FileInputStream("src/main/resources/img/pallavolo.jpg");
-		Image image = new Image(immagine, "pallavolo", ".jpg");
+		Immagine image = new Immagine(immagine, "pallavolo", ".jpg");
 //		//la image.insert() non va più richiamata, la fanno automaticamente i costruttori, dopo potete cancellare
 //		//image.insert();
 		Society rick = new Society("12345678923", "TOMMI", Sport.CALCIO, image);

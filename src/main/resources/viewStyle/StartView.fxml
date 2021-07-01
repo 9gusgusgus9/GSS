@@ -1,42 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.StartView">
+<AnchorPane fx:id="pane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.StartView">
    <children>
       <VBox alignment="CENTER" prefHeight="600.0" prefWidth="1000.0" spacing="20.0">
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                <children>
+                  <Label text="Inserire un nome per la società:" />
+                  <TextField fx:id="Nome" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+               <children>
+                  <Label text="Inserire il codice della partitaIVA:" />
+                  <TextField fx:id="Nome1" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+               <children>
                   <Label text="Inserire un logo per personalizzare il gestionale: " />
-                  <TextField />
-                  <Button mnemonicParsing="false" text="Browse" />
+                  <TextField fx:id="logoPath" />
+                  <Button fx:id="browse" mnemonicParsing="false" onMouseClicked="#oneFileChooser" text="Browse" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                <children>
-                  <Label text="Seleziona i colori sociali:" />
-                  <ColorPicker editable="true" />
-                  <ColorPicker editable="true" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
-               <children>
-                  <ImageView fx:id="calcio" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#getFoto" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="calcio" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#setCalcio" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/calcio.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
-                  <ImageView fx:id="basket" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="basket" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#setBasket" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/basket.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="pallavolo" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="pallavolo" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#setPallavolo" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/pallavolo.jpg" />
                      </image>

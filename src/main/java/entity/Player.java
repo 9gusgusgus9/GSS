@@ -19,7 +19,7 @@ public class Player extends Entity {
 	private String codPreferenza;
 
 	public Player(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso,
-			String codPartitaIva, Image image, int matricola, String peso, String altezza,
+			String codPartitaIva, Immagine image, int matricola, String peso, String altezza,
 			DateTime data_scadenza_certificato, String codRuolo, int codCategoria, String codPreferenza) {
 		person = new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, image,
 				matricola);
@@ -33,7 +33,7 @@ public class Player extends Entity {
 	}
 
 	public Player(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso,
-			String codPartitaIva, Image image, String peso, String altezza, DateTime data_scadenza_certificato,
+			String codPartitaIva, Immagine image, String peso, String altezza, DateTime data_scadenza_certificato,
 			String codRuolo, int codCategoria, String codPreferenza) {
 		person = new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, image);
 		this.peso = peso;

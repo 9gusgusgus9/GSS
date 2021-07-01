@@ -15,7 +15,7 @@ public class Staff extends Entity {
 	private int codCategoria;
 	private Person person;
 	
-	public Staff(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva, Image image,
+	public Staff(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva, Immagine image,
 			int matricola, String codRuolo, int codCategoria) {
 		person = new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, image, matricola);
 		this.codCategoria = codCategoria;
@@ -23,7 +23,7 @@ public class Staff extends Entity {
 	}
 
 	public Staff(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
-			Image image, String codRuolo, int codCategoria) {
+			Immagine image, String codRuolo, int codCategoria) {
 		person = new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, image);
 		this.codCategoria = codCategoria;
 		this.codRuolo = codRuolo;

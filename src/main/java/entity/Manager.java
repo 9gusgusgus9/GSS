@@ -15,13 +15,13 @@ public class Manager extends Entity {
 	private Person person;
 	
 	public Manager(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
-			Image image, int matricola, String codRuolo) {
+			Immagine image, int matricola, String codRuolo) {
 		person = new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, image, matricola);
 		this.codRuolo = codRuolo;
 	}
 
 	public Manager(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
-			Image image, String codRuolo) {
+			Immagine image, String codRuolo) {
 		person = new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, image);
 		this.codRuolo = codRuolo;
 	}

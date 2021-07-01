@@ -17,7 +17,7 @@ public class Person extends Entity{
 	private String codPartitaIva;
 		
 	public Person(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
-			Image image) {
+			Immagine image) {
 		this.codiceFiscale = codiceFiscale;
 		this.nome = nome;
 		this.cognome = cognome;
@@ -31,7 +31,7 @@ public class Person extends Entity{
 	}
 
 	public Person(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
-			Image image, int matricola) {
+			Immagine image, int matricola) {
 		this.codiceFiscale = codiceFiscale;
 		this.nome = nome;
 		this.cognome = cognome;

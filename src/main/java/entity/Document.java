@@ -8,7 +8,7 @@ public class Document extends Entity{
 	private String cF;
 	private int codImmagine;
 	
-	public Document(int codDocumento, String cF, Image image) {
+	public Document(int codDocumento, String cF, Immagine image) {
 		super();
 		this.codDocumento = codDocumento;
 		this.cF = cF;

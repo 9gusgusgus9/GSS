@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import utilities.Utilities;
 
-public class Image extends Entity {
+public class Immagine extends Entity {
 
 	private static final String TABLENAME = "immagine";
 	private static final String COLUMNS = "(Nome, TipoFile, DatiFile)";
@@ -16,7 +16,7 @@ public class Image extends Entity {
 	private String nome;
 	private String ext;
 
-	public Image(InputStream image, String nome, String ext) {
+	public Immagine(InputStream image, String nome, String ext) {
 		this.image = image;
 		this.nome = nome;
 		this.ext = ext;
@@ -28,7 +28,7 @@ public class Image extends Entity {
 
 	@Override
 	public String getTableName() {
-		return Image.TABLENAME;
+		return Immagine.TABLENAME;
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class Image extends Entity {
 
 	@Override
 	public String getColumnList() {
-		return Image.COLUMNS;
+		return Immagine.COLUMNS;
 	}
 
 	@Override
