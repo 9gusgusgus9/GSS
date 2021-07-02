@@ -17,7 +17,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import utilities.Utilities;
 
-public class StartView {
+public class StartView implements View {
 
 	@FXML
 	private ImageView calcio;
@@ -36,20 +36,22 @@ public class StartView {
 
 	@FXML
 	private TextField logoPath;
-	
+
 	public void init() {
-
+		calcio.setOpacity(0.5);
+		basket.setOpacity(0.5);
+		pallavolo.setOpacity(0.5);
 	}
 
-public void oneFileChooser() {
-	FileChooser fileChooser = new FileChooser();
-	fileChooser.setTitle("Selezionare un logo per la società");
-	Stage stage = (Stage) pane.getScene().getWindow();
-	File file = fileChooser.showOpenDialog(stage);
-	if(file != null) {
-		logoPath.setText(file.getPath());
+	public void oneFileChooser() {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Selezionare un logo per la società");
+		Stage stage = (Stage) pane.getScene().getWindow();
+		File file = fileChooser.showOpenDialog(stage);
+		if (file != null) {
+			logoPath.setText(file.getPath());
+		}
 	}
-}
 
 	public void setCalcio() {
 		calcio.setOpacity(1);
@@ -67,6 +69,26 @@ public void oneFileChooser() {
 		calcio.setOpacity(0.5);
 		basket.setOpacity(1);
 		pallavolo.setOpacity(0.5);
+	}
+
+	@Override
+	public void attachController(Controller controller) {
+		
+	}
+
+	@Override
+	public Controller getController() {
+		return null;
+	}
+
+	@Override
+	public void setStage(Stage stage) {
+		
+	}
+
+	@Override
+	public Stage getStage() {
+		return null;
 	}
 
 }
