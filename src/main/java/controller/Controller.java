@@ -1,4 +1,6 @@
-package view;
+package controller;
+
+import view.View;
 
 /**
  * This represent a generic Controller, every type of Controller extends it.

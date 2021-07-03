@@ -1,23 +1,15 @@
 package view;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.sql.SQLException;
 
-import javax.imageio.ImageIO;
-
-import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import utilities.Utilities;
 
-public class StartView implements View {
+public class StartView extends ViewImpl {
 
 	@FXML
 	private ImageView calcio;
@@ -70,25 +62,8 @@ public class StartView implements View {
 		basket.setOpacity(1);
 		pallavolo.setOpacity(0.5);
 	}
-
-	@Override
-	public void attachController(Controller controller) {
-		
+	
+	public void switchToTest() {
+		ViewSwitcher.getInstance().switchView(this.getStage(), ViewType.TEST);
 	}
-
-	@Override
-	public Controller getController() {
-		return null;
-	}
-
-	@Override
-	public void setStage(Stage stage) {
-		
-	}
-
-	@Override
-	public Stage getStage() {
-		return null;
-	}
-
 }
