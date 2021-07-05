@@ -1,5 +1,6 @@
 package entity;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.SQLException;
@@ -16,16 +17,65 @@ public class Immagine extends Entity {
 	private String nome;
 	private String ext;
 
-	public Immagine(InputStream image, String nome, String ext) {
-		this.image = image;
+	public Immagine(String path, String nome, String ext) {
+		InputStream image;
+		try {
+			image = new FileInputStream(path);
+			this.image = image;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		this.nome = nome;
 		this.ext = ext;
 	}
 
+	public Immagine(String path) {
+		InputStream image;
+		try {
+			image = new FileInputStream(path);
+			this.image = image;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		this.setNameFromPath(path);
+		this.setExtFromPath(path);
+	}
+	
 	public InputStream getImage() {
 		return image;
 	}
 
+	private void setNameFromPath(String path) {
+		char[] arr = path.toCharArray();
+		int length = path.length();
+		int count = 1;
+		String out = "";
+		while(arr[length-count]!='.') {
+			count++;
+		}
+		count++;
+		char slash = '\\';
+		while(length-count==0 && (arr[length-count]!='/' || arr[length-count]!=slash)) {
+			System.out.println(arr[length-count]);
+			out = arr[length-count] + out;
+			count++;
+		}
+		this.nome = out;
+	}
+	
+	private void setExtFromPath(String path) {
+		char[] arr = path.toCharArray();
+		int length = path.length();
+		int count = 1;
+		String out = "";
+		while(arr[length-count]!='.') {
+			out = arr[length-count] + out;
+			count++;
+		}
+		out = '.' + out;
+		this.ext = out;
+	}
+	
 	@Override
 	public String getTableName() {
 		return Immagine.TABLENAME;
@@ -48,7 +98,6 @@ public class Immagine extends Entity {
 
 	@Override
 	public String getNamePrimaryKey() {
-		// TODO Auto-generated method stub
 		return "IdImmagine";
 	}
 

@@ -15,21 +15,26 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                <children>
-                  <Label text="Inserire un nome per la società:" />
-                  <TextField fx:id="Nome" />
+                  <Label fx:id="nomeLab" text="Inserire un nome per la società*:" />
+                  <TextField fx:id="nome" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                <children>
-                  <Label text="Inserire il codice della partitaIVA:" />
-                  <TextField fx:id="Nome1" />
+                  <Label fx:id="pivaLab" text="Inserire il codice della partitaIVA*:" />
+                  <TextField fx:id="pIVA" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                <children>
-                  <Label text="Inserire un logo per personalizzare il gestionale: " />
+                  <Label fx:id="logoLab" text="Inserire un logo per personalizzare il gestionale: " />
                   <TextField fx:id="logoPath" />
                   <Button fx:id="browse" mnemonicParsing="false" onMouseClicked="#oneFileChooser" text="Browse" />
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="41.0" prefWidth="1000.0">
+               <children>
+                  <Label fx:id="sportLab" text="Selezionare lo sport desiderato*:" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">

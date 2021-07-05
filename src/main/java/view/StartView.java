@@ -1,15 +1,48 @@
 package view;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
+import entity.Immagine;
+import entity.Society;
+import entity.Sport;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class StartView extends ViewImpl {
+
+	@FXML
+	private AnchorPane pane;
+
+	@FXML
+	private Label nomeLab;
+
+	@FXML
+	private Label pivaLab;
+
+	@FXML
+	private Label logoLab;
+
+	@FXML
+	private Label sportLab;
+
+	@FXML
+	private TextField nome;
+
+	@FXML
+	private TextField pIVA;
+
+	@FXML
+	private TextField logoPath;
 
 	@FXML
 	private ImageView calcio;
@@ -20,15 +53,12 @@ public class StartView extends ViewImpl {
 	@FXML
 	private ImageView basket;
 
-	@FXML
-	private TextField nome;
-
-	@FXML
-	private AnchorPane pane;
-
-	@FXML
-	private TextField logoPath;
-
+	private String societyName = null;
+	private String partitaIVA = null;
+	private String logo = null;
+	private Sport sport = Sport.NONSELEZIONATO;
+	private boolean flag = true;
+	
 	public void init() {
 		calcio.setOpacity(0.5);
 		basket.setOpacity(0.5);
@@ -46,24 +76,65 @@ public class StartView extends ViewImpl {
 	}
 
 	public void setCalcio() {
+		this.sport = Sport.CALCIO;
 		calcio.setOpacity(1);
 		basket.setOpacity(0.5);
 		pallavolo.setOpacity(0.5);
 	}
 
 	public void setPallavolo() {
+		this.sport = Sport.PALLAVOLO;
 		calcio.setOpacity(0.5);
 		basket.setOpacity(0.5);
 		pallavolo.setOpacity(1);
 	}
 
 	public void setBasket() {
+		this.sport = Sport.BASKET;
 		calcio.setOpacity(0.5);
 		basket.setOpacity(1);
 		pallavolo.setOpacity(0.5);
 	}
-	
-	public void switchToTest() {
-		ViewSwitcher.getInstance().switchView(this.getStage(), ViewType.TEST);
+
+	public void switchToTest() throws FileNotFoundException {
+		if(this.nome.getText().equals("")) {
+			this.nomeLab.setTextFill(Color.RED);
+			this.flag = false;
+		} else {
+			this.nomeLab.setTextFill(Color.BLACK);
+		}
+		if(this.pIVA.getText().equals("")) {
+			this.pivaLab.setTextFill(Color.RED);
+			this.flag = false;
+		} else {
+			this.pivaLab.setTextFill(Color.BLACK);
+		}
+//		if(this.logoPath.getText().equals("")) {
+//			this.logoLab.setTextFill(Color.RED);
+//			this.flag = false;
+//		} else {
+//			this.logoLab.setTextFill(Color.BLACK);
+//		}
+		if(this.sport.equals(Sport.NONSELEZIONATO)) {
+			this.sportLab.setTextFill(Color.RED);
+			this.flag = false;
+		} else {
+			this.sportLab.setTextFill(Color.BLACK);
+		}
+		if(this.flag) {
+			this.societyName = this.nome.getText();
+			this.partitaIVA = this.pIVA.getText();
+			this.logo = this.logoPath.getText();
+			if(this.logoPath.getText().equals("")) {
+				Society society = new Society(this.partitaIVA, this.societyName, this.sport);
+			} else {
+				Immagine image = new Immagine(this.logo);
+				Society society = new Society(this.partitaIVA, this.societyName, this.sport, image);
+				society.insert();
+			}
+			ViewSwitcher.getInstance().switchView(this.getStage(), ViewType.TEST);
+		} else {
+			this.flag = true;
+		}
 	}
 }
