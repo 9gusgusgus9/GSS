@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import utilities.Utilities;
 import view.ViewSwitcher;
 import view.ViewType;
 
@@ -17,6 +18,10 @@ public class Prova3 extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		ViewSwitcher.getInstance().switchView(primaryStage, ViewType.START);
+		if(Utilities.isTheFirstStart()) {
+			ViewSwitcher.getInstance().switchView(primaryStage, ViewType.START);
+		} else {
+			ViewSwitcher.getInstance().switchView(primaryStage, ViewType.TEST);
+		}
 	}
 }

@@ -60,9 +60,10 @@ public class StartView extends ViewImpl {
 	private boolean flag = true;
 	
 	public void init() {
-		calcio.setOpacity(0.5);
-		basket.setOpacity(0.5);
-		pallavolo.setOpacity(0.5);
+		this.calcio.setOpacity(0.5);
+		this.basket.setOpacity(0.5);
+		this.pallavolo.setOpacity(0.5);
+		this.logoPath.setEditable(false);
 	}
 
 	public void oneFileChooser() {
@@ -109,12 +110,6 @@ public class StartView extends ViewImpl {
 		} else {
 			this.pivaLab.setTextFill(Color.BLACK);
 		}
-//		if(this.logoPath.getText().equals("")) {
-//			this.logoLab.setTextFill(Color.RED);
-//			this.flag = false;
-//		} else {
-//			this.logoLab.setTextFill(Color.BLACK);
-//		}
 		if(this.sport.equals(Sport.NONSELEZIONATO)) {
 			this.sportLab.setTextFill(Color.RED);
 			this.flag = false;
@@ -127,6 +122,7 @@ public class StartView extends ViewImpl {
 			this.logo = this.logoPath.getText();
 			if(this.logoPath.getText().equals("")) {
 				Society society = new Society(this.partitaIVA, this.societyName, this.sport);
+				society.insert();
 			} else {
 				Immagine image = new Immagine(this.logo);
 				Society society = new Society(this.partitaIVA, this.societyName, this.sport, image);

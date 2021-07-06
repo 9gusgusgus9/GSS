@@ -201,5 +201,16 @@ public class Utilities {
 		conn.close();
 		stmt.close();
 	}
+	
+	public static boolean isTheFirstStart() throws SQLException {
+		dbConnection();
+		String query = "SELECT * FROM societa";
+		ResultSet rs = stmt.executeQuery(query);
+		if(rs.next()) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 
 }

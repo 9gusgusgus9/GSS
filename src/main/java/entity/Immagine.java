@@ -40,7 +40,7 @@ public class Immagine extends Entity {
 		this.setNameFromPath(path);
 		this.setExtFromPath(path);
 	}
-	
+
 	public InputStream getImage() {
 		return image;
 	}
@@ -50,32 +50,30 @@ public class Immagine extends Entity {
 		int length = path.length();
 		int count = 1;
 		String out = "";
-		while(arr[length-count]!='.') {
+		while (arr[length - count] != '.') {
 			count++;
 		}
 		count++;
-		char slash = '\\';
-		while(length-count==0 && (arr[length-count]!='/' || arr[length-count]!=slash)) {
-			System.out.println(arr[length-count]);
-			out = arr[length-count] + out;
+		while (length - count >= 0 && arr[length - count] != '/' && arr[length - count] != '\\') {
+			out = arr[length - count] + out;
 			count++;
 		}
 		this.nome = out;
 	}
-	
+
 	private void setExtFromPath(String path) {
 		char[] arr = path.toCharArray();
 		int length = path.length();
 		int count = 1;
 		String out = "";
-		while(arr[length-count]!='.') {
-			out = arr[length-count] + out;
+		while (arr[length - count] != '.') {
+			out = arr[length - count] + out;
 			count++;
 		}
 		out = '.' + out;
 		this.ext = out;
 	}
-	
+
 	@Override
 	public String getTableName() {
 		return Immagine.TABLENAME;
@@ -105,7 +103,7 @@ public class Immagine extends Entity {
 	public void setPrimaryKey(int primaryKey) {
 		this.idImmagine = primaryKey;
 	}
-	
+
 	@Override
 	public void insert() {
 		try {
