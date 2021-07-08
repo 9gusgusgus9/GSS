@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -176,9 +177,9 @@ public class Utilities {
 
 	}
 	
-	public static Image getImage() throws IOException, SQLException {
+	public static Image getImage(int x) throws IOException, SQLException {
 		dbConnection();
-		String query = "SELECT DatiFile FROM immagine WHERE IdImmagine = 1";
+		String query = "SELECT DatiFile FROM immagine WHERE IdImmagine = " + x;
 		ResultSet rs = stmt.executeQuery(query);
 		System.out.println(query);
 		if(rs.next()) {
@@ -211,6 +212,20 @@ public class Utilities {
 		} else {
 			return true;
 		}
+	}
+	
+	public static List<Pair<Category, Image>> getCategories() throws SQLException, IOException{
+		dbConnection();
+		String query = "SELECT * FROM categoria";
+		ResultSet rs = stmt.executeQuery(query);
+		List<Pair<Category, Image>> out = new LinkedList();
+		while(rs.next()) {
+			int codImage = rs.getInt("CodImmagine");
+			Image image = Utilities.getImage(codImage);
+			Category category = new Category(rs.getInt("IdCategoria"),rs.getString("Nome"),rs.getString("CodPartitaIVA"), codImage);
+			out.add(new Pair<>(category, image));
+		}
+		return out;
 	}
 
 }

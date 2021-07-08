@@ -21,7 +21,7 @@ public class Prova3 extends Application{
 		if(Utilities.isTheFirstStart()) {
 			ViewSwitcher.getInstance().switchView(primaryStage, ViewType.START);
 		} else {
-			ViewSwitcher.getInstance().switchView(primaryStage, ViewType.TEST);
+			ViewSwitcher.getInstance().switchView(primaryStage, ViewType.CATEGORY);
 		}
 	}
 }

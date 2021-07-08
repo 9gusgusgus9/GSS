@@ -25,6 +25,21 @@ public class Category extends Entity {
 		this.codImmagine =(int) image.getPrimaryKey();
 		this.nome = nome;
 	}
+	
+	public Category(String nome, String codPartitaIVA, int codImage) {
+		super();
+		this.codPartitaIVA = codPartitaIVA;
+		this.codImmagine = codImage;
+		this.nome = nome;
+	}
+	
+	public Category(int idCategoria, String nome, String codPartitaIVA, int codImage) {
+		super();
+		this.idCategoria=idCategoria;
+		this.codPartitaIVA = codPartitaIVA;
+		this.codImmagine = codImage;
+		this.nome = nome;
+	}
 
 	public String getNome() {
 		return this.nome;

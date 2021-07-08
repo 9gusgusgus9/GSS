@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CategoryView">
+   <children>
+      <VBox alignment="TOP_CENTER">
+         <children>
+            <HBox alignment="CENTER">
+               <children>
+                  <Pane prefHeight="160.0" prefWidth="1700.0">
+                     <children>
+                        <Rectangle fx:id="color1" arcHeight="5.0" arcWidth="5.0" fill="#9c9c9ce5" height="29.0" layoutX="5.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="1690.0" />
+                        <Rectangle fx:id="color2" arcHeight="5.0" arcWidth="5.0" fill="#e4f267" height="29.0" layoutX="5.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="1690.0" />
+                        <Label fx:id="nameLabel" alignment="CENTER" layoutX="5.0" layoutY="50.0" prefHeight="62.0" prefWidth="1690.0" text="TEAM NAME">
+                           <font>
+                              <Font name="Bauhaus 93" size="54.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="logo" fitHeight="136.0" fitWidth="145.0" layoutX="37.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/default/stemma.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <TabPane prefHeight="640.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Categorie">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1300.0">
+                           <children>
+                              <GridPane alignment="CENTER" prefHeight="600.0" prefWidth="1300.0">
+                                <columnConstraints>
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <ImageView fx:id="image1" fitHeight="150.0" fitWidth="200.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/default/categoria.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <Label fx:id="label1" text="Dirigenti" translateX="45.0" translateY="40.0">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fx:id="image2" fitHeight="150.0" fitWidth="200.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+                                    <Label fx:id="label2" translateX="45.0" translateY="40.0" GridPane.columnIndex="1">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fx:id="image3" fitHeight="150.0" fitWidth="200.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+                                    <Label fx:id="label3" translateX="45.0" translateY="40.0" GridPane.columnIndex="2">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fx:id="image4" fitHeight="150.0" fitWidth="200.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
+                                    <Label fx:id="label4" translateX="45.0" translateY="40.0" GridPane.columnIndex="3">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fx:id="image5" fitHeight="150.0" fitWidth="200.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" />
+                                    <Label fx:id="label5" translateX="45.0" translateY="40.0" GridPane.columnIndex="4">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fx:id="image6" fitHeight="150.0" fitWidth="200.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+                                    <Label fx:id="label6" translateX="45.0" translateY="40.0" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fx:id="image7" fitHeight="150.0" fitWidth="200.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label fx:id="label7" translateX="45.0" translateY="40.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fx:id="image8" fitHeight="150.0" fitWidth="200.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <Label fx:id="label8" translateX="45.0" translateY="40.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fx:id="image9" fitHeight="150.0" fitWidth="200.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                    <Label fx:id="label9" translateX="45.0" translateY="40.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fx:id="image10" fitHeight="150.0" fitWidth="200.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                    <Label fx:id="label10" translateX="45.0" translateY="40.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fx:id="image111" fitHeight="150.0" fitWidth="200.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
+                                    <Label fx:id="label11" translateX="45.0" translateY="40.0" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fx:id="image12" fitHeight="150.0" fitWidth="200.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label fx:id="label12" translateX="45.0" translateY="40.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fx:id="image13" fitHeight="150.0" fitWidth="200.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <Label fx:id="label13" translateX="45.0" translateY="40.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fx:id="image14" fitHeight="150.0" fitWidth="200.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                    <Label fx:id="label14" translateX="45.0" translateY="40.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fx:id="image15" fitHeight="150.0" fitWidth="200.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                    <Label fx:id="label15" translateX="45.0" translateY="40.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </GridPane>
+                           </children></AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Calendario">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
