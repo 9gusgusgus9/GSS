@@ -128,7 +128,7 @@ public class StartView extends ViewImpl {
 				Society society = new Society(this.partitaIVA, this.societyName, this.sport, image);
 				society.insert();
 			}
-			ViewSwitcher.getInstance().switchView(this.getStage(), ViewType.TEST);
+			ViewSwitcher.getInstance().switchView(this.getStage(), ViewType.CATEGORY);
 		} else {
 			this.flag = true;
 		}
