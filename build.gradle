@@ -16,17 +16,6 @@ repositories {
     jcenter()
 }
 
-val javaFXModules = listOf(
-    "base",
-    "controls",
-    "fxml",
-    "swing",
-    "graphics",
-    "media"
-)
-
-val javaFxVersion = "11.0.2"
-
 dependencies {
     // Use JUnit test framework.
     testImplementation 'junit:junit:4.13'
