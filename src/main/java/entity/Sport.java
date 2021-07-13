@@ -12,4 +12,16 @@ public enum Sport {
 	public int getCodice(){
 		return this.codice;
 	}
+	
+	public static Sport getSport(int cod) {
+		if(cod == Sport.CALCIO.getCodice()) {
+			return Sport.CALCIO;
+		} else if(cod == Sport.BASKET.getCodice()) {
+			return Sport.BASKET;
+		} else if(cod == Sport.PALLAVOLO.getCodice()){
+			return Sport.PALLAVOLO;
+		} else {
+			return Sport.NONSELEZIONATO;
+		}
+	}
 }

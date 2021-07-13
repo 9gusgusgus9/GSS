@@ -8,17 +8,17 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CategoryView">
+<AnchorPane prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CategoryView">
    <children>
-      <VBox alignment="TOP_CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="800.0" prefWidth="1500.0">
          <children>
-            <HBox alignment="CENTER">
+            <HBox alignment="CENTER" prefHeight="160.0" prefWidth="1500.0">
                <children>
-                  <Pane prefHeight="160.0" prefWidth="1700.0">
+                  <Pane prefHeight="160.0" prefWidth="1500.0">
                      <children>
-                        <Rectangle fx:id="color1" arcHeight="5.0" arcWidth="5.0" fill="#9c9c9ce5" height="29.0" layoutX="5.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="1690.0" />
-                        <Rectangle fx:id="color2" arcHeight="5.0" arcWidth="5.0" fill="#e4f267" height="29.0" layoutX="5.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="1690.0" />
-                        <Label fx:id="nameLabel" alignment="CENTER" layoutX="5.0" layoutY="50.0" prefHeight="62.0" prefWidth="1690.0" text="TEAM NAME">
+                        <Rectangle fx:id="color1" arcHeight="5.0" arcWidth="5.0" fill="#9c9c9ce5" height="29.0" layoutX="5.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="1490.0" />
+                        <Rectangle fx:id="color2" arcHeight="5.0" arcWidth="5.0" fill="#e4f267" height="29.0" layoutX="5.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="1490.0" />
+                        <Label fx:id="nameLabel" alignment="CENTER" layoutX="5.0" layoutY="50.0" prefHeight="62.0" prefWidth="1490.0" text="TEAM NAME">
                            <font>
                               <Font name="Bauhaus 93" size="54.0" />
                            </font>
@@ -32,13 +32,13 @@
                   </Pane>
                </children>
             </HBox>
-            <TabPane prefHeight="640.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane prefHeight="640.0" prefWidth="1500.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab text="Categorie">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1300.0">
                            <children>
-                              <GridPane alignment="CENTER" prefHeight="600.0" prefWidth="1300.0">
+                              <GridPane alignment="CENTER" prefHeight="600.0" prefWidth="1500.0">
                                 <columnConstraints>
                                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -57,7 +57,7 @@
                                           <Image url="@../img/default/categoria.jpg" />
                                        </image>
                                     </ImageView>
-                                    <Label fx:id="label1" text="Dirigenti" translateX="45.0" translateY="40.0">
+                                    <Label fx:id="label1" text="Dirigenti" textAlignment="RIGHT" translateX="45.0" translateY="40.0">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
                                        </font>

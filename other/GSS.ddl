@@ -125,6 +125,8 @@ create table SOCIETA (
      Nome varchar(40) not null,
      CodSport int not null,
      CodImmagine int not null,
+     Color1 varchar(10),
+     Color2 varchar(10),
      constraint IDSOCIETA primary key (PartitaIVA));
 
 create table SPORT (

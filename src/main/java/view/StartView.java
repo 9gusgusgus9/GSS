@@ -9,6 +9,7 @@ import entity.Immagine;
 import entity.Society;
 import entity.Sport;
 import javafx.fxml.FXML;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -52,10 +53,18 @@ public class StartView extends ViewImpl {
 
 	@FXML
 	private ImageView basket;
+	
+	@FXML
+	private ColorPicker color1;
+
+	@FXML
+	private ColorPicker color2;
 
 	private String societyName = null;
 	private String partitaIVA = null;
 	private String logo = null;
+	private String colorA = null;
+	private String colorB = null;
 	private Sport sport = Sport.NONSELEZIONATO;
 	private boolean flag = true;
 	
@@ -121,12 +130,27 @@ public class StartView extends ViewImpl {
 			this.partitaIVA = this.pIVA.getText();
 			this.logo = this.logoPath.getText();
 			if(this.logoPath.getText().equals("")) {
-				Society society = new Society(this.partitaIVA, this.societyName, this.sport);
-				society.insert();
+				if(this.color1.getValue().equals(Color.WHITE) && this.color2.getValue().equals(Color.WHITE)) {
+					Society society = new Society(this.partitaIVA, this.societyName, this.sport);
+					society.insert();
+				} else {
+					System.out.println(this.color1.getValue() + "   " + this.color1.getValue().toString());
+					System.out.println(this.color2.getValue() + "   " + this.color2.getValue().toString());
+					Society society = new Society(this.partitaIVA, this.societyName, this.sport, this.color1.getValue().toString(), this.color2.getValue().toString());
+					society.insert();
+				}
 			} else {
 				Immagine image = new Immagine(this.logo);
-				Society society = new Society(this.partitaIVA, this.societyName, this.sport, image);
-				society.insert();
+				if(this.color1.equals(Color.WHITE) && this.color2.equals(Color.WHITE)) {
+					Society society = new Society(this.partitaIVA, this.societyName, this.sport, image);
+					society.insert();
+				} else {
+					System.out.println(this.color1.getValue() + "   " + this.color1.getValue().toString());
+					System.out.println(this.color2.getValue() + "   " + this.color2.getValue().toString());
+					Society society = new Society(this.partitaIVA, this.societyName, this.sport, image, this.color1.getValue().toString(), this.color2.getValue().toString());
+					society.insert();
+				}
+				
 			}
 			ViewSwitcher.getInstance().switchView(this.getStage(), ViewType.CATEGORY);
 		} else {

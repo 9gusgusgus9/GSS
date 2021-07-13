@@ -7,11 +7,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 import entity.Category;
+import entity.Society;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import utilities.Pair;
 import utilities.Utilities;
@@ -122,6 +123,7 @@ public class CategoryView extends ViewImpl {
 		
 	@Override
 	public void init() {
+		this.setSociety();
 		List<Pair<Category, Image>> list = new LinkedList<>();
 		try {
 			list = Utilities.getCategories();
@@ -129,7 +131,7 @@ public class CategoryView extends ViewImpl {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Iterator iter = list.iterator();
+		Iterator<Pair<Category, Image>> iter = list.iterator();
 		int c = 2;
 		while(iter.hasNext()) {
 			Pair<Category, Image> next = (Pair<Category, Image>) iter.next();
@@ -137,6 +139,22 @@ public class CategoryView extends ViewImpl {
 			getImageView(c).setImage(next.getY());
 			c++;
 		}
+	}
+	
+	private void setSociety(){
+		Pair<Image, Society> society = null;
+		try {
+			society = Utilities.getSociety();
+		} catch (SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.logo.setImage(society.getX());
+		this.nameLabel.setText(society.getY().getNome());
+		System.out.println(society.getY().getColor1());
+		System.out.println(society.getY().getColor2());
+		this.color1.setFill(Color.valueOf(society.getY().getColor1()));
+		this.color2.setFill(Color.valueOf(society.getY().getColor2()));
 	}
 	
 	private Label getLabel(int x) {

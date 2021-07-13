@@ -23,6 +23,8 @@ import entity.Entity;
 import entity.Event;
 import entity.Immagine;
 import entity.Payment;
+import entity.Society;
+import entity.Sport;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
@@ -31,7 +33,7 @@ public class Utilities {
 
 	private static Connection conn;
 	private static Statement stmt;
-	private static String password = null;
+	private static String password = "Gu$tavo191199";
 	static {
 
 	}
@@ -181,7 +183,6 @@ public class Utilities {
 		dbConnection();
 		String query = "SELECT DatiFile FROM immagine WHERE IdImmagine = " + x;
 		ResultSet rs = stmt.executeQuery(query);
-		System.out.println(query);
 		if(rs.next()) {
 			InputStream image = rs.getBlob(1).getBinaryStream();
 			BufferedImage imagen = ImageIO.read(image);
@@ -228,4 +229,21 @@ public class Utilities {
 		return out;
 	}
 
+	public static Pair<Image,Society> getSociety() throws SQLException, IOException {
+		dbConnection();
+		String query = "SELECT * FROM societa";
+		ResultSet rs = stmt.executeQuery(query);
+		Society out = null;
+		Image image = null;
+		if(rs.next()) {
+			if(rs.getString("Color1").equals(null)) {
+				out = new Society(rs.getString("PartitaIVA"),rs.getString("Nome"), Sport.getSport(rs.getInt("CodSport")));
+			} else {
+				out = new Society(rs.getString("PartitaIVA"),rs.getString("Nome"), Sport.getSport(rs.getInt("CodSport")), rs.getString("Color1"), rs.getString("Color2"));
+			}
+			image = Utilities.getImage(rs.getInt("CodImmagine"));
+		}
+		Pair<Image, Society> society = new Pair<>(image, out);
+		return society;
+	}
 }

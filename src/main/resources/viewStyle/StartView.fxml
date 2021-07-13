@@ -27,6 +27,13 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                <children>
+                  <Label fx:id="logoLab1" text="Inserire i colori sociali: " />
+                  <ColorPicker fx:id="color1" />
+                  <ColorPicker fx:id="color2" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+               <children>
                   <Label fx:id="logoLab" text="Inserire un logo per personalizzare il gestionale: " />
                   <TextField fx:id="logoPath" />
                   <Button fx:id="browse" mnemonicParsing="false" onMouseClicked="#oneFileChooser" text="Browse" />
