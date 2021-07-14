@@ -69,12 +69,25 @@ public class StartView extends ViewImpl {
 	private boolean flag = true;
 	
 	public void init() {
+		this.setDefault();
 		this.calcio.setOpacity(0.5);
 		this.basket.setOpacity(0.5);
 		this.pallavolo.setOpacity(0.5);
 		this.logoPath.setEditable(false);
 	}
 
+	private void setDefault() {
+		Immagine image = new Immagine("src/main/resources/img/default/stemma.jpg");
+		image.setPrimaryKey(1);
+		image.insert();
+		image = new Immagine("src/main/resources/img/default/categoria.jpg");
+		image.setPrimaryKey(2);
+		image.insert();
+		image = new Immagine("src/main/resources/img/default/user.png");
+		image.setPrimaryKey(3);
+		image.insert();
+	}
+	
 	public void oneFileChooser() {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Selezionare un logo per la società");
