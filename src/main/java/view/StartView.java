@@ -144,22 +144,18 @@ public class StartView extends ViewImpl {
 			this.logo = this.logoPath.getText();
 			if(this.logoPath.getText().equals("")) {
 				if(this.color1.getValue().equals(Color.WHITE) && this.color2.getValue().equals(Color.WHITE)) {
-					Society society = new Society(this.partitaIVA, this.societyName, this.sport);
+					Society society = new Society(this.partitaIVA, this.societyName, this.sport, "#9c9c9c", "#e4f267");
 					society.insert();
 				} else {
-					System.out.println(this.color1.getValue() + "   " + this.color1.getValue().toString());
-					System.out.println(this.color2.getValue() + "   " + this.color2.getValue().toString());
 					Society society = new Society(this.partitaIVA, this.societyName, this.sport, this.color1.getValue().toString(), this.color2.getValue().toString());
 					society.insert();
 				}
 			} else {
 				Immagine image = new Immagine(this.logo);
 				if(this.color1.equals(Color.WHITE) && this.color2.equals(Color.WHITE)) {
-					Society society = new Society(this.partitaIVA, this.societyName, this.sport, image);
+					Society society = new Society(this.partitaIVA, this.societyName, this.sport, image, "#9c9c9c", "#e4f267");
 					society.insert();
 				} else {
-					System.out.println(this.color1.getValue() + "   " + this.color1.getValue().toString());
-					System.out.println(this.color2.getValue() + "   " + this.color2.getValue().toString());
 					Society society = new Society(this.partitaIVA, this.societyName, this.sport, image, this.color1.getValue().toString(), this.color2.getValue().toString());
 					society.insert();
 				}

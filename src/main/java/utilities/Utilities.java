@@ -72,7 +72,6 @@ public class Utilities {
 
 		String query = "INSERT INTO " + entity.getTableName() + " " + entity.getColumnList() + " VALUES "
 				+ entity.getValues();
-		System.out.println(query);
 		stmt.executeUpdate(query);
 		query = "SELECT * FROM " + entity.getTableName() + " ORDER BY " + entity.getNamePrimaryKey() + " DESC LIMIT 1";
 		ResultSet rs = stmt.executeQuery(query);
