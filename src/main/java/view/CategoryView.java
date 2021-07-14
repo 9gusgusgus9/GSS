@@ -151,8 +151,6 @@ public class CategoryView extends ViewImpl {
 		}
 		this.logo.setImage(society.getX());
 		this.nameLabel.setText(society.getY().getNome());
-		System.out.println(society.getY().getColor1());
-		System.out.println(society.getY().getColor2());
 		this.color1.setFill(Color.valueOf(society.getY().getColor1()));
 		this.color2.setFill(Color.valueOf(society.getY().getColor2()));
 	}
