@@ -1,8 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
+<AnchorPane prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CategoryView">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="-4.0" layoutY="-1.0" prefHeight="982.0" prefWidth="1504.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="160.0" prefWidth="1500.0">
+               <children>
+                  <Pane prefHeight="160.0" prefWidth="1495.0">
+                     <children>
+                        <Rectangle fx:id="color1" arcHeight="5.0" arcWidth="5.0" fill="#9c9c9ce5" height="29.0" layoutX="5.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="1490.0" />
+                        <Rectangle fx:id="color2" arcHeight="5.0" arcWidth="5.0" fill="#e4f267" height="29.0" layoutX="5.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="1490.0" />
+                        <Label fx:id="nameLabel" alignment="CENTER" layoutX="5.0" layoutY="50.0" prefHeight="62.0" prefWidth="1490.0" text="TEAM NAME">
+                           <font>
+                              <Font name="Bauhaus 93" size="54.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="logo" fitHeight="136.0" fitWidth="145.0" layoutX="37.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/default/stemma.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <Pane prefHeight="70.0" prefWidth="1529.0">
+               <children>
+                  <Label layoutX="69.0" layoutY="14.0" prefHeight="41.0" prefWidth="392.0" text="NOME CATEGORIA" underline="true">
+                     <font>
+                        <Font name="Georgia" size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <SplitPane dividerPositions="0.5" prefHeight="751.0" prefWidth="1504.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="749.0" prefWidth="546.0">
+                     <children>
+                        <Button layoutX="600.0" layoutY="2.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="141.0" text="Inserisci Giocatore" />
+                        <Label layoutX="37.0" layoutY="2.0" prefHeight="40.0" prefWidth="141.0" text="PLAYERS" underline="true">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <TableView layoutX="35.0" layoutY="55.0" prefHeight="683.0" prefWidth="683.0">
+                          <columns>
+                            <TableColumn prefWidth="227.0" text="CF" />
+                              <TableColumn prefWidth="227.0" text="NOME" />
+                              <TableColumn prefWidth="227.0" text="RUOLO" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="158.0" prefWidth="762.0">
+                     <children>
+                        <Button layoutX="600.0" layoutY="2.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="141.0" text="Inserisci Staff" />
+                        <Label layoutX="36.0" layoutY="2.0" prefHeight="40.0" prefWidth="141.0" text="STAFF" underline="true">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <TableView layoutX="35.0" layoutY="55.0" prefHeight="683.0" prefWidth="683.0">
+                           <columns>
+                              <TableColumn prefWidth="227.0" text="CF" />
+                              <TableColumn prefWidth="227.0" text="NOME" />
+                              <TableColumn prefWidth="227.0" text="RUOLO" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>
-
