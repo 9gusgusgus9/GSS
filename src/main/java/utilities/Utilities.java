@@ -33,7 +33,7 @@ public class Utilities {
 
 	private static Connection conn;
 	private static Statement stmt;
-	private static String password = null;
+	private static String password = "Gu$tavo191199";
 	static {
 
 	}
@@ -216,7 +216,7 @@ public class Utilities {
 	
 	public static List<Pair<Category, Image>> getCategories() throws SQLException, IOException{
 		dbConnection();
-		String query = "SELECT * FROM categoria";
+		String query = "SELECT * FROM categoria ORDER BY Nome";
 		ResultSet rs = stmt.executeQuery(query);
 		List<Pair<Category, Image>> out = new LinkedList();
 		while(rs.next()) {

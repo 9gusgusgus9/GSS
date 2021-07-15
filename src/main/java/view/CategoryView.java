@@ -11,6 +11,7 @@ import entity.Society;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,144 +24,151 @@ import utilities.Utilities;
 public class CategoryView extends ViewImpl {
 
 	@FXML
-	Label nameLabel;
-	
-	@FXML
-	ImageView logo;
-	
-	@FXML
-	Rectangle color1;
-	
-	@FXML
-	Rectangle color2;
-	
-	@FXML
-	ImageView image1;
-	
-	@FXML
-	Label label1;
-	
-	int flag1 = 0;
-	
-	@FXML
-	ImageView image2;
-	
-	@FXML
-	Label label2;
+	private Label nameLabel;
 
-	int flag2 = 0;
-	
 	@FXML
-	ImageView image3;
-	
-	@FXML
-	Label label3;
+	private ImageView logo;
 
-	int flag3 = 0;
-	
 	@FXML
-	ImageView image4;
-	
+	private Rectangle color1;
+
 	@FXML
-	Label label4;
-	
-	int flag4 = 0;
-	
+	private Rectangle color2;
+
 	@FXML
-	ImageView image5;
-	
+	private ImageView image1;
+
 	@FXML
-	Label label5;
-	
-	int flag5 = 0;
-	
+	private Label label1;
+
+	private int flag1 = 0;
+
 	@FXML
-	ImageView image6;
-	
+	private ImageView image2;
+
 	@FXML
-	Label label6;
-	
-	int flag6 = 0;
-	
+	private Label label2;
+
+	private int flag2 = 0;
+
 	@FXML
-	ImageView image7;
-	
+	private ImageView image3;
+
 	@FXML
-	Label label7;
-	
-	int flag7 = 0;
-	
+	private Label label3;
+
+	private int flag3 = 0;
+
 	@FXML
-	ImageView image8;
-	
+	private ImageView image4;
+
 	@FXML
-	Label label8;
-	
-	int flag8 = 0;
-	
+	private Label label4;
+
+	private int flag4 = 0;
+
 	@FXML
-	ImageView image9;
-	
+	private ImageView image5;
+
 	@FXML
-	Label label9;
-	
-	int flag9 = 0;
-	
+	private Label label5;
+
+	private int flag5 = 0;
+
 	@FXML
-	ImageView image10;
-	
+	private ImageView image6;
+
 	@FXML
-	Label label10;
-	
-	int flag10 = 0;
-	
+	private Label label6;
+
+	private int flag6 = 0;
+
 	@FXML
-	ImageView image11;
-	
+	private ImageView image7;
+
 	@FXML
-	Label label11;
-	
-	int flag11 = 0;
-	
+	private Label label7;
+
+	private int flag7 = 0;
+
 	@FXML
-	ImageView image12;
-	
+	private ImageView image8;
+
 	@FXML
-	Label label12;
-	
-	int flag12 = 0;
-	
+	private Label label8;
+
+	private int flag8 = 0;
+
 	@FXML
-	ImageView image13;
-	
+	private ImageView image9;
+
 	@FXML
-	Label label13;
-	
-	int flag13 = 0;
-	
+	private Label label9;
+
+	private int flag9 = 0;
+
 	@FXML
-	ImageView image14;
-	
+	private ImageView image10;
+
 	@FXML
-	Label label14;
-	
-	int flag14 = 0;
-	
+	private Label label10;
+
+	private int flag10 = 0;
+
 	@FXML
-	ImageView image15;
-	
+	private ImageView image11;
+
 	@FXML
-	Label label15;
-	
-	int flag15 = 0;
-		
+	private Label label11;
+
+	private int flag11 = 0;
+
+	@FXML
+	private ImageView image12;
+
+	@FXML
+	private Label label12;
+
+	private int flag12 = 0;
+
+	@FXML
+	private ImageView image13;
+
+	@FXML
+	private Label label13;
+
+	private int flag13 = 0;
+
+	@FXML
+	private ImageView image14;
+
+	@FXML
+	private Label label14;
+
+	private int flag14 = 0;
+
+	@FXML
+	private ImageView image15;
+
+	@FXML
+	private Label label15;
+
+	private int flag15 = 0;
+
+	@FXML
+	private Button prec, succ, nuova;
+
+	private int currentPage;
+
 	@Override
 	public void init() {
 		this.setSociety();
-		this.loadCategories();
+		this.prec.setDisable(true);
+		this.currentPage = 0;
+		this.loadCategories(currentPage);
 	}
-	
-	private void loadCategories() {
+
+	private void loadCategories(int page) {
 		List<Pair<Category, Image>> list = new LinkedList<>();
 		try {
 			list = Utilities.getCategories();
@@ -169,14 +177,46 @@ public class CategoryView extends ViewImpl {
 			e.printStackTrace();
 		}
 		Iterator<Pair<Category, Image>> iter = list.iterator();
-		int c = 2;
-		while(iter.hasNext()) {
+		int c = 1;
+		if (page == 0) {
+			this.getLabel(c).setText("Dirigenti");
+			try {
+				this.getImageView(c).setImage(Utilities.getImage(2));
+			} catch (IOException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			this.getImageView(c).setOnMouseClicked(new EventHandler<Event>() {
+
+				@Override
+				public void handle(Event arg0) {
+					ViewSwitcher.getInstance().switchView(new Stage(), ViewType.TEST);
+				}
+			});
+			c++;
+			if(list.size() <= 14) {
+				this.succ.setDisable(true);
+			} else {
+				this.succ.setDisable(false);
+			}
+		} else {
+			this.prec.setDisable(false);
+			int count  = 0;
+			if(page == 1) {
+				count++;
+			}
+			while(iter.hasNext() && count < (page * 15) ) {
+				iter.next();
+				count++;
+			}
+		}
+		while (iter.hasNext() && c<=15) {
 			Pair<Category, Image> next = (Pair<Category, Image>) iter.next();
 			this.getLabel(c).setText(next.getX().getNome());
 			this.getImageView(c).setImage(next.getY());
-			this.setFlag(c, (int) next.getX().getPrimaryKey()); 
+			this.setFlag(c, (int) next.getX().getPrimaryKey());
 			this.getImageView(c).setOnMouseClicked(new EventHandler<Event>() {
-				
+
 				@Override
 				public void handle(Event arg0) {
 					ViewSwitcher.getInstance().switchView(new Stage(), ViewType.TEST);
@@ -184,11 +224,22 @@ public class CategoryView extends ViewImpl {
 			});
 			c++;
 		}
-		
-		
+		while(c<=15) {
+			this.getLabel(c).setText("");
+			this.getImageView(c).setImage(null);
+			this.setFlag(c, 0);
+			this.getImageView(c).setOnMouseClicked(null);
+			c++;
+		}
+		if(list.size() < ((page + 1)*15 - 1)) {
+			this.succ.setDisable(true);
+		}
+		if(this.currentPage == 0) {
+			this.prec.setDisable(true);
+		}
 	}
-	
-	private void setSociety(){
+
+	private void setSociety() {
 		Pair<Image, Society> society = null;
 		try {
 			society = Utilities.getSociety();
@@ -201,9 +252,9 @@ public class CategoryView extends ViewImpl {
 		this.color1.setFill(Color.valueOf(society.getY().getColor1()));
 		this.color2.setFill(Color.valueOf(society.getY().getColor2()));
 	}
-	
+
 	private Label getLabel(int x) {
-		switch(x) {
+		switch (x) {
 		case 1:
 			return this.label1;
 		case 2:
@@ -234,13 +285,12 @@ public class CategoryView extends ViewImpl {
 			return this.label14;
 		case 15:
 			return this.label15;
-		default :
-			return null;
 		}
+		return new Label();
 	}
-	
+
 	private ImageView getImageView(int x) {
-		switch(x) {
+		switch (x) {
 		case 1:
 			return this.image1;
 		case 2:
@@ -271,13 +321,12 @@ public class CategoryView extends ViewImpl {
 			return this.image14;
 		case 15:
 			return this.image15;
-		default :
-			return null;
 		}
+		return new ImageView();
 	}
-	
+
 	private int getFlag(int x) {
-		switch(x) {
+		switch (x) {
 		case 1:
 			return this.flag1;
 		case 2:
@@ -308,13 +357,12 @@ public class CategoryView extends ViewImpl {
 			return this.flag14;
 		case 15:
 			return this.flag15;
-		default :
-			return 0;
 		}
+		return 0;
 	}
-	
+
 	private void setFlag(int x, int id) {
-		switch(x) {
+		switch (x) {
 		case 1:
 			this.flag1 = id;
 		case 2:
@@ -345,9 +393,18 @@ public class CategoryView extends ViewImpl {
 			this.flag14 = id;
 		case 15:
 			this.flag15 = id;
-		default :
-			
 		}
 	}
 
+	@FXML
+	private void nextPage() {
+		this.currentPage++;
+		this.loadCategories(currentPage);
+	}
+
+	@FXML
+	private void prevPage() {
+		this.currentPage--;
+		this.loadCategories(currentPage);
+	}
 }
