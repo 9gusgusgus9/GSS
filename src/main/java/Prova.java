@@ -19,6 +19,8 @@ import entity.Society;
 import entity.Sport;
 import entity.Staff;
 import utilities.DateTime;
+import utilities.Pair;
+import utilities.Utilities;
 
 public class Prova {
 
@@ -27,7 +29,7 @@ public class Prova {
 //		List<Object> convocati = new ArrayList<>();
 //		InputStream immagine = new FileInputStream("src/main/resources/img/pallavolo.jpg");
 //		Immagine image = new Immagine(immagine, "pallavolo", ".jpg");
-////		//la image.insert() non va più richiamata, la fanno automaticamente i costruttori, dopo potete cancellare
+////		//la image.insert() non va piï¿½ richiamata, la fanno automaticamente i costruttori, dopo potete cancellare
 ////		//image.insert();
 //		Society rick = new Society("12345678923", "TOMMI", Sport.CALCIO, image);
 //		rick.insert();
@@ -58,7 +60,9 @@ public class Prova {
 //		partita.insert();
 //		allenamento.insert();
 //		generico.insert();
-		Immagine image = new Immagine("src/main/resources/img/default/stemma.jpg");
-		image.insert();
+//		Immagine image = new Immagine("src/main/resources/img/default/stemma.jpg");
+//		image.insert();
+		List<Pair<DateTime, String>> list = Utilities.getEvents(new DateTime(6,2,2), new DateTime(6,2,4));
+		System.out.println(list.get(0).getY());
 	}
 }

@@ -1,6 +1,7 @@
 package view;
 
 import controller.Controller;
+import controller.ControllerImpl;
 import controller.StartViewController;
 import controller.TestController;
 
@@ -17,7 +18,8 @@ public enum ViewType {
 	TEST("Test", new TestController()),
     START("StartView", new StartViewController()),
 	BASIC("HomeView", new StartViewController()),
-	CATEGORY("CategoryView", new StartViewController());
+	CATEGORY("CategoryView", new StartViewController()),
+	CALENDAR("CalendarView", new StartViewController());
 
     /**
      * Style files path.

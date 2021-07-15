@@ -15,6 +15,7 @@ import java.sql.Statement;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
 
@@ -218,7 +219,7 @@ public class Utilities {
 		dbConnection();
 		String query = "SELECT * FROM categoria";
 		ResultSet rs = stmt.executeQuery(query);
-		List<Pair<Category, Image>> out = new LinkedList();
+		List<Pair<Category, Image>> out = new LinkedList<>();
 		while(rs.next()) {
 			int codImage = rs.getInt("CodImmagine");
 			Image image = Utilities.getImage(codImage);
@@ -244,5 +245,25 @@ public class Utilities {
 		}
 		Pair<Image, Society> society = new Pair<>(image, out);
 		return society;
+	}
+	
+	public static List<Pair<DateTime, String>> getEvents(DateTime lunedi, DateTime domenica) throws SQLException {
+		dbConnection();
+		String query = "SELECT * FROM evento";
+		List<Pair<DateTime, String>> events = new LinkedList<>();
+		ResultSet rs = stmt.executeQuery(query);
+		while(rs.next()) {
+			String[] date = rs.getString("Inizio").split("/");
+			if(rs.getString("NomeAvversario") != null) {
+				events.add(new Pair<>(new DateTime(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2])), "Partita"));
+			} else if (rs.getString("CodCategoria") != null){
+				events.add(new Pair<>(new DateTime(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2])), "Allenamento"));
+			} else {
+				events.add(new Pair<>(new DateTime(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2])), "Generico"));
+			}
+		}
+		events.stream().filter(d -> d.getX().getGiorno() >= lunedi.getGiorno() && d.getX().getGiorno() <= domenica.getGiorno() 
+				&& d.getX().getAnno() == lunedi.getAnno() && d.getX().getAnno() == lunedi.getMese()).collect(Collectors.toList());
+		return events;
 	}
 }
