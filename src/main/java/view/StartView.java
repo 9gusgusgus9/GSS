@@ -138,6 +138,14 @@ public class StartView extends ViewImpl {
 		} else {
 			this.sportLab.setTextFill(Color.BLACK);
 		}
+		if(this.pIVA.getText().length()  != 11) {
+			this.pivaLab.setText(this.pivaLab.getText() + " (11 cifre)");
+			this.pivaLab.setTextFill(Color.RED);
+			this.flag = false;
+		} else {
+			this.pivaLab.setText(this.pivaLab.getText().substring(0, this.pivaLab.getText().length() - 11));
+			this.pivaLab.setTextFill(Color.BLACK);
+		}
 		if(this.flag) {
 			this.societyName = this.nome.getText();
 			this.partitaIVA = this.pIVA.getText();

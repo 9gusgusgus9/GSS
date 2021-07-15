@@ -176,7 +176,7 @@ public class CategoryView extends ViewImpl {
 			this.getImageView(c).setImage(next.getY());
 			this.setFlag(c, (int) next.getX().getPrimaryKey()); 
 			this.getImageView(c).setOnMouseClicked(new EventHandler<Event>() {
-
+				
 				@Override
 				public void handle(Event arg0) {
 					ViewSwitcher.getInstance().switchView(new Stage(), ViewType.TEST);
