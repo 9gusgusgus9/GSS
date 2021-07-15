@@ -45,7 +45,7 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="749.0" prefWidth="546.0">
                      <children>
-                        <Button fx:id="addPlayer" layoutX="600.0" layoutY="2.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="141.0" text="Inserisci Giocatore" />
+                        <Button fx:id="addPlayer" layoutX="600.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#prova" prefHeight="40.0" prefWidth="141.0" text="Inserisci Giocatore" />
                         <Label layoutX="37.0" layoutY="2.0" prefHeight="40.0" prefWidth="141.0" text="PLAYERS" underline="true">
                            <font>
                               <Font size="24.0" />

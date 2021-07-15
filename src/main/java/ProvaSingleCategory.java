@@ -15,6 +15,6 @@ public class ProvaSingleCategory extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		ViewSwitcher.getInstance().switchView(primaryStage, ViewType.START);
+		ViewSwitcher.getInstance().switchView(primaryStage, ViewType.SINGLECATEGORY);
 	}
 }
