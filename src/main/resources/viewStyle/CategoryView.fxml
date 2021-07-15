@@ -36,9 +36,9 @@
               <tabs>
                 <Tab text="Categorie">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1300.0">
+                    <AnchorPane prefHeight="640.0" prefWidth="1500.0">
                            <children>
-                              <GridPane alignment="CENTER" prefHeight="600.0" prefWidth="1500.0">
+                              <GridPane alignment="CENTER" prefHeight="550.0" prefWidth="1500.0">
                                 <columnConstraints>
                                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -116,7 +116,7 @@
                                           <Font name="System Bold" size="20.0" />
                                        </font>
                                     </Label>
-                                    <ImageView fx:id="image111" fitHeight="150.0" fitWidth="200.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
+                                    <ImageView fx:id="image11" fitHeight="150.0" fitWidth="200.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
                                     <Label fx:id="label11" translateX="45.0" translateY="40.0" GridPane.rowIndex="2">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
@@ -148,6 +148,13 @@
                                     </Label>
                                  </children>
                               </GridPane>
+                              <HBox alignment="CENTER" layoutY="550.0" prefHeight="50.0" prefWidth="1500.0" spacing="500.0">
+                                 <children>
+                                    <Button fx:id="prec" mnemonicParsing="false" onMouseClicked="#prevPage" text="Precedente" />
+                                    <Button fx:id="nuova" mnemonicParsing="false" text="Inserisci nuova" />
+                                    <Button fx:id="succ" mnemonicParsing="false" onMouseClicked="#nextPage" text="Successiva" />
+                                 </children>
+                              </HBox>
                            </children></AnchorPane>
                   </content>
                 </Tab>

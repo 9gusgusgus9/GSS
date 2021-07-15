@@ -44,7 +44,7 @@ public class ViewSwitcher {
         stage.setTitle("Test");
         stage.show();
     }
-
+    
     /**
      * Load Style from FXML file and creates the View linked to it.
      * 
