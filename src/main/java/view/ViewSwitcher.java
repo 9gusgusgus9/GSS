@@ -61,7 +61,7 @@ public class ViewSwitcher {
             e.printStackTrace();
         }
         Scene newScene;
-        if (this.firstSwitch) {
+        if (this.firstSwitch || !stage.isShowing()) {
             newScene = new Scene(root);
             this.firstSwitch = false;
         } else {
