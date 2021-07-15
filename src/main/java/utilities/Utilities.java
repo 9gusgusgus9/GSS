@@ -33,7 +33,7 @@ public class Utilities {
 
 	private static Connection conn;
 	private static Statement stmt;
-	private static String password = "Gu$tavo191199";
+	private static String password = null;
 	static {
 
 	}
