@@ -16,3 +16,6 @@ VIEW
 -View di tutte le persone divise in staff, dirigenti, giocatori e categorie
 -View della persona singola
 -View di un evento singolo
+
+MIGLIORAMENTI
+-controllo sull'inserimento partita iva (esattamente 11 caratteri)
