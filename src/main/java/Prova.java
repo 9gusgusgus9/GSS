@@ -31,13 +31,15 @@ public class Prova {
 //		Immagine image = new Immagine(immagine, "pallavolo", ".jpg");
 ////		//la image.insert() non va pi� richiamata, la fanno automaticamente i costruttori, dopo potete cancellare
 ////		//image.insert();
-//		Society rick = new Society("12345678923", "TOMMI", Sport.CALCIO, image);
-//		rick.insert();
+		Immagine image = new Immagine("src/main/resources/img/default/stemma.jpg");
+		image.insert();
+		Society rick = new Society("12345678925", "TOMMI", Sport.CALCIO, image);
+		rick.insert();
 //		Category allievi = new Category("pulcini", rick.getPrimaryKey(), image);
 //		allievi.insert();
 //		Event allenamento = new Event(new DateTime(4, 2, 3), new DateTime(4, 3, 4), rick.getPrimaryKey(), 4);
-//		Event generico = new Event(new DateTime(6, 2, 3), new DateTime(6, 3, 4), rick.getPrimaryKey(),
-//				"Cena di squadra");
+		Event generico = new Event(new DateTime(2021, 7, 15), new DateTime(2021, 7, 15), rick.getPrimaryKey(),
+				"Cena di squadra");
 //		Event partita = new Event(new DateTime(2, 2, 3), new DateTime(2, 3, 4), rick.getPrimaryKey(), "Bubano", 4);
 ////		partita.setRisultato("0-1");
 //		Payment pagamento = new Payment(1000, false, Finanze.QUOTA);
@@ -59,10 +61,10 @@ public class Prova {
 //		generico.setConvocati(convocati);
 //		partita.insert();
 //		allenamento.insert();
-//		generico.insert();
+		generico.insert();
 //		Immagine image = new Immagine("src/main/resources/img/default/stemma.jpg");
 //		image.insert();
-		List<Pair<DateTime, String>> list = Utilities.getEvents(new DateTime(6,2,2), new DateTime(6,2,4));
-		System.out.println(list.get(0).getY());
+//		List<Pair<DateTime, String>> list = Utilities.getEvents(new DateTime(6,2,2), new DateTime(6,2,4));
+//		System.out.println(list.get(0).getY());
 	}
 }

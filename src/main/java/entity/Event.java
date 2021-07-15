@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import utilities.DateTime;
 import utilities.Pair;
 import utilities.Utilities;
@@ -26,6 +28,7 @@ public class Event extends Entity {
 	private String risultato = null;
 	private int codCategoria = 0;
 	private List<Object> convocati = new ArrayList<>();
+	private StringProperty tipoEvento;	
 	
 	//EVENTO GENERICO
 	public Event(DateTime inizio, DateTime fine, String codPartitaIva, String descrizione){
@@ -33,6 +36,7 @@ public class Event extends Entity {
 		this.fine=fine;
 		this.codPartitaIva=codPartitaIva;
 		this.descrizione_generico=descrizione;
+		tipoEvento = new SimpleStringProperty("Generico");
 	}
 	
 	//PARTITA
@@ -43,6 +47,7 @@ public class Event extends Entity {
 		this.codCategoria=codiceCategoria;
 		this.nomeAvversario=avversario;
 		this.risultato="ND";
+		tipoEvento = new SimpleStringProperty("Partita");
 	}
 	
 	//ALLENAMENTO
@@ -51,6 +56,7 @@ public class Event extends Entity {
 		this.fine=fine;
 		this.codPartitaIva=codPartitaIva;
 		this.codCategoria=codCategoria;
+		tipoEvento = new SimpleStringProperty("Allenamento");
 	}
 	
 	@Override
@@ -121,5 +127,17 @@ public class Event extends Entity {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public DateTime getInizio() {
+		return this.inizio;
+	}
+	
+	public DateTime getFine() {
+		return this.fine;
+	}
+	
+	public StringProperty getTipoEvento() {
+		return this.tipoEvento;
 	}
 }

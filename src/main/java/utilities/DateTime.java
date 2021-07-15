@@ -1,7 +1,11 @@
 package utilities;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class DateTime {
 	private int anno, mese, giorno, ora, minuto;
+	private StringProperty property = new SimpleStringProperty("lunedi");
 	
 	public DateTime(int anno, int mese, int giorno, int ora, int minuto) {
 		this.anno = anno;
@@ -41,6 +45,10 @@ public class DateTime {
 
 	public String getDate() {
 		return this.giorno+"/"+this.mese+"/"+this.anno;
+	}
+	
+	public StringProperty getProperty() {
+		return this.property;
 	}
 	
 	public String getTime() {

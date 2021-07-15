@@ -247,23 +247,25 @@ public class Utilities {
 		return society;
 	}
 	
-	public static List<Pair<DateTime, String>> getEvents(DateTime lunedi, DateTime domenica) throws SQLException {
+	public static List<Event> getEvents(DateTime lunedi, DateTime domenica) throws SQLException {
 		dbConnection();
 		String query = "SELECT * FROM evento";
-		List<Pair<DateTime, String>> events = new LinkedList<>();
+		List<Event> events = new LinkedList<>();
 		ResultSet rs = stmt.executeQuery(query);
 		while(rs.next()) {
-			String[] date = rs.getString("Inizio").split("/");
+			String[] inizio = rs.getString("Inizio").split("/");
+			String[] fine = rs.getString("Fine").split("/");
 			if(rs.getString("NomeAvversario") != null) {
-				events.add(new Pair<>(new DateTime(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2])), "Partita"));
+				events.add(new Event(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[0]), Integer.parseInt(fine[1]), Integer.parseInt(fine[2])), rs.getString("CodPartitaIVA"), rs.getString("NomeAvversario"), rs.getInt("CodCategoria")));
 			} else if (rs.getString("CodCategoria") != null){
-				events.add(new Pair<>(new DateTime(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2])), "Allenamento"));
+				events.add(new Event(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[0]), Integer.parseInt(fine[1]), Integer.parseInt(fine[2])), rs.getString("CodPartitaIVA"), rs.getInt("CodCategoria")));
 			} else {
-				events.add(new Pair<>(new DateTime(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2])), "Generico"));
+				events.add(new Event(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[0]), Integer.parseInt(fine[1]), Integer.parseInt(fine[2])), rs.getString("CodPartitaIVA"), rs.getString("Descrizione_generico")));
 			}
 		}
-		events.stream().filter(d -> d.getX().getGiorno() >= lunedi.getGiorno() && d.getX().getGiorno() <= domenica.getGiorno() 
-				&& d.getX().getAnno() == lunedi.getAnno() && d.getX().getAnno() == lunedi.getMese()).collect(Collectors.toList());
-		return events;
+//		List<Event> filteredEvents = events.stream().filter(d -> d.getInizio().getGiorno() >= lunedi.getGiorno() && d.getInizio().getGiorno() <= domenica.getGiorno() 
+//				&& d.getInizio().getAnno() == lunedi.getAnno() && d.getInizio().getMese() == lunedi.getMese()).collect(Collectors.toList());
+		List<Event> filteredEvents = events.stream().filter(d -> d.getInizio().compareDate(lunedi) >= 0 && d.getInizio().compareDate(domenica) <= 0).collect(Collectors.toList());
+		return filteredEvents;
 	}
 }
