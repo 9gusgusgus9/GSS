@@ -40,16 +40,9 @@ public class InsertPlayerView extends ViewImpl{
 	@FXML
 	TextField dataText;
 	
-	
-	
 	@Override
 	public void init() {
-		this.prova();
 		this.setSociety();
-	}
-	
-	public void prova() {
-		System.out.println("coglione");
 	}
 	
 	private void setSociety() {
