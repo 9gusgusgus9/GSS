@@ -245,4 +245,18 @@ public class Utilities {
 		Pair<Image, Society> society = new Pair<>(image, out);
 		return society;
 	}
+	
+	public static Pair<Image,Category> getCategory(int idCategoria) throws SQLException, IOException {
+		dbConnection();
+		String query = "SELECT * FROM categoria WHERE IdCategoria=idcategoria";
+		ResultSet rs = stmt.executeQuery(query);
+		Category out = null;
+		Image image = null;
+		if(rs.next()) {
+			out = new Category(rs.getString("Nome"), rs.getString("CodPartitaIva"));
+			image = Utilities.getImage(rs.getInt("CodImmagine"));
+		}
+		Pair<Image, Category> category = new Pair<>(image, out);
+		return category;
+	}
 }

@@ -190,7 +190,7 @@ public class CategoryView extends ViewImpl {
 
 				@Override
 				public void handle(Event arg0) {
-					ViewSwitcher.getInstance().switchView(new Stage(), ViewType.TEST);
+					ViewSwitcher.getInstance().switchView(new Stage(), ViewType.SINGLECATEGORY);
 				}
 			});
 			c++;
@@ -219,7 +219,7 @@ public class CategoryView extends ViewImpl {
 
 				@Override
 				public void handle(Event arg0) {
-					ViewSwitcher.getInstance().switchView(new Stage(), ViewType.TEST);
+					ViewSwitcher.getInstance().switchView(new Stage(), ViewType.SINGLECATEGORY);
 				}
 			});
 			c++;
