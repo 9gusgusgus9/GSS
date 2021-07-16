@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CategoryView">
+<AnchorPane prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SingleCategoryView">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="-4.0" layoutY="-1.0" prefHeight="982.0" prefWidth="1504.0">
          <children>
@@ -34,7 +34,7 @@
             </HBox>
             <Pane prefHeight="70.0" prefWidth="1529.0">
                <children>
-                  <Label layoutX="69.0" layoutY="14.0" prefHeight="41.0" prefWidth="392.0" text="NOME CATEGORIA" underline="true">
+                  <Label fx:id="categoria" layoutX="69.0" layoutY="14.0" prefHeight="41.0" prefWidth="392.0" text="NOME CATEGORIA" underline="true">
                      <font>
                         <Font name="Georgia" size="36.0" />
                      </font>
@@ -45,7 +45,7 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="749.0" prefWidth="546.0">
                      <children>
-                        <Button layoutX="600.0" layoutY="2.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="141.0" text="Inserisci Giocatore" />
+                        <Button fx:id="addPlayer" layoutX="600.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#switchToInsertPlayer" prefHeight="40.0" prefWidth="141.0" text="Inserisci Giocatore" />
                         <Label layoutX="37.0" layoutY="2.0" prefHeight="40.0" prefWidth="141.0" text="PLAYERS" underline="true">
                            <font>
                               <Font size="24.0" />

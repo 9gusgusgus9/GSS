@@ -217,7 +217,7 @@ public class Utilities {
 	
 	public static List<Pair<Category, Image>> getCategories() throws SQLException, IOException{
 		dbConnection();
-		String query = "SELECT * FROM categoria";
+		String query = "SELECT * FROM categoria ORDER BY Nome";
 		ResultSet rs = stmt.executeQuery(query);
 		List<Pair<Category, Image>> out = new LinkedList<>();
 		while(rs.next()) {
@@ -247,6 +247,7 @@ public class Utilities {
 		return society;
 	}
 	
+
 	public static List<Event> getEvents(DateTime lunedi, DateTime domenica) throws SQLException {
 		dbConnection();
 		String query = "SELECT * FROM evento";
@@ -267,5 +268,19 @@ public class Utilities {
 //				&& d.getInizio().getAnno() == lunedi.getAnno() && d.getInizio().getMese() == lunedi.getMese()).collect(Collectors.toList());
 		List<Event> filteredEvents = events.stream().filter(d -> d.getInizio().compareDate(lunedi) >= 0 && d.getInizio().compareDate(domenica) <= 0).collect(Collectors.toList());
 		return filteredEvents;
+	}
+		
+	public static Pair<Image,Category> getCategory(int idCategoria) throws SQLException, IOException {
+		dbConnection();
+		String query = "SELECT * FROM categoria WHERE IdCategoria=idcategoria";
+		ResultSet rs = stmt.executeQuery(query);
+		Category out = null;
+		Image image = null;
+		if(rs.next()) {
+			out = new Category(rs.getString("Nome"), rs.getString("CodPartitaIva"));
+			image = Utilities.getImage(rs.getInt("CodImmagine"));
+		}
+		Pair<Image, Category> category = new Pair<>(image, out);
+		return category;
 	}
 }
