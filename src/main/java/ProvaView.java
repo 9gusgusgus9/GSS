@@ -11,12 +11,11 @@ public class ProvaView extends javafx.application.Application {
 	
 
 	public static void main(String[] args) throws SQLException, IOException { 
-		System.out.println(Utilities.getCategory(1).getY().getNome());
+		launch(args);
 		}
 
 	@Override
 	public void start(Stage arg0) throws Exception {
-		// TODO Auto-generated method stub
-		
+		System.out.println(Utilities.getCategory(3).getY().getNome());
 	}
 }
