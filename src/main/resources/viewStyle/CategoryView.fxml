@@ -151,7 +151,7 @@
                               <HBox alignment="CENTER" layoutY="550.0" prefHeight="50.0" prefWidth="1500.0" spacing="500.0">
                                  <children>
                                     <Button fx:id="prec" mnemonicParsing="false" onMouseClicked="#prevPage" text="Precedente" />
-                                    <Button fx:id="nuova" mnemonicParsing="false" text="Inserisci nuova" />
+                                    <Button fx:id="nuova" mnemonicParsing="false" onMouseClicked="#insertNew" text="Inserisci nuova" />
                                     <Button fx:id="succ" mnemonicParsing="false" onMouseClicked="#nextPage" text="Successiva" />
                                  </children>
                               </HBox>
