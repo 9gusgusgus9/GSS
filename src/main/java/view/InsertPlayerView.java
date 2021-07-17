@@ -5,14 +5,13 @@ import java.sql.SQLException;
 
 import entity.Finanze;
 import entity.Payment;
-import entity.Person;
 import entity.Player;
-import entity.Sesso;
 import entity.Society;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -66,12 +65,40 @@ public class InsertPlayerView extends ViewImpl{
 	@FXML
 	Button insertButton;
 	
+	@FXML
+	ChoiceBox<String> sesso;
+	
+	@FXML
+	ChoiceBox<String> preferenza;
+	
+	@FXML
+	ChoiceBox<String> ruolo;
+	
 	private int category;
 	
 	@Override
 	public void init() {
 		this.setSociety();
+		this.setChoiceBox();
 		this.category=Utilities.getCategoria();
+	}
+	
+	private void setChoiceBox() {
+		sesso.setItems(FXCollections.observableArrayList("Maschio","Femmina","Altro"));
+		preferenza.setItems(FXCollections.observableArrayList("Dx","Sx","DS"));
+		ruolo.setItems(FXCollections.observableArrayList("POR","DIF","CEN","ATT"));
+	}
+	
+	public void setSesso() {
+		sesso.show();
+	}
+	
+	public void setPreferenza() {
+		preferenza.show();
+	}
+	
+	public void setRuolo() {
+		ruolo.show();
 	}
 	
 	private void setSociety() {
@@ -89,7 +116,7 @@ public class InsertPlayerView extends ViewImpl{
 	}
 	
 	private boolean check() {
-		if(nameText.getText().isEmpty() || surnameText.getText().isEmpty() || cfText.getText().isEmpty() || dataText.getText().isEmpty() || matricolaText.getText().isEmpty() || pesoText.getText().isEmpty() || altezzaText.getText().isEmpty() || certificatoText.getText().isEmpty()) {
+		if(nameText.getText().isEmpty() || surnameText.getText().isEmpty() || cfText.getText().isEmpty() || dataText.getText().isEmpty() || matricolaText.getText().isEmpty() || pesoText.getText().isEmpty() || altezzaText.getText().isEmpty() || certificatoText.getText().isEmpty() || sesso.getValue().isEmpty() || preferenza.getValue().isEmpty() || ruolo.getValue().isEmpty()) {
 			return false;
 		}
 		return true;
@@ -101,8 +128,8 @@ public class InsertPlayerView extends ViewImpl{
 				Payment pagamento = new Payment(1000, false, Finanze.QUOTA);
 				pagamento.insert();
 				Player player = new Player(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getText()),
-						(int) pagamento.getPrimaryKey(), Sesso.ALTRO.getKey(), Utilities.getSociety().getY().getPrimaryKey(), Integer.parseInt(this.matricolaText.getText()), this.pesoText.getText(),
-						this.altezzaText.getText(), new DateTime(this.certificatoText.getText()), "ATT", this.category, "DS");
+						(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(), Integer.parseInt(this.matricolaText.getText()), this.pesoText.getText(),
+						this.altezzaText.getText(), new DateTime(this.certificatoText.getText()), ruolo.getValue(), this.category, preferenza.getValue());
 				player.insert();
 				this.getStage().close();
 			} else {

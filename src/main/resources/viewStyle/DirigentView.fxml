@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.DirigentView">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="-4.0" layoutY="-1.0" prefHeight="800.0" prefWidth="1500.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="160.0" prefWidth="1500.0">
+               <children>
+                  <Pane prefHeight="160.0" prefWidth="1495.0">
+                     <children>
+                        <Rectangle fx:id="color1" arcHeight="5.0" arcWidth="5.0" fill="#9c9c9ce5" height="29.0" layoutX="5.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="1490.0" />
+                        <Rectangle fx:id="color2" arcHeight="5.0" arcWidth="5.0" fill="#e4f267" height="29.0" layoutX="5.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="1490.0" />
+                        <Label fx:id="nameLabel" alignment="CENTER" layoutX="5.0" layoutY="50.0" prefHeight="62.0" prefWidth="1490.0" text="TEAM NAME">
+                           <font>
+                              <Font name="Bauhaus 93" size="54.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="logo" fitHeight="136.0" fitWidth="145.0" layoutX="37.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/default/stemma.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <Pane prefHeight="60.0" prefWidth="1500.0">
+               <children>
+                  <Label layoutX="69.0" layoutY="14.0" prefHeight="41.0" prefWidth="211.0" text="DIRIGENTI" underline="true">
+                     <font>
+                        <Font name="Georgia" size="36.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="addDirigent" layoutX="1327.0" layoutY="9.0" mnemonicParsing="false" onMouseClicked="#switchToInsertPlayer" prefHeight="40.0" prefWidth="141.0" text="Inserisci Dirigente" />
+               </children>
+            </Pane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="580.0" prefWidth="1500.0">
+               <children>
+                  <TableView fx:id="tableView" layoutX="35.0" layoutY="41.0" prefHeight="500.0" prefWidth="1454.0">
+                    <columns>
+                      <TableColumn fx:id="columnCF" prefWidth="423.3333435058594" text="CF" />
+                        <TableColumn fx:id="columnName" minWidth="0.0" prefWidth="552.3333129882812" text="NOME" />
+                        <TableColumn fx:id="columnRuolo" minWidth="0.0" prefWidth="478.66668701171875" text="RUOLO" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
