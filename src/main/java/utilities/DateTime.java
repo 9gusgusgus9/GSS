@@ -23,6 +23,12 @@ public class DateTime {
 		this.minuto = 0;
 	}
 	
+	public DateTime(String string) {
+		this.giorno = Integer.parseInt(string.substring(0,2));
+		this.mese = Integer.parseInt(string.substring(3,5));
+		this.anno = Integer.parseInt(string.substring(6));
+	}
+	
 	public int getAnno() {
 		return anno;
 	}
