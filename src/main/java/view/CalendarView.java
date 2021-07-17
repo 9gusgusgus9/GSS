@@ -2,7 +2,9 @@ package view;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
 import entity.Event;
 
@@ -51,7 +53,25 @@ public class CalendarView extends ViewImpl{
 	Rectangle color2;
 	
 	@FXML
-	TableView<Event> gridWeek;
+	TableView<Event> lunedi;
+	
+	@FXML
+	TableView<Event> martedi;
+	
+	@FXML
+	TableView<Event> mercoledi;
+	
+	@FXML
+	TableView<Event> giovedi;
+	
+	@FXML
+	TableView<Event> venerdi;
+	
+	@FXML
+	TableView<Event> sabato;
+	
+	@FXML
+	TableView<Event> domenica;
 	
 	@FXML
 	Label actualWeek;
@@ -63,25 +83,27 @@ public class CalendarView extends ViewImpl{
 	Button previousWeek;
 	
 	@FXML
-	TableColumn<Event, String> lunedi;
+	TableColumn<Event, String> lun;
 	
 	@FXML
-	TableColumn<Event, String> martedi;
+	TableColumn<Event, String> mar;
 	
 	@FXML
-	TableColumn<Event, String> mercoledi;
+	TableColumn<Event, String> mer;
 	
 	@FXML
-	TableColumn<Event, String> giovedi;
+	TableColumn<Event, String> giov;
 	
 	@FXML
-	TableColumn<Event, String> venerdi;
+	TableColumn<Event, String> ven;
 	
 	@FXML
-	TableColumn<Event, String> sabato;
+	TableColumn<Event, String> sab;
 	
 	@FXML
-	TableColumn<Event, String> domenica;
+	TableColumn<Event, String> dom;
+	
+	private List<TableColumn<Event, String>> list = Arrays.asList(lun, mar, mer, giov, ven,sab,dom);
 	
 	@Override
 	public void init(){
@@ -117,7 +139,7 @@ public class CalendarView extends ViewImpl{
 	
 	private void setDayNumber() {
 		int first = this.first.getDayOfMonth();
-		for(TableColumn<Event, ?> col : gridWeek.getColumns()) {
+		for(TableColumn<Event, ?> col : list) {
 			col.setEditable(false);
 			String[] day = col.getText().split(",");
 			col.setText(day[0] + ", " + first);
@@ -127,109 +149,14 @@ public class CalendarView extends ViewImpl{
 	
 	private void setEventOnDay() {
     	try {
-			gridWeek.setItems(FXCollections.observableArrayList(Utilities.getEvents(new DateTime(first.getYear(), first.getMonthValue(), first.getDayOfMonth()), new DateTime(last.getYear(), last.getMonthValue(), last.getDayOfMonth()))));
-//			for(Event p : Utilities.getEvents(new DateTime(first.getYear(), first.getMonthValue(), first.getDayOfMonth()), new DateTime(last.getYear(), last.getMonthValue(), last.getDayOfMonth()))) {
-//				DayOfWeek day = this.getDayOfWeek(p);
-//				if (day == DayOfWeek.MONDAY) {
-//					lunedi.setCellValueFactory(new PropertyValueFactory<Event, String>("monday"));
-//					lunedi.setCellFactory(col -> new TableCell<Event, String>() {
-//					    @Override
-//					    public void updateItem(String s, boolean empty) {
-//					        super.updateItem(s, empty);
-//					        if (empty) {
-//					            setText(null);
-//					        } else {
-//					            setText(s);
-//					        }
-//					    }
-//					});
-//				} else if (day == DayOfWeek.TUESDAY) {
-//		    		martedi.setCellValueFactory(new PropertyValueFactory<Event, String>("tuesday"));
-//					martedi.setCellFactory(col -> new TableCell<Event, String>() {
-//					    @Override
-//					    public void updateItem(String s, boolean empty) {
-//					        super.updateItem(s, empty);
-//					        if (empty) {
-//					            setText(null);
-//					        } else {
-//					            setText(s);
-//					        }
-//					    }
-//					});
-//				} else if (day == DayOfWeek.WEDNESDAY) {
-//		    		mercoledi.setCellValueFactory(new PropertyValueFactory<Event, String>("wednesday"));
-//					mercoledi.setCellFactory(col -> new TableCell<Event, String>() {
-//					    @Override
-//					    public void updateItem(String s, boolean empty) {
-//					        super.updateItem(s, empty);
-//					        if (empty) {
-//					            setText(null);
-//					        } else {
-//					            setText(s);
-//					        }
-//					    }
-//					});
-//				} else if (day == DayOfWeek.THURSDAY) {
-//					giovedi.setCellValueFactory(new PropertyValueFactory<Event, String>("thursday"));
-//					giovedi.setCellFactory(col -> new TableCell<Event, String>() {
-//					    @Override
-//					    public void updateItem(String s, boolean empty) {
-//					        super.updateItem(s, empty);
-//					        if (empty) {
-//					            setText(null);
-//					        } else {
-//					            setText(s);
-//					        }
-//					    }
-//					});
-//				} else if (day == DayOfWeek.FRIDAY) {
-//					venerdi.setCellValueFactory(new PropertyValueFactory<Event, String>("friday"));
-//					venerdi.setCellFactory(col -> new TableCell<Event, String>() {
-//					    @Override
-//					    public void updateItem(String s, boolean empty) {
-//					        super.updateItem(s, empty);
-//					        if (empty) {
-//					            setText(null);
-//					        } else {
-//					            setText(s);
-//					        }
-//					    }
-//					});
-//				} else if (day == DayOfWeek.SATURDAY) {
-//					sabato.setCellValueFactory(new PropertyValueFactory<Event, String>("saturday"));
-//					sabato.setCellFactory(col -> new TableCell<Event, String>() {
-//					    @Override
-//					    public void updateItem(String s, boolean empty) {
-//					        super.updateItem(s, empty);
-//					        if (empty) {
-//					            setText(null);
-//					        } else {
-//					            setText(s);
-//					        }
-//					    }
-//					});
-//				} else {
-//					domenica.setCellValueFactory(new PropertyValueFactory<Event, String>("sunday"));
-//					domenica.setCellFactory(col -> new TableCell<Event, String>() {
-//					    @Override
-//					    public void updateItem(String s, boolean empty) {
-//					        super.updateItem(s, empty);
-//					        if (empty) {
-//					            setText(null);
-//					        } else {
-//					            setText(s);
-//					        }
-//					    }
-//					});
-//				}
-//			}
-			lunedi.setCellValueFactory(new PropertyValueFactory<Event, String>("monday"));
-			martedi.setCellValueFactory(new PropertyValueFactory<Event, String>("tuesday"));
-			domenica.setCellValueFactory(new PropertyValueFactory<Event, String>("sunday"));
-			sabato.setCellValueFactory(new PropertyValueFactory<Event, String>("saturday"));
-			venerdi.setCellValueFactory(new PropertyValueFactory<Event, String>("friday"));
-			giovedi.setCellValueFactory(new PropertyValueFactory<Event, String>("thursday"));
-			mercoledi.setCellValueFactory(new PropertyValueFactory<Event, String>("wednesday"));
+			lunedi.setItems(FXCollections.observableArrayList(Utilities.getEvents(new DateTime(first.getYear(), first.getMonthValue(), first.getDayOfMonth()), new DateTime(last.getYear(), last.getMonthValue(), last.getDayOfMonth()))));
+			lun.setCellValueFactory(new PropertyValueFactory<Event, String>("monday"));
+			mar.setCellValueFactory(new PropertyValueFactory<Event, String>("tuesday"));
+			dom.setCellValueFactory(new PropertyValueFactory<Event, String>("sunday"));
+			sab.setCellValueFactory(new PropertyValueFactory<Event, String>("saturday"));
+			ven.setCellValueFactory(new PropertyValueFactory<Event, String>("friday"));
+			giov.setCellValueFactory(new PropertyValueFactory<Event, String>("thursday"));
+			mer.setCellValueFactory(new PropertyValueFactory<Event, String>("wednesday"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
