@@ -58,7 +58,7 @@ public class Event extends Entity {
 		this.nomeAvversario=avversario;
 		this.risultato="ND";
 		try {
-			this.setDayOfWeek(Utilities.getCategory(this.codCategoria).getY().getNome() + " vs " + this.nomeAvversario);
+			this.setDayOfWeek(Utilities.getOnlyCategory(this.codCategoria).getNome() + " vs " + this.nomeAvversario);
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
 		}
@@ -71,7 +71,7 @@ public class Event extends Entity {
 		this.codPartitaIva=codPartitaIva;
 		this.codCategoria=codCategoria;
 		try {
-			this.setDayOfWeek("Allenamento "+Utilities.getCategory(this.codCategoria).getY().getNome());
+		this.setDayOfWeek("Allenamento "+ Utilities.getOnlyCategory(this.codCategoria).getNome());
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
 		}
