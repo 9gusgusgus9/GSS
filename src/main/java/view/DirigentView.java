@@ -55,7 +55,7 @@ public class DirigentView extends ViewImpl{
 	}
 	
 	public void switchToInsertPlayer() {
-		ViewSwitcher.getInstance().switchView(new Stage(), ViewType.INSERTPLAYERVIEW);
+		ViewSwitcher.getInstance().switchView(new Stage(), ViewType.INSERTDIRIGENT);
 	}
 
 	private void setSociety() {

@@ -23,7 +23,9 @@ public enum ViewType {
 	SINGLECATEGORY("SingleCategoryView", new StartViewController()),
 	INSERTPLAYERVIEW("InsertPlayerView", new StartViewController()),
 	INSERTCATEGORY("InsertCategoryView", new StartViewController()),
-	DIRIGENT("DirigentView", new StartViewController());
+	DIRIGENT("DirigentView", new StartViewController()),
+	INSERTSTAFF("InsertStaffView", new StartViewController()),
+	INSERTDIRIGENT("InsertDirigentView", new StartViewController());
 
     /**
      * Style files path.
