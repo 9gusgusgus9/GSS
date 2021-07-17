@@ -5,8 +5,10 @@ import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import entity.Category;
+import entity.Event;
 import entity.Society;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -67,6 +69,12 @@ public class EventView extends ViewImpl {
 	}
 	
 	private void setEvent() {
-		
+		Pair<Event, Optional<String>> evento;
+		try {
+			evento = Utilities.getEvent(0);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
