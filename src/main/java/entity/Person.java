@@ -64,7 +64,7 @@ public class Person extends Entity{
 		this.data = data;
 		this.codPagamento = codPagamento;
 		this.codSesso = codSesso;
-		this.codImmagine = 0;
+		this.codImmagine = 3;
 		this.matricola = matricola;
 		this.codPartitaIva=codPartitaIva;
 	}

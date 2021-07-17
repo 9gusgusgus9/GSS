@@ -93,11 +93,15 @@ public class SingleCategoryView extends ViewImpl{
 	private void setCategory() {
 		Pair<Image, Category> category = null;
 		try {
-			category = Utilities.getCategory(1);
+			if(Utilities.getCategoria()==0) {
+				this.categoria.setText("Dirigenti");
+			} else {
+				category = Utilities.getCategory(Utilities.getCategoria());
+				this.categoria.setText(category.getY().getNome());
+			}
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
 		}
-		this.categoria.setText(category.getY().getNome());
 	}
 	
 }

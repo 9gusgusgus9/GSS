@@ -32,6 +32,8 @@ import javafx.scene.image.Image;
 
 public class Utilities {
 
+	private static int idCategoria=0;
+	
 	private static Connection conn;
 	private static Statement stmt;
 	private static String password = null;
@@ -99,6 +101,7 @@ public class Utilities {
 			query = "INSERT INTO ruolo_giocatore (IdRuoloGiocatore, Descrizione) VALUES ('PAL','Palleggiatore'),('CENT','Centrale'),('SL','Schiacciatore Laterale'),('SO','Schiacciatore Opposto'),('LIB','Libero')";
 			break;
 		}
+		
 		stmt.executeUpdate(query);
 		conn.close();
 		stmt.close();
@@ -280,5 +283,25 @@ public class Utilities {
 		}
 		Pair<Image, Category> category = new Pair<>(image, out);
 		return category;
+	}
+	
+	public static void setCategoria(int id) {
+		idCategoria = id;
+	}
+	
+	public static int getCategoria() {
+		return idCategoria;
+	}
+	
+	public static boolean checkPersona(String cf) throws SQLException {
+		dbConnection();
+		String query = "SELECT * FROM persona";
+		ResultSet rs = stmt.executeQuery(query);
+		while(rs.next()) {
+			if(rs.getString("CF").equals(cf)) {
+				return false;
+			}
+		}
+		return true;
 	}
 }
