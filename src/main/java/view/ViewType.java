@@ -22,7 +22,8 @@ public enum ViewType {
 	CALENDAR("CalendarView", new StartViewController()),
 	SINGLECATEGORY("SingleCategoryView", new StartViewController()),
 	INSERTPLAYERVIEW("InsertPlayerView", new StartViewController()),
-	INSERTCATEGORY("InsertCategoryView", new StartViewController());
+	INSERTCATEGORY("InsertCategoryView", new StartViewController()),
+	DIRIGENT("DirigentView", new StartViewController());
 
     /**
      * Style files path.
