@@ -32,6 +32,8 @@ import javafx.scene.image.Image;
 
 public class Utilities {
 
+	private static int idCategoria=0;
+	
 	private static Connection conn;
 	private static Statement stmt;
 	private static String password = null;
@@ -282,5 +284,14 @@ public class Utilities {
 		}
 		Pair<Image, Category> category = new Pair<>(image, out);
 		return category;
+	}
+	
+	public static void setCategoria(int id) {
+		idCategoria = id;
+	}
+	
+	public static int getCategoria() {
+		return idCategoria;
+		
 	}
 }

@@ -190,6 +190,7 @@ public class CategoryView extends ViewImpl {
 
 				@Override
 				public void handle(Event arg0) {
+					Utilities.setCategoria(0);
 					ViewSwitcher.getInstance().switchView(new Stage(), ViewType.SINGLECATEGORY);
 				}
 			});
@@ -219,6 +220,7 @@ public class CategoryView extends ViewImpl {
 
 				@Override
 				public void handle(Event arg0) {
+					Utilities.setCategoria((int) next.getX().getPrimaryKey());
 					ViewSwitcher.getInstance().switchView(new Stage(), ViewType.SINGLECATEGORY);
 				}
 			});
