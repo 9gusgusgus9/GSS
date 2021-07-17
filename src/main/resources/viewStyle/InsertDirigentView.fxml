@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="pane" prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.InsertPlayerView">
+<AnchorPane fx:id="pane" prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.InsertDirigentView">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="800.0" prefWidth="1500.0">
          <children>
@@ -41,7 +41,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label layoutX="23.0" layoutY="6.0" text="INSERISCI GIOCATORE" underline="true">
+                        <Label layoutX="23.0" layoutY="6.0" text="INSERISCI DIRIGENTE" underline="true">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -59,12 +59,6 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label layoutX="1084.0" layoutY="55.0" prefHeight="30.0" prefWidth="179.0" text="Scadenza certificato">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="certificatoText" layoutX="1287.0" layoutY="55.0" promptText="InserisciData" />
                      </children>
                   </Pane>
                </children>
@@ -85,24 +79,12 @@
                            </font>
                         </Label>
                         <ChoiceBox fx:id="sesso" layoutX="464.0" layoutY="35.0" onMouseClicked="#setSesso" prefWidth="150.0" />
-                        <Label layoutX="976.0" layoutY="35.0" prefHeight="30.0" prefWidth="42.0" text="Peso">
+                        <Label layoutX="778.0" layoutY="35.0" prefHeight="30.0" prefWidth="87.0" text="Ruolo">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="pesoText" layoutX="1032.0" layoutY="35.0" prefHeight="31.0" prefWidth="119.0" promptText="Inserisci peso" />
-                        <Label layoutX="1209.0" layoutY="35.0" prefHeight="30.0" prefWidth="67.0" text="Altezza">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="altezzaText" layoutX="1290.0" layoutY="35.0" prefHeight="31.0" prefWidth="122.0" promptText="Inserisci Altezza" />
-                        <ChoiceBox fx:id="preferenza" layoutX="767.0" layoutY="35.0" onMouseClicked="#setPreferenza" prefWidth="150.0" />
-                        <Label layoutX="648.0" layoutY="35.0" prefHeight="30.0" prefWidth="102.0" text="Preferenza">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
+                        <ChoiceBox fx:id="ruolo" layoutX="872.0" layoutY="35.0" onMouseClicked="#setRuolo" prefWidth="150.0" />
                      </children>
                   </Pane>
                </children>
@@ -118,14 +100,8 @@
                         </Label>
                         <TextField fx:id="matricolaText" layoutX="243.0" layoutY="32.0" promptText="Inserisci numero" />
                         <Button fx:id="browse" layoutX="841.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#oneFileChooser" text="Browse" />
-                        <TextField fx:id="playerPath" layoutX="636.0" layoutY="32.0" promptText="Inserisci immagine" />
+                        <TextField fx:id="dirigentPath" layoutX="636.0" layoutY="32.0" promptText="Inserisci immagine" />
                         <Label layoutX="523.0" layoutY="32.0" text="Immagine">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <ChoiceBox fx:id="ruolo" layoutX="1143.0" layoutY="32.0" onMouseClicked="#setRuolo" prefWidth="150.0" />
-                        <Label layoutX="1042.0" layoutY="32.0" prefHeight="30.0" prefWidth="87.0" text="Ruolo">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -138,7 +114,7 @@
                <children>
                   <Pane prefHeight="192.0" prefWidth="1515.0">
                      <children>
-                        <Button fx:id="insertButton" layoutX="572.0" layoutY="78.0" mnemonicParsing="false" onKeyPressed="#insert" onMouseClicked="#insert" prefHeight="60.0" prefWidth="328.0" text="INSERISCI GIOCATORE" />
+                        <Button fx:id="insertButton" layoutX="572.0" layoutY="78.0" mnemonicParsing="false" onKeyPressed="#insert" onMouseClicked="#insert" prefHeight="60.0" prefWidth="328.0" text="INSERISCI DIRIGENTE" />
                         <TextField fx:id="message" editable="false" layoutX="578.0" layoutY="21.0" prefHeight="31.0" prefWidth="315.0" />
                      </children>
                   </Pane>

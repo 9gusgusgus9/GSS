@@ -9,6 +9,7 @@ import entity.Immagine;
 import entity.Payment;
 import entity.Player;
 import entity.Society;
+import entity.Staff;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -26,7 +27,7 @@ import utilities.DateTime;
 import utilities.Pair;
 import utilities.Utilities;
 
-public class InsertPlayerView extends ViewImpl{
+public class InsertStaffView extends ViewImpl{
 
 	@FXML
 	private AnchorPane pane;
@@ -57,21 +58,12 @@ public class InsertPlayerView extends ViewImpl{
 	
 	@FXML
 	TextField matricolaText;
-	
-	@FXML
-	TextField pesoText;
-	
-	@FXML
-	TextField altezzaText;
-	
-	@FXML
-	TextField certificatoText;
-	
+
 	@FXML
 	TextField message;
 
 	@FXML
-	TextField playerPath;
+	TextField staffPath;
 	
 	@FXML
 	Button insertButton;
@@ -83,9 +75,6 @@ public class InsertPlayerView extends ViewImpl{
 	ChoiceBox<String> sesso;
 	
 	@FXML
-	ChoiceBox<String> preferenza;
-	
-	@FXML
 	ChoiceBox<String> ruolo;
 	
 	private int category;
@@ -93,29 +82,19 @@ public class InsertPlayerView extends ViewImpl{
 	@Override
 	public void init() {
 		this.setSociety();
-		try {
-			this.setChoiceBox();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.setChoiceBox();
 		this.category=Utilities.getCategoria();
 	}
 	
-	private void setChoiceBox() throws SQLException {
+	private void setChoiceBox() {
 		sesso.setItems(FXCollections.observableArrayList("Maschio","Femmina","Altro"));
-		preferenza.setItems(FXCollections.observableArrayList("Dx","Sx","DS"));
-		ruolo.setItems(FXCollections.observableArrayList(Utilities.getSport()));
+		ruolo.setItems(FXCollections.observableArrayList("2All","Acc","All","Mass","PA","Altro"));
 	}
 	
 	public void setSesso() {
 		sesso.show();
 	}
-	
-	public void setPreferenza() {
-		preferenza.show();
-	}
-	
+		
 	public void setRuolo() {
 		ruolo.show();
 	}
@@ -135,7 +114,7 @@ public class InsertPlayerView extends ViewImpl{
 	}
 	
 	private boolean check() {
-		if(nameText.getText().isEmpty() || surnameText.getText().isEmpty() || cfText.getText().isEmpty() || dataText.getText().isEmpty() || matricolaText.getText().isEmpty() || pesoText.getText().isEmpty() || altezzaText.getText().isEmpty() || certificatoText.getText().isEmpty() || sesso.getValue().isEmpty() || preferenza.getValue().isEmpty() || ruolo.getValue().isEmpty()) {
+		if(nameText.getText().isEmpty() || surnameText.getText().isEmpty() || cfText.getText().isEmpty() || dataText.getText().isEmpty() || matricolaText.getText().isEmpty() || sesso.getValue().isEmpty() || ruolo.getValue().isEmpty()) {
 			return false;
 		}
 		return true;
@@ -147,7 +126,7 @@ public class InsertPlayerView extends ViewImpl{
 		Stage stage = (Stage) pane.getScene().getWindow();
 		File file = fileChooser.showOpenDialog(stage);
 		if (file != null) {
-			playerPath.setText(file.getPath());
+			staffPath.setText(file.getPath());
 		}
 	}
 	
@@ -156,17 +135,17 @@ public class InsertPlayerView extends ViewImpl{
 			if(this.check()) {
 				Payment pagamento = new Payment(1000, false, Finanze.QUOTA);
 				pagamento.insert();
-				if(this.playerPath.getText().isEmpty()) {
-					Player player = new Player(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getText()),
-							(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(), Integer.parseInt(this.matricolaText.getText()), this.pesoText.getText(),
-							this.altezzaText.getText(), new DateTime(this.certificatoText.getText()), ruolo.getValue(), this.category, preferenza.getValue());
-					player.insert();
+				if(this.staffPath.getText().isEmpty()) {
+					Staff staff = new Staff(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getText()),
+						(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(), Integer.parseInt(this.matricolaText.getText()),
+						ruolo.getValue(), this.category);
+					staff.insert();
 				} else {
-					Immagine image = new Immagine(playerPath.getText());
-					Player player = new Player(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getText()),
-						(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(),image, Integer.parseInt(this.matricolaText.getText()), this.pesoText.getText(),
-						this.altezzaText.getText(), new DateTime(this.certificatoText.getText()), ruolo.getValue(), this.category, preferenza.getValue());
-					player.insert();
+					Immagine image = new Immagine(staffPath.getText());
+					Staff staff = new Staff(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getText()),
+						(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(),image, Integer.parseInt(this.matricolaText.getText()),
+						ruolo.getValue(), this.category);
+					staff.insert();
 				}
 				this.getStage().close();
 			} else {

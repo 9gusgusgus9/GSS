@@ -76,6 +76,10 @@ public class SingleCategoryView extends ViewImpl{
 		ViewSwitcher.getInstance().switchView(new Stage(), ViewType.INSERTPLAYERVIEW);
 	}
 
+	public void switchToInsertStaff() {
+		ViewSwitcher.getInstance().switchView(new Stage(), ViewType.INSERTSTAFF);
+	}
+	
 	private void setSociety() {
 		Pair<Image, Society> society = null;
 		try {

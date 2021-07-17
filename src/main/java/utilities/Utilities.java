@@ -89,9 +89,15 @@ public class Utilities {
 
 	public static void insertSport(int codSport) throws SQLException, FileNotFoundException {
 		dbConnection();
+<<<<<<< HEAD
 		String query = "";
 		switch (codSport) {
 		case 2:
+=======
+		String query="";
+		switch(codSport) {
+		case 2: 
+>>>>>>> feature-tommaso
 			query = "INSERT INTO ruolo_giocatore (IdRuoloGiocatore, Descrizione) VALUES ('PM','Playmaker'),('GU','Guardia'),('AP','Ala Piccola'),('AG','Ala Grande'),('CEN','Centro')";
 			break;
 		case 1:
@@ -106,7 +112,22 @@ public class Utilities {
 		conn.close();
 		stmt.close();
 	}
+<<<<<<< HEAD
 
+=======
+	
+	public static List<String> getSport() throws SQLException{
+		dbConnection();
+		String query = "SELECT * FROM ruolo_giocatore" ;
+		ResultSet rs = stmt.executeQuery(query);
+		List<String> list = new LinkedList<>();
+		while(rs.next()) {
+			list.add(rs.getString("IdRuoloGiocatore"));
+		}
+		return list;
+	}
+	
+>>>>>>> feature-tommaso
 	public static void deleteEntity(Entity entity) throws SQLException {
 		dbConnection();
 
