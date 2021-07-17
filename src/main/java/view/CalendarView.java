@@ -107,7 +107,6 @@ public class CalendarView extends ViewImpl{
 	
 	@Override
 	public void init(){
-		
         this.printWeekCalendar();
 	}
 
@@ -139,8 +138,7 @@ public class CalendarView extends ViewImpl{
 	
 	private void setDayNumber() {
 		int first = this.first.getDayOfMonth();
-		for(TableColumn<Event, ?> col : list) {
-			col.setEditable(false);
+		for(TableColumn<Event, String> col : list) {
 			String[] day = col.getText().split(",");
 			col.setText(day[0] + ", " + first);
 			first += 1;
