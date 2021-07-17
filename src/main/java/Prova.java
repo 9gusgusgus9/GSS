@@ -1,26 +1,13 @@
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import entity.Category;
 import entity.Event;
-import entity.Finanze;
 import entity.Immagine;
-import entity.Manager;
-import entity.Payment;
-import entity.Player;
-import entity.Sesso;
 import entity.Society;
 import entity.Sport;
-import entity.Staff;
 import utilities.DateTime;
-import utilities.Pair;
-import utilities.Utilities;
 
 public class Prova {
 
@@ -33,15 +20,14 @@ public class Prova {
 ////		//image.insert();
 		Immagine image = new Immagine("src/main/resources/img/default/stemma.jpg");
 		image.insert();
-		Society rick = new Society("12345678925", "TOMMI", Sport.CALCIO, image);
+		Society rick = new Society("12345678929", "TOMMI", Sport.CALCIO, image);
 		rick.insert();
-//		Category allievi = new Category("pulcini", rick.getPrimaryKey(), image);
-//		allievi.insert();
-//		Event allenamento = new Event(new DateTime(4, 2, 3), new DateTime(4, 3, 4), rick.getPrimaryKey(), 4);
-		Event generico = new Event(new DateTime(2021, 7, 13), new DateTime(2021, 7, 13), rick.getPrimaryKey(),
-				"Cena di squadra");
-//		Event partita = new Event(new DateTime(2, 2, 3), new DateTime(2, 3, 4), rick.getPrimaryKey(), "Bubano", 4);
-////		partita.setRisultato("0-1");
+		Category allievi = new Category("pulcini", rick.getPrimaryKey(), image);
+		allievi.insert();
+		Event allenamento = new Event(new DateTime(2021, 7, 16), new DateTime(2021, 7, 16), rick.getPrimaryKey(), 2);
+		Event generico = new Event(new DateTime(2021, 7, 21), new DateTime(2021, 7, 21), rick.getPrimaryKey(),"Cena di squadra");
+		Event partita = new Event(new DateTime(2021, 7, 18), new DateTime(2021, 7, 18), rick.getPrimaryKey(), "Bubano", 2);
+		partita.setRisultato("0-1");
 //		Payment pagamento = new Payment(1000, false, Finanze.QUOTA);
 //		pagamento.insert();
 //		Staff rambo = new Staff("ojubfjwneoufnw86", "rambo", "rambo", new DateTime(1701, 02, 29),
@@ -59,8 +45,8 @@ public class Prova {
 //		convocati.add(ronaldo.getPrimaryKey());
 //		convocati.add(gus.getPrimaryKey());
 //		generico.setConvocati(convocati);
-//		partita.insert();
-//		allenamento.insert();
+		partita.insert();
+		allenamento.insert();
 		generico.insert();
 //		Immagine image = new Immagine("src/main/resources/img/default/stemma.jpg");
 //		image.insert();

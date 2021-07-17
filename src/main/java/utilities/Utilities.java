@@ -189,7 +189,8 @@ public class Utilities {
 		if(rs.next()) {
 			InputStream image = rs.getBlob(1).getBinaryStream();
 			BufferedImage imagen = ImageIO.read(image);
-			Image out = SwingFXUtils.toFXImage(imagen, null );
+			Image out = SwingFXUtils.toFXImage(imagen, null);
+			System.out.println("piedi");
 			return out;
 		}
 		return null;
@@ -273,7 +274,7 @@ public class Utilities {
 		
 	public static Pair<Image,Category> getCategory(int idCategoria) throws SQLException, IOException {
 		dbConnection();
-		String query = "SELECT * FROM categoria WHERE IdCategoria=idcategoria";
+		String query = "SELECT * FROM categoria WHERE IdCategoria="+idCategoria;
 		ResultSet rs = stmt.executeQuery(query);
 		Category out = null;
 		Image image = null;

@@ -97,12 +97,6 @@ public class CalendarView extends ViewImpl{
 		this.setEventOnDay();
 	}
 	
-	private DayOfWeek getDayOfWeek(Event e) {
-	    LocalDate localDate = LocalDate.of(e.getInizio().getAnno(), e.getInizio().getMese(), e.getInizio().getGiorno());
-	    DayOfWeek dayOfWeek = localDate.getDayOfWeek();
-		return dayOfWeek;
-	}
-	
 	@FXML
 	private void next() {
 		this.first = this.first.plusDays(7);
@@ -133,102 +127,109 @@ public class CalendarView extends ViewImpl{
 	
 	private void setEventOnDay() {
     	try {
-			for(Event p : Utilities.getEvents(new DateTime(first.getYear(), first.getMonthValue(), first.getDayOfMonth()), new DateTime(last.getYear(), last.getMonthValue(), last.getDayOfMonth()))) {
-				DayOfWeek day = this.getDayOfWeek(p);
-				if (day == DayOfWeek.MONDAY) {
-//					lunedi.setCellValueFactory(new PropertyValueFactory<Event, String>("monday"));
-					lunedi.setCellFactory(col -> new TableCell<Event, String>() {
-					    @Override
-					    public void updateItem(String s, boolean empty) {
-					        super.updateItem(s, empty);
-					        if (empty) {
-					            setText(null);
-					        } else {
-					            setText(p.getEvento());
-					        }
-					    }
-					});
-				} else if (day == DayOfWeek.TUESDAY) {
-//		    		martedi.setCellValueFactory(new PropertyValueFactory<Event, String>("tuesday"));
-					martedi.setCellFactory(col -> new TableCell<Event, String>() {
-					    @Override
-					    public void updateItem(String s, boolean empty) {
-					        super.updateItem(s, empty);
-					        if (empty) {
-					            setText(null);
-					        } else {
-					            setText(p.getEvento());
-					        }
-					    }
-					});
-				} else if (day == DayOfWeek.WEDNESDAY) {
-//		    		mercoledi.setCellValueFactory(new PropertyValueFactory<Event, String>("wednesday"));
-					mercoledi.setCellFactory(col -> new TableCell<Event, String>() {
-					    @Override
-					    public void updateItem(String s, boolean empty) {
-					        super.updateItem(s, empty);
-					        if (empty) {
-					            setText(null);
-					        } else {
-					            setText(p.getEvento());
-					        }
-					    }
-					});
-				} else if (day == DayOfWeek.THURSDAY) {
-//					giovedi.setCellValueFactory(new PropertyValueFactory<Event, String>("thursday"));
-					giovedi.setCellFactory(col -> new TableCell<Event, String>() {
-					    @Override
-					    public void updateItem(String s, boolean empty) {
-					        super.updateItem(s, empty);
-					        if (empty) {
-					            setText(null);
-					        } else {
-					            setText(p.getEvento());
-					        }
-					    }
-					});
-				} else if (day == DayOfWeek.FRIDAY) {
-//					venerdi.setCellValueFactory(new PropertyValueFactory<Event, String>("friday"));
-					venerdi.setCellFactory(col -> new TableCell<Event, String>() {
-					    @Override
-					    public void updateItem(String s, boolean empty) {
-					        super.updateItem(s, empty);
-					        if (empty) {
-					            setText(null);
-					        } else {
-					            setText(p.getEvento());
-					        }
-					    }
-					});
-				} else if (day == DayOfWeek.SATURDAY) {
-//					sabato.setCellValueFactory(new PropertyValueFactory<Event, String>("saturday"));
-					sabato.setCellFactory(col -> new TableCell<Event, String>() {
-					    @Override
-					    public void updateItem(String s, boolean empty) {
-					        super.updateItem(s, empty);
-					        if (empty) {
-					            setText(null);
-					        } else {
-					            setText(p.getEvento());
-					        }
-					    }
-					});
-				} else {
-//					domenica.setCellValueFactory(new PropertyValueFactory<Event, String>("sunday"));
-					domenica.setCellFactory(col -> new TableCell<Event, String>() {
-					    @Override
-					    public void updateItem(String s, boolean empty) {
-					        super.updateItem(s, empty);
-					        if (empty) {
-					            setText(null);
-					        } else {
-					            setText(p.getEvento());
-					        }
-					    }
-					});
-				}
-			}
 			gridWeek.setItems(FXCollections.observableArrayList(Utilities.getEvents(new DateTime(first.getYear(), first.getMonthValue(), first.getDayOfMonth()), new DateTime(last.getYear(), last.getMonthValue(), last.getDayOfMonth()))));
+//			for(Event p : Utilities.getEvents(new DateTime(first.getYear(), first.getMonthValue(), first.getDayOfMonth()), new DateTime(last.getYear(), last.getMonthValue(), last.getDayOfMonth()))) {
+//				DayOfWeek day = this.getDayOfWeek(p);
+//				if (day == DayOfWeek.MONDAY) {
+//					lunedi.setCellValueFactory(new PropertyValueFactory<Event, String>("monday"));
+//					lunedi.setCellFactory(col -> new TableCell<Event, String>() {
+//					    @Override
+//					    public void updateItem(String s, boolean empty) {
+//					        super.updateItem(s, empty);
+//					        if (empty) {
+//					            setText(null);
+//					        } else {
+//					            setText(s);
+//					        }
+//					    }
+//					});
+//				} else if (day == DayOfWeek.TUESDAY) {
+//		    		martedi.setCellValueFactory(new PropertyValueFactory<Event, String>("tuesday"));
+//					martedi.setCellFactory(col -> new TableCell<Event, String>() {
+//					    @Override
+//					    public void updateItem(String s, boolean empty) {
+//					        super.updateItem(s, empty);
+//					        if (empty) {
+//					            setText(null);
+//					        } else {
+//					            setText(s);
+//					        }
+//					    }
+//					});
+//				} else if (day == DayOfWeek.WEDNESDAY) {
+//		    		mercoledi.setCellValueFactory(new PropertyValueFactory<Event, String>("wednesday"));
+//					mercoledi.setCellFactory(col -> new TableCell<Event, String>() {
+//					    @Override
+//					    public void updateItem(String s, boolean empty) {
+//					        super.updateItem(s, empty);
+//					        if (empty) {
+//					            setText(null);
+//					        } else {
+//					            setText(s);
+//					        }
+//					    }
+//					});
+//				} else if (day == DayOfWeek.THURSDAY) {
+//					giovedi.setCellValueFactory(new PropertyValueFactory<Event, String>("thursday"));
+//					giovedi.setCellFactory(col -> new TableCell<Event, String>() {
+//					    @Override
+//					    public void updateItem(String s, boolean empty) {
+//					        super.updateItem(s, empty);
+//					        if (empty) {
+//					            setText(null);
+//					        } else {
+//					            setText(s);
+//					        }
+//					    }
+//					});
+//				} else if (day == DayOfWeek.FRIDAY) {
+//					venerdi.setCellValueFactory(new PropertyValueFactory<Event, String>("friday"));
+//					venerdi.setCellFactory(col -> new TableCell<Event, String>() {
+//					    @Override
+//					    public void updateItem(String s, boolean empty) {
+//					        super.updateItem(s, empty);
+//					        if (empty) {
+//					            setText(null);
+//					        } else {
+//					            setText(s);
+//					        }
+//					    }
+//					});
+//				} else if (day == DayOfWeek.SATURDAY) {
+//					sabato.setCellValueFactory(new PropertyValueFactory<Event, String>("saturday"));
+//					sabato.setCellFactory(col -> new TableCell<Event, String>() {
+//					    @Override
+//					    public void updateItem(String s, boolean empty) {
+//					        super.updateItem(s, empty);
+//					        if (empty) {
+//					            setText(null);
+//					        } else {
+//					            setText(s);
+//					        }
+//					    }
+//					});
+//				} else {
+//					domenica.setCellValueFactory(new PropertyValueFactory<Event, String>("sunday"));
+//					domenica.setCellFactory(col -> new TableCell<Event, String>() {
+//					    @Override
+//					    public void updateItem(String s, boolean empty) {
+//					        super.updateItem(s, empty);
+//					        if (empty) {
+//					            setText(null);
+//					        } else {
+//					            setText(s);
+//					        }
+//					    }
+//					});
+//				}
+//			}
+			lunedi.setCellValueFactory(new PropertyValueFactory<Event, String>("monday"));
+			martedi.setCellValueFactory(new PropertyValueFactory<Event, String>("tuesday"));
+			domenica.setCellValueFactory(new PropertyValueFactory<Event, String>("sunday"));
+			sabato.setCellValueFactory(new PropertyValueFactory<Event, String>("saturday"));
+			venerdi.setCellValueFactory(new PropertyValueFactory<Event, String>("friday"));
+			giovedi.setCellValueFactory(new PropertyValueFactory<Event, String>("thursday"));
+			mercoledi.setCellValueFactory(new PropertyValueFactory<Event, String>("wednesday"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
