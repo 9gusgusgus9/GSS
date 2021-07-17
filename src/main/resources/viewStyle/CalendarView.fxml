@@ -35,20 +35,66 @@
                   </Pane>
                </children>
             </HBox>
-            <TableView fx:id="gridWeek" blendMode="DARKEN" editable="true" pickOnBounds="false" prefHeight="642.0" prefWidth="1500.0">
-              <columns>
-                <TableColumn fx:id="lunedi" prefWidth="75.0" sortable="false" text="Lunedì" />
-                <TableColumn fx:id="martedi" prefWidth="75.0" sortable="false" text="Martedì" />
-                  <TableColumn fx:id="mercoledi" prefWidth="75.0" sortable="false" text="Mercoledì" />
-                  <TableColumn fx:id="giovedi" prefWidth="75.0" sortable="false" text="Giovedì" />
-                  <TableColumn fx:id="venerdi" prefWidth="-1.0" sortable="false" text="Venerdì" />
-                  <TableColumn fx:id="sabato" prefWidth="-1.0" sortable="false" text="Sabato" />
-                  <TableColumn fx:id="domenica" prefWidth="-1.0" sortable="false" text="Domenica" />
-              </columns>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
-            </TableView>
+            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="lunedi" fixedCellSize="24.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="214.0">
+                    <columns>
+                      <TableColumn fx:id="lun" prefWidth="75.0" sortable="false" text="Lunedì" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <TableView fx:id="martedi" prefHeight="200.0" prefWidth="214.0">
+                    <columns>
+                      <TableColumn fx:id="mar" prefWidth="75.0" text="Martedì" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <TableView fx:id="mercoledi" prefHeight="200.0" prefWidth="214.0">
+                    <columns>
+                      <TableColumn fx:id="mer" prefWidth="75.0" text="Mercoledì" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <TableView fx:id="giovedi" prefHeight="200.0" prefWidth="214.0">
+                    <columns>
+                      <TableColumn fx:id="giov" prefWidth="75.0" text="Giovedì" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <TableView fx:id="venerdi" prefHeight="200.0" prefWidth="214.0">
+                    <columns>
+                      <TableColumn fx:id="ven" prefWidth="75.0" text="Venerdì" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <TableView fx:id="sabato" prefHeight="200.0" prefWidth="214.0">
+                    <columns>
+                      <TableColumn fx:id="sab" prefWidth="75.0" text="Sabato" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <TableView fx:id="domenica" layoutX="1080.0" layoutY="10.0" prefHeight="200.0" prefWidth="214.0">
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                     <columns>
+                        <TableColumn fx:id="dom" prefWidth="75.0" text="Domenica" />
+                     </columns>
+                  </TableView>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>
