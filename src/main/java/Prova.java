@@ -38,7 +38,7 @@ public class Prova {
 //		Category allievi = new Category("pulcini", rick.getPrimaryKey(), image);
 //		allievi.insert();
 //		Event allenamento = new Event(new DateTime(4, 2, 3), new DateTime(4, 3, 4), rick.getPrimaryKey(), 4);
-		Event generico = new Event(new DateTime(2021, 7, 15), new DateTime(2021, 7, 15), rick.getPrimaryKey(),
+		Event generico = new Event(new DateTime(2021, 7, 13), new DateTime(2021, 7, 13), rick.getPrimaryKey(),
 				"Cena di squadra");
 //		Event partita = new Event(new DateTime(2, 2, 3), new DateTime(2, 3, 4), rick.getPrimaryKey(), "Bubano", 4);
 ////		partita.setRisultato("0-1");

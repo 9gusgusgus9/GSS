@@ -264,8 +264,6 @@ public class Utilities {
 				events.add(new Event(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[0]), Integer.parseInt(fine[1]), Integer.parseInt(fine[2])), rs.getString("CodPartitaIVA"), rs.getString("Descrizione_generico")));
 			}
 		}
-//		List<Event> filteredEvents = events.stream().filter(d -> d.getInizio().getGiorno() >= lunedi.getGiorno() && d.getInizio().getGiorno() <= domenica.getGiorno() 
-//				&& d.getInizio().getAnno() == lunedi.getAnno() && d.getInizio().getMese() == lunedi.getMese()).collect(Collectors.toList());
 		List<Event> filteredEvents = events.stream().filter(d -> d.getInizio().compareDate(lunedi) >= 0 && d.getInizio().compareDate(domenica) <= 0).collect(Collectors.toList());
 		return filteredEvents;
 	}

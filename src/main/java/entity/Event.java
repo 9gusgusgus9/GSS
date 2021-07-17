@@ -1,12 +1,14 @@
 package entity;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.reflect.Method;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import utilities.DateTime;
 import utilities.Pair;
 import utilities.Utilities;
@@ -28,7 +30,7 @@ public class Event extends Entity {
 	private String risultato = null;
 	private int codCategoria = 0;
 	private List<Object> convocati = new ArrayList<>();
-	private StringProperty tipoEvento;	
+	private SimpleStringProperty evento;	
 	
 	//EVENTO GENERICO
 	public Event(DateTime inizio, DateTime fine, String codPartitaIva, String descrizione){
@@ -36,7 +38,7 @@ public class Event extends Entity {
 		this.fine=fine;
 		this.codPartitaIva=codPartitaIva;
 		this.descrizione_generico=descrizione;
-		tipoEvento = new SimpleStringProperty("Generico");
+		this.evento = new SimpleStringProperty(this.descrizione_generico);
 	}
 	
 	//PARTITA
@@ -47,7 +49,11 @@ public class Event extends Entity {
 		this.codCategoria=codiceCategoria;
 		this.nomeAvversario=avversario;
 		this.risultato="ND";
-		tipoEvento = new SimpleStringProperty("Partita");
+		try {
+			this.evento = new SimpleStringProperty(Utilities.getCategory(this.codCategoria) + " vs " + this.nomeAvversario);
+		} catch (SQLException | IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 	//ALLENAMENTO
@@ -56,7 +62,15 @@ public class Event extends Entity {
 		this.fine=fine;
 		this.codPartitaIva=codPartitaIva;
 		this.codCategoria=codCategoria;
-		tipoEvento = new SimpleStringProperty("Allenamento");
+		try {
+			this.evento = new SimpleStringProperty("Allenamento "+Utilities.getCategory(this.codCategoria));
+		} catch (SQLException | IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	public String getEvento() {
+		return this.evento.get();
 	}
 	
 	@Override
@@ -137,7 +151,4 @@ public class Event extends Entity {
 		return this.fine;
 	}
 	
-	public StringProperty getTipoEvento() {
-		return this.tipoEvento;
-	}
 }
