@@ -31,13 +31,7 @@ public class Event extends Entity {
 	private String risultato = null;
 	private int codCategoria = 0;
 	private List<Object> convocati = new ArrayList<>();
-	private SimpleStringProperty eventoLunedi = new SimpleStringProperty();	
-	private SimpleStringProperty eventoMartedi = new SimpleStringProperty();	
-	private SimpleStringProperty eventoGiovedi = new SimpleStringProperty();	
-	private SimpleStringProperty eventoMercoledi = new SimpleStringProperty();
-	private SimpleStringProperty eventoVenerdi = new SimpleStringProperty();
-	private SimpleStringProperty eventoSabato = new SimpleStringProperty();	
-	private SimpleStringProperty eventoDomenica = new SimpleStringProperty();
+	private SimpleStringProperty evento;	
 	
 	
 	//EVENTO GENERICO
@@ -46,7 +40,7 @@ public class Event extends Entity {
 		this.fine=fine;
 		this.codPartitaIva=codPartitaIva;
 		this.descrizione_generico=descrizione;
-		this.setDayOfWeek(this.descrizione_generico);
+		this.evento = new SimpleStringProperty(this.descrizione_generico);
 	}
 	
 	//PARTITA
@@ -58,7 +52,7 @@ public class Event extends Entity {
 		this.nomeAvversario=avversario;
 		this.risultato="ND";
 		try {
-			this.setDayOfWeek(Utilities.getOnlyCategory(this.codCategoria).getNome() + " vs " + this.nomeAvversario);
+			this.evento = new SimpleStringProperty(Utilities.getOnlyCategory(this.codCategoria).getNome() + " vs " + this.nomeAvversario);
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
 		}
@@ -71,57 +65,14 @@ public class Event extends Entity {
 		this.codPartitaIva=codPartitaIva;
 		this.codCategoria=codCategoria;
 		try {
-		this.setDayOfWeek("Allenamento "+ Utilities.getOnlyCategory(this.codCategoria).getNome());
+			this.evento = new SimpleStringProperty("Allenamento "+ Utilities.getOnlyCategory(this.codCategoria).getNome());
 		} catch (SQLException | IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public String getMonday() {
-		return this.eventoLunedi.get();
-	}
-	public String getTuesday() {
-		return this.eventoMartedi.get();
-	}
-	public String getWednesday() {
-		return this.eventoMercoledi.get();
-	}
-	public String getThursday() {
-		return this.eventoGiovedi.get();
-	}
-	public String getFriday() {
-		return this.eventoVenerdi.get();
-	}
-	public String getSaturday() {
-		return this.eventoSabato.get();
-	}
-	public String getSunday() {
-		return this.eventoDomenica.get();
-	}
-	
-	public void setDayOfWeek(String e) {
-		DayOfWeek day = this.getDayOfWeek(this);
-		if (day == DayOfWeek.MONDAY) {
-			this.eventoLunedi = new SimpleStringProperty(e);
-		} else if (day == DayOfWeek.TUESDAY) {
-			this.eventoMartedi = new SimpleStringProperty(e);
-		} else if (day == DayOfWeek.WEDNESDAY) {
-			this.eventoMercoledi = new SimpleStringProperty(e);
-		} else if (day == DayOfWeek.THURSDAY) {
-			this.eventoGiovedi = new SimpleStringProperty(e);
-		} else if (day == DayOfWeek.FRIDAY) {
-			this.eventoVenerdi = new SimpleStringProperty(e);
-		} else if (day == DayOfWeek.SATURDAY) {
-			this.eventoSabato = new SimpleStringProperty(e);
-		} else {
-			this.eventoDomenica = new SimpleStringProperty(e);
-		}
-	}
-	
-	private DayOfWeek getDayOfWeek(Event e) {
-	    LocalDate localDate = LocalDate.of(e.getInizio().getAnno(), e.getInizio().getMese(), e.getInizio().getGiorno());
-	    DayOfWeek dayOfWeek = localDate.getDayOfWeek();
-		return dayOfWeek;
+	public String getEvent() {
+		return this.evento.get();
 	}
 	
 	@Override

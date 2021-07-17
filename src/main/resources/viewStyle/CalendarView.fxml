@@ -47,7 +47,7 @@
                   </TableView>
                   <TableView fx:id="martedi" prefHeight="200.0" prefWidth="214.0">
                     <columns>
-                      <TableColumn fx:id="mar" prefWidth="75.0" text="Martedì" />
+                      <TableColumn fx:id="mar" prefWidth="75.0" sortable="false" text="Martedì" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -55,7 +55,7 @@
                   </TableView>
                   <TableView fx:id="mercoledi" prefHeight="200.0" prefWidth="214.0">
                     <columns>
-                      <TableColumn fx:id="mer" prefWidth="75.0" text="Mercoledì" />
+                      <TableColumn fx:id="mer" prefWidth="75.0" sortable="false" text="Mercoledì" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -63,7 +63,7 @@
                   </TableView>
                   <TableView fx:id="giovedi" prefHeight="200.0" prefWidth="214.0">
                     <columns>
-                      <TableColumn fx:id="giov" prefWidth="75.0" text="Giovedì" />
+                      <TableColumn fx:id="giov" prefWidth="75.0" sortable="false" text="Giovedì" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -71,7 +71,7 @@
                   </TableView>
                   <TableView fx:id="venerdi" prefHeight="200.0" prefWidth="214.0">
                     <columns>
-                      <TableColumn fx:id="ven" prefWidth="75.0" text="Venerdì" />
+                      <TableColumn fx:id="ven" prefWidth="75.0" sortable="false" text="Venerdì" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -79,19 +79,19 @@
                   </TableView>
                   <TableView fx:id="sabato" prefHeight="200.0" prefWidth="214.0">
                     <columns>
-                      <TableColumn fx:id="sab" prefWidth="75.0" text="Sabato" />
+                      <TableColumn fx:id="sab" prefWidth="75.0" sortable="false" text="Sabato" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
                   <TableView fx:id="domenica" layoutX="1080.0" layoutY="10.0" prefHeight="200.0" prefWidth="214.0">
+                     <columns>
+                        <TableColumn fx:id="dom" prefWidth="75.0" sortable="false" text="Domenica" />
+                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
-                     <columns>
-                        <TableColumn fx:id="dom" prefWidth="75.0" text="Domenica" />
-                     </columns>
                   </TableView>
                </children>
             </HBox>
