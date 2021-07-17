@@ -21,18 +21,22 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.skin.TableHeaderRow;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import utilities.DateTime;
 import utilities.Utilities;
@@ -105,11 +109,10 @@ public class CalendarView extends ViewImpl{
 	@FXML
 	TableColumn<Event, String> dom;
 	
-	private List<TableColumn<Event, String>> list = new ArrayList<>();
-	
 	@Override
 	public void init(){
         this.printWeekCalendar();
+        this.setOnMouseClick();
 	}
 
 	public void printWeekCalendar() {
@@ -144,13 +147,7 @@ public class CalendarView extends ViewImpl{
 	
 	private void setEventOnDay() {
     	try {
-    		lunedi.setItems(null);
-    		martedi.setItems(null);
-    		mercoledi.setItems(null);
-    		giovedi.setItems(null);
-    		venerdi.setItems(null);
-    		sabato.setItems(null);
-    		domenica.setItems(null);
+    		this.setOnChangeWeek();
     		for(Event e : Utilities.getEvents(new DateTime(this.first.getYear(), this.first.getMonthValue(), this.first.getDayOfMonth()), new DateTime(this.last.getYear(), this.last.getMonthValue(), this.last.getDayOfMonth()))) {
 				DayOfWeek day = this.getDayOfWeek(e);
 				if (day == DayOfWeek.MONDAY) {
@@ -179,5 +176,95 @@ public class CalendarView extends ViewImpl{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void setOnChangeWeek() {
+		lunedi.setItems(null);
+		martedi.setItems(null);
+		mercoledi.setItems(null);
+		giovedi.setItems(null);
+		venerdi.setItems(null);
+		sabato.setItems(null);
+		domenica.setItems(null);
+		this.setOnMouseClick();
+	}
+	
+	private void setOnMouseClick() {
+		lunedi.setRowFactory( tv -> {
+		    TableRow<Event> row = new TableRow<>();
+		    row.setOnMouseClicked(event -> {
+		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+		            Utilities.setEvent(row.getItem());
+		            ViewSwitcher.getInstance().switchView(new Stage(), ViewType.SINGLEEVENT);
+		        }
+		    });
+		    return row ;
+		});
+		
+		martedi.setRowFactory( tv -> {
+		    TableRow<Event> row = new TableRow<>();
+		    row.setOnMouseClicked(event -> {
+		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+		            Utilities.setEvent(row.getItem());
+		            ViewSwitcher.getInstance().switchView(new Stage(), ViewType.SINGLEEVENT);
+		        }
+		    });
+		    return row ;
+		});
+		
+		mercoledi.setRowFactory( tv -> {
+		    TableRow<Event> row = new TableRow<>();
+		    row.setOnMouseClicked(event -> {
+		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+		            Utilities.setEvent(row.getItem());
+		            ViewSwitcher.getInstance().switchView(new Stage(), ViewType.SINGLEEVENT);
+		        }
+		    });
+		    return row ;
+		});
+		
+		giovedi.setRowFactory( tv -> {
+		    TableRow<Event> row = new TableRow<>();
+		    row.setOnMouseClicked(event -> {
+		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+		            Utilities.setEvent(row.getItem());
+		            ViewSwitcher.getInstance().switchView(new Stage(), ViewType.SINGLEEVENT);
+		        }
+		    });
+		    return row ;
+		});
+		
+		venerdi.setRowFactory( tv -> {
+		    TableRow<Event> row = new TableRow<>();
+		    row.setOnMouseClicked(event -> {
+		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+		            Utilities.setEvent(row.getItem());
+		            ViewSwitcher.getInstance().switchView(new Stage(), ViewType.SINGLEEVENT);
+		        }
+		    });
+		    return row ;
+		});
+		
+		sabato.setRowFactory( tv -> {
+		    TableRow<Event> row = new TableRow<>();
+		    row.setOnMouseClicked(event -> {
+		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+		            Utilities.setEvent(row.getItem());
+		            ViewSwitcher.getInstance().switchView(new Stage(), ViewType.SINGLEEVENT);
+		        }
+		    });
+		    return row ;
+		});
+		
+		domenica.setRowFactory( tv -> {
+		    TableRow<Event> row = new TableRow<>();
+		    row.setOnMouseClicked(event -> {
+		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+		            Utilities.setEvent(row.getItem());
+		            ViewSwitcher.getInstance().switchView(new Stage(), ViewType.SINGLEEVENT);
+		        }
+		    });
+		    return row ;
+		});
 	}
 }

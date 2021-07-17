@@ -33,6 +33,7 @@ import javafx.scene.image.Image;
 public class Utilities {
 
 	private static int idCategoria=0;
+	private static Event actualEvent;
 	
 	private static Connection conn;
 	private static Statement stmt;
@@ -292,6 +293,14 @@ public class Utilities {
 	
 	public static int getCategoria() {
 		return idCategoria;
+	}
+	
+	public static Event getEvent() {
+		return actualEvent;
+	}
+	
+	public static void setEvent(Event e) {
+		actualEvent = e;
 	}
 	
 	public static Category getOnlyCategory(int idCategoria) throws SQLException, IOException {

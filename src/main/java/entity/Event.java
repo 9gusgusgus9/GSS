@@ -32,7 +32,7 @@ public class Event extends Entity {
 	private int codCategoria = 0;
 	private List<Object> convocati = new ArrayList<>();
 	private SimpleStringProperty evento;	
-	
+	private String tipoEvento;
 	
 	//EVENTO GENERICO
 	public Event(DateTime inizio, DateTime fine, String codPartitaIva, String descrizione){
@@ -41,6 +41,7 @@ public class Event extends Entity {
 		this.codPartitaIva=codPartitaIva;
 		this.descrizione_generico=descrizione;
 		this.evento = new SimpleStringProperty(this.descrizione_generico);
+		this.tipoEvento = "Generico";
 	}
 	
 	//PARTITA
@@ -51,6 +52,7 @@ public class Event extends Entity {
 		this.codCategoria=codiceCategoria;
 		this.nomeAvversario=avversario;
 		this.risultato="ND";
+		this.tipoEvento = "Partita";
 		try {
 			this.evento = new SimpleStringProperty(Utilities.getOnlyCategory(this.codCategoria).getNome() + " vs " + this.nomeAvversario);
 		} catch (SQLException | IOException e) {
@@ -64,6 +66,7 @@ public class Event extends Entity {
 		this.fine=fine;
 		this.codPartitaIva=codPartitaIva;
 		this.codCategoria=codCategoria;
+		this.tipoEvento = "Allenamento";
 		try {
 			this.evento = new SimpleStringProperty("Allenamento "+ Utilities.getOnlyCategory(this.codCategoria).getNome());
 		} catch (SQLException | IOException e) {
@@ -105,6 +108,10 @@ public class Event extends Entity {
 	
 	public String getRisultato() {
 		return this.risultato;
+	}
+	
+	public String getTipoEvento() {
+		return this.tipoEvento;
 	}
 	
 	@Override
