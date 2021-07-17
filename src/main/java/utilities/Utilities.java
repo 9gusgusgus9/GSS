@@ -92,7 +92,7 @@ public class Utilities {
 		String query="";
 		switch(codSport) {
 		case 2: 
-			query = "INSERT INTO ruolo_giocatore (IdRuoloGiocatore, Descrizione) VALUES ('PM','Playmaker'),('GU','Guardia'),('AP','Ala Piccola'),('AG','Ala Grande'),('CEN','Centro)";
+			query = "INSERT INTO ruolo_giocatore (IdRuoloGiocatore, Descrizione) VALUES ('PM','Playmaker'),('GU','Guardia'),('AP','Ala Piccola'),('AG','Ala Grande'),('CEN','Centro')";
 			break;
 		case 1:
 			query = "INSERT INTO ruolo_giocatore (IdRuoloGiocatore, Descrizione) VALUES ('POR','Portiere'),('DIF','Difensore'),('CEN','Centrocampista'),('ATT','Attaccante')";
@@ -184,13 +184,13 @@ public class Utilities {
 	
 	public static Image getImage(int x) throws IOException, SQLException {
 		dbConnection();
-		String query = "SELECT DatiFile FROM immagine WHERE IdImmagine = " + x;
+		String query = "SELECT DatiFile FROM IMMAGINE WHERE IdImmagine=" + x;
+		System.out.println(query);
 		ResultSet rs = stmt.executeQuery(query);
 		if(rs.next()) {
 			InputStream image = rs.getBlob(1).getBinaryStream();
 			BufferedImage imagen = ImageIO.read(image);
 			Image out = SwingFXUtils.toFXImage(imagen, null);
-			System.out.println("piedi");
 			return out;
 		}
 		return null;
@@ -292,6 +292,17 @@ public class Utilities {
 	
 	public static int getCategoria() {
 		return idCategoria;
+	}
+	
+	public static Category getOnlyCategory(int idCategoria) throws SQLException, IOException {
+		dbConnection();
+		String query = "SELECT * FROM categoria WHERE IdCategoria="+idCategoria;
+		ResultSet rs = stmt.executeQuery(query);
+		Category out = null;
+		rs.next();
+		out = new Category(rs.getString("Nome"), rs.getString("CodPartitaIva"));
+		Category category = out;
+		return category;
 	}
 	
 	public static boolean checkPersona(String cf) throws SQLException {
