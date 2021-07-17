@@ -1,5 +1,6 @@
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 
 import entity.Category;
@@ -8,6 +9,7 @@ import entity.Immagine;
 import entity.Society;
 import entity.Sport;
 import utilities.DateTime;
+import utilities.Utilities;
 
 public class Prova {
 
@@ -18,15 +20,13 @@ public class Prova {
 //		Immagine image = new Immagine(immagine, "pallavolo", ".jpg");
 ////		//la image.insert() non va pi� richiamata, la fanno automaticamente i costruttori, dopo potete cancellare
 ////		//image.insert();
-		Immagine image = new Immagine("src/main/resources/img/default/stemma.jpg");
-		image.insert();
-		Society rick = new Society("12345678929", "TOMMI", Sport.CALCIO, image);
-		rick.insert();
-		Category allievi = new Category("pulcini", rick.getPrimaryKey(), image);
-		allievi.insert();
-		Event allenamento = new Event(new DateTime(2021, 7, 16), new DateTime(2021, 7, 16), rick.getPrimaryKey(), 2);
-		Event generico = new Event(new DateTime(2021, 7, 21), new DateTime(2021, 7, 21), rick.getPrimaryKey(),"Cena di squadra");
-		Event partita = new Event(new DateTime(2021, 7, 18), new DateTime(2021, 7, 18), rick.getPrimaryKey(), "Bubano", 2);
+////		image.insert();
+		String partitaIVA = "12345678970";
+//		Category allievi = new Category("pulcini", rick.getPrimaryKey(), image);
+//		allievi.insert();
+		Event allenamento = new Event(new DateTime(2021, 7, 16), new DateTime(2021, 7, 16), partitaIVA, 1);
+		Event generico = new Event(new DateTime(2021, 7, 21), new DateTime(2021, 7, 21), partitaIVA,"Cena di squadra");
+		Event partita = new Event(new DateTime(2021, 7, 18), new DateTime(2021, 7, 18), partitaIVA, "Bubano", 1);
 		partita.setRisultato("0-1");
 //		Payment pagamento = new Payment(1000, false, Finanze.QUOTA);
 //		pagamento.insert();
