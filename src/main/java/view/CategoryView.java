@@ -409,4 +409,9 @@ public class CategoryView extends ViewImpl {
 		this.currentPage--;
 		this.loadCategories(currentPage);
 	}
+	
+	@FXML
+	private void insertNew() {
+		ViewSwitcher.getInstance().switchView(new Stage(), ViewType.INSERTCATEGORY);
+	}
 }
