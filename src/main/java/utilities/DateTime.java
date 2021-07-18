@@ -25,8 +25,8 @@ public class DateTime {
 	
 	public DateTime(String string) {
 		this.giorno = Integer.parseInt(string.substring(0,2));
-		this.mese = Integer.parseInt(string.substring(3,5));
-		this.anno = Integer.parseInt(string.substring(6));
+		this.mese = Integer.parseInt(string.substring(3,4));
+		this.anno = Integer.parseInt(string.substring(5));
 	}
 	
 	public int getAnno() {

@@ -24,6 +24,7 @@ import entity.Entity;
 import entity.Event;
 import entity.Immagine;
 import entity.Payment;
+import entity.Player;
 import entity.Society;
 import entity.Sport;
 import javafx.embed.swing.SwingFXUtils;
@@ -295,6 +296,38 @@ public class Utilities {
 		}
 		Pair<Image, Category> category = new Pair<>(image, out);
 		return category;
+	}
+	
+	public static Pair<Image,Player> getPlayer(String cf) throws SQLException, IOException {
+		dbConnection();
+		String query = "SELECT * FROM giocatore WHERE CF="+cf;
+		ResultSet rs = stmt.executeQuery(query);
+		Player out = null;
+		Image image = null;
+		String peso = null;
+		String altezza = null;
+		DateTime data = null;
+		String ruolo = null;
+		int codCategoria = 0;
+		String preferenza = null;
+		if(rs.next()) {
+			peso = rs.getString("Peso");
+			altezza = rs.getString("Altezza");
+			data = new DateTime(rs.getString("Data_scadenza_certificato"));
+			ruolo = rs.getString("CodRuoloGiocatore");
+			codCategoria = rs.getInt("CodCategoria");
+			preferenza = rs.getString("CodPreferenza");
+		}
+		String query1 = "SELECT * FROM persona WHERE CF="+cf;
+		ResultSet rs1 = stmt.executeQuery(query1);
+		if(rs1.next()) {
+			out = new Player(cf, rs1.getString("Nome"), rs1.getString("Cognome"),new DateTime(rs1.getString("Data")), rs1.getInt("CodPagamento"),rs1.getString("CodSesso"), rs1.getString("CodPartitaIva"), rs1.getInt("Matricola_tesserino"), peso, altezza, data, ruolo, codCategoria, preferenza);
+			image = Utilities.getImage(rs.getInt("CodImmagine"));
+		}
+		Pair<Image, Player> player = new Pair<>(image, out);
+		conn.close();
+		stmt.close();
+		return player;
 	}
 	
 	public static void setCategoria(int id) {
