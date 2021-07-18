@@ -4,9 +4,11 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 import entity.Event;
+import entity.Society;
 
 import static java.time.temporal.TemporalAdjusters.previousOrSame;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import static java.time.temporal.TemporalAdjusters.nextOrSame;
@@ -19,10 +21,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import utilities.DateTime;
+import utilities.Pair;
 import utilities.Utilities;
 
 public class CalendarView extends ViewImpl{
@@ -98,6 +103,7 @@ public class CalendarView extends ViewImpl{
 	
 	@Override
 	public void init(){
+		this.setSociety();
         this.printWeekCalendar();
         this.setOnMouseClick();
 	}
@@ -253,5 +259,19 @@ public class CalendarView extends ViewImpl{
 		    });
 		    return row ;
 		});
+	}
+	
+	private void setSociety() {
+		Pair<Image, Society> society = null;
+		try {
+			society = Utilities.getSociety();
+		} catch (SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.logo.setImage(society.getX());
+		this.nameLabel.setText(society.getY().getNome());
+		this.color1.setFill(Color.valueOf(society.getY().getColor1()));
+		this.color2.setFill(Color.valueOf(society.getY().getColor2()));
 	}
 }

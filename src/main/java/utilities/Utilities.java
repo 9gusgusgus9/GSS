@@ -286,36 +286,17 @@ public class Utilities {
 			String[] inizio = rs.getString("Inizio").split("/");
 			String[] fine = rs.getString("Fine").split("/");
 				if(rs.getString("NomeAvversario") != null) {
-					Event e = new Event(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[0]), Integer.parseInt(fine[1]), Integer.parseInt(fine[2])), rs.getString("CodPartitaIVA"), rs.getString("NomeAvversario"), rs.getInt("CodCategoria"));
+					Event e = new Event(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[2]), Integer.parseInt(fine[1]), Integer.parseInt(fine[0])), rs.getString("CodPartitaIVA"), rs.getString("NomeAvversario"), rs.getInt("CodCategoria"));
 					e.setPrimaryKey(rs.getInt("IdEvento"));
 					events.add(e);
 				} else if (rs.getString("CodCategoria") != null){
-					Event e = new Event(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[0]), Integer.parseInt(fine[1]), Integer.parseInt(fine[2])), rs.getString("CodPartitaIVA"), rs.getInt("CodCategoria"));
+					Event e = new Event(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[2]), Integer.parseInt(fine[1]), Integer.parseInt(fine[0])), rs.getString("CodPartitaIVA"), rs.getInt("CodCategoria"));
 					e.setPrimaryKey(rs.getInt("IdEvento"));
 					events.add(e);
 				} else {
-					Event e = new Event(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[0]), Integer.parseInt(fine[1]), Integer.parseInt(fine[2])), rs.getString("CodPartitaIVA"), rs.getString("Descrizione_generico"));
+					Event e = new Event(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[2]), Integer.parseInt(fine[1]), Integer.parseInt(fine[0])), rs.getString("CodPartitaIVA"), rs.getString("Descrizione_generico"));
 					e.setPrimaryKey(rs.getInt("IdEvento"));
 					events.add(e);
-//			if (rs.getString("NomeAvversario") != null) {
-//				events.add(new Event(
-//						new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]),
-//								Integer.parseInt(inizio[0])),
-//						new DateTime(Integer.parseInt(fine[0]), Integer.parseInt(fine[1]), Integer.parseInt(fine[2])),
-//						rs.getString("CodPartitaIVA"), rs.getString("NomeAvversario"), rs.getInt("CodCategoria")));
-//			} else if (rs.getString("CodCategoria") != null) {
-//				events.add(new Event(
-//						new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]),
-//								Integer.parseInt(inizio[0])),
-//						new DateTime(Integer.parseInt(fine[0]), Integer.parseInt(fine[1]), Integer.parseInt(fine[2])),
-//						rs.getString("CodPartitaIVA"), rs.getInt("CodCategoria")));
-//			} else {
-//				events.add(new Event(
-//						new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]),
-//								Integer.parseInt(inizio[0])),
-//						new DateTime(Integer.parseInt(fine[0]), Integer.parseInt(fine[1]), Integer.parseInt(fine[2])),
-//						rs.getString("CodPartitaIVA"), rs.getString("Descrizione_generico")));
-//			}
 			}
 		}
 		List<Event> filteredEvents = events.stream()
