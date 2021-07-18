@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import entity.Category;
 import entity.Finanze;
 import entity.Immagine;
 import entity.Payment;
@@ -44,6 +45,12 @@ public class SchedaGiocatoreView extends ViewImpl{
 	private Rectangle color2;
 	
 	@FXML
+	private Label categoryLabel;
+
+	@FXML
+	private ImageView playerImage;
+	
+	@FXML
 	TextField nameText;
 	
 	@FXML
@@ -53,7 +60,13 @@ public class SchedaGiocatoreView extends ViewImpl{
 	TextField cfText;
 	
 	@FXML
+	TextField certificatoText;
+	
+	@FXML
 	TextField dataText;
+
+	@FXML
+	TextField sessoText;
 	
 	@FXML
 	TextField matricolaText;
@@ -65,20 +78,8 @@ public class SchedaGiocatoreView extends ViewImpl{
 	TextField altezzaText;
 	
 	@FXML
-	TextField certificatoText;
-	
-	@FXML
-	TextField message;
-
-	@FXML
-	TextField playerPath;
-	
-	@FXML
 	Button closeButton;
-	
-	@FXML
-	TextField sesso;
-	
+		
 	@FXML
 	TextField preferenza;
 	
@@ -93,6 +94,8 @@ public class SchedaGiocatoreView extends ViewImpl{
 	public void init() {
 		this.setSociety();
 		this.category=Utilities.getCategoria();
+		this.setCategory();
+		this.CF=Utilities.getCF();
 		this.setGiocatore();
 	}
 	
@@ -110,14 +113,39 @@ public class SchedaGiocatoreView extends ViewImpl{
 		this.color2.setFill(Color.valueOf(society.getY().getColor2()));
 	}
 
+	private void setCategory() {
+		Pair<Image, Category> category = null;
+		try {
+			category = Utilities.getCategory(this.category);
+		} catch (SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.categoryLabel.setText(category.getY().getNome());
+		}
+	
 	private void setGiocatore() {
 		Pair<Image, Player> player = null;
 		try {
 			player = Utilities.getPlayer(CF);
 		} catch (SQLException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		this.playerImage.setImage(player.getX());
+		this.nameText.setText(player.getY().getPerson().getNome());
+		this.surnameText.setText(player.getY().getPerson().getCognome());
+		this.cfText.setText((String) player.getY().getPrimaryKey());
+		this.certificatoText.setText(player.getY().getData_scadenza_certificato().getDate());
+		this.dataText.setText((String) player.getY().getPerson().getData().getDate());
+		this.sessoText.setText(player.getY().getPerson().getCodSesso());
+		this.pesoText.setText(player.getY().getPeso());
+		this.altezzaText.setText(player.getY().getAltezza());
+		this.matricolaText.setText(Integer.toString(player.getY().getPerson().getMatricola()));
+		this.preferenza.setText(player.getY().getCodPreferenza());
+		this.ruolo.setText(player.getY().getCodRuolo());
 	}
 	
+	public void close() {
+		this.getStage().close();
+	}
 }

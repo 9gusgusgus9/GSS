@@ -34,6 +34,7 @@ import javafx.scene.image.Image;
 public class Utilities {
 
 	private static int idCategoria=0;
+	private static String cf = null;
 	private static Event actualEvent;
 	
 	private static Connection conn;
@@ -340,7 +341,7 @@ public class Utilities {
 		ResultSet rs1 = stmt.executeQuery(query1);
 		if(rs1.next()) {
 			out = new Player(cf, rs1.getString("Nome"), rs1.getString("Cognome"),new DateTime(rs1.getString("Data")), rs1.getInt("CodPagamento"),rs1.getString("CodSesso"), rs1.getString("CodPartitaIva"), rs1.getInt("Matricola_tesserino"), peso, altezza, data, ruolo, codCategoria, preferenza);
-			image = Utilities.getImage(rs.getInt("CodImmagine"));
+			image = Utilities.getImage(rs1.getInt("CodImmagine"));
 		}
 		Pair<Image, Player> player = new Pair<>(image, out);
 		conn.close();
@@ -354,6 +355,14 @@ public class Utilities {
 
 	public static int getCategoria() {
 		return idCategoria;
+	}
+	
+	public static void setCF(String CF) {
+		cf = CF;
+	}
+
+	public static String getCF() {
+		return cf;
 	}
 	
 	public static Event getEvent() {

@@ -28,12 +28,12 @@
                               <Image url="@../img/default/user.png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="634.0" layoutY="185.0" text="NOME CATEGORIA" underline="true">
+                        <Label fx:id="categoryLabel" layoutX="634.0" layoutY="185.0" underline="true">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="181.0" fitWidth="193.0" layoutX="1289.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="playerImage" fitHeight="181.0" fitWidth="193.0" layoutX="1289.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
                </children>
@@ -47,7 +47,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="nameText" editable="false" layoutX="147.0" layoutY="55.0" promptText="Inserisci Nome" />
+                        <TextField fx:id="nameText" editable="false" layoutX="147.0" layoutY="55.0" />
                         <Label layoutX="393.0" layoutY="55.0" prefHeight="30.0" prefWidth="92.0" text="Cognome">
                            <font>
                               <Font size="20.0" />
@@ -97,7 +97,7 @@
                            </font>
                         </Label>
                         <TextField fx:id="altezzaText" editable="false" layoutX="1169.0" layoutY="35.0" prefHeight="31.0" prefWidth="122.0" promptText="Inserisci Altezza" />
-                        <TextField fx:id="pesoText11" editable="false" layoutX="466.0" layoutY="35.0" prefHeight="31.0" prefWidth="119.0" promptText="Inserisci sesso" />
+                        <TextField fx:id="sessoText" editable="false" layoutX="466.0" layoutY="35.0" prefHeight="31.0" prefWidth="119.0" promptText="Inserisci sesso" />
                      </children>
                   </Pane>
                </children>
@@ -117,8 +117,8 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="pesoText1" editable="false" layoutX="1141.0" layoutY="32.0" prefHeight="31.0" prefWidth="119.0" promptText="Inserisci ruolo" />
-                        <TextField fx:id="pesoText1111" editable="false" layoutX="706.0" layoutY="32.0" prefHeight="31.0" prefWidth="119.0" promptText="Inserisci preferenza" />
+                        <TextField fx:id="ruolo" editable="false" layoutX="1141.0" layoutY="32.0" prefHeight="31.0" prefWidth="119.0" promptText="Inserisci ruolo" />
+                        <TextField fx:id="preferenza" editable="false" layoutX="706.0" layoutY="32.0" prefHeight="31.0" prefWidth="119.0" promptText="Inserisci preferenza" />
                         <Label layoutX="594.0" layoutY="32.0" prefHeight="30.0" prefWidth="102.0" text="Preferenza">
                            <font>
                               <Font size="20.0" />
@@ -132,7 +132,7 @@
                <children>
                   <Pane prefHeight="192.0" prefWidth="1515.0">
                      <children>
-                        <Button fx:id="insertButton" layoutX="572.0" layoutY="78.0" mnemonicParsing="false" onKeyPressed="#insert" onMouseClicked="#insert" prefHeight="60.0" prefWidth="328.0" text="CHIUDI" />
+                        <Button fx:id="closeButton" layoutX="572.0" layoutY="78.0" mnemonicParsing="false" onMouseClicked="#close" prefHeight="60.0" prefWidth="328.0" text="CHIUDI" />
                      </children>
                   </Pane>
                </children>

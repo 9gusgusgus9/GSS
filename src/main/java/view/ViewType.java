@@ -26,7 +26,8 @@ public enum ViewType {
 	SINGLEEVENT("SingleEventView", new StartViewController()),
 	DIRIGENT("DirigentView", new StartViewController()),
 	INSERTSTAFF("InsertStaffView", new StartViewController()),
-	INSERTDIRIGENT("InsertDirigentView", new StartViewController());
+	INSERTDIRIGENT("InsertDirigentView", new StartViewController()),
+	SCHEDAGIOCATORE("SchedaGiocatoreView", new StartViewController());
 
     /**
      * Style files path.

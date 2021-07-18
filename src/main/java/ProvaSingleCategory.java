@@ -10,18 +10,19 @@ import utilities.Utilities;
 import view.ViewSwitcher;
 import view.ViewType;
 
-public class ProvaSingleCategory{
+public class ProvaSingleCategory extends Application{
 
-	public static void main(String[] args) throws SQLException, IOException {
-		Pair<Image, Player> player = null;
-		try {
-			player = Utilities.getPlayer("1234567890123456");
-		} catch (SQLException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public static void main(String[] args) {
+
+		launch(args);
 		
-		System.out.println(player.getY().getAltezza());
 	}
 
+	@Override
+	public void start(Stage stage) throws Exception {
+		Utilities.setCF("1234567890123456");
+		Utilities.setCategoria(1);
+		ViewSwitcher.getInstance().switchView(stage, ViewType.SCHEDAGIOCATORE);
+	}
 }
+
