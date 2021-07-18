@@ -10,11 +10,17 @@ import java.util.Optional;
 import entity.Category;
 import entity.Event;
 import entity.Society;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import utilities.Pair;
@@ -38,18 +44,39 @@ public class InsertEventView extends ViewImpl {
 	private Label name;
 	
 	@FXML
-	private Label dal, inizio, al, fine;
+	private Label dal, al;
 	
 	@FXML
-	private Label lab1, lab2, lab3, lab4;
+	private DatePicker inizio, fine;
 	
 	@FXML
-	private Button set;
+	private Label nomeAvvLab, categoriaLab, descrizioneLab;
 	
+	@FXML
+	private RadioButton rPartita, rAllenamento, rGenerico;
+	
+	@FXML
+	private TextField nomeAvv, descrizione;
+	
+	@FXML
+	private ChoiceBox<String> categoria;
+	
+	@FXML
+	private HBox partita, allenamento, generico, crea;
+	
+	@FXML
+	private Button inserisci;
+	
+	private boolean flag = true;
 	
 	@Override
 	public void init() {
 		this.setSociety();
+		this.allenamento.setVisible(false);
+		this.partita.setVisible(false);
+		this.generico.setVisible(false);
+		this.crea.setVisible(false);
+		this.setCategories();
 	}
 	
 	private void setSociety(){
@@ -68,7 +95,89 @@ public class InsertEventView extends ViewImpl {
 		this.color2.setFill(Color.valueOf(society.getY().getColor2()));
 	}
 	
-	private void setEvent() {
-		
+	private void setCategories() {
+		List<String> list = new LinkedList();
+		try {
+			Utilities.getCategories().stream().forEach((p) -> list.add(p.getX().getNome()));
+		} catch (SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		categoria.setItems(FXCollections.observableArrayList(list));
+	}
+	
+	@FXML
+	private void setPartita() {
+		this.generico.setVisible(false);
+		this.allenamento.setVisible(true);
+		this.partita.setVisible(true);
+		this.crea.setVisible(true);
+		this.name.setText("NUOVA PARTITA");
+	}
+	
+	@FXML
+	private void setAllenamento() {
+		this.generico.setVisible(false);
+		this.allenamento.setVisible(true);
+		this.partita.setVisible(false);
+		this.crea.setVisible(true);
+		this.name.setText("NUOVO ALLENAMENTO");
+	}
+	
+	@FXML
+	private void setGenerico() {
+		this.generico.setVisible(true);
+		this.allenamento.setVisible(false);
+		this.partita.setVisible(false);
+		this.crea.setVisible(true);
+		this.name.setText("NUOVO GENERICO");
+	}
+	
+	@FXML
+	private void inserisci() {
+		if(inizio.getValue() == null) {
+			dal.setTextFill(Color.RED);
+			flag = false;
+		} else {
+			dal.setTextFill(Color.BLACK);
+		}
+		if(fine.getValue() == null) {
+			al.setTextFill(Color.RED);
+			flag = false;
+		} else {
+			al.setTextFill(Color.BLACK);
+		}
+		if(rPartita.isSelected()) {
+			if(nomeAvv.getText().equals("")) {
+				nomeAvvLab.setTextFill(Color.RED);
+				flag = false;
+			}else {
+				nomeAvvLab.setTextFill(Color.BLACK);
+			}
+			if(categoria.getValue() == null) {
+				categoriaLab.setTextFill(Color.RED);
+				flag = false;
+			}else {
+				categoriaLab.setTextFill(Color.BLACK);
+			}
+		} else if(rAllenamento.isSelected()){
+			if(categoria.getValue() == null) {
+				categoriaLab.setTextFill(Color.RED);
+				flag = false;
+			}else {
+				categoriaLab.setTextFill(Color.BLACK);
+			}
+		} else {
+			if(descrizione.getText().equals("")) {
+				descrizioneLab.setTextFill(Color.RED);
+				flag = false;
+			}else {
+				descrizioneLab.setTextFill(Color.BLACK);
+			}
+		}
+		if(this.flag) {
+			
+		}
+		this.flag = true;
 	}
 }
