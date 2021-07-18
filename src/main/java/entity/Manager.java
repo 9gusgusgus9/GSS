@@ -41,6 +41,10 @@ public class Manager extends Entity {
 	public String getCodRuolo() {
 		return codRuolo;
 	}
+	
+	public Person getPersona() {
+		return this.person;
+	}
 
 	@Override
 	public String getColumnList() {

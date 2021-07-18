@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import utilities.Utilities;
 
 public class SingleEventView extends ViewImpl{
@@ -29,10 +30,12 @@ public class SingleEventView extends ViewImpl{
 	
 	@FXML
 	Button showButton;
+	
+	private Event e;
 
 	@Override
 	public void init() {
-		Event e = Utilities.getEvent();
+		e = Utilities.getEvent();
 		dataInizio.setText(Utilities.getEvent().getInizio().getDate());
 		dataFine.setText(Utilities.getEvent().getFine().getDate());
 		nomeEvento.setText(Utilities.getEvent().getEvent());
@@ -45,5 +48,12 @@ public class SingleEventView extends ViewImpl{
 			infoBox.setVisible(false);
 		}
 	}
+	
+	@FXML
+	public void showConvocati() {
+		Utilities.setEvent(e);
+		ViewSwitcher.getInstance().switchView(new Stage(), ViewType.EVENTCONVENE);
+	}
+	
 
 }

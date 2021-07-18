@@ -3,6 +3,7 @@ package entity;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 
+import javafx.beans.property.SimpleStringProperty;
 import utilities.DateTime;
 import utilities.Utilities;
 
@@ -71,7 +72,7 @@ public class Player extends Entity {
 
 	}
 
-	public Person getPerson() {
+	public Person getPersona() {
 		return person;
 	}
 

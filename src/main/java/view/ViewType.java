@@ -23,7 +23,8 @@ public enum ViewType {
 	SINGLECATEGORY("SingleCategoryView", new StartViewController()),
 	INSERTPLAYERVIEW("InsertPlayerView", new StartViewController()),
 	INSERTCATEGORY("InsertCategoryView", new StartViewController()),
-	SINGLEEVENT("SingleEventView", new StartViewController());
+	SINGLEEVENT("SingleEventView", new StartViewController()),
+	EVENTCONVENE("ConveneToEventView", new StartViewController());
 
     /**
      * Style files path.
