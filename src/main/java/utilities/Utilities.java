@@ -318,7 +318,7 @@ public class Utilities {
 	
 	public static Pair<Image,Player> getPlayer(String cf) throws SQLException, IOException {
 		dbConnection();
-		String query = "SELECT * FROM giocatore WHERE CF="+cf;
+		String query = "SELECT * FROM giocatore WHERE CF='" + cf + "'";
 		ResultSet rs = stmt.executeQuery(query);
 		Player out = null;
 		Image image = null;

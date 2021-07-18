@@ -20,7 +20,7 @@ import javafx.scene.shape.Rectangle;
 import utilities.Pair;
 import utilities.Utilities;
 
-public class EventView extends ViewImpl {
+public class InsertEventView extends ViewImpl {
 
 	@FXML
 	private Label nameLabel;
