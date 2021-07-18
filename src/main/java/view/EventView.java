@@ -69,14 +69,6 @@ public class EventView extends ViewImpl {
 	}
 	
 	private void setEvent() {
-		Pair<Event, Optional<String>> evento = null;
-		try {
-			evento = Utilities.getEvent(0);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(evento.getY().equals(Optional.empty())) {
-		}
+		
 	}
 }

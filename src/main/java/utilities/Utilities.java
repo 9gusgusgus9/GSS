@@ -33,14 +33,9 @@ import javafx.scene.image.Image;
 
 public class Utilities {
 
-<<<<<<< HEAD
 	private static int idCategoria=0;
 	private static Event actualEvent;
 	
-=======
-	private static int idCategoria = 0;
-
->>>>>>> a12935d90855f92e3ee86381f816bc5bc9451e61
 	private static Connection conn;
 	private static Statement stmt;
 	private static String password = null;
@@ -96,15 +91,9 @@ public class Utilities {
 
 	public static void insertSport(int codSport) throws SQLException, FileNotFoundException {
 		dbConnection();
-<<<<<<< HEAD
 		String query = "";
 		switch (codSport) {
 		case 2:
-=======
-		String query="";
-		switch(codSport) {
-		case 2: 
->>>>>>> feature-tommaso
 			query = "INSERT INTO ruolo_giocatore (IdRuoloGiocatore, Descrizione) VALUES ('PM','Playmaker'),('GU','Guardia'),('AP','Ala Piccola'),('AG','Ala Grande'),('CEN','Centro')";
 			break;
 		case 1:
@@ -119,9 +108,6 @@ public class Utilities {
 		conn.close();
 		stmt.close();
 	}
-<<<<<<< HEAD
-
-=======
 	
 	public static List<String> getSport() throws SQLException{
 		dbConnection();
@@ -134,7 +120,6 @@ public class Utilities {
 		return list;
 	}
 	
->>>>>>> feature-tommaso
 	public static void deleteEntity(Entity entity) throws SQLException {
 		dbConnection();
 
@@ -330,9 +315,6 @@ public class Utilities {
 		Pair<Image, Category> category = new Pair<>(image, out);
 		return category;
 	}
-<<<<<<< HEAD
-
-=======
 	
 	public static Pair<Image,Player> getPlayer(String cf) throws SQLException, IOException {
 		dbConnection();
@@ -366,7 +348,6 @@ public class Utilities {
 		return player;
 	}
 	
->>>>>>> feature-tommaso
 	public static void setCategoria(int id) {
 		idCategoria = id;
 	}
@@ -374,7 +355,6 @@ public class Utilities {
 	public static int getCategoria() {
 		return idCategoria;
 	}
-<<<<<<< HEAD
 	
 	public static Event getEvent() {
 		return actualEvent;
@@ -384,9 +364,6 @@ public class Utilities {
 		actualEvent = e;
 	}
 	
-=======
-
->>>>>>> a12935d90855f92e3ee86381f816bc5bc9451e61
 	public static Category getOnlyCategory(int idCategoria) throws SQLException, IOException {
 		dbConnection();
 		String query = "SELECT * FROM categoria WHERE IdCategoria=" + idCategoria;
