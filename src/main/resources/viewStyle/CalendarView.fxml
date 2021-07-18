@@ -105,6 +105,6 @@
             </HBox>
          </children>
       </VBox>
-      <Button fx:id="newEvento" layoutX="1404.0" layoutY="129.0" mnemonicParsing="false" text="Nuovo Evento" />
+      <Button fx:id="newEvento" layoutX="1404.0" layoutY="129.0" mnemonicParsing="false" onMouseClicked="#switchToInsertEvent" text="Nuovo Evento" />
    </children>
 </AnchorPane>

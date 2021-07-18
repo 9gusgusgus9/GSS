@@ -254,4 +254,9 @@ public class CalendarView extends ViewImpl{
 		    return row ;
 		});
 	}
+	
+	@FXML
+	private void switchToInsertEvent() {
+		ViewSwitcher.getInstance().switchView(new Stage(), ViewType.INSERTEVENT);
+	}
 }
