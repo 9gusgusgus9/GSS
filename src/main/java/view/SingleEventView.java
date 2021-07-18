@@ -2,6 +2,7 @@ package view;
 
 import entity.Event;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import utilities.Utilities;
@@ -25,6 +26,9 @@ public class SingleEventView extends ViewImpl{
 	
 	@FXML
 	Label setRisultato;
+	
+	@FXML
+	Button showButton;
 
 	@Override
 	public void init() {

@@ -8,22 +8,22 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="pane" minWidth="-Infinity" prefHeight="50.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SingleEventView">
+<AnchorPane fx:id="pane" prefHeight="200.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SingleEventView">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="300.0" prefWidth="500.0">
+      <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="700.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="160.0" prefWidth="500.0">
+            <HBox alignment="CENTER" prefHeight="160.0" prefWidth="700.0">
                <children>
-                  <Pane prefHeight="160.0" prefWidth="500.0">
+                  <Pane prefHeight="160.0" prefWidth="700.0">
                      <children>
-                        <Rectangle fx:id="color1" arcHeight="5.0" arcWidth="5.0" fill="#9c9c9ce5" height="29.0" layoutY="42.0" stroke="BLACK" strokeType="INSIDE" width="500.0" />
-                        <Rectangle fx:id="color2" arcHeight="5.0" arcWidth="5.0" fill="#e4f267" height="29.0" layoutY="70.0" stroke="BLACK" strokeType="INSIDE" width="500.0" />
-                        <Label fx:id="nameLabel" alignment="CENTER" layoutX="1.0" layoutY="47.0" prefHeight="40.0" prefWidth="500.0" text="TEAM NAME">
+                        <Rectangle fx:id="color1" arcHeight="5.0" arcWidth="5.0" fill="#9c9c9ce5" height="29.0" layoutX="5.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="690.0" />
+                        <Rectangle fx:id="color2" arcHeight="5.0" arcWidth="5.0" fill="#e4f267" height="29.0" layoutX="5.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="690.0" />
+                        <Label fx:id="nameLabel" alignment="CENTER" layoutX="5.0" layoutY="50.0" prefHeight="62.0" prefWidth="690.0" text="TEAM NAME">
                            <font>
-                              <Font size="36.0" />
+                              <Font name="Bauhaus 93" size="54.0" />
                            </font>
                         </Label>
-                        <ImageView fx:id="logo" fitHeight="116.0" fitWidth="125.0" layoutX="20.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="logo" fitHeight="136.0" fitWidth="145.0" layoutX="20.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../img/default/stemma.jpg" />
                            </image>
@@ -32,7 +32,7 @@
                   </Pane>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="48.0" prefWidth="500.0">
+            <HBox alignment="CENTER" prefHeight="48.0" prefWidth="700.0">
                <children>
                   <Label fx:id="nomeEvento" underline="true">
                      <font>
@@ -49,9 +49,14 @@
                      </font>
                   </Label>
                   <Label fx:id="setRisultato" text="Label" />
+                  <Label fx:id="risultato1" layoutX="304.0" layoutY="43.0" text="Risultato: ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="500.0" spacing="30.0">
+            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="700.0" spacing="30.0">
                <children>
                   <Label fx:id="dataInizio" text="Data Inizio:">
                      <font>
@@ -61,7 +66,7 @@
                   <Label fx:id="dataInizio" text="Label" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="500.0" spacing="20.0">
+            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="700.0" spacing="20.0">
                <children>
                   <Label fx:id="dataFine" text="Data Fine:">
                      <font>
@@ -71,9 +76,9 @@
                   <Label fx:id="dataFine" text="Label" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="500.0" spacing="20.0">
+            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="700.0" spacing="20.0">
                <children>
-                  <Button fx:id="showButton" mnemonicParsing="false" text="Visualizza Convocati" />
+                  <Button fx:id="insertButton" mnemonicParsing="false" text="Visualizza Convocati" />
                </children>
             </HBox>
          </children>
