@@ -24,9 +24,10 @@ public class DateTime {
 	}
 	
 	public DateTime(String string) {
-		this.giorno = Integer.parseInt(string.substring(0,2));
-		this.mese = Integer.parseInt(string.substring(3,5));
-		this.anno = Integer.parseInt(string.substring(6));
+		String[] splits = string.split("/");
+		this.giorno = Integer.parseInt(splits[0]);
+		this.mese = Integer.parseInt(splits[1]);
+		this.anno = Integer.parseInt(splits[2]);
 	}
 	
 	public int getAnno() {

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.InsertEventView">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="900.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="160.0" prefWidth="1500.0">
+               <children>
+                  <Pane prefHeight="160.0" prefWidth="900.0">
+                     <children>
+                        <Rectangle fx:id="color1" arcHeight="5.0" arcWidth="5.0" fill="#9c9c9ce5" height="29.0" layoutX="5.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="890.0" />
+                        <Rectangle fx:id="color2" arcHeight="5.0" arcWidth="5.0" fill="#e4f267" height="29.0" layoutX="5.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="890.0" />
+                        <Label fx:id="nameLabel" alignment="CENTER" layoutX="5.0" layoutY="50.0" prefHeight="62.0" prefWidth="890.0" text="TEAM NAME">
+                           <font>
+                              <Font name="Bauhaus 93" size="54.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="logo" fitHeight="136.0" fitWidth="145.0" layoutX="37.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/default/stemma.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="900.0">
+               <children>
+                  <Label fx:id="name" text="EVENTO" underline="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="900.0">
+               <children>
+                  <Label fx:id="dal" text="Dal: ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="inizio">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="al" text="Al: ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="fine">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="900.0">
+               <children>
+                  <Label fx:id="lab1">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lab2">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lab3">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lab4">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="900.0">
+               <children>
+                  <Button fx:id="set" mnemonicParsing="false" text="Imposta il risultato" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
