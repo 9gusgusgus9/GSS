@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 import utilities.Pair;
 import utilities.Utilities;
 
-public class SingleCategoryView extends ViewImpl{
+public class DirigentView extends ViewImpl{
 
 	@FXML
 	private Label nameLabel;
@@ -35,51 +35,29 @@ public class SingleCategoryView extends ViewImpl{
 	private Rectangle color2;
 	
     @FXML
-    private VBox vBoxTable;
-    @FXML
     private TableView<Person> tableView;
 
     @FXML
-    private TableColumn<Person, String> columnCFPlayer;
+    private TableColumn<Person, String> columnCF;
     
     @FXML
-    private TableColumn<Person, String> columnNamePlayer;
+    private TableColumn<Person, String> columnName;
 
     @FXML
-    private TableColumn<Person, String> columnRuoloPlayer;
-	
-    @FXML
-    private TableColumn<Person, String> columnCFStaff;
+    private TableColumn<Person, String> columnRuolo;
     
     @FXML
-    private TableColumn<Person, String> columnNameStaff;
-
-    @FXML
-    private TableColumn<Person, String> columnRuoloStaff;
-	
-    @FXML
-    private Label categoria;
-    
-    @FXML
-    private Button addPlayer;
-    
-    @FXML
-    private Button addStaff;
+    private Button addDirigent;
     
 	@Override
 	public void init() {
 		this.setSociety();
-		this.setCategory();
 	}
 	
 	public void switchToInsertPlayer() {
-		ViewSwitcher.getInstance().switchView(new Stage(), ViewType.INSERTPLAYERVIEW);
+		ViewSwitcher.getInstance().switchView(new Stage(), ViewType.INSERTDIRIGENT);
 	}
 
-	public void switchToInsertStaff() {
-		ViewSwitcher.getInstance().switchView(new Stage(), ViewType.INSERTSTAFF);
-	}
-	
 	private void setSociety() {
 		Pair<Image, Society> society = null;
 		try {
@@ -94,18 +72,6 @@ public class SingleCategoryView extends ViewImpl{
 		this.color2.setFill(Color.valueOf(society.getY().getColor2()));
 	}
 	
-	private void setCategory() {
-		Pair<Image, Category> category = null;
-		try {
-			if(Utilities.getCategoria()==0) {
-				this.categoria.setText("Dirigenti");
-			} else {
-				category = Utilities.getCategory(Utilities.getCategoria());
-				this.categoria.setText(category.getY().getNome());
-			}
-		} catch (SQLException | IOException e) {
-			e.printStackTrace();
-		}
-	}
 	
 }
+

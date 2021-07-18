@@ -191,7 +191,7 @@ public class CategoryView extends ViewImpl {
 				@Override
 				public void handle(Event arg0) {
 					Utilities.setCategoria(0);
-					ViewSwitcher.getInstance().switchView(new Stage(), ViewType.SINGLECATEGORY);
+					ViewSwitcher.getInstance().switchView(new Stage(), ViewType.DIRIGENT);
 				}
 			});
 			c++;

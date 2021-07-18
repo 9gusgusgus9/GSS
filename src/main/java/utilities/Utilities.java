@@ -15,6 +15,7 @@ import java.sql.Statement;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
@@ -29,12 +30,16 @@ import entity.Sport;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
-
 public class Utilities {
 
+<<<<<<< HEAD
 	private static int idCategoria=0;
 	private static Event actualEvent;
 	
+=======
+	private static int idCategoria = 0;
+
+>>>>>>> a12935d90855f92e3ee86381f816bc5bc9451e61
 	private static Connection conn;
 	private static Statement stmt;
 	private static String password = null;
@@ -90,9 +95,15 @@ public class Utilities {
 
 	public static void insertSport(int codSport) throws SQLException, FileNotFoundException {
 		dbConnection();
+<<<<<<< HEAD
+		String query = "";
+		switch (codSport) {
+		case 2:
+=======
 		String query="";
 		switch(codSport) {
 		case 2: 
+>>>>>>> feature-tommaso
 			query = "INSERT INTO ruolo_giocatore (IdRuoloGiocatore, Descrizione) VALUES ('PM','Playmaker'),('GU','Guardia'),('AP','Ala Piccola'),('AG','Ala Grande'),('CEN','Centro')";
 			break;
 		case 1:
@@ -102,12 +113,27 @@ public class Utilities {
 			query = "INSERT INTO ruolo_giocatore (IdRuoloGiocatore, Descrizione) VALUES ('PAL','Palleggiatore'),('CENT','Centrale'),('SL','Schiacciatore Laterale'),('SO','Schiacciatore Opposto'),('LIB','Libero')";
 			break;
 		}
-		
+
 		stmt.executeUpdate(query);
 		conn.close();
 		stmt.close();
 	}
+<<<<<<< HEAD
+
+=======
 	
+	public static List<String> getSport() throws SQLException{
+		dbConnection();
+		String query = "SELECT * FROM ruolo_giocatore" ;
+		ResultSet rs = stmt.executeQuery(query);
+		List<String> list = new LinkedList<>();
+		while(rs.next()) {
+			list.add(rs.getString("IdRuoloGiocatore"));
+		}
+		return list;
+	}
+	
+>>>>>>> feature-tommaso
 	public static void deleteEntity(Entity entity) throws SQLException {
 		dbConnection();
 
@@ -182,13 +208,13 @@ public class Utilities {
 		stmt.close();
 
 	}
-	
+
 	public static Image getImage(int x) throws IOException, SQLException {
 		dbConnection();
 		String query = "SELECT DatiFile FROM IMMAGINE WHERE IdImmagine=" + x;
 		System.out.println(query);
 		ResultSet rs = stmt.executeQuery(query);
-		if(rs.next()) {
+		if (rs.next()) {
 			InputStream image = rs.getBlob(1).getBinaryStream();
 			BufferedImage imagen = ImageIO.read(image);
 			Image out = SwingFXUtils.toFXImage(imagen, null);
@@ -196,104 +222,122 @@ public class Utilities {
 		}
 		return null;
 	}
-	
+
 	public static void insertConvocati(List<Object> convocati, Object codEvent) throws SQLException {
 		dbConnection();
 		String query = null;
-		for(int i=0; i<convocati.size(); i++) {
-			query = "INSERT INTO convocazioni (codEvento, CF) VALUES (" + (int) codEvent + ",'" + (String) convocati.get(i) + "')";
+		for (int i = 0; i < convocati.size(); i++) {
+			query = "INSERT INTO convocazioni (codEvento, CF) VALUES (" + (int) codEvent + ",'"
+					+ (String) convocati.get(i) + "')";
 			stmt.executeUpdate(query);
 			System.out.println(query);
 		}
 		conn.close();
 		stmt.close();
 	}
-	
+
 	public static boolean isTheFirstStart() throws SQLException {
 		dbConnection();
 		String query = "SELECT * FROM societa";
 		ResultSet rs = stmt.executeQuery(query);
-		if(rs.next()) {
+		if (rs.next()) {
 			return false;
 		} else {
 			return true;
 		}
 	}
-	
-	public static List<Pair<Category, Image>> getCategories() throws SQLException, IOException{
+
+	public static List<Pair<Category, Image>> getCategories() throws SQLException, IOException {
 		dbConnection();
 		String query = "SELECT * FROM categoria ORDER BY Nome";
 		ResultSet rs = stmt.executeQuery(query);
 		List<Pair<Category, Image>> out = new LinkedList<>();
-		while(rs.next()) {
+		while (rs.next()) {
 			int codImage = rs.getInt("CodImmagine");
 			Image image = Utilities.getImage(codImage);
-			Category category = new Category(rs.getInt("IdCategoria"),rs.getString("Nome"),rs.getString("CodPartitaIVA"), codImage);
+			Category category = new Category(rs.getInt("IdCategoria"), rs.getString("Nome"),
+					rs.getString("CodPartitaIVA"), codImage);
 			out.add(new Pair<>(category, image));
 		}
 		return out;
 	}
 
-	public static Pair<Image,Society> getSociety() throws SQLException, IOException {
+	public static Pair<Image, Society> getSociety() throws SQLException, IOException {
 		dbConnection();
 		String query = "SELECT * FROM societa";
 		ResultSet rs = stmt.executeQuery(query);
 		Society out = null;
 		Image image = null;
-		if(rs.next()) {
-			if(rs.getString("Color1").equals(null)) {
-				out = new Society(rs.getString("PartitaIVA"),rs.getString("Nome"), Sport.getSport(rs.getInt("CodSport")));
+		if (rs.next()) {
+			if (rs.getString("Color1").equals(null)) {
+				out = new Society(rs.getString("PartitaIVA"), rs.getString("Nome"),
+						Sport.getSport(rs.getInt("CodSport")));
 			} else {
-				out = new Society(rs.getString("PartitaIVA"),rs.getString("Nome"), Sport.getSport(rs.getInt("CodSport")), rs.getString("Color1"), rs.getString("Color2"));
+				out = new Society(rs.getString("PartitaIVA"), rs.getString("Nome"),
+						Sport.getSport(rs.getInt("CodSport")), rs.getString("Color1"), rs.getString("Color2"));
 			}
 			image = Utilities.getImage(rs.getInt("CodImmagine"));
 		}
 		Pair<Image, Society> society = new Pair<>(image, out);
 		return society;
 	}
-	
 
 	public static List<Event> getEvents(DateTime lunedi, DateTime domenica) throws SQLException {
 		dbConnection();
 		String query = "SELECT * FROM evento";
 		List<Event> events = new LinkedList<>();
 		ResultSet rs = stmt.executeQuery(query);
-		while(rs.next()) {
+		while (rs.next()) {
 			String[] inizio = rs.getString("Inizio").split("/");
 			String[] fine = rs.getString("Fine").split("/");
-			if(rs.getString("NomeAvversario") != null) {
-				events.add(new Event(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[0]), Integer.parseInt(fine[1]), Integer.parseInt(fine[2])), rs.getString("CodPartitaIVA"), rs.getString("NomeAvversario"), rs.getInt("CodCategoria")));
-			} else if (rs.getString("CodCategoria") != null){
-				events.add(new Event(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[0]), Integer.parseInt(fine[1]), Integer.parseInt(fine[2])), rs.getString("CodPartitaIVA"), rs.getInt("CodCategoria")));
+			if (rs.getString("NomeAvversario") != null) {
+				events.add(new Event(
+						new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]),
+								Integer.parseInt(inizio[0])),
+						new DateTime(Integer.parseInt(fine[0]), Integer.parseInt(fine[1]), Integer.parseInt(fine[2])),
+						rs.getString("CodPartitaIVA"), rs.getString("NomeAvversario"), rs.getInt("CodCategoria")));
+			} else if (rs.getString("CodCategoria") != null) {
+				events.add(new Event(
+						new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]),
+								Integer.parseInt(inizio[0])),
+						new DateTime(Integer.parseInt(fine[0]), Integer.parseInt(fine[1]), Integer.parseInt(fine[2])),
+						rs.getString("CodPartitaIVA"), rs.getInt("CodCategoria")));
 			} else {
-				events.add(new Event(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[0]), Integer.parseInt(fine[1]), Integer.parseInt(fine[2])), rs.getString("CodPartitaIVA"), rs.getString("Descrizione_generico")));
+				events.add(new Event(
+						new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]),
+								Integer.parseInt(inizio[0])),
+						new DateTime(Integer.parseInt(fine[0]), Integer.parseInt(fine[1]), Integer.parseInt(fine[2])),
+						rs.getString("CodPartitaIVA"), rs.getString("Descrizione_generico")));
 			}
 		}
-		List<Event> filteredEvents = events.stream().filter(d -> d.getInizio().compareDate(lunedi) >= 0 && d.getInizio().compareDate(domenica) <= 0).collect(Collectors.toList());
+		List<Event> filteredEvents = events.stream()
+				.filter(d -> d.getInizio().compareDate(lunedi) >= 0 && d.getInizio().compareDate(domenica) <= 0)
+				.collect(Collectors.toList());
 		return filteredEvents;
 	}
-		
-	public static Pair<Image,Category> getCategory(int idCategoria) throws SQLException, IOException {
+
+	public static Pair<Image, Category> getCategory(int idCategoria) throws SQLException, IOException {
 		dbConnection();
-		String query = "SELECT * FROM categoria WHERE IdCategoria="+idCategoria;
+		String query = "SELECT * FROM categoria WHERE IdCategoria=" + idCategoria;
 		ResultSet rs = stmt.executeQuery(query);
 		Category out = null;
 		Image image = null;
-		if(rs.next()) {
+		if (rs.next()) {
 			out = new Category(rs.getString("Nome"), rs.getString("CodPartitaIva"));
 			image = Utilities.getImage(rs.getInt("CodImmagine"));
 		}
 		Pair<Image, Category> category = new Pair<>(image, out);
 		return category;
 	}
-	
+
 	public static void setCategoria(int id) {
 		idCategoria = id;
 	}
-	
+
 	public static int getCategoria() {
 		return idCategoria;
 	}
+<<<<<<< HEAD
 	
 	public static Event getEvent() {
 		return actualEvent;
@@ -303,9 +347,12 @@ public class Utilities {
 		actualEvent = e;
 	}
 	
+=======
+
+>>>>>>> a12935d90855f92e3ee86381f816bc5bc9451e61
 	public static Category getOnlyCategory(int idCategoria) throws SQLException, IOException {
 		dbConnection();
-		String query = "SELECT * FROM categoria WHERE IdCategoria="+idCategoria;
+		String query = "SELECT * FROM categoria WHERE IdCategoria=" + idCategoria;
 		ResultSet rs = stmt.executeQuery(query);
 		Category out = null;
 		rs.next();
@@ -313,16 +360,34 @@ public class Utilities {
 		Category category = out;
 		return category;
 	}
-	
+
 	public static boolean checkPersona(String cf) throws SQLException {
 		dbConnection();
 		String query = "SELECT * FROM persona";
 		ResultSet rs = stmt.executeQuery(query);
-		while(rs.next()) {
-			if(rs.getString("CF").equals(cf)) {
+		while (rs.next()) {
+			if (rs.getString("CF").equals(cf)) {
 				return false;
 			}
 		}
 		return true;
+	}
+
+	public static Pair<Event, Optional<String>> getEvent(int id) throws SQLException {
+		dbConnection();
+		String query = "SELECT * FROM event WHERE IdEvento = " + id;
+		ResultSet rs = stmt.executeQuery(query);
+		rs.next();
+		Event event;
+		Optional<String> result = Optional.empty();
+		if(rs.getString("NomeAvversario") != null) {
+			event = new Event(new DateTime(rs.getString("Inizio")), new DateTime(rs.getString("Fine")), rs.getString("CodPartitaIVA"), rs.getString("Avversario"), rs.getInt("CodCategoria"));
+			result = Optional.of(rs.getString("Risultato"));
+		} else if(rs.getString("Descrizione_generico") != null) {
+			event = new Event(new DateTime(rs.getString("Inizio")), new DateTime(rs.getString("Fine")), rs.getString("CodPartitaIVA"), rs.getString("Descrizione_generico"));
+		} else {
+			event = new Event(new DateTime(rs.getString("Inizio")), new DateTime(rs.getString("Fine")), rs.getString("CodPartitaIVA"), rs.getString("CodCategoria"));
+		}
+		return new Pair(event, result);
 	}
 }
