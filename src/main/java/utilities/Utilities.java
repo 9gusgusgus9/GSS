@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,8 +28,15 @@ import entity.Immagine;
 import entity.Payment;
 import entity.Person;
 import entity.Player;
+import entity.Manager;
+import entity.Staff;
+import entity.Person;
 import entity.Society;
 import entity.Sport;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
@@ -278,24 +286,18 @@ public class Utilities {
 		while (rs.next()) {
 			String[] inizio = rs.getString("Inizio").split("/");
 			String[] fine = rs.getString("Fine").split("/");
-			if (rs.getString("NomeAvversario") != null) {
-				events.add(new Event(
-						new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]),
-								Integer.parseInt(inizio[0])),
-						new DateTime(Integer.parseInt(fine[0]), Integer.parseInt(fine[1]), Integer.parseInt(fine[2])),
-						rs.getString("CodPartitaIVA"), rs.getString("NomeAvversario"), rs.getInt("CodCategoria")));
-			} else if (rs.getString("CodCategoria") != null) {
-				events.add(new Event(
-						new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]),
-								Integer.parseInt(inizio[0])),
-						new DateTime(Integer.parseInt(fine[0]), Integer.parseInt(fine[1]), Integer.parseInt(fine[2])),
-						rs.getString("CodPartitaIVA"), rs.getInt("CodCategoria")));
-			} else {
-				events.add(new Event(
-						new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]),
-								Integer.parseInt(inizio[0])),
-						new DateTime(Integer.parseInt(fine[0]), Integer.parseInt(fine[1]), Integer.parseInt(fine[2])),
-						rs.getString("CodPartitaIVA"), rs.getString("Descrizione_generico")));
+				if(rs.getString("NomeAvversario") != null) {
+					Event e = new Event(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[2]), Integer.parseInt(fine[1]), Integer.parseInt(fine[0])), rs.getString("CodPartitaIVA"), rs.getString("NomeAvversario"), rs.getInt("CodCategoria"));
+					e.setPrimaryKey(rs.getInt("IdEvento"));
+					events.add(e);
+				} else if (rs.getString("CodCategoria") != null){
+					Event e = new Event(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[2]), Integer.parseInt(fine[1]), Integer.parseInt(fine[0])), rs.getString("CodPartitaIVA"), rs.getInt("CodCategoria"));
+					e.setPrimaryKey(rs.getInt("IdEvento"));
+					events.add(e);
+				} else {
+					Event e = new Event(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[2]), Integer.parseInt(fine[1]), Integer.parseInt(fine[0])), rs.getString("CodPartitaIVA"), rs.getString("Descrizione_generico"));
+					e.setPrimaryKey(rs.getInt("IdEvento"));
+					events.add(e);
 			}
 		}
 		List<Event> filteredEvents = events.stream()
@@ -379,8 +381,9 @@ public class Utilities {
 		String query = "SELECT * FROM categoria WHERE IdCategoria=" + idCategoria;
 		ResultSet rs = stmt.executeQuery(query);
 		Category out = null;
-		rs.next();
-		out = new Category(rs.getString("Nome"), rs.getString("CodPartitaIva"));
+		if(rs.next()) {
+			out = new Category(rs.getString("Nome"), rs.getString("CodPartitaIva"));
+		}
 		Category category = out;
 		return category;
 	}
@@ -395,6 +398,65 @@ public class Utilities {
 			}
 		}
 		return true;
+	}
+	
+	public static ObservableList<Person> getConvocati(int idEvento) throws SQLException {
+		ObservableList<Person> convocati = FXCollections.observableArrayList();
+		dbConnection();
+		String qPlayer = "SELECT q1.CF , q1.Nome , q1.Cognome, q2.CodRuoloGiocatore , q2.CodCategoria FROM (SELECT * FROM giocatore) AS q2 INNER JOIN (SELECT c.CF , p.Nome , p.Cognome FROM convocazioni AS c INNER JOIN persona AS p ON c.CF = p.CF WHERE c.CodEvento="+idEvento+") AS q1 ON q1.CF = q2.CF";
+		String qManager = "SELECT q1.CF , q1.Nome , q1.Cognome , q2.CodRuoloDirigente FROM (SELECT * FROM dirigente) AS q2 INNER JOIN (SELECT c.CF , p.Nome , p.Cognome FROM convocazioni AS c INNER JOIN persona AS p ON c.CF = p.CF WHERE c.CodEvento="+idEvento+") AS q1 ON q1.CF = q2.CF";
+		String qStaff = "SELECT q1.CF , q1.Nome , q1.Cognome , q2.CodRuoloStaff , q2.CodCategoria FROM (SELECT * FROM staff) AS q2 INNER JOIN (SELECT c.CF , p.Nome , p.Cognome FROM convocazioni AS c INNER JOIN persona AS p ON c.CF = p.CF WHERE c.CodEvento="+idEvento+") AS q1 ON q1.CF = q2.CF";
+		ResultSet rsPlayer = stmt.executeQuery(qPlayer);
+		while(rsPlayer.next()) {
+			Person player = new Person(rsPlayer.getString("q1.CF"), rsPlayer.getString("q1.Nome"), rsPlayer.getString("q1.Cognome"));
+			convocati.add(player);
+		}
+		ResultSet rsManager = stmt.executeQuery(qManager);
+		while(rsManager.next()) {
+			Person manager = new Person(rsManager.getString("q1.CF"), rsManager.getString("q1.Nome"), rsManager.getString("q1.Cognome"));
+			convocati.add(manager);
+		}
+		ResultSet rsStaff = stmt.executeQuery(qStaff);
+		while(rsStaff.next()) {
+			Person staff = new Person(rsStaff.getString("q1.CF"), rsStaff.getString("q1.Nome"), rsStaff.getString("q1.Cognome"));
+			convocati.add(staff);
+		}
+		return convocati;
+	}
+	
+	public static SimpleStringProperty getCodRuoloByCF(String CF) throws SQLException {
+		dbConnection();
+		String qPlayer = "SELECT CodRuoloGiocatore FROM giocatore WHERE CF='"+CF+"'";
+		String qManager = "SELECT CodRuoloDirigente FROM dirigente WHERE CF='"+CF+"'";
+		String qStaff = "SELECT CodRuoloStaff FROM staff WHERE CF='"+CF+"'";
+		ResultSet rsPlayer = stmt.executeQuery(qPlayer);
+		if(rsPlayer.next()) {
+			return new SimpleStringProperty(rsPlayer.getString("CodRuoloGiocatore"));
+		}
+		ResultSet rsManager = stmt.executeQuery(qManager);
+		if(rsManager.next()) {
+			return new SimpleStringProperty(rsManager.getString("CodRuoloDirigente"));
+		}
+		ResultSet rsStaff = stmt.executeQuery(qStaff);
+		if(rsStaff.next()) {
+			return new SimpleStringProperty(rsStaff.getString("CodRuoloStaff"));
+		}
+		return null;
+	}
+	
+	public static SimpleStringProperty getNomeCategoriaByCF(String CF) throws SQLException {
+		dbConnection();
+		String qPlayer = "SELECT q2.Nome FROM (SELECT CodCategoria FROM giocatore WHERE CF='"+CF+"') AS q1 INNER JOIN categoria AS q2 ON q1.CodCategoria = q2.IdCategoria";
+		String qStaff = "SELECT q2.Nome FROM (SELECT CodCategoria FROM staff WHERE CF='"+CF+"') AS q1 INNER JOIN categoria AS q2 ON q1.CodCategoria = q2.IdCategoria";
+		ResultSet rsPlayer = stmt.executeQuery(qPlayer);
+		if(rsPlayer.next()) {
+			return new SimpleStringProperty(rsPlayer.getString("q2.Nome"));
+		}
+		ResultSet rsStaff = stmt.executeQuery(qStaff);
+		if(rsStaff.next()) {
+			return new SimpleStringProperty(rsStaff.getString("q2.Nome"));
+		}
+		return new SimpleStringProperty("Dirigente");
 	}
 
 	public static Pair<Event, Optional<String>> getEvent(int id) throws SQLException {

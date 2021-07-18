@@ -73,7 +73,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="80.0" prefWidth="500.0" spacing="20.0">
                <children>
-                  <Button fx:id="showButton" mnemonicParsing="false" text="Visualizza Convocati" />
+                  <Button fx:id="showButton" mnemonicParsing="false" onAction="#showConvocati" text="Modifica Convocati" />
                </children>
             </HBox>
          </children>

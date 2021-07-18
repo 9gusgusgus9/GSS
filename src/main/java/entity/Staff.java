@@ -42,6 +42,10 @@ public class Staff extends Entity {
 		this.codRuolo = codRuolo;
 	}
 	
+	public Person getPersona() {
+		return this.person;
+	}
+	
 	public int getCodCategoria() {
 		return codCategoria;
 	}

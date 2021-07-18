@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ConveneToEventView">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="800.0" prefWidth="1500.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="160.0" prefWidth="1500.0">
+               <children>
+                  <Pane prefHeight="160.0" prefWidth="1500.0">
+                     <children>
+                        <HBox alignment="BOTTOM_CENTER" layoutY="112.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="1500.0">
+                           <children>
+                              <Label fx:id="event" text="Label">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Rectangle fx:id="color1" arcHeight="5.0" arcWidth="5.0" fill="#9c9c9ce5" height="29.0" layoutX="5.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="1490.0" />
+                        <Rectangle fx:id="color2" arcHeight="5.0" arcWidth="5.0" fill="#e4f267" height="29.0" layoutX="5.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="1490.0" />
+                        <Label fx:id="nameLabel" alignment="CENTER" layoutX="5.0" layoutY="50.0" prefHeight="62.0" prefWidth="1490.0" text="TEAM NAME">
+                           <font>
+                              <Font name="Bauhaus 93" size="54.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="logo" fitHeight="136.0" fitWidth="145.0" layoutX="37.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/default/stemma.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_CENTER" prefHeight="641.0" prefWidth="1500.0">
+               <children>
+                  <ScrollPane prefHeight="641.0" prefWidth="1501.0">
+                     <content>
+                        <TableView fx:id="gridConvene" prefHeight="641.0" prefWidth="1483.0">
+                          <columns>
+                            <TableColumn fx:id="nome" prefWidth="75.0" text="Nome" />
+                            <TableColumn fx:id="cognome" prefWidth="75.0" text="Cognome" />
+                              <TableColumn fx:id="codRuolo" prefWidth="75.0" text="Ruolo" />
+                              <TableColumn fx:id="codCategoria" prefWidth="75.0" text="Categoria" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

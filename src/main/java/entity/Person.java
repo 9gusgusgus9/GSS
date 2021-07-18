@@ -1,6 +1,11 @@
 package entity;
 
+import java.sql.SQLException;
+
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import utilities.DateTime;
+import utilities.Utilities;
 
 public class Person extends Entity{
 	public final static String TABLENAME="persona";
@@ -8,8 +13,8 @@ public class Person extends Entity{
 	public final static String COLUMNS="(CF, CodPagamento, Nome, Cognome, Data, Matricola_tesserino, CodSesso, CodPartitaIVA, CodImmagine)";
 	private String codiceFiscale;
 	private int codPagamento;
-	private String nome;
-	private String cognome;
+	private StringProperty nome;
+	private StringProperty cognome;
 	private DateTime data;
 	private String codSesso;
 	private int matricola;
@@ -19,8 +24,8 @@ public class Person extends Entity{
 	public Person(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
 			Immagine image) {
 		this.codiceFiscale = codiceFiscale;
-		this.nome = nome;
-		this.cognome = cognome;
+		this.nome = new SimpleStringProperty(nome);
+		this.cognome = new SimpleStringProperty(cognome);
 		this.data = data;
 		this.codPagamento = codPagamento;
 		this.codSesso = codSesso;
@@ -33,8 +38,8 @@ public class Person extends Entity{
 	public Person(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
 			Immagine image, int matricola) {
 		this.codiceFiscale = codiceFiscale;
-		this.nome = nome;
-		this.cognome = cognome;
+		this.nome = new SimpleStringProperty(nome);
+		this.cognome = new SimpleStringProperty(cognome);
 		this.data = data;
 		this.codPagamento = codPagamento;
 		this.codSesso = codSesso;
@@ -46,8 +51,8 @@ public class Person extends Entity{
 
 	public Person(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva) {
 		this.codiceFiscale = codiceFiscale;
-		this.nome = nome;
-		this.cognome = cognome;
+		this.nome = new SimpleStringProperty(nome);
+		this.cognome = new SimpleStringProperty(cognome);
 		this.data = data;
 		this.codPagamento = codPagamento;
 		this.codSesso = codSesso;
@@ -59,8 +64,8 @@ public class Person extends Entity{
 	public Person(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
 			int matricola) {
 		this.codiceFiscale = codiceFiscale;
-		this.nome = nome;
-		this.cognome = cognome;
+		this.nome = new SimpleStringProperty(nome);
+		this.cognome = new SimpleStringProperty(cognome);
 		this.data = data;
 		this.codPagamento = codPagamento;
 		this.codSesso = codSesso;
@@ -69,12 +74,26 @@ public class Person extends Entity{
 		this.codPartitaIva=codPartitaIva;
 	}
 	
+	public Person(String codiceFiscale, String nome, String cognome) {
+		this.codiceFiscale = codiceFiscale;
+		this.nome = new SimpleStringProperty(nome);
+		this.cognome = new SimpleStringProperty(cognome);
+	}
+	
 	public String getNome() {
-		return nome;
+		return nome.get();
 	}
 
 	public String getCognome() {
-		return cognome;
+		return cognome.get();
+	}
+	
+	public String getCodRuolo() throws SQLException {
+		return Utilities.getCodRuoloByCF(this.codiceFiscale).get();
+	}
+	
+	public String getCodCategoria() throws SQLException {
+		return Utilities.getNomeCategoriaByCF(this.codiceFiscale).get();
 	}
 
 	public DateTime getData() {
