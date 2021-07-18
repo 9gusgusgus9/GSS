@@ -24,9 +24,6 @@ public class ConveneToEventView extends ViewImpl{
 	Label nameLabel;
 	
 	@FXML
-	Button newEvento;
-	
-	@FXML
 	ImageView logo;
 	
 	@FXML
@@ -37,12 +34,6 @@ public class ConveneToEventView extends ViewImpl{
 	
 	@FXML
 	TableView<Person> gridConvene;
-	
-	@FXML
-	Button nextWeek;
-	
-	@FXML
-	Button previousWeek;
 	
 	@FXML
 	TableColumn<Person, String> nome;

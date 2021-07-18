@@ -132,15 +132,15 @@ public class SchedaGiocatoreView extends ViewImpl{
 			e.printStackTrace();
 		}
 		this.playerImage.setImage(player.getX());
-		this.nameText.setText(player.getY().getPerson().getNome());
-		this.surnameText.setText(player.getY().getPerson().getCognome());
+		this.nameText.setText(player.getY().getPersona().getNome());
+		this.surnameText.setText(player.getY().getPersona().getCognome());
 		this.cfText.setText((String) player.getY().getPrimaryKey());
 		this.certificatoText.setText(player.getY().getData_scadenza_certificato().getDate());
-		this.dataText.setText((String) player.getY().getPerson().getData().getDate());
-		this.sessoText.setText(player.getY().getPerson().getCodSesso());
+		this.dataText.setText((String) player.getY().getPersona().getData().getDate());
+		this.sessoText.setText(player.getY().getPersona().getCodSesso());
 		this.pesoText.setText(player.getY().getPeso());
 		this.altezzaText.setText(player.getY().getAltezza());
-		this.matricolaText.setText(Integer.toString(player.getY().getPerson().getMatricola()));
+		this.matricolaText.setText(Integer.toString(player.getY().getPersona().getMatricola()));
 		this.preferenza.setText(player.getY().getCodPreferenza());
 		this.ruolo.setText(player.getY().getCodRuolo());
 	}
