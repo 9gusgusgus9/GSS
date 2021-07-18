@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="pane" prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SchedaGiocatoreView">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="800.0" prefWidth="1500.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="241.0" prefWidth="1500.0">
+               <children>
+                  <Pane prefHeight="160.0" prefWidth="1500.0">
+                     <children>
+                        <Rectangle fx:id="color1" arcHeight="5.0" arcWidth="5.0" fill="#9c9c9ce5" height="29.0" layoutX="5.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="1490.0" />
+                        <Rectangle fx:id="color2" arcHeight="5.0" arcWidth="5.0" fill="#e4f267" height="29.0" layoutX="5.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="1490.0" />
+                        <Label fx:id="nameLabel" alignment="CENTER" layoutX="5.0" layoutY="50.0" prefHeight="62.0" prefWidth="1490.0" text="TEAM NAME">
+                           <font>
+                              <Font name="Bauhaus 93" size="54.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="logo" fitHeight="136.0" fitWidth="145.0" layoutX="37.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/default/user.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="634.0" layoutY="185.0" text="NOME CATEGORIA" underline="true">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="181.0" fitWidth="193.0" layoutX="1289.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <HBox prefHeight="141.0" prefWidth="1500.0">
+               <children>
+                  <Pane prefHeight="100.0" prefWidth="1501.0">
+                     <children>
+                        <Label layoutX="65.0" layoutY="55.0" prefHeight="30.0" prefWidth="67.0" text="Nome">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="nameText" editable="false" layoutX="147.0" layoutY="55.0" promptText="Inserisci Nome" />
+                        <Label layoutX="393.0" layoutY="55.0" prefHeight="30.0" prefWidth="92.0" text="Cognome">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="surnameText" editable="false" layoutX="490.0" layoutY="55.0" promptText="Inserisci Cognome" />
+                        <TextField fx:id="cfText" editable="false" layoutX="831.0" layoutY="55.0" promptText="Inserisci CF" />
+                        <Label layoutX="782.0" layoutY="55.0" prefHeight="30.0" prefWidth="28.0" text="CF">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="1084.0" layoutY="55.0" prefHeight="30.0" prefWidth="179.0" text="Scadenza certificato">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="certificatoText" editable="false" layoutX="1287.0" layoutY="55.0" promptText="InserisciData" />
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <HBox prefHeight="127.0" prefWidth="1500.0">
+               <children>
+                  <Pane prefHeight="100.0" prefWidth="1549.0">
+                     <children>
+                        <TextField fx:id="dataText" editable="false" layoutX="155.0" layoutY="35.0" promptText="Inserisci Data" />
+                        <Label layoutX="65.0" layoutY="35.0" prefHeight="30.0" prefWidth="67.0" text="Nato il">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="401.0" layoutY="35.0" prefHeight="30.0" prefWidth="65.0" text="Sesso">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="775.0" layoutY="35.0" prefHeight="30.0" prefWidth="42.0" text="Peso">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="pesoText" editable="false" layoutX="865.0" layoutY="35.0" prefHeight="31.0" prefWidth="119.0" promptText="Inserisci peso" />
+                        <Label layoutX="1076.0" layoutY="35.0" prefHeight="30.0" prefWidth="67.0" text="Altezza">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="altezzaText" editable="false" layoutX="1169.0" layoutY="35.0" prefHeight="31.0" prefWidth="122.0" promptText="Inserisci Altezza" />
+                        <TextField fx:id="pesoText11" editable="false" layoutX="466.0" layoutY="35.0" prefHeight="31.0" prefWidth="119.0" promptText="Inserisci sesso" />
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Pane prefHeight="100.0" prefWidth="1563.0">
+                     <children>
+                        <Label layoutX="32.0" layoutY="32.0" text="Matricola Tesserino">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="matricolaText" editable="false" layoutX="243.0" layoutY="32.0" promptText="Inserisci numero" />
+                        <Label layoutX="1053.0" layoutY="32.0" prefHeight="30.0" prefWidth="87.0" text="Ruolo">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="pesoText1" editable="false" layoutX="1141.0" layoutY="32.0" prefHeight="31.0" prefWidth="119.0" promptText="Inserisci ruolo" />
+                        <TextField fx:id="pesoText1111" editable="false" layoutX="706.0" layoutY="32.0" prefHeight="31.0" prefWidth="119.0" promptText="Inserisci preferenza" />
+                        <Label layoutX="594.0" layoutY="32.0" prefHeight="30.0" prefWidth="102.0" text="Preferenza">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <HBox prefHeight="192.0" prefWidth="1500.0">
+               <children>
+                  <Pane prefHeight="192.0" prefWidth="1515.0">
+                     <children>
+                        <Button fx:id="insertButton" layoutX="572.0" layoutY="78.0" mnemonicParsing="false" onKeyPressed="#insert" onMouseClicked="#insert" prefHeight="60.0" prefWidth="328.0" text="CHIUDI" />
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
