@@ -60,7 +60,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label layoutX="1084.0" layoutY="55.0" prefHeight="30.0" prefWidth="179.0" text="Scadenza certificato">
+                        <Label fx:id="scadenza" layoutX="1084.0" layoutY="55.0" prefHeight="30.0" prefWidth="179.0" text="Scadenza certificato">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -85,13 +85,13 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label layoutX="775.0" layoutY="35.0" prefHeight="30.0" prefWidth="42.0" text="Peso">
+                        <Label fx:id="peso" layoutX="775.0" layoutY="35.0" prefHeight="30.0" prefWidth="42.0" text="Peso">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
                         <TextField fx:id="pesoText" editable="false" layoutX="865.0" layoutY="35.0" prefHeight="31.0" prefWidth="119.0" promptText="Inserisci peso" />
-                        <Label layoutX="1076.0" layoutY="35.0" prefHeight="30.0" prefWidth="67.0" text="Altezza">
+                        <Label fx:id="altezza" layoutX="1076.0" layoutY="35.0" prefHeight="30.0" prefWidth="67.0" text="Altezza">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -119,7 +119,7 @@
                         </Label>
                         <TextField fx:id="ruolo" editable="false" layoutX="1141.0" layoutY="32.0" prefHeight="31.0" prefWidth="119.0" promptText="Inserisci ruolo" />
                         <TextField fx:id="preferenza" editable="false" layoutX="706.0" layoutY="32.0" prefHeight="31.0" prefWidth="119.0" promptText="Inserisci preferenza" />
-                        <Label layoutX="594.0" layoutY="32.0" prefHeight="30.0" prefWidth="102.0" text="Preferenza">
+                        <Label fx:id="preferenzaL" layoutX="594.0" layoutY="32.0" prefHeight="30.0" prefWidth="102.0" text="Preferenza">
                            <font>
                               <Font size="20.0" />
                            </font>

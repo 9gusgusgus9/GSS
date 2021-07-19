@@ -153,7 +153,7 @@ public class Person extends Entity{
 
 	@Override
 	public String getValues() {
-		return "('" + this.codiceFiscale + "', '" + this.codPagamento + "', '" + this.nome + "', '" + this.cognome + "', '" + this.data.getDate() + "', '" + this.matricola + "', '" + this.codSesso + "', '" + this.codPartitaIva + "', " + this.codImmagine + ")";
+		return "('" + this.codiceFiscale + "', '" + this.codPagamento + "', '" + this.nome.get() + "', '" + this.cognome.get() + "', '" + this.data.getDate() + "', '" + this.matricola + "', '" + this.codSesso + "', '" + this.codPartitaIva + "', " + this.codImmagine + ")";
 	}
 
 	@Override

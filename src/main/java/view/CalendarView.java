@@ -279,4 +279,5 @@ public class CalendarView extends ViewImpl{
 		this.color1.setFill(Color.valueOf(society.getY().getColor1()));
 		this.color2.setFill(Color.valueOf(society.getY().getColor2()));
 	}
+
 }
