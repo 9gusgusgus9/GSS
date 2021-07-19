@@ -260,7 +260,7 @@ public class CalendarView extends ViewImpl{
 		    return row ;
 		});
 	}
-	
+
 	private void setSociety() {
 		Pair<Image, Society> society = null;
 		try {
@@ -273,5 +273,9 @@ public class CalendarView extends ViewImpl{
 		this.nameLabel.setText(society.getY().getNome());
 		this.color1.setFill(Color.valueOf(society.getY().getColor1()));
 		this.color2.setFill(Color.valueOf(society.getY().getColor2()));
+	}
+
+	private void switchToInsertEvent() {
+		ViewSwitcher.getInstance().switchView(new Stage(), ViewType.INSERTEVENT);
 	}
 }

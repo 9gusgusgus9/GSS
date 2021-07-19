@@ -26,6 +26,7 @@ import entity.Entity;
 import entity.Event;
 import entity.Immagine;
 import entity.Payment;
+import entity.Person;
 import entity.Player;
 import entity.Manager;
 import entity.Staff;
@@ -474,5 +475,110 @@ public class Utilities {
 			event = new Event(new DateTime(rs.getString("Inizio")), new DateTime(rs.getString("Fine")), rs.getString("CodPartitaIVA"), rs.getString("CodCategoria"));
 		}
 		return new Pair(event, result);
+	}
+	
+	public static List<String> getCategoryCfFromCod(int codCategoria){
+		dbConnection();
+		List<String> out = new LinkedList();
+		String query = "SELECT CF FROM giocatore WHERE CodCategoria=" + codCategoria;
+		ResultSet rs = null;
+		try {
+			rs = stmt.executeQuery(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			while(rs.next()) {
+				out.add(rs.getString("CF"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		query = "SELECT CF FROM staff WHERE CodCategoria=" + codCategoria;
+		try {
+			rs = stmt.executeQuery(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			while(rs.next()) {
+				out.add(rs.getString("CF"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return out;
+	}
+	
+	public static void inviteFromCategory(int codEvento, int codCategoria) {
+		dbConnection();
+		List<String> convocati =  Utilities.getCategoryCfFromCod(codCategoria);
+		String query = "INSERT INTO convocazioni (CodEvento, CF, Presenza) VALUES ";
+		Iterator iter = convocati.iterator();
+		while(iter.hasNext()) {
+			query += "(" + codEvento + ", '" + iter.next() + "', false), ";
+		}
+		query = "" + query.subSequence(0, query.length() - 2);
+		try {
+			stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public List<Pair<Person, String>> getPeople(){
+		List<Pair<Person,String>> out = new LinkedList<>();
+		dbConnection();
+		String query = "SELECT CF, Nome, Cognome FROM persona ORDER BY Cognome DESC";
+		ResultSet rs = null;
+		try {
+			rs = stmt.executeQuery(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			while(rs.next()) {
+				//out.add(new Pair<>());
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return out;
+	}
+	
+	public String getMansion(String cf) {
+		dbConnection();
+		String query = "SELECT c.Nome FROM giocatore AS g INNER JOIN categoria AS c ON g.CodCategoria = c.IdCategoria WHERE g.CF='" + cf + "'";
+		ResultSet rs = null;
+		try {
+			rs = stmt.executeQuery(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			if(rs.next()) {
+				return "Giocatore (" + rs.getString("c.Nome") + ")";
+			} else {
+				query = "SELECT c.Nome FROM staff AS s INNER JOIN categoria AS c ON s.CodCategoria = c.IdCategoria WHERE s.CF='" + cf + "'";
+				rs = stmt.executeQuery(query);
+				if(rs.next()) {
+					return "Staff (" + rs.getString("c.Nome") + ")";
+				} else {
+					return "Dirigente";
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
 	}
 }
