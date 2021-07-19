@@ -47,7 +47,7 @@ public class Utilities {
 	
 	private static Connection conn;
 	private static Statement stmt;
-	private static String password = "Gu$tavo191199";
+	private static String password = null;
 	static {
 
 	}
@@ -598,7 +598,7 @@ public class Utilities {
 		return out;
 	}
 	
-	public static SimpleStringProperty getMansionByCF(String cf) {
+	public static SimpleStringProperty getMansionAndCategoryByCF(String cf) {
 		dbConnection();
 		String query = "SELECT c.Nome FROM giocatore AS g INNER JOIN categoria AS c ON g.CodCategoria = c.IdCategoria WHERE g.CF='" + cf + "'";
 		ResultSet rs = null;
@@ -627,6 +627,35 @@ public class Utilities {
 			e.printStackTrace();
 		}
 		return new SimpleStringProperty("");
+	}
+	
+	public static String getMansionByCF(String cf) {
+		dbConnection();
+		String query = "SELECT * FROM giocatore WHERE CF='" + cf + "'";
+		ResultSet rs = null;
+		try {
+			rs = stmt.executeQuery(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			if(rs.next()) {
+				return "Giocatore";
+			} else {
+				query = "SELECT * FROM staff WHERE CF='" + cf + "'";
+				rs = stmt.executeQuery(query);
+				if(rs.next()) {
+					return "Staff";
+				} else {
+					return "Dirigente";
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
 	}
 	
 	public static String getTypePerson(String cf) throws SQLException {

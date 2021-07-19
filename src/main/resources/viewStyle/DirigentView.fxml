@@ -47,9 +47,9 @@
                <children>
                   <TableView fx:id="tableView" layoutX="35.0" layoutY="41.0" prefHeight="500.0" prefWidth="1454.0">
                     <columns>
-                      <TableColumn fx:id="columnCF" prefWidth="423.3333435058594" text="CF" />
-                        <TableColumn fx:id="columnName" minWidth="0.0" prefWidth="552.3333129882812" text="NOME" />
-                        <TableColumn fx:id="columnRuolo" minWidth="0.0" prefWidth="478.66668701171875" text="RUOLO" />
+                      <TableColumn fx:id="cognome" prefWidth="423.3333435058594" text="COGNOME" />
+                        <TableColumn fx:id="nome" minWidth="0.0" prefWidth="552.3333129882812" text="NOME" />
+                        <TableColumn fx:id="codRuolo" minWidth="0.0" prefWidth="478.66668701171875" text="RUOLO" />
                     </columns>
                   </TableView>
                </children>

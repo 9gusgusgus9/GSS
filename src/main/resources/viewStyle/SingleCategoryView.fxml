@@ -52,11 +52,11 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <TableView layoutX="35.0" layoutY="55.0" prefHeight="486.0" prefWidth="683.0">
+                        <TableView fx:id="tableView" layoutX="35.0" layoutY="55.0" prefHeight="486.0" prefWidth="683.0">
                           <columns>
-                            <TableColumn prefWidth="227.0" text="CF" />
-                              <TableColumn prefWidth="227.0" text="NOME" />
-                              <TableColumn prefWidth="227.0" text="RUOLO" />
+                            <TableColumn fx:id="nome" prefWidth="227.0" text="NOME" />
+                              <TableColumn fx:id="cognome" prefWidth="227.0" text="COGNOME" />
+                              <TableColumn fx:id="codRuolo" prefWidth="227.0" text="RUOLO" />
                           </columns>
                         </TableView>
                      </children>
@@ -74,9 +74,9 @@
                         </Label>
                         <TableView layoutX="35.0" layoutY="55.0" prefHeight="486.0" prefWidth="683.0">
                            <columns>
-                              <TableColumn prefWidth="227.0" text="CF" />
-                              <TableColumn prefWidth="227.0" text="NOME" />
-                              <TableColumn prefWidth="227.0" text="RUOLO" />
+                              <TableColumn fx:id="nomeStaff" prefWidth="227.0" text="NOME" />
+                              <TableColumn fx:id="cognomeStaff" prefWidth="227.0" text="COGNOME" />
+                              <TableColumn fx:id="codRuoloStaff" prefWidth="227.0" text="RUOLO" />
                            </columns>
                         </TableView>
                      </children>

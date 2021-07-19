@@ -40,22 +40,22 @@ public class SingleCategoryView extends ViewImpl{
     private TableView<Person> tableView;
 
     @FXML
-    private TableColumn<Person, String> columnCFPlayer;
+    private TableColumn<Person, String> nome;
     
     @FXML
-    private TableColumn<Person, String> columnNamePlayer;
+    private TableColumn<Person, String> cognome;
 
     @FXML
-    private TableColumn<Person, String> columnRuoloPlayer;
+    private TableColumn<Person, String> codRuolo;
 	
     @FXML
-    private TableColumn<Person, String> columnCFStaff;
+    private TableColumn<Person, String> nomeStaff;
     
     @FXML
-    private TableColumn<Person, String> columnNameStaff;
+    private TableColumn<Person, String> cognomeStaff;
 
     @FXML
-    private TableColumn<Person, String> columnRuoloStaff;
+    private TableColumn<Person, String> codRuoloStaff;
 	
     @FXML
     private Label categoria;
@@ -70,6 +70,7 @@ public class SingleCategoryView extends ViewImpl{
 	public void init() {
 		this.setSociety();
 		this.setCategory();
+		this.populateTable();
 	}
 	
 	public void switchToInsertPlayer() {
@@ -108,4 +109,7 @@ public class SingleCategoryView extends ViewImpl{
 		}
 	}
 	
+	private void populateTable() {
+		
+	}
 }

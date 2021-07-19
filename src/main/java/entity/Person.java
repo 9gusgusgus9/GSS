@@ -100,7 +100,7 @@ public class Person extends Entity{
 	}
 
 	public String getMansione() throws SQLException {
-		return Utilities.getMansionByCF(this.codiceFiscale).get() + "(" + this.getCodRuolo() + ")";
+		return Utilities.getMansionAndCategoryByCF(this.codiceFiscale).get() + "(" + this.getCodRuolo() + ")";
 	}
 	
 	public String getCf() {
