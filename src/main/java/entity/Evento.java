@@ -14,7 +14,7 @@ import utilities.DateTime;
 import utilities.Pair;
 import utilities.Utilities;
 
-public class Event extends Entity {
+public class Evento extends Entity {
 	public final static String TABLENAME="evento";
 	private final static String MATCH_COLUMN="(Inizio, Fine, CodPartitaIva, NomeAvversario, Risultato, CodCategoria)";
 	private final static String TRAINING_COLUMN="(Inizio, Fine, CodPartitaIva, CodCategoria)";
@@ -35,7 +35,7 @@ public class Event extends Entity {
 	private String tipoEvento;
 	
 	//EVENTO GENERICO
-	public Event(DateTime inizio, DateTime fine, String codPartitaIva, String descrizione){
+	public Evento(DateTime inizio, DateTime fine, String codPartitaIva, String descrizione){
 		this.inizio=inizio;
 		this.fine=fine;
 		this.codPartitaIva=codPartitaIva;
@@ -45,7 +45,7 @@ public class Event extends Entity {
 	}
 	
 	//PARTITA
-	public Event(DateTime inizio, DateTime fine, String codPartitaIva, String avversario, int codiceCategoria){
+	public Evento(DateTime inizio, DateTime fine, String codPartitaIva, String avversario, int codiceCategoria){
 		this.inizio=inizio;
 		this.fine=fine;
 		this.codPartitaIva=codPartitaIva;
@@ -61,7 +61,7 @@ public class Event extends Entity {
 	}
 	
 	//ALLENAMENTO
-	public Event(DateTime inizio, DateTime fine, String codPartitaIva, int codCategoria){
+	public Evento(DateTime inizio, DateTime fine, String codPartitaIva, int codCategoria){
 		this.inizio=inizio;
 		this.fine=fine;
 		this.codPartitaIva=codPartitaIva;
@@ -80,7 +80,7 @@ public class Event extends Entity {
 	
 	@Override
 	public String getTableName() {
-		return Event.TABLENAME;
+		return Evento.TABLENAME;
 	}
 
 	@Override
@@ -91,11 +91,11 @@ public class Event extends Entity {
 	@Override
 	public String getColumnList() {
 		if (this.codCategoria == 0) {
-			return Event.EVENT_COLUMN;
+			return Evento.EVENT_COLUMN;
 		} else if (this.nomeAvversario != null) {
-			return Event.MATCH_COLUMN;
+			return Evento.MATCH_COLUMN;
 		} else {
-			return Event.TRAINING_COLUMN;
+			return Evento.TRAINING_COLUMN;
 		}
 	}
 

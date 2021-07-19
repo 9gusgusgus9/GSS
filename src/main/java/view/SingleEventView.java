@@ -3,7 +3,7 @@ package view;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import entity.Event;
+import entity.Evento;
 import entity.Society;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -55,7 +55,7 @@ public class SingleEventView extends ViewImpl{
 	@FXML
 	Button showButton;
 	
-	private Event e;
+	private Evento e;
 
 	@Override
 	public void init() {

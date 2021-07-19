@@ -29,6 +29,7 @@ public enum ViewType {
 	INSERTSTAFF("InsertStaffView", new StartViewController()),
 	SCHEDAGIOCATORE("SchedaGiocatoreView", new StartViewController()),
 	INSERTEVENT("InsertEventView", new StartViewController()),
+	CONVOCATIONS("Convocations", new StartViewController()),
 	INSERTDIRIGENT("InsertDirigentView", new StartViewController());
 	
 

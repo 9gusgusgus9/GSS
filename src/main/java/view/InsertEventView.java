@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 import entity.Category;
-import entity.Event;
+import entity.Evento;
 import entity.Society;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -24,6 +24,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import utilities.DateTime;
 import utilities.Pair;
@@ -178,7 +179,7 @@ public class InsertEventView extends ViewImpl {
 			}
 			if (this.flag) {
 				try {
-					Event event = new Event(
+					Evento event = new Evento(
 							new DateTime(this.inizio.getValue().getYear(), this.inizio.getValue().getMonthValue(),
 									this.inizio.getValue().getDayOfMonth()),
 							new DateTime(this.fine.getValue().getYear(), this.fine.getValue().getMonthValue(),
@@ -186,6 +187,7 @@ public class InsertEventView extends ViewImpl {
 							Utilities.getSociety().getY().getPrimaryKey(), this.nomeAvv.getText(),
 							this.categoria.getValue().getY());
 					event.insert();
+					Utilities.setEvent(event);
 					Utilities.inviteFromCategory((int) event.getPrimaryKey(), this.categoria.getValue().getY());
 					getStage().close();
 				} catch (SQLException | IOException e) {
@@ -202,7 +204,7 @@ public class InsertEventView extends ViewImpl {
 			}
 			if (this.flag) {
 				try {
-					Event event = new Event(
+					Evento event = new Evento(
 							new DateTime(this.inizio.getValue().getYear(), this.inizio.getValue().getMonthValue(),
 									this.inizio.getValue().getDayOfMonth()),
 							new DateTime(this.fine.getValue().getYear(), this.fine.getValue().getMonthValue(),
@@ -210,6 +212,7 @@ public class InsertEventView extends ViewImpl {
 							Utilities.getSociety().getY().getPrimaryKey(),
 							this.categoria.getValue().getY());
 					event.insert();
+					Utilities.setEvent(event);
 					Utilities.inviteFromCategory((int) event.getPrimaryKey(), this.categoria.getValue().getY());
 					getStage().close();
 				} catch (SQLException | IOException e) {
@@ -226,14 +229,16 @@ public class InsertEventView extends ViewImpl {
 			}
 			if (this.flag) {
 				try {
-					Event event = new Event(
+					Evento event = new Evento(
 							new DateTime(this.inizio.getValue().getYear(), this.inizio.getValue().getMonthValue(),
 									this.inizio.getValue().getDayOfMonth()),
 							new DateTime(this.fine.getValue().getYear(), this.fine.getValue().getMonthValue(),
 									this.fine.getValue().getDayOfMonth()),
 							Utilities.getSociety().getY().getPrimaryKey(), this.descrizione.getText());
 					event.insert();
+					Utilities.setEvent(event);
 					getStage().close();
+					ViewSwitcher.getInstance().switchView(new Stage(), ViewType.CONVOCATIONS);
 				} catch (SQLException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

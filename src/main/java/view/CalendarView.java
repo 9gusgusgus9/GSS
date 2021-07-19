@@ -3,7 +3,7 @@ package view;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
-import entity.Event;
+import entity.Evento;
 import entity.Society;
 
 import static java.time.temporal.TemporalAdjusters.previousOrSame;
@@ -51,25 +51,25 @@ public class CalendarView extends ViewImpl{
 	Rectangle color2;
 	
 	@FXML
-	TableView<Event> lunedi;
+	TableView<Evento> lunedi;
 	
 	@FXML
-	TableView<Event> martedi;
+	TableView<Evento> martedi;
 	
 	@FXML
-	TableView<Event> mercoledi;
+	TableView<Evento> mercoledi;
 	
 	@FXML
-	TableView<Event> giovedi;
+	TableView<Evento> giovedi;
 	
 	@FXML
-	TableView<Event> venerdi;
+	TableView<Evento> venerdi;
 	
 	@FXML
-	TableView<Event> sabato;
+	TableView<Evento> sabato;
 	
 	@FXML
-	TableView<Event> domenica;
+	TableView<Evento> domenica;
 	
 	@FXML
 	Label actualWeek;
@@ -81,25 +81,25 @@ public class CalendarView extends ViewImpl{
 	Button previousWeek;
 	
 	@FXML
-	TableColumn<Event, String> lun;
+	TableColumn<Evento, String> lun;
 	
 	@FXML
-	TableColumn<Event, String> mar;
+	TableColumn<Evento, String> mar;
 	
 	@FXML
-	TableColumn<Event, String> mer;
+	TableColumn<Evento, String> mer;
 	
 	@FXML
-	TableColumn<Event, String> giov;
+	TableColumn<Evento, String> giov;
 	
 	@FXML
-	TableColumn<Event, String> ven;
+	TableColumn<Evento, String> ven;
 	
 	@FXML
-	TableColumn<Event, String> sab;
+	TableColumn<Evento, String> sab;
 	
 	@FXML
-	TableColumn<Event, String> dom;
+	TableColumn<Evento, String> dom;
 	
 	@Override
 	public void init(){
@@ -123,7 +123,7 @@ public class CalendarView extends ViewImpl{
 		this.setEventOnDay();
 	}
 	
-	private DayOfWeek getDayOfWeek(Event e) {
+	private DayOfWeek getDayOfWeek(Evento e) {
 	    LocalDate localDate = LocalDate.of(e.getInizio().getAnno(), e.getInizio().getMese(), e.getInizio().getGiorno());
 	    DayOfWeek dayOfWeek = localDate.getDayOfWeek();
 		return dayOfWeek;
@@ -141,29 +141,29 @@ public class CalendarView extends ViewImpl{
 	private void setEventOnDay() {
     	try {
     		this.setOnChangeWeek();
-    		for(Event e : Utilities.getEvents(new DateTime(this.first.getYear(), this.first.getMonthValue(), this.first.getDayOfMonth()), new DateTime(this.last.getYear(), this.last.getMonthValue(), this.last.getDayOfMonth()))) {
+    		for(Evento e : Utilities.getEvents(new DateTime(this.first.getYear(), this.first.getMonthValue(), this.first.getDayOfMonth()), new DateTime(this.last.getYear(), this.last.getMonthValue(), this.last.getDayOfMonth()))) {
 				DayOfWeek day = this.getDayOfWeek(e);
 				if (day == DayOfWeek.MONDAY) {
 					lunedi.setItems(FXCollections.observableArrayList(e));
-					lun.setCellValueFactory(new PropertyValueFactory<Event, String>("event"));
+					lun.setCellValueFactory(new PropertyValueFactory<Evento, String>("event"));
 				} else if (day == DayOfWeek.TUESDAY) {
 					martedi.setItems(FXCollections.observableArrayList(e));
-					mar.setCellValueFactory(new PropertyValueFactory<Event, String>("event"));
+					mar.setCellValueFactory(new PropertyValueFactory<Evento, String>("event"));
 				} else if (day == DayOfWeek.WEDNESDAY) {
 					mercoledi.setItems(FXCollections.observableArrayList(e));
-					mer.setCellValueFactory(new PropertyValueFactory<Event, String>("event"));
+					mer.setCellValueFactory(new PropertyValueFactory<Evento, String>("event"));
 				} else if (day == DayOfWeek.THURSDAY) {
 					giovedi.setItems(FXCollections.observableArrayList(e));
-					giov.setCellValueFactory(new PropertyValueFactory<Event, String>("event"));
+					giov.setCellValueFactory(new PropertyValueFactory<Evento, String>("event"));
 				} else if (day == DayOfWeek.FRIDAY) {
 					venerdi.setItems(FXCollections.observableArrayList(e));
-					ven.setCellValueFactory(new PropertyValueFactory<Event, String>("event"));
+					ven.setCellValueFactory(new PropertyValueFactory<Evento, String>("event"));
 				} else if (day == DayOfWeek.SATURDAY) {
 					sabato.setItems(FXCollections.observableArrayList(e));
-					sab.setCellValueFactory(new PropertyValueFactory<Event, String>("event"));
+					sab.setCellValueFactory(new PropertyValueFactory<Evento, String>("event"));
 				} else {
 					domenica.setItems(FXCollections.observableArrayList(e));
-					dom.setCellValueFactory(new PropertyValueFactory<Event, String>("event"));
+					dom.setCellValueFactory(new PropertyValueFactory<Evento, String>("event"));
 				}
     		}
 		} catch (SQLException e) {
@@ -184,7 +184,7 @@ public class CalendarView extends ViewImpl{
 	
 	private void setOnMouseClick() {
 		lunedi.setRowFactory( tv -> {
-		    TableRow<Event> row = new TableRow<>();
+		    TableRow<Evento> row = new TableRow<>();
 		    row.setOnMouseClicked(event -> {
 		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
 		            Utilities.setEvent(row.getItem());
@@ -195,7 +195,7 @@ public class CalendarView extends ViewImpl{
 		});
 		
 		martedi.setRowFactory( tv -> {
-		    TableRow<Event> row = new TableRow<>();
+		    TableRow<Evento> row = new TableRow<>();
 		    row.setOnMouseClicked(event -> {
 		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
 		            Utilities.setEvent(row.getItem());
@@ -206,7 +206,7 @@ public class CalendarView extends ViewImpl{
 		});
 		
 		mercoledi.setRowFactory( tv -> {
-		    TableRow<Event> row = new TableRow<>();
+		    TableRow<Evento> row = new TableRow<>();
 		    row.setOnMouseClicked(event -> {
 		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
 		            Utilities.setEvent(row.getItem());
@@ -217,7 +217,7 @@ public class CalendarView extends ViewImpl{
 		});
 		
 		giovedi.setRowFactory( tv -> {
-		    TableRow<Event> row = new TableRow<>();
+		    TableRow<Evento> row = new TableRow<>();
 		    row.setOnMouseClicked(event -> {
 		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
 		            Utilities.setEvent(row.getItem());
@@ -228,7 +228,7 @@ public class CalendarView extends ViewImpl{
 		});
 		
 		venerdi.setRowFactory( tv -> {
-		    TableRow<Event> row = new TableRow<>();
+		    TableRow<Evento> row = new TableRow<>();
 		    row.setOnMouseClicked(event -> {
 		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
 		            Utilities.setEvent(row.getItem());
@@ -239,7 +239,7 @@ public class CalendarView extends ViewImpl{
 		});
 		
 		sabato.setRowFactory( tv -> {
-		    TableRow<Event> row = new TableRow<>();
+		    TableRow<Evento> row = new TableRow<>();
 		    row.setOnMouseClicked(event -> {
 		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
 		            Utilities.setEvent(row.getItem());
@@ -250,7 +250,7 @@ public class CalendarView extends ViewImpl{
 		});
 		
 		domenica.setRowFactory( tv -> {
-		    TableRow<Event> row = new TableRow<>();
+		    TableRow<Evento> row = new TableRow<>();
 		    row.setOnMouseClicked(event -> {
 		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
 		            Utilities.setEvent(row.getItem());

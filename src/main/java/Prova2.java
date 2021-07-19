@@ -8,7 +8,7 @@ import java.net.URL;
 import java.sql.SQLException;
 
 import entity.Category;
-import entity.Event;
+import entity.Evento;
 import entity.Finanze;
 import entity.Immagine;
 import entity.Manager;

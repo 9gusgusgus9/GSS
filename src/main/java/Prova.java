@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entity.Category;
-import entity.Event;
+import entity.Evento;
 import entity.Finanze;
 import entity.Immagine;
 import entity.Manager;
@@ -36,9 +36,9 @@ public class Prova {
 //		rick.insert();
 		Category allievi = new Category("pulcini", partitaIVA);
 		allievi.insert();
-		Event allenamento = new Event(new DateTime(2021, 7, 16), new DateTime(2021, 7, 16), partitaIVA, (int)allievi.getPrimaryKey());
-		Event generico = new Event(new DateTime(2021, 7, 21), new DateTime(2021, 7, 21), partitaIVA,"Cena di squadra");
-		Event partita = new Event(new DateTime(2021, 7, 18), new DateTime(2021, 7, 18), partitaIVA, "Bubano",(int) allievi.getPrimaryKey());
+		Evento allenamento = new Evento(new DateTime(2021, 7, 16), new DateTime(2021, 7, 16), partitaIVA, (int)allievi.getPrimaryKey());
+		Evento generico = new Evento(new DateTime(2021, 7, 21), new DateTime(2021, 7, 21), partitaIVA,"Cena di squadra");
+		Evento partita = new Evento(new DateTime(2021, 7, 18), new DateTime(2021, 7, 18), partitaIVA, "Bubano",(int) allievi.getPrimaryKey());
 		partita.setRisultato("0-1");
 		Payment pagamento = new Payment(1000, false, Finanze.QUOTA);
 		pagamento.insert();

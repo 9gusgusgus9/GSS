@@ -2,6 +2,8 @@ package entity;
 
 import java.sql.SQLException;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import utilities.DateTime;
@@ -20,6 +22,7 @@ public class Person extends Entity{
 	private int matricola;
 	private int codImmagine;
 	private String codPartitaIva;
+	private BooleanProperty invite = new SimpleBooleanProperty(false);
 		
 	public Person(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
 			Immagine image) {
@@ -96,6 +99,22 @@ public class Person extends Entity{
 		return Utilities.getNomeCategoriaByCF(this.codiceFiscale).get();
 	}
 
+	public String getMansione() throws SQLException {
+		return Utilities.getMansionByCF(this.codiceFiscale).get() + "(" + this.getCodRuolo() + ")";
+	}
+	
+	public String getCf() {
+		return this.codiceFiscale;
+	}
+	
+	public BooleanProperty getInvite() {
+		return this.invite;
+	}
+	
+	public void setInvite(boolean val) {
+		this.invite.set(val);
+	}
+	
 	public DateTime getData() {
 		return data;
 	}
