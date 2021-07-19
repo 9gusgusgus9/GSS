@@ -55,6 +55,9 @@ public class SingleEventView extends ViewImpl{
 	@FXML
 	Button showButton;
 	
+	@FXML
+	Button deleteEvent;
+	
 	private Evento e;
 
 	@Override
@@ -64,6 +67,7 @@ public class SingleEventView extends ViewImpl{
 		dataInizio.setText(Utilities.getEvent().getInizio().getDate());
 		dataFine.setText(Utilities.getEvent().getFine().getDate());
 		nomeEvento.setText(Utilities.getEvent().getEvent());
+		deleteEvent.setStyle("-fx-background-color: Red");
 		if (e.getTipoEvento() == "Partita") {
 			setRisultato.setText(e.getRisultato());
 		}else if (e.getTipoEvento() == "Allenamento") {
@@ -85,13 +89,23 @@ public class SingleEventView extends ViewImpl{
 		try {
 			society = Utilities.getSociety();
 		} catch (SQLException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		this.logo.setImage(society.getX());
 		this.nameLabel.setText(society.getY().getNome());
 		this.color1.setFill(Color.valueOf(society.getY().getColor1()));
 		this.color2.setFill(Color.valueOf(society.getY().getColor2()));
+	}
+	
+	@FXML
+	private void deleteEvent() {
+		try {
+			Utilities.deleteConvocazioni((int)e.getPrimaryKey());
+			Utilities.deleteEntity(e);
+			getStage().close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -74,6 +74,7 @@
             <HBox alignment="CENTER" prefHeight="80.0" prefWidth="500.0" spacing="20.0">
                <children>
                   <Button fx:id="showButton" mnemonicParsing="false" onAction="#showConvocati" text="Modifica Convocati" />
+                  <Button fx:id="deleteEvent" mnemonicParsing="false" onAction="#deleteEvent" text="Delete" textFill="#0a0a0a" />
                </children>
             </HBox>
          </children>

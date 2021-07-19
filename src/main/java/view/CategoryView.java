@@ -220,6 +220,9 @@ public class CategoryView extends ViewImpl {
 	
 	@FXML
 	TableColumn<Event, String> dom;
+	
+	@FXML 
+	Button refresh;
 
 	private LocalDate first;
 	private LocalDate last;
@@ -479,7 +482,9 @@ public class CategoryView extends ViewImpl {
 	
 	@FXML
 	private void insertNew() {
-		ViewSwitcher.getInstance().switchView(new Stage(), ViewType.INSERTCATEGORY);
+		Stage stage = new Stage();
+		ViewSwitcher.getInstance().switchView(stage, ViewType.INSERTCATEGORY);
+		
 	}
 	
 
@@ -639,6 +644,11 @@ public class CategoryView extends ViewImpl {
 	@FXML
 	private void switchToInsertEvent() {
 		ViewSwitcher.getInstance().switchView(new Stage(), ViewType.INSERTEVENT);
+	}
+	
+	@FXML
+	private void refreshStage() {
+		init();
 	}
 
 }

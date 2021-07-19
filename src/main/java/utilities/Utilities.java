@@ -678,4 +678,14 @@ public class Utilities {
 		return null;
 		
 	}
+	
+	public static void deleteConvocazioni(int codEvento) {
+		dbConnection();
+		String query = "DELETE FROM convocazioni WHERE CodEvento="+codEvento;
+		try {
+			stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
