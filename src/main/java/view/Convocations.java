@@ -99,7 +99,7 @@ public class Convocations extends ViewImpl {
 		nome.setCellValueFactory(new PropertyValueFactory<Person, String>("nome"));
 		cognome.setCellValueFactory(new PropertyValueFactory<Person, String>("cognome"));
 		cf.setCellValueFactory(new PropertyValueFactory<Person, String>("cf"));
-		mansione.setCellValueFactory(new PropertyValueFactory<Person, String>("mansione"));
+		mansione.setCellValueFactory(new PropertyValueFactory<Person, String>("mansionee"));
 	}
 	
 	@FXML

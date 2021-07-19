@@ -33,56 +33,63 @@
                   </Pane>
                </children>
             </HBox>
-            <Pane prefHeight="60.0" prefWidth="1500.0">
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1500.0">
                <children>
-                  <Label fx:id="categoria" layoutX="69.0" layoutY="14.0" prefHeight="41.0" prefWidth="392.0" text="NOME CATEGORIA" underline="true">
-                     <font>
-                        <Font name="Georgia" size="36.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <SplitPane dividerPositions="0.5" prefHeight="560.0" prefWidth="1500.0">
-              <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="560.0" prefWidth="750.0">
+                  <Pane prefHeight="60.0" prefWidth="1500.0">
                      <children>
-                        <Button fx:id="addPlayer" layoutX="600.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#switchToInsertPlayer" prefHeight="40.0" prefWidth="141.0" text="Inserisci Giocatore" />
-                        <Label layoutX="37.0" layoutY="2.0" prefHeight="40.0" prefWidth="141.0" text="PLAYERS" underline="true">
+                        <Label fx:id="categoria" layoutX="69.0" layoutY="14.0" prefHeight="41.0" prefWidth="392.0" text="NOME CATEGORIA" underline="true">
                            <font>
-                              <Font size="24.0" />
+                              <Font name="Georgia" size="36.0" />
                            </font>
                         </Label>
-                        <TableView layoutX="35.0" layoutY="55.0" prefHeight="486.0" prefWidth="683.0">
-                          <columns>
-                            <TableColumn prefWidth="227.0" text="CF" />
-                              <TableColumn prefWidth="227.0" text="NOME" />
-                              <TableColumn prefWidth="227.0" text="RUOLO" />
-                          </columns>
-                        </TableView>
                      </children>
+                  </Pane>
+                  <SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1500.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="560.0" prefWidth="740.0">
+                           <children>
+                              <Button fx:id="addPlayer" layoutX="600.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#switchToInsertPlayer" prefHeight="40.0" prefWidth="141.0" text="Inserisci Giocatore" />
+                              <Label layoutX="37.0" layoutY="2.0" prefHeight="40.0" prefWidth="141.0" text="PLAYERS" underline="true">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <TableView fx:id="giocatore" layoutX="35.0" layoutY="55.0" prefHeight="486.0" prefWidth="683.0">
+                                <columns>
+                                  <TableColumn fx:id="giocatoreCF" prefWidth="227.0" text="CF" />
+                                    <TableColumn fx:id="giocatoreNome" prefWidth="227.0" text="NOME" />
+                                    <TableColumn fx:id="giocatoreRuolo" prefWidth="227.0" text="RUOLO" />
+                                </columns>
+                              </TableView>
+                           </children>
+                           <rotationAxis>
+                              <Point3D />
+                           </rotationAxis>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="560.0" prefWidth="740.0">
+                           <children>
+                              <Button layoutX="600.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#switchToInsertStaff" prefHeight="40.0" prefWidth="141.0" text="Inserisci Staff" />
+                              <Label layoutX="36.0" layoutY="2.0" prefHeight="40.0" prefWidth="141.0" text="STAFF" underline="true">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <TableView fx:id="staff" layoutX="35.0" layoutY="55.0" prefHeight="486.0" prefWidth="683.0">
+                                 <columns>
+                                    <TableColumn fx:id="staffCF" prefWidth="227.0" text="CF" />
+                                    <TableColumn fx:id="staffNome" prefWidth="227.0" text="NOME" />
+                                    <TableColumn fx:id="staffRuolo" prefWidth="227.0" text="RUOLO" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                    </items>
                      <rotationAxis>
                         <Point3D />
                      </rotationAxis>
-                  </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="560.0" prefWidth="750.0">
-                     <children>
-                        <Button layoutX="600.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#switchToInsertStaff" prefHeight="40.0" prefWidth="141.0" text="Inserisci Staff" />
-                        <Label layoutX="36.0" layoutY="2.0" prefHeight="40.0" prefWidth="141.0" text="STAFF" underline="true">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <TableView layoutX="35.0" layoutY="55.0" prefHeight="486.0" prefWidth="683.0">
-                           <columns>
-                              <TableColumn prefWidth="227.0" text="CF" />
-                              <TableColumn prefWidth="227.0" text="NOME" />
-                              <TableColumn prefWidth="227.0" text="RUOLO" />
-                           </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-              </items>
-            </SplitPane>
+                  </SplitPane>
+               </children>
+            </VBox>
          </children>
       </VBox>
    </children>

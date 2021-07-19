@@ -99,8 +99,12 @@ public class Person extends Entity{
 		return Utilities.getNomeCategoriaByCF(this.codiceFiscale).get();
 	}
 
-	public String getMansione() throws SQLException {
-		return Utilities.getMansionByCF(this.codiceFiscale).get() + "(" + this.getCodRuolo() + ")";
+	public String getMansionee() throws SQLException {
+		return Utilities.getMansionAndCategoryByCF(this.codiceFiscale).get() + "(" + this.getCodRuolo() + ")";
+	}
+	
+	public String getMansione() {
+		return Utilities.getMansionByCF(getCf());
 	}
 	
 	public String getCf() {
@@ -153,7 +157,7 @@ public class Person extends Entity{
 
 	@Override
 	public String getValues() {
-		return "('" + this.codiceFiscale + "', '" + this.codPagamento + "', '" + this.nome + "', '" + this.cognome + "', '" + this.data.getDate() + "', '" + this.matricola + "', '" + this.codSesso + "', '" + this.codPartitaIva + "', " + this.codImmagine + ")";
+		return "('" + this.codiceFiscale + "', '" + this.codPagamento + "', '" + this.nome.get() + "', '" + this.cognome.get() + "', '" + this.data.getDate() + "', '" + this.matricola + "', '" + this.codSesso + "', '" + this.codPartitaIva + "', " + this.codImmagine + ")";
 	}
 
 	@Override

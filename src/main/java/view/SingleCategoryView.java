@@ -2,15 +2,19 @@ package view;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.stream.Collectors;
 
 import entity.Category;
 import entity.Person;
 import entity.Society;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -33,30 +37,31 @@ public class SingleCategoryView extends ViewImpl{
 
 	@FXML
 	private Rectangle color2;
-	
-    @FXML
-    private VBox vBoxTable;
-    @FXML
-    private TableView<Person> tableView;
-
-    @FXML
-    private TableColumn<Person, String> columnCFPlayer;
     
     @FXML
-    private TableColumn<Person, String> columnNamePlayer;
+    private TableView<Person> giocatore;
 
     @FXML
-    private TableColumn<Person, String> columnRuoloPlayer;
-	
-    @FXML
-    private TableColumn<Person, String> columnCFStaff;
+    private TableColumn<Person, String> giocatoreCF;
     
     @FXML
-    private TableColumn<Person, String> columnNameStaff;
+    private TableColumn<Person, String> giocatoreNome;
 
     @FXML
-    private TableColumn<Person, String> columnRuoloStaff;
-	
+    private TableColumn<Person, String> giocatoreRuolo;
+    
+    @FXML
+    private TableView<Person> staff;
+
+    @FXML
+    private TableColumn<Person, String> staffCF;
+    
+    @FXML
+    private TableColumn<Person, String> staffNome;
+
+    @FXML
+    private TableColumn<Person, String> staffRuolo;
+		
     @FXML
     private Label categoria;
     
@@ -70,6 +75,7 @@ public class SingleCategoryView extends ViewImpl{
 	public void init() {
 		this.setSociety();
 		this.setCategory();
+		this.loadPlayerAndStaff();
 	}
 	
 	public void switchToInsertPlayer() {
@@ -108,4 +114,28 @@ public class SingleCategoryView extends ViewImpl{
 		}
 	}
 	
+	private void loadPlayerAndStaff() {
+		ObservableList<Person> list = Utilities.getAllPeople();
+		giocatore.setItems(FXCollections.observableArrayList(list.stream().filter(p -> {
+			if(Utilities.getMansionByCF(p.getCf()).equals("Giocatore")) {
+				return true;
+			}else {
+				return false;
+			}
+		}).collect(Collectors.toList())));
+		staff.setItems(FXCollections.observableArrayList(list.stream().filter(p -> {
+			if(Utilities.getMansionByCF(p.getCf()).equals("Staff")) {
+				return true;
+			}else {
+				return false;
+			}
+		}).collect(Collectors.toList())));
+		giocatoreCF.setCellValueFactory(new PropertyValueFactory<Person, String>("cf"));
+		giocatoreNome.setCellValueFactory(new PropertyValueFactory<Person, String>("nome"));
+		giocatoreRuolo.setCellValueFactory(new PropertyValueFactory<Person, String>("codRuolo"));
+
+		staffCF.setCellValueFactory(new PropertyValueFactory<Person, String>("cf"));
+		staffNome.setCellValueFactory(new PropertyValueFactory<Person, String>("nome"));
+		staffRuolo.setCellValueFactory(new PropertyValueFactory<Person, String>("codRuolo"));
+	}
 }
