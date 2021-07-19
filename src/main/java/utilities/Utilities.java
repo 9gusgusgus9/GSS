@@ -352,6 +352,53 @@ public class Utilities {
 		return player;
 	}
 	
+	public static Pair<Image,Manager> getDirigent(String cf) throws SQLException, IOException {
+		dbConnection();
+		String query = "SELECT * FROM dirigente WHERE CF='" + cf + "'";
+		ResultSet rs = stmt.executeQuery(query);
+		Manager out = null;
+		Image image = null;
+		String ruolo = null;
+		if(rs.next()) {
+			ruolo = rs.getString("CodRuoloDirigente");
+		}
+		String query1 = "SELECT * FROM persona WHERE CF="+cf;
+		ResultSet rs1 = stmt.executeQuery(query1);
+		if(rs1.next()) {
+			out = new Manager(cf, rs1.getString("Nome"), rs1.getString("Cognome"),new DateTime(rs1.getString("Data")), rs1.getInt("CodPagamento"),rs1.getString("CodSesso"), rs1.getString("CodPartitaIva"), rs1.getInt("Matricola_tesserino"), ruolo);
+			image = Utilities.getImage(rs1.getInt("CodImmagine"));
+		}
+		Pair<Image, Manager> manager = new Pair<>(image, out);
+		conn.close();
+		stmt.close();
+		return manager;
+	}
+
+	public static Pair<Image,Staff> getStaff(String cf) throws SQLException, IOException {
+		dbConnection();
+		String query = "SELECT * FROM staff WHERE CF='" + cf + "'";
+		ResultSet rs = stmt.executeQuery(query);
+		Staff out = null;
+		Image image = null;
+		int categoria = 0;
+		String ruolo = null;
+		if(rs.next()) {
+			ruolo = rs.getString("CodRuoloStaff");
+			categoria = rs.getInt("CodCategoria");
+		}
+		String query1 = "SELECT * FROM persona WHERE CF="+cf;
+		ResultSet rs1 = stmt.executeQuery(query1);
+		if(rs1.next()) {
+			out = new Staff(cf, rs1.getString("Nome"), rs1.getString("Cognome"),new DateTime(rs1.getString("Data")), rs1.getInt("CodPagamento"),rs1.getString("CodSesso"), rs1.getString("CodPartitaIva"), rs1.getInt("Matricola_tesserino"), ruolo, categoria);
+			image = Utilities.getImage(rs1.getInt("CodImmagine"));
+		}
+		Pair<Image, Staff> staff = new Pair<>(image, out);
+		conn.close();
+		stmt.close();
+		return staff;
+	}
+	
+	
 	public static void setCategoria(int id) {
 		idCategoria = id;
 	}
@@ -580,5 +627,26 @@ public class Utilities {
 			e.printStackTrace();
 		}
 		return "";
+	}
+	
+	public static String getTypePerson(String cf) throws SQLException {
+		dbConnection();
+		String qPlayer = "SELECT CodRuoloGiocatore FROM giocatore WHERE CF='"+cf+"'";
+		String qManager = "SELECT CodRuoloDirigente FROM dirigente WHERE CF='"+cf+"'";
+		String qStaff = "SELECT CodRuoloStaff FROM staff WHERE CF='"+cf+"'";
+		ResultSet rsPlayer = stmt.executeQuery(qPlayer);
+		if(rsPlayer.next()) {
+			return "giocatore";
+		}
+		ResultSet rsManager = stmt.executeQuery(qManager);
+		if(rsManager.next()) {
+			return "dirigente";
+		}
+		ResultSet rsStaff = stmt.executeQuery(qStaff);
+		if(rsStaff.next()) {
+			return "staff";
+		}
+		return null;
+		
 	}
 }

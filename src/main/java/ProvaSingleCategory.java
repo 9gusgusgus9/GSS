@@ -20,7 +20,7 @@ public class ProvaSingleCategory extends Application{
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		Utilities.setCF("1234567890123456");
+		Utilities.setCF("3456789012345678");
 		Utilities.setCategoria(1);
 		ViewSwitcher.getInstance().switchView(stage, ViewType.SCHEDAGIOCATORE);
 	}
