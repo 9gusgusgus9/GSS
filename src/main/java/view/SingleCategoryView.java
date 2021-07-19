@@ -1,16 +1,23 @@
 package view;
 
+import java.beans.EventHandler;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.stream.Collectors;
 
 import entity.Category;
+import entity.Evento;
 import entity.Person;
 import entity.Society;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -36,18 +43,22 @@ public class SingleCategoryView extends ViewImpl{
 	
     @FXML
     private VBox vBoxTable;
-    @FXML
-    private TableView<Person> tableView;
-
-    @FXML
-    private TableColumn<Person, String> nome;
     
     @FXML
-    private TableColumn<Person, String> cognome;
+    private TableView<Person> player;
 
     @FXML
-    private TableColumn<Person, String> codRuolo;
+    private TableColumn<Person, String> nomePlayer;
+    
+    @FXML
+    private TableColumn<Person, String> cognomePlayer;
+
+    @FXML
+    private TableColumn<Person, String> codRuoloPlayer;
 	
+    @FXML
+    private TableView<Person> staff;
+    
     @FXML
     private TableColumn<Person, String> nomeStaff;
     
@@ -110,6 +121,57 @@ public class SingleCategoryView extends ViewImpl{
 	}
 	
 	private void populateTable() {
+		ObservableList<Person> people = Utilities.getAllPeople();
+		player.setItems(FXCollections.observableArrayList(people.stream().filter(p-> {
+					if(Utilities.getMansionByCF(p.getCf()).equals("Giocatore")) {
+						int codCategoria = Utilities.getCategoria();
+						if(Utilities.getCategoryCfFromCod(codCategoria).contains(p.getCf())) {
+							return true;
+						} else {
+							return false;	
+						}
+					} else {
+						return false;
+					}
+		}).collect(Collectors.toList())));
+		nomePlayer.setCellValueFactory(new PropertyValueFactory<Person, String>("nome"));
+		cognomePlayer.setCellValueFactory(new PropertyValueFactory<Person, String>("cognome"));
+		codRuoloPlayer.setCellValueFactory(new PropertyValueFactory<Person, String>("codRuolo"));
+		player.setRowFactory( tv -> {
+		    TableRow<Person> row = new TableRow<>();
+		    row.setOnMouseClicked(event -> {
+		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+		            Utilities.setCF(row.getItem().getCf());
+		            ViewSwitcher.getInstance().switchView(new Stage(), ViewType.SCHEDAGIOCATORE);
+		        }
+		    });
+		    return row ;
+		});
 		
+		staff.setItems(FXCollections.observableArrayList(people.stream().filter(p-> {
+			if(Utilities.getMansionByCF(p.getCf()).equals("Staff")) {
+				int codCategoria = Utilities.getCategoria();
+				if(Utilities.getCategoryCfFromCod(codCategoria).contains(p.getCf())) {
+					return true;
+				} else {
+					return false;	
+				}
+			} else {
+				return false;
+			}
+		}).collect(Collectors.toList())));
+		nomeStaff.setCellValueFactory(new PropertyValueFactory<Person, String>("nome"));
+		cognomeStaff.setCellValueFactory(new PropertyValueFactory<Person, String>("cognome"));
+		codRuoloStaff.setCellValueFactory(new PropertyValueFactory<Person, String>("codRuolo"));
+		staff.setRowFactory( tv -> {
+		    TableRow<Person> row = new TableRow<>();
+		    row.setOnMouseClicked(event -> {
+		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+		            Utilities.setCF(row.getItem().getCf());
+		            ViewSwitcher.getInstance().switchView(new Stage(), ViewType.SCHEDAGIOCATORE);
+		        }
+		    });
+		    return row ;
+		});
 	}
 }

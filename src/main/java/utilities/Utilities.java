@@ -337,7 +337,7 @@ public class Utilities {
 			codCategoria = rs.getInt("CodCategoria");
 			preferenza = rs.getString("CodPreferenza");
 		}
-		String query1 = "SELECT * FROM persona WHERE CF="+cf;
+		String query1 = "SELECT * FROM persona WHERE CF='" + cf + "'";
 		ResultSet rs1 = stmt.executeQuery(query1);
 		if(rs1.next()) {
 			out = new Player(cf, rs1.getString("Nome"), rs1.getString("Cognome"),new DateTime(rs1.getString("Data")), rs1.getInt("CodPagamento"),rs1.getString("CodSesso"), rs1.getString("CodPartitaIva"), rs1.getInt("Matricola_tesserino"), peso, altezza, data, ruolo, codCategoria, preferenza);
@@ -359,7 +359,7 @@ public class Utilities {
 		if(rs.next()) {
 			ruolo = rs.getString("CodRuoloDirigente");
 		}
-		String query1 = "SELECT * FROM persona WHERE CF="+cf;
+		String query1 = "SELECT * FROM persona WHERE CF='" + cf + "'";
 		ResultSet rs1 = stmt.executeQuery(query1);
 		if(rs1.next()) {
 			out = new Manager(cf, rs1.getString("Nome"), rs1.getString("Cognome"),new DateTime(rs1.getString("Data")), rs1.getInt("CodPagamento"),rs1.getString("CodSesso"), rs1.getString("CodPartitaIva"), rs1.getInt("Matricola_tesserino"), ruolo);

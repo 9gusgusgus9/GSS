@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -80,7 +81,7 @@ public class DirigentView extends ViewImpl{
 	private void loadManager() {
 		ObservableList<Person> people = Utilities.getAllPeople();
 		tableView.setItems(FXCollections.observableArrayList(people.stream().filter(p-> {
-					if(Utilities.getMansionByCF(p.getCf()).equals("dirigente")) {
+					if(Utilities.getMansionByCF(p.getCf()).equals("Dirigente")) {
 						return true;
 					} else {
 						return false;
@@ -89,6 +90,16 @@ public class DirigentView extends ViewImpl{
 		nome.setCellValueFactory(new PropertyValueFactory<Person, String>("nome"));
 		cognome.setCellValueFactory(new PropertyValueFactory<Person, String>("cognome"));
 		codRuolo.setCellValueFactory(new PropertyValueFactory<Person, String>("codRuolo"));
+		tableView.setRowFactory( tv -> {
+		    TableRow<Person> row = new TableRow<>();
+		    row.setOnMouseClicked(event -> {
+		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+		            Utilities.setCF(row.getItem().getCf());
+		            ViewSwitcher.getInstance().switchView(new Stage(), ViewType.SCHEDAGIOCATORE);
+		        }
+		    });
+		    return row ;
+		});
 	}
 }
 

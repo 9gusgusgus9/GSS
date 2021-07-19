@@ -140,8 +140,10 @@ public class SchedaGiocatoreView extends ViewImpl{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.categoryLabel.setText(category.getY().getNome());
+		if(!Utilities.getMansionByCF(CF).equals("Dirigente")) {
+			this.categoryLabel.setText(category.getY().getNome());
 		}
+	}
 	
 	private void setPerson() throws SQLException {
 		if(Utilities.getTypePerson(CF).equals("giocatore")) {
