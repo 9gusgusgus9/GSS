@@ -1,8 +1,5 @@
 package view;
 
-import java.io.IOException;
-import java.sql.SQLException;
-
 import entity.Evento;
 import entity.Society;
 import javafx.fxml.FXML;
@@ -86,11 +83,7 @@ public class SingleEventView extends ViewImpl{
 	
 	private void setSociety() {
 		Pair<Image, Society> society = null;
-		try {
-			society = Utilities.getSociety();
-		} catch (SQLException | IOException e) {
-			e.printStackTrace();
-		}
+		society = Utilities.getSociety();
 		this.logo.setImage(society.getX());
 		this.nameLabel.setText(society.getY().getNome());
 		this.color1.setFill(Color.valueOf(society.getY().getColor1()));
@@ -99,13 +92,9 @@ public class SingleEventView extends ViewImpl{
 	
 	@FXML
 	private void deleteEvent() {
-		try {
-			Utilities.deleteConvocazioni((int)e.getPrimaryKey());
-			Utilities.deleteEntity(e);
-			getStage().close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		Utilities.deleteConvocazioni((int)e.getPrimaryKey());
+		Utilities.deleteEntity(e);
+		getStage().close();
 	}
 
 }

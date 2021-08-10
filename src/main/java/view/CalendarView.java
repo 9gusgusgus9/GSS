@@ -8,9 +8,6 @@ import entity.Society;
 
 import static java.time.temporal.TemporalAdjusters.previousOrSame;
 
-import java.io.IOException;
-import java.sql.SQLException;
-
 import static java.time.temporal.TemporalAdjusters.nextOrSame;
 
 import javafx.collections.FXCollections;
@@ -139,35 +136,31 @@ public class CalendarView extends ViewImpl{
 	
 	
 	private void setEventOnDay() {
-    	try {
-    		this.setOnChangeWeek();
-    		for(Evento e : Utilities.getEvents(new DateTime(this.first.getYear(), this.first.getMonthValue(), this.first.getDayOfMonth()), new DateTime(this.last.getYear(), this.last.getMonthValue(), this.last.getDayOfMonth()))) {
-				DayOfWeek day = this.getDayOfWeek(e);
-				if (day == DayOfWeek.MONDAY) {
-					lunedi.setItems(FXCollections.observableArrayList(e));
-					lun.setCellValueFactory(new PropertyValueFactory<Evento, String>("event"));
-				} else if (day == DayOfWeek.TUESDAY) {
-					martedi.setItems(FXCollections.observableArrayList(e));
-					mar.setCellValueFactory(new PropertyValueFactory<Evento, String>("event"));
-				} else if (day == DayOfWeek.WEDNESDAY) {
-					mercoledi.setItems(FXCollections.observableArrayList(e));
-					mer.setCellValueFactory(new PropertyValueFactory<Evento, String>("event"));
-				} else if (day == DayOfWeek.THURSDAY) {
-					giovedi.setItems(FXCollections.observableArrayList(e));
-					giov.setCellValueFactory(new PropertyValueFactory<Evento, String>("event"));
-				} else if (day == DayOfWeek.FRIDAY) {
-					venerdi.setItems(FXCollections.observableArrayList(e));
-					ven.setCellValueFactory(new PropertyValueFactory<Evento, String>("event"));
-				} else if (day == DayOfWeek.SATURDAY) {
-					sabato.setItems(FXCollections.observableArrayList(e));
-					sab.setCellValueFactory(new PropertyValueFactory<Evento, String>("event"));
-				} else {
-					domenica.setItems(FXCollections.observableArrayList(e));
-					dom.setCellValueFactory(new PropertyValueFactory<Evento, String>("event"));
-				}
-    		}
-		} catch (SQLException e) {
-			e.printStackTrace();
+    	this.setOnChangeWeek();
+		for(Evento e : Utilities.getEvents(new DateTime(this.first.getYear(), this.first.getMonthValue(), this.first.getDayOfMonth()), new DateTime(this.last.getYear(), this.last.getMonthValue(), this.last.getDayOfMonth()))) {
+			DayOfWeek day = this.getDayOfWeek(e);
+			if (day == DayOfWeek.MONDAY) {
+				lunedi.setItems(FXCollections.observableArrayList(e));
+				lun.setCellValueFactory(new PropertyValueFactory<Evento, String>("event"));
+			} else if (day == DayOfWeek.TUESDAY) {
+				martedi.setItems(FXCollections.observableArrayList(e));
+				mar.setCellValueFactory(new PropertyValueFactory<Evento, String>("event"));
+			} else if (day == DayOfWeek.WEDNESDAY) {
+				mercoledi.setItems(FXCollections.observableArrayList(e));
+				mer.setCellValueFactory(new PropertyValueFactory<Evento, String>("event"));
+			} else if (day == DayOfWeek.THURSDAY) {
+				giovedi.setItems(FXCollections.observableArrayList(e));
+				giov.setCellValueFactory(new PropertyValueFactory<Evento, String>("event"));
+			} else if (day == DayOfWeek.FRIDAY) {
+				venerdi.setItems(FXCollections.observableArrayList(e));
+				ven.setCellValueFactory(new PropertyValueFactory<Evento, String>("event"));
+			} else if (day == DayOfWeek.SATURDAY) {
+				sabato.setItems(FXCollections.observableArrayList(e));
+				sab.setCellValueFactory(new PropertyValueFactory<Evento, String>("event"));
+			} else {
+				domenica.setItems(FXCollections.observableArrayList(e));
+				dom.setCellValueFactory(new PropertyValueFactory<Evento, String>("event"));
+			}
 		}
 	}
 	
@@ -268,12 +261,7 @@ public class CalendarView extends ViewImpl{
 	
 	private void setSociety() {
 		Pair<Image, Society> society = null;
-		try {
-			society = Utilities.getSociety();
-		} catch (SQLException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		society = Utilities.getSociety();
 		this.logo.setImage(society.getX());
 		this.nameLabel.setText(society.getY().getNome());
 		this.color1.setFill(Color.valueOf(society.getY().getColor1()));

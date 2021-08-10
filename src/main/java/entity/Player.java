@@ -1,9 +1,5 @@
 package entity;
 
-import java.io.FileNotFoundException;
-import java.sql.SQLException;
-
-import javafx.beans.property.SimpleStringProperty;
 import utilities.DateTime;
 import utilities.Utilities;
 
@@ -120,13 +116,7 @@ public class Player extends Entity {
 	@Override
 	public void insert() {
 		person.insert();
-		try {
-			Utilities.insertEntity(this);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		Utilities.insertEntity(this);
 	}
 
 	@Override

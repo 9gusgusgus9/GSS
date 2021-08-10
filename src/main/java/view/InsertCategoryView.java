@@ -1,11 +1,6 @@
 package view;
 
 import java.io.File;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 
 import entity.Category;
 import entity.Immagine;
@@ -70,12 +65,7 @@ public class InsertCategoryView extends ViewImpl {
 	
 	private void setSociety(){
 		Pair<Image, Society> society = null;
-		try {
-			society = Utilities.getSociety();
-		} catch (SQLException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		society = Utilities.getSociety();
 		this.logo.setImage(society.getX());
 		this.nameLabel.setText(society.getY().getNome());
 		this.color1.setFill(Color.valueOf(society.getY().getColor1()));
@@ -98,12 +88,7 @@ public class InsertCategoryView extends ViewImpl {
 	public void inserisci() {
 		if(this.nome.getText() != "") {
 			String pIVA = "";
-			try {
-				pIVA = Utilities.getSociety().getY().getPrimaryKey();
-			} catch (SQLException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			pIVA = Utilities.getSociety().getY().getPrimaryKey();
 			Category category = null;
 			if(this.image) {
 				Immagine image = new Immagine(this.fotoSqPath.getText());

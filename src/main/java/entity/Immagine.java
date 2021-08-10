@@ -3,7 +3,6 @@ package entity;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.sql.SQLException;
 
 import utilities.Utilities;
 
@@ -106,11 +105,7 @@ public class Immagine extends Entity {
 
 	@Override
 	public void insert() {
-		try {
-			Utilities.insertImage(this);
-		} catch (FileNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
+		Utilities.insertImage(this);
 	}
 
 }

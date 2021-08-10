@@ -29,11 +29,9 @@ import entity.Person;
 import entity.Player;
 import entity.Manager;
 import entity.Staff;
-import entity.Person;
 import entity.Society;
 import entity.Sport;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -75,30 +73,36 @@ public class Utilities {
 		}
 	}
 
-	public static void insertEntity(Entity entity) throws SQLException, FileNotFoundException {
+	public static void insertEntity(Entity entity){
 		dbConnection();
-
-//		InputStream is = new FileInputStream("src/main/resources/img/pallavolo.jpg");
-//		PreparedStatement ps = conn.prepareStatement("INSERT INTO immagine(IdImmagine, Nome, TipoFile, DatiFile) VALUES ('1', 'bomber','.jpg', ?)");
-//		ps.setBlob(1, is);
-//		ps.execute();
-//		
-
+		
 		String query = "INSERT INTO " + entity.getTableName() + " " + entity.getColumnList() + " VALUES "
 				+ entity.getValues();
-		stmt.executeUpdate(query);
-		query = "SELECT * FROM " + entity.getTableName() + " ORDER BY " + entity.getNamePrimaryKey() + " DESC LIMIT 1";
-		ResultSet rs = stmt.executeQuery(query);
-		if (rs.next() && (entity.getClass().equals(Category.class) || entity.getClass().equals(Evento.class)
-				|| entity.getClass().equals(Payment.class))) {
-			entity.setPrimaryKey(Integer.parseInt(rs.getString(1)));
+		try {
+			stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		conn.close();
-		stmt.close();
+		query = "SELECT * FROM " + entity.getTableName() + " ORDER BY " + entity.getNamePrimaryKey() + " DESC LIMIT 1";
+		ResultSet rs;
+		try {
+			rs = stmt.executeQuery(query);
+			if (rs.next() && (entity.getClass().equals(Category.class) || entity.getClass().equals(Evento.class)
+					|| entity.getClass().equals(Payment.class))) {
+				entity.setPrimaryKey(Integer.parseInt(rs.getString(1)));
+			}
+			conn.close();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 
 	};
 
-	public static void insertSport(int codSport) throws SQLException, FileNotFoundException {
+	public static void insertSport(int codSport){
 		dbConnection();
 		String query = "";
 		switch (codSport) {
@@ -112,34 +116,48 @@ public class Utilities {
 			query = "INSERT INTO ruolo_giocatore (IdRuoloGiocatore, Descrizione) VALUES ('PAL','Palleggiatore'),('CENT','Centrale'),('SL','Schiacciatore Laterale'),('SO','Schiacciatore Opposto'),('LIB','Libero')";
 			break;
 		}
-
-		stmt.executeUpdate(query);
-		conn.close();
-		stmt.close();
+		try {
+			stmt.executeUpdate(query);
+			conn.close();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public static List<String> getSport() throws SQLException{
+	public static List<String> getSport(){
 		dbConnection();
-		String query = "SELECT * FROM ruolo_giocatore" ;
-		ResultSet rs = stmt.executeQuery(query);
 		List<String> list = new LinkedList<>();
-		while(rs.next()) {
-			list.add(rs.getString("IdRuoloGiocatore"));
+		String query = "SELECT * FROM ruolo_giocatore" ;
+		ResultSet rs;
+		try {
+			rs = stmt.executeQuery(query);
+			while(rs.next()) {
+				list.add(rs.getString("IdRuoloGiocatore"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return list;
 	}
 	
-	public static void deleteEntity(Entity entity) throws SQLException {
+	public static void deleteEntity(Entity entity){
 		dbConnection();
 
-		stmt.executeUpdate("DELETE FROM " + entity.getTableName() + " AS e WHERE e." + entity.getNamePrimaryKey() + "="
-				+ entity.getPrimaryKey());
-		conn.close();
-		stmt.close();
+		try {
+			stmt.executeUpdate("DELETE FROM " + entity.getTableName() + " AS e WHERE e." + entity.getNamePrimaryKey() + "=" + entity.getPrimaryKey());
+			conn.close();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
-	public static void update(Entity entity, List<Pair<String, String>> fields)
-			throws SQLException, FileNotFoundException {
+	public static void update(Entity entity, List<Pair<String, String>> fields){
 		dbConnection();
 
 		Iterator<Pair<String, String>> it = fields.iterator();
@@ -156,146 +174,176 @@ public class Utilities {
 				query += ",";
 			}
 		}
-
 		query += " WHERE " + entity.getNamePrimaryKey() + " = '" + entity.getPrimaryKey() + "'";
-		stmt.executeUpdate(query);
-		stmt.close();
-
+		try {
+			stmt.executeUpdate(query);
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	};
 
-	public static void tableEmpty() throws SQLException {
+	public static void insertImage(Immagine image){
 		dbConnection();
-		String query = "DELETE TABLE dirigente";
-		stmt.executeUpdate(query);
-		query = "DELETE TABLE team_management.staff";
-		stmt.executeUpdate(query);
-		query = "DELETE TABLE team_management.giocatore";
-		stmt.executeUpdate(query);
-		query = "DELETE TABLE team_management.convocazioni";
-		stmt.executeUpdate(query);
-		query = "DELETE TABLE team_management.eventi";
-		stmt.executeUpdate(query);
-		query = "DELETE TABLE team_management.persona";
-		stmt.executeUpdate(query);
-		query = "DELETE TABLE team_management.pagamento";
-		stmt.executeUpdate(query);
-		query = "DELETE TABLE team_management.categoria";
-		stmt.executeUpdate(query);
-		query = "DELETE TABLE team_management.societa";
-		stmt.executeUpdate(query);
-		conn.close();
-		stmt.close();
-	}
-
-	public static void insertImage(Immagine image) throws FileNotFoundException, SQLException {
-		dbConnection();
-		PreparedStatement ps = conn
-				.prepareStatement("INSERT INTO immagine" + image.getColumnList() + " VALUES " + image.getValues());
-		ps.setBlob(1, image.getImage());
-		ps.execute();
+		PreparedStatement ps;
+		try {
+			ps = conn.prepareStatement("INSERT INTO immagine" + image.getColumnList() + " VALUES " + image.getValues());
+			ps.setBlob(1, image.getImage());
+			ps.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String query = "SELECT * FROM " + image.getTableName() + " ORDER BY " + image.getNamePrimaryKey()
 				+ " DESC LIMIT 1";
-		ResultSet rs = stmt.executeQuery(query);
-		if (rs.next()) {
-			image.setPrimaryKey(Integer.parseInt(rs.getString(1)));
+		ResultSet rs;
+		try {
+			rs = stmt.executeQuery(query);
+			if (rs.next()) {
+				image.setPrimaryKey(Integer.parseInt(rs.getString(1)));
+			}
+			conn.close();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		conn.close();
-		stmt.close();
-
 	}
 
-	public static Image getImage(int x) throws IOException, SQLException {
+	public static Image getImage(int x){
 		dbConnection();
 		String query = "SELECT DatiFile FROM Immagine WHERE IdImmagine=" + x;
-		ResultSet rs = stmt.executeQuery(query);
-		if (rs.next()) {
-			InputStream image = rs.getBlob(1).getBinaryStream();
-			BufferedImage imagen = ImageIO.read(image);
-			Image out = SwingFXUtils.toFXImage(imagen, null);
-			return out;
+		ResultSet rs;
+		try {
+			rs = stmt.executeQuery(query);
+			if (rs.next()) {
+				InputStream image = rs.getBlob(1).getBinaryStream();
+				BufferedImage imagen = ImageIO.read(image);
+				Image out = SwingFXUtils.toFXImage(imagen, null);
+				return out;
+			}
+		} catch (SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return null;
 	}
 
-	public static void insertConvocati(List<Object> convocati, Object codEvent) throws SQLException {
+	public static void insertConvocati(List<Object> convocati, Object codEvent){
 		dbConnection();
 		String query = null;
 		for (int i = 0; i < convocati.size(); i++) {
 			query = "INSERT INTO convocazioni (codEvento, CF) VALUES (" + (int)codEvent + ",'"
 					+ (String) convocati.get(i) + "')";
-			stmt.executeUpdate(query);
+			try {
+				stmt.executeUpdate(query);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		conn.close();
-		stmt.close();
+		try {
+			conn.close();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public static boolean isTheFirstStart() throws SQLException {
+	public static boolean isTheFirstStart(){
 		dbConnection();
 		String query = "SELECT * FROM societa";
-		ResultSet rs = stmt.executeQuery(query);
-		if (rs.next()) {
-			return false;
-		} else {
-			return true;
+		ResultSet rs;
+		try {
+			rs = stmt.executeQuery(query);
+			if (rs.next()) {
+				return false;
+			} else {
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return false;
 	}
 
-	public static List<Pair<Category, Image>> getCategories() throws SQLException, IOException {
+	public static List<Pair<Category, Image>> getCategories(){
 		dbConnection();
-		String query = "SELECT * FROM categoria ORDER BY Nome";
-		ResultSet rs = stmt.executeQuery(query);
 		List<Pair<Category, Image>> out = new LinkedList<>();
-		while (rs.next()) {
-			int codImage = rs.getInt("CodImmagine");
-			Image image = Utilities.getImage(codImage);
-			Category category = new Category(rs.getInt("IdCategoria"), rs.getString("Nome"),
-					rs.getString("CodPartitaIVA"), codImage);
-			out.add(new Pair<>(category, image));
+		String query = "SELECT * FROM categoria ORDER BY Nome";
+		ResultSet rs;
+		try {
+			rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				int codImage = rs.getInt("CodImmagine");
+				Image image = Utilities.getImage(codImage);
+				Category category = new Category(rs.getInt("IdCategoria"), rs.getString("Nome"),
+						rs.getString("CodPartitaIVA"), codImage);
+				out.add(new Pair<>(category, image));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return out;
 	}
 
-	public static Pair<Image, Society> getSociety() throws SQLException, IOException {
+	public static Pair<Image, Society> getSociety(){
 		dbConnection();
 		String query = "SELECT * FROM societa";
-		ResultSet rs = stmt.executeQuery(query);
+		ResultSet rs;
 		Society out = null;
 		Image image = null;
-		if (rs.next()) {
-			if (rs.getString("Color1").equals(null)) {
-				out = new Society(rs.getString("PartitaIVA"), rs.getString("Nome"),
-						Sport.getSport(rs.getInt("CodSport")));
-			} else {
-				out = new Society(rs.getString("PartitaIVA"), rs.getString("Nome"),
-						Sport.getSport(rs.getInt("CodSport")), rs.getString("Color1"), rs.getString("Color2"));
+		try {
+			rs = stmt.executeQuery(query);
+			if (rs.next()) {
+				if (rs.getString("Color1").equals(null)) {
+					out = new Society(rs.getString("PartitaIVA"), rs.getString("Nome"),
+							Sport.getSport(rs.getInt("CodSport")));
+				} else {
+					out = new Society(rs.getString("PartitaIVA"), rs.getString("Nome"),
+							Sport.getSport(rs.getInt("CodSport")), rs.getString("Color1"), rs.getString("Color2"));
+				}
+				image = Utilities.getImage(rs.getInt("CodImmagine"));
 			}
-			image = Utilities.getImage(rs.getInt("CodImmagine"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		Pair<Image, Society> society = new Pair<>(image, out);
 		return society;
 	}
 
-	public static List<Evento> getEvents(DateTime lunedi, DateTime domenica) throws SQLException {
+	public static List<Evento> getEvents(DateTime lunedi, DateTime domenica){
 		dbConnection();
 		String query = "SELECT * FROM evento";
 		List<Evento> events = new LinkedList<>();
-		ResultSet rs = stmt.executeQuery(query);
-		while (rs.next()) {
-			String[] inizio = rs.getString("Inizio").split("/");
-			String[] fine = rs.getString("Fine").split("/");
-				if(rs.getString("NomeAvversario") != null) {
-					Evento e = new Evento(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[2]), Integer.parseInt(fine[1]), Integer.parseInt(fine[0])), rs.getString("CodPartitaIVA"), rs.getString("NomeAvversario"), rs.getInt("CodCategoria"));
-					e.setPrimaryKey(rs.getInt("IdEvento"));
-					events.add(e);
-				} else if (rs.getString("CodCategoria") != null){
-					Evento e = new Evento(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[2]), Integer.parseInt(fine[1]), Integer.parseInt(fine[0])), rs.getString("CodPartitaIVA"), rs.getInt("CodCategoria"));
-					e.setPrimaryKey(rs.getInt("IdEvento"));
-					events.add(e);
-				} else {
-					Evento e = new Evento(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[2]), Integer.parseInt(fine[1]), Integer.parseInt(fine[0])), rs.getString("CodPartitaIVA"), rs.getString("Descrizione_generico"));
-					e.setPrimaryKey(rs.getInt("IdEvento"));
-					events.add(e);
+		ResultSet rs;
+		try {
+			rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				String[] inizio = rs.getString("Inizio").split("/");
+				String[] fine = rs.getString("Fine").split("/");
+					if(rs.getString("NomeAvversario") != null) {
+						Evento e = new Evento(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[2]), Integer.parseInt(fine[1]), Integer.parseInt(fine[0])), rs.getString("CodPartitaIVA"), rs.getString("NomeAvversario"), rs.getInt("CodCategoria"));
+						e.setPrimaryKey(rs.getInt("IdEvento"));
+						events.add(e);
+					} else if (rs.getString("CodCategoria") != null){
+						Evento e = new Evento(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[2]), Integer.parseInt(fine[1]), Integer.parseInt(fine[0])), rs.getString("CodPartitaIVA"), rs.getInt("CodCategoria"));
+						e.setPrimaryKey(rs.getInt("IdEvento"));
+						events.add(e);
+					} else {
+						Evento e = new Evento(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[2]), Integer.parseInt(fine[1]), Integer.parseInt(fine[0])), rs.getString("CodPartitaIVA"), rs.getString("Descrizione_generico"));
+						e.setPrimaryKey(rs.getInt("IdEvento"));
+						events.add(e);
+				}
 			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 		List<Evento> filteredEvents = events.stream()
 				.filter(d -> d.getInizio().compareDate(lunedi) >= 0 && d.getInizio().compareDate(domenica) <= 0)
@@ -303,24 +351,30 @@ public class Utilities {
 		return filteredEvents;
 	}
 
-	public static Pair<Image, Category> getCategory(int idCategoria) throws SQLException, IOException {
+	public static Pair<Image, Category> getCategory(int idCategoria){
 		dbConnection();
 		String query = "SELECT * FROM categoria WHERE IdCategoria=" + idCategoria;
-		ResultSet rs = stmt.executeQuery(query);
+		ResultSet rs;
 		Category out = null;
 		Image image = null;
-		if (rs.next()) {
-			out = new Category(rs.getString("Nome"), rs.getString("CodPartitaIva"));
-			image = Utilities.getImage(rs.getInt("CodImmagine"));
+		try {
+			rs = stmt.executeQuery(query);
+			if (rs.next()) {
+				out = new Category(rs.getString("Nome"), rs.getString("CodPartitaIva"));
+				image = Utilities.getImage(rs.getInt("CodImmagine"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		Pair<Image, Category> category = new Pair<>(image, out);
 		return category;
 	}
 	
-	public static Pair<Image,Player> getPlayer(String cf) throws SQLException, IOException {
+	public static Pair<Image,Player> getPlayer(String cf){
 		dbConnection();
 		String query = "SELECT * FROM giocatore WHERE CF='" + cf + "'";
-		ResultSet rs = stmt.executeQuery(query);
+		ResultSet rs;
 		Player out = null;
 		Image image = null;
 		String peso = null;
@@ -329,70 +383,106 @@ public class Utilities {
 		String ruolo = null;
 		int codCategoria = 0;
 		String preferenza = null;
-		if(rs.next()) {
-			peso = rs.getString("Peso");
-			altezza = rs.getString("Altezza");
-			data = new DateTime(rs.getString("Data_scadenza_certificato"));
-			ruolo = rs.getString("CodRuoloGiocatore");
-			codCategoria = rs.getInt("CodCategoria");
-			preferenza = rs.getString("CodPreferenza");
+		try {
+			rs = stmt.executeQuery(query);
+			if(rs.next()) {
+				peso = rs.getString("Peso");
+				altezza = rs.getString("Altezza");
+				data = new DateTime(rs.getString("Data_scadenza_certificato"));
+				ruolo = rs.getString("CodRuoloGiocatore");
+				codCategoria = rs.getInt("CodCategoria");
+				preferenza = rs.getString("CodPreferenza");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
+		
 		String query1 = "SELECT * FROM persona WHERE CF='" + cf + "'";
-		ResultSet rs1 = stmt.executeQuery(query1);
-		if(rs1.next()) {
-			out = new Player(cf, rs1.getString("Nome"), rs1.getString("Cognome"),new DateTime(rs1.getString("Data")), rs1.getInt("CodPagamento"),rs1.getString("CodSesso"), rs1.getString("CodPartitaIva"), rs1.getInt("Matricola_tesserino"), peso, altezza, data, ruolo, codCategoria, preferenza);
-			image = Utilities.getImage(rs1.getInt("CodImmagine"));
+		ResultSet rs1;
+		try {
+			rs1 = stmt.executeQuery(query1);
+			if(rs1.next()) {
+				out = new Player(cf, rs1.getString("Nome"), rs1.getString("Cognome"),new DateTime(rs1.getString("Data")), rs1.getInt("CodPagamento"),rs1.getString("CodSesso"), rs1.getString("CodPartitaIva"), rs1.getInt("Matricola_tesserino"), peso, altezza, data, ruolo, codCategoria, preferenza);
+				image = Utilities.getImage(rs1.getInt("CodImmagine"));
+			}
+			conn.close();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		Pair<Image, Player> player = new Pair<>(image, out);
-		conn.close();
-		stmt.close();
-		return player;
+		
+		return new Pair<>(image, out);
 	}
 	
-	public static Pair<Image,Manager> getDirigent(String cf) throws SQLException, IOException {
+	public static Pair<Image,Manager> getDirigent(String cf){
 		dbConnection();
 		String query = "SELECT * FROM dirigente WHERE CF='" + cf + "'";
-		ResultSet rs = stmt.executeQuery(query);
+		ResultSet rs;
 		Manager out = null;
 		Image image = null;
 		String ruolo = null;
-		if(rs.next()) {
-			ruolo = rs.getString("CodRuoloDirigente");
+		try {
+			rs = stmt.executeQuery(query);
+			if(rs.next()) {
+				ruolo = rs.getString("CodRuoloDirigente");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		String query1 = "SELECT * FROM persona WHERE CF='" + cf + "'";
-		ResultSet rs1 = stmt.executeQuery(query1);
-		if(rs1.next()) {
-			out = new Manager(cf, rs1.getString("Nome"), rs1.getString("Cognome"),new DateTime(rs1.getString("Data")), rs1.getInt("CodPagamento"),rs1.getString("CodSesso"), rs1.getString("CodPartitaIva"), rs1.getInt("Matricola_tesserino"), ruolo);
-			image = Utilities.getImage(rs1.getInt("CodImmagine"));
+		ResultSet rs1;
+		try {
+			rs1 = stmt.executeQuery(query1);
+			if(rs1.next()) {
+				out = new Manager(cf, rs1.getString("Nome"), rs1.getString("Cognome"),new DateTime(rs1.getString("Data")), rs1.getInt("CodPagamento"),rs1.getString("CodSesso"), rs1.getString("CodPartitaIva"), rs1.getInt("Matricola_tesserino"), ruolo);
+				image = Utilities.getImage(rs1.getInt("CodImmagine"));
+			}
+			conn.close();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		Pair<Image, Manager> manager = new Pair<>(image, out);
-		conn.close();
-		stmt.close();
-		return manager;
+		
+		return new Pair<>(image, out);
 	}
 
-	public static Pair<Image,Staff> getStaff(String cf) throws SQLException, IOException {
+	public static Pair<Image,Staff> getStaff(String cf){
 		dbConnection();
 		String query = "SELECT * FROM staff WHERE CF='" + cf + "'";
-		ResultSet rs = stmt.executeQuery(query);
 		Staff out = null;
 		Image image = null;
 		int categoria = 0;
 		String ruolo = null;
-		if(rs.next()) {
-			ruolo = rs.getString("CodRuoloStaff");
-			categoria = rs.getInt("CodCategoria");
+		try {
+			ResultSet rs = stmt.executeQuery(query);
+			if(rs.next()) {
+				ruolo = rs.getString("CodRuoloStaff");
+				categoria = rs.getInt("CodCategoria");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		String query1 = "SELECT * FROM persona WHERE CF='" + cf + "'";
-		ResultSet rs1 = stmt.executeQuery(query1);
-		if(rs1.next()) {
-			out = new Staff(cf, rs1.getString("Nome"), rs1.getString("Cognome"),new DateTime(rs1.getString("Data")), rs1.getInt("CodPagamento"),rs1.getString("CodSesso"), rs1.getString("CodPartitaIva"), rs1.getInt("Matricola_tesserino"), ruolo, categoria);
-			image = Utilities.getImage(rs1.getInt("CodImmagine"));
+		ResultSet rs1;
+		try {
+			rs1 = stmt.executeQuery(query1);
+			if(rs1.next()) {
+				out = new Staff(cf, rs1.getString("Nome"), rs1.getString("Cognome"),new DateTime(rs1.getString("Data")), rs1.getInt("CodPagamento"),rs1.getString("CodSesso"), rs1.getString("CodPartitaIva"), rs1.getInt("Matricola_tesserino"), ruolo, categoria);
+				image = Utilities.getImage(rs1.getInt("CodImmagine"));
+			}
+			conn.close();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		Pair<Image, Staff> staff = new Pair<>(image, out);
-		conn.close();
-		stmt.close();
-		return staff;
+		return new Pair<>(image, out);
 	}
 	
 	
@@ -420,110 +510,130 @@ public class Utilities {
 		actualEvent = e;
 	}
 	
-	public static Category getOnlyCategory(int idCategoria) throws SQLException, IOException {
-		dbConnection();
-		String query = "SELECT * FROM categoria WHERE IdCategoria=" + idCategoria;
-		ResultSet rs = stmt.executeQuery(query);
-		Category out = null;
-		if(rs.next()) {
-			out = new Category(rs.getString("Nome"), rs.getString("CodPartitaIva"));
-		}
-		Category category = out;
-		return category;
+	public static Category getOnlyCategory(int idCategoria){
+		return Utilities.getCategory(idCategoria).getY();
 	}
 
-	public static boolean checkPersona(String cf) throws SQLException {
+	public static boolean isFreeCF(String cf){
 		dbConnection();
-		String query = "SELECT * FROM persona";
-		ResultSet rs = stmt.executeQuery(query);
-		while (rs.next()) {
-			if (rs.getString("CF").equals(cf)) {
+		String query = "SELECT * FROM persona WHERE CF = '" + cf + "'";
+		ResultSet rs;
+		try {
+			rs = stmt.executeQuery(query);
+			while (rs.next()) {
 				return false;
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		
 		return true;
 	}
 	
-	public static ObservableList<Person> getConvocati(int idEvento) throws SQLException {
+	public static ObservableList<Person> getConvocati(int idEvento){
 		ObservableList<Person> convocati = FXCollections.observableArrayList();
 		dbConnection();
 		String qPlayer = "SELECT q1.CF , q1.Nome , q1.Cognome, q2.CodRuoloGiocatore , q2.CodCategoria FROM (SELECT * FROM giocatore) AS q2 INNER JOIN (SELECT c.CF , p.Nome , p.Cognome FROM convocazioni AS c INNER JOIN persona AS p ON c.CF = p.CF WHERE c.CodEvento="+idEvento+") AS q1 ON q1.CF = q2.CF";
 		String qManager = "SELECT q1.CF , q1.Nome , q1.Cognome , q2.CodRuoloDirigente FROM (SELECT * FROM dirigente) AS q2 INNER JOIN (SELECT c.CF , p.Nome , p.Cognome FROM convocazioni AS c INNER JOIN persona AS p ON c.CF = p.CF WHERE c.CodEvento="+idEvento+") AS q1 ON q1.CF = q2.CF";
 		String qStaff = "SELECT q1.CF , q1.Nome , q1.Cognome , q2.CodRuoloStaff , q2.CodCategoria FROM (SELECT * FROM staff) AS q2 INNER JOIN (SELECT c.CF , p.Nome , p.Cognome FROM convocazioni AS c INNER JOIN persona AS p ON c.CF = p.CF WHERE c.CodEvento="+idEvento+") AS q1 ON q1.CF = q2.CF";
-		ResultSet rsPlayer = stmt.executeQuery(qPlayer);
-		while(rsPlayer.next()) {
-			Person player = new Person(rsPlayer.getString("q1.CF"), rsPlayer.getString("q1.Nome"), rsPlayer.getString("q1.Cognome"));
-			convocati.add(player);
+		ResultSet rsPlayer;
+		try {
+			rsPlayer = stmt.executeQuery(qPlayer);
+			while(rsPlayer.next()) {
+				Person player = new Person(rsPlayer.getString("q1.CF"), rsPlayer.getString("q1.Nome"), rsPlayer.getString("q1.Cognome"));
+				convocati.add(player);
+			}
+			ResultSet rsManager = stmt.executeQuery(qManager);
+			while(rsManager.next()) {
+				Person manager = new Person(rsManager.getString("q1.CF"), rsManager.getString("q1.Nome"), rsManager.getString("q1.Cognome"));
+				convocati.add(manager);
+			}
+			ResultSet rsStaff = stmt.executeQuery(qStaff);
+			while(rsStaff.next()) {
+				Person staff = new Person(rsStaff.getString("q1.CF"), rsStaff.getString("q1.Nome"), rsStaff.getString("q1.Cognome"));
+				convocati.add(staff);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		ResultSet rsManager = stmt.executeQuery(qManager);
-		while(rsManager.next()) {
-			Person manager = new Person(rsManager.getString("q1.CF"), rsManager.getString("q1.Nome"), rsManager.getString("q1.Cognome"));
-			convocati.add(manager);
-		}
-		ResultSet rsStaff = stmt.executeQuery(qStaff);
-		while(rsStaff.next()) {
-			Person staff = new Person(rsStaff.getString("q1.CF"), rsStaff.getString("q1.Nome"), rsStaff.getString("q1.Cognome"));
-			convocati.add(staff);
-		}
+		
 		return convocati;
 	}
 	
-	public static SimpleStringProperty getCodRuoloByCF(String CF) throws SQLException {
+	public static SimpleStringProperty getCodRuoloByCF(String CF){
 		dbConnection();
 		String qPlayer = "SELECT rg.Descrizione AS CodRuoloGiocatore FROM giocatore AS g INNER JOIN ruolo_giocatore AS rg ON g.CodRuoloGiocatore = rg.IdRuoloGiocatore WHERE g.CF='"+CF+"'";
 		String qManager = "SELECT rd.Descrizione AS CodRuoloDirigente FROM dirigente AS d INNER JOIN ruolo_dirigente AS rd ON d.CodRuoloDirigente = rd.IdRuoloDirigente WHERE d.CF='"+CF+"'";
 		String qStaff = "SELECT rs.Descrizione AS CodRuoloStaff FROM staff AS s INNER JOIN ruolo_staff  AS rs ON s.CodRuoloStaff = rs.IdRuoloStaff WHERE s.CF='"+CF+"'";
-		ResultSet rsPlayer = stmt.executeQuery(qPlayer);
-		if(rsPlayer.next()) {
-			return new SimpleStringProperty(rsPlayer.getString("CodRuoloGiocatore"));
-		}
-		ResultSet rsManager = stmt.executeQuery(qManager);
-		if(rsManager.next()) {
-			return new SimpleStringProperty(rsManager.getString("CodRuoloDirigente"));
-		}
-		ResultSet rsStaff = stmt.executeQuery(qStaff);
-		if(rsStaff.next()) {
-			return new SimpleStringProperty(rsStaff.getString("CodRuoloStaff"));
+		ResultSet rsPlayer;
+		try {
+			rsPlayer = stmt.executeQuery(qPlayer);
+			if(rsPlayer.next()) {
+				return new SimpleStringProperty(rsPlayer.getString("CodRuoloGiocatore"));
+			}
+			ResultSet rsManager = stmt.executeQuery(qManager);
+			if(rsManager.next()) {
+				return new SimpleStringProperty(rsManager.getString("CodRuoloDirigente"));
+			}
+			ResultSet rsStaff = stmt.executeQuery(qStaff);
+			if(rsStaff.next()) {
+				return new SimpleStringProperty(rsStaff.getString("CodRuoloStaff"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return null;
 	}
 	
-	public static SimpleStringProperty getNomeCategoriaByCF(String CF) throws SQLException {
+	public static SimpleStringProperty getNomeCategoriaByCF(String CF){
 		dbConnection();
 		String qPlayer = "SELECT q2.Nome FROM (SELECT CodCategoria FROM giocatore WHERE CF='"+CF+"') AS q1 INNER JOIN categoria AS q2 ON q1.CodCategoria = q2.IdCategoria";
 		String qStaff = "SELECT q2.Nome FROM (SELECT CodCategoria FROM staff WHERE CF='"+CF+"') AS q1 INNER JOIN categoria AS q2 ON q1.CodCategoria = q2.IdCategoria";
-		ResultSet rsPlayer = stmt.executeQuery(qPlayer);
-		if(rsPlayer.next()) {
-			return new SimpleStringProperty(rsPlayer.getString("q2.Nome"));
-		}
-		ResultSet rsStaff = stmt.executeQuery(qStaff);
-		if(rsStaff.next()) {
-			return new SimpleStringProperty(rsStaff.getString("q2.Nome"));
+		ResultSet rsPlayer;
+		try {
+			rsPlayer = stmt.executeQuery(qPlayer);
+			if(rsPlayer.next()) {
+				return new SimpleStringProperty(rsPlayer.getString("q2.Nome"));
+			}
+			ResultSet rsStaff = stmt.executeQuery(qStaff);
+			if(rsStaff.next()) {
+				return new SimpleStringProperty(rsStaff.getString("q2.Nome"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return new SimpleStringProperty("Dirigente");
 	}
 
-	public static Pair<Evento, Optional<String>> getEvent(int id) throws SQLException {
+	public static Pair<Evento, Optional<String>> getEvent(int id){
 		dbConnection();
 		String query = "SELECT * FROM event WHERE IdEvento = " + id;
-		ResultSet rs = stmt.executeQuery(query);
-		rs.next();
-		Evento event;
+		ResultSet rs;
+		Evento event = null;
 		Optional<String> result = Optional.empty();
-		if(rs.getString("NomeAvversario") != null) {
-			event = new Evento(new DateTime(rs.getString("Inizio")), new DateTime(rs.getString("Fine")), rs.getString("CodPartitaIVA"), rs.getString("Avversario"), rs.getInt("CodCategoria"));
-			result = Optional.of(rs.getString("Risultato"));
-		} else if(rs.getString("Descrizione_generico") != null) {
-			event = new Evento(new DateTime(rs.getString("Inizio")), new DateTime(rs.getString("Fine")), rs.getString("CodPartitaIVA"), rs.getString("Descrizione_generico"));
-		} else {
-			event = new Evento(new DateTime(rs.getString("Inizio")), new DateTime(rs.getString("Fine")), rs.getString("CodPartitaIVA"), rs.getString("CodCategoria"));
+		try {
+			rs = stmt.executeQuery(query);
+			rs.next();
+			if(rs.getString("NomeAvversario") != null) {
+				event = new Evento(new DateTime(rs.getString("Inizio")), new DateTime(rs.getString("Fine")), rs.getString("CodPartitaIVA"), rs.getString("Avversario"), rs.getInt("CodCategoria"));
+				result = Optional.of(rs.getString("Risultato"));
+			} else if(rs.getString("Descrizione_generico") != null) {
+				event = new Evento(new DateTime(rs.getString("Inizio")), new DateTime(rs.getString("Fine")), rs.getString("CodPartitaIVA"), rs.getString("Descrizione_generico"));
+			} else {
+				event = new Evento(new DateTime(rs.getString("Inizio")), new DateTime(rs.getString("Fine")), rs.getString("CodPartitaIVA"), rs.getString("CodCategoria"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return new Pair(event, result);
+		return new Pair<>(event, result);
 	}
 	
 	public static List<String> getCategoryCfFromCod(int codCategoria){
 		dbConnection();
-		List<String> out = new LinkedList();
+		List<String> out = new LinkedList<>();
 		String query = "SELECT CF FROM giocatore WHERE CodCategoria=" + codCategoria;
 		ResultSet rs = null;
 		try {
@@ -562,7 +672,7 @@ public class Utilities {
 		dbConnection();
 		List<String> convocati =  Utilities.getCategoryCfFromCod(codCategoria);
 		String query = "INSERT INTO convocazioni (CodEvento, CF, Presenza) VALUES ";
-		Iterator iter = convocati.iterator();
+		Iterator<String> iter = convocati.iterator();
 		while(iter.hasNext()) {
 			query += "(" + codEvento + ", '" + iter.next() + "', false), ";
 		}
@@ -577,7 +687,6 @@ public class Utilities {
 	
 	public static ObservableList<Person> getAllPeople(){
 		ObservableList<Person> out = FXCollections.observableArrayList();
-		List<Person> list = new LinkedList<>();
 		dbConnection();
 		String query = "SELECT CF, Nome, Cognome FROM persona ORDER BY Cognome DESC";
 		ResultSet rs = null;
@@ -658,22 +767,27 @@ public class Utilities {
 		return "";
 	}
 	
-	public static String getTypePerson(String cf) throws SQLException {
+	public static String getTypePerson(String cf){
 		dbConnection();
 		String qPlayer = "SELECT CodRuoloGiocatore FROM giocatore WHERE CF='"+cf+"'";
 		String qManager = "SELECT CodRuoloDirigente FROM dirigente WHERE CF='"+cf+"'";
 		String qStaff = "SELECT CodRuoloStaff FROM staff WHERE CF='"+cf+"'";
-		ResultSet rsPlayer = stmt.executeQuery(qPlayer);
-		if(rsPlayer.next()) {
-			return "giocatore";
-		}
-		ResultSet rsManager = stmt.executeQuery(qManager);
-		if(rsManager.next()) {
-			return "dirigente";
-		}
-		ResultSet rsStaff = stmt.executeQuery(qStaff);
-		if(rsStaff.next()) {
-			return "staff";
+		try {
+			ResultSet rsPlayer = stmt.executeQuery(qPlayer);
+			if(rsPlayer.next()) {
+				return "giocatore";
+			}
+			ResultSet rsManager = stmt.executeQuery(qManager);
+			if(rsManager.next()) {
+				return "dirigente";
+			}
+			ResultSet rsStaff = stmt.executeQuery(qStaff);
+			if(rsStaff.next()) {
+				return "staff";
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return null;
 		

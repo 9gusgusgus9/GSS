@@ -10,32 +10,15 @@ import utilities.Utilities;
 public abstract class Entity {
 	
 	public void insert() {
-		try {
-			Utilities.insertEntity(this);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			
-		}
+		Utilities.insertEntity(this);
 	}
 	
 	public void delete() {
-		try {
-			Utilities.deleteEntity(this);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		Utilities.deleteEntity(this);
 	}
 	
 	public void update(List<Pair<String, String>> list) {
-		try {
-			Utilities.update(this, list);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		Utilities.update(this, list);
 	}
 	
 	public abstract String getTableName();

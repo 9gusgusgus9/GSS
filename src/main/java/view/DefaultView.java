@@ -1,12 +1,5 @@
 package view;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
-import entity.Category;
 import entity.Society;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -38,12 +31,7 @@ public class DefaultView extends ViewImpl {
 	
 	private void setSociety(){
 		Pair<Image, Society> society = null;
-		try {
-			society = Utilities.getSociety();
-		} catch (SQLException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		society = Utilities.getSociety();
 		this.logo.setImage(society.getX());
 		this.nameLabel.setText(society.getY().getNome());
 		System.out.println(society.getY().getColor1());

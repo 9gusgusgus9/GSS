@@ -1,8 +1,5 @@
 package entity;
 
-import java.io.FileNotFoundException;
-import java.sql.SQLException;
-
 import utilities.Utilities;
 
 public class Society extends Entity {
@@ -114,14 +111,8 @@ public class Society extends Entity {
 
 	@Override
 	public void insert() {
-		try {
-			Utilities.insertEntity(this);
-			Utilities.insertSport(this.sport.getCodice());
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		Utilities.insertEntity(this);
+		Utilities.insertSport(this.sport.getCodice());
 		
 	}
 	

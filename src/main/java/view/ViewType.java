@@ -1,9 +1,7 @@
 package view;
 
 import controller.Controller;
-import controller.ControllerImpl;
 import controller.StartViewController;
-import controller.TestController;
 
 /**
  * Enum for the Views, each one has her Style-File ".fxml" and her specific
@@ -15,7 +13,6 @@ public enum ViewType {
     /*
      * 
      */
-	TEST("Test", new TestController()),
     START("StartView", new StartViewController()),
 	BASIC("HomeView", new StartViewController()),
 	CATEGORY("CategoryView", new StartViewController()),

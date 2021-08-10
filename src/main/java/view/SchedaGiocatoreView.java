@@ -1,21 +1,14 @@
 package view;
 
-import java.io.File;
-import java.io.IOException;
 import java.sql.SQLException;
 
 import entity.Category;
-import entity.Finanze;
-import entity.Immagine;
 import entity.Manager;
-import entity.Payment;
 import entity.Player;
 import entity.Society;
 import entity.Staff;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -23,9 +16,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import utilities.DateTime;
 import utilities.Pair;
 import utilities.Utilities;
 
@@ -120,12 +110,7 @@ public class SchedaGiocatoreView extends ViewImpl{
 	
 	private void setSociety() {
 		Pair<Image, Society> society = null;
-		try {
-			society = Utilities.getSociety();
-		} catch (SQLException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		society = Utilities.getSociety();
 		this.logo.setImage(society.getX());
 		this.nameLabel.setText(society.getY().getNome());
 		this.color1.setFill(Color.valueOf(society.getY().getColor1()));
@@ -134,12 +119,7 @@ public class SchedaGiocatoreView extends ViewImpl{
 
 	private void setCategory() {
 		Pair<Image, Category> category = null;
-		try {
-			category = Utilities.getCategory(this.category);
-		} catch (SQLException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		category = Utilities.getCategory(this.category);
 		if(!Utilities.getMansionByCF(CF).equals("Dirigente")) {
 			this.categoryLabel.setText(category.getY().getNome());
 		}
@@ -148,11 +128,7 @@ public class SchedaGiocatoreView extends ViewImpl{
 	private void setPerson() throws SQLException {
 		if(Utilities.getTypePerson(CF).equals("giocatore")) {
 			Pair<Image, Player> player = null;
-			try {
-				player = Utilities.getPlayer(CF);
-			} catch (SQLException | IOException e) {
-				e.printStackTrace();
-			}
+			player = Utilities.getPlayer(CF);
 			this.playerImage.setImage(player.getX());
 			this.nameText.setText(player.getY().getPersona().getNome());
 			this.surnameText.setText(player.getY().getPersona().getCognome());
@@ -167,11 +143,7 @@ public class SchedaGiocatoreView extends ViewImpl{
 			this.ruolo.setText(player.getY().getCodRuolo());
 		} else if(Utilities.getTypePerson(CF).equals("dirigente")){
 			Pair<Image, Manager> manager = null;
-			try {
-				manager = Utilities.getDirigent(CF);
-			} catch (SQLException | IOException e) {
-				e.printStackTrace();
-			}
+			manager = Utilities.getDirigent(CF);
 			this.playerImage.setImage(manager.getX());
 			this.nameText.setText(manager.getY().getPersona().getNome());
 			this.surnameText.setText(manager.getY().getPersona().getCognome());
@@ -190,11 +162,7 @@ public class SchedaGiocatoreView extends ViewImpl{
 			this.scadenza.setVisible(false);
 		} else {
 			Pair<Image, Staff> staff = null;
-			try {
-				staff = Utilities.getStaff(CF);
-			} catch (SQLException | IOException e) {
-				e.printStackTrace();
-			}
+			staff = Utilities.getStaff(CF);
 			this.playerImage.setImage(staff.getX());
 			this.nameText.setText(staff.getY().getPersona().getNome());
 			this.surnameText.setText(staff.getY().getPersona().getCognome());

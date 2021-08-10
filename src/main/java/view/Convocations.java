@@ -1,19 +1,13 @@
 package view;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Observable;
 
-import entity.Category;
 import entity.Person;
 import entity.Society;
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -69,12 +63,7 @@ public class Convocations extends ViewImpl {
 	
 	private void setSociety(){
 		Pair<Image, Society> society = null;
-		try {
-			society = Utilities.getSociety();
-		} catch (SQLException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		society = Utilities.getSociety();
 		this.logo.setImage(society.getX());
 		this.nameLabel.setText(society.getY().getNome());
 		this.color1.setFill(Color.valueOf(society.getY().getColor1()));
@@ -112,12 +101,7 @@ public class Convocations extends ViewImpl {
 				invitati.add(person.getCf());
 			}
 		}
-		try {
-			Utilities.insertConvocati(invitati, Utilities.getEvent().getPrimaryKey());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Utilities.insertConvocati(invitati, Utilities.getEvent().getPrimaryKey());
 		getStage().close();
 	}
 }

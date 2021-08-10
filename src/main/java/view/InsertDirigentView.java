@@ -100,11 +100,7 @@ public class InsertDirigentView extends ViewImpl{
 	
 	private void setSociety() {
 		Pair<Image, Society> society = null;
-		try {
-			society = Utilities.getSociety();
-		} catch (SQLException | IOException e) {
-			e.printStackTrace();
-		}
+		society = Utilities.getSociety();
 		this.logo.setImage(society.getX());
 		this.nameLabel.setText(society.getY().getNome());
 		this.color1.setFill(Color.valueOf(society.getY().getColor1()));
@@ -129,7 +125,7 @@ public class InsertDirigentView extends ViewImpl{
 	}
 	
 	public void insert() throws NumberFormatException, SQLException, IOException {
-		if(Utilities.checkPersona(this.cfText.getText())) {
+		if(Utilities.isFreeCF(this.cfText.getText())) {
 			if(this.check()) {
 				Payment pagamento = new Payment(1000, false, Finanze.QUOTA);
 				pagamento.insert();

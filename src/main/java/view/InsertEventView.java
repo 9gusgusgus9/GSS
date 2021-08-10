@@ -1,14 +1,8 @@
 package view;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.time.format.DateTimeFormatter;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
-import entity.Category;
 import entity.Evento;
 import entity.Society;
 import javafx.collections.FXCollections;
@@ -85,12 +79,7 @@ public class InsertEventView extends ViewImpl {
 
 	private void setSociety() {
 		Pair<Image, Society> society = null;
-		try {
-			society = Utilities.getSociety();
-		} catch (SQLException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		society = Utilities.getSociety();
 		this.logo.setImage(society.getX());
 		this.nameLabel.setText(society.getY().getNome());
 		this.color1.setFill(Color.valueOf(society.getY().getColor1()));
@@ -98,14 +87,9 @@ public class InsertEventView extends ViewImpl {
 	}
 
 	private void setCategories() {
-		List<Pair<String, Integer>> list = new LinkedList();
-		try {
-			Utilities.getCategories().stream()
-					.forEach((p) -> list.add(new Pair<>(p.getX().getNome(), (int) p.getX().getPrimaryKey())));
-		} catch (SQLException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		List<Pair<String, Integer>> list = new LinkedList<>();
+		Utilities.getCategories().stream()
+				.forEach((p) -> list.add(new Pair<>(p.getX().getNome(), (int) p.getX().getPrimaryKey())));
 		categoria.setItems(FXCollections.observableArrayList(list));
 		categoria.setConverter(new StringConverter<Pair<String,Integer>>() {
 			
@@ -176,22 +160,17 @@ public class InsertEventView extends ViewImpl {
 				categoriaLab.setTextFill(Color.BLACK);
 			}
 			if (this.flag) {
-				try {
-					Evento event = new Evento(
-							new DateTime(this.inizio.getValue().getYear(), this.inizio.getValue().getMonthValue(),
-									this.inizio.getValue().getDayOfMonth()),
-							new DateTime(this.fine.getValue().getYear(), this.fine.getValue().getMonthValue(),
-									this.fine.getValue().getDayOfMonth()),
-							Utilities.getSociety().getY().getPrimaryKey(), this.nomeAvv.getText(),
-							this.categoria.getValue().getY());
-					event.insert();
-					Utilities.setEvent(event);
-					Utilities.inviteFromCategory((int) event.getPrimaryKey(), this.categoria.getValue().getY());
-					getStage().close();
-				} catch (SQLException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				Evento event = new Evento(
+						new DateTime(this.inizio.getValue().getYear(), this.inizio.getValue().getMonthValue(),
+								this.inizio.getValue().getDayOfMonth()),
+						new DateTime(this.fine.getValue().getYear(), this.fine.getValue().getMonthValue(),
+								this.fine.getValue().getDayOfMonth()),
+						Utilities.getSociety().getY().getPrimaryKey(), this.nomeAvv.getText(),
+						this.categoria.getValue().getY());
+				event.insert();
+				Utilities.setEvent(event);
+				Utilities.inviteFromCategory((int) event.getPrimaryKey(), this.categoria.getValue().getY());
+				getStage().close();
 			}
 		} else if (rAllenamento.isSelected()) {
 			if (categoria.getValue() == null) {
@@ -201,22 +180,17 @@ public class InsertEventView extends ViewImpl {
 				categoriaLab.setTextFill(Color.BLACK);
 			}
 			if (this.flag) {
-				try {
-					Evento event = new Evento(
-							new DateTime(this.inizio.getValue().getYear(), this.inizio.getValue().getMonthValue(),
-									this.inizio.getValue().getDayOfMonth()),
-							new DateTime(this.fine.getValue().getYear(), this.fine.getValue().getMonthValue(),
-									this.fine.getValue().getDayOfMonth()),
-							Utilities.getSociety().getY().getPrimaryKey(),
-							this.categoria.getValue().getY());
-					event.insert();
-					Utilities.setEvent(event);
-					Utilities.inviteFromCategory((int) event.getPrimaryKey(), this.categoria.getValue().getY());
-					getStage().close();
-				} catch (SQLException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				Evento event = new Evento(
+						new DateTime(this.inizio.getValue().getYear(), this.inizio.getValue().getMonthValue(),
+								this.inizio.getValue().getDayOfMonth()),
+						new DateTime(this.fine.getValue().getYear(), this.fine.getValue().getMonthValue(),
+								this.fine.getValue().getDayOfMonth()),
+						Utilities.getSociety().getY().getPrimaryKey(),
+						this.categoria.getValue().getY());
+				event.insert();
+				Utilities.setEvent(event);
+				Utilities.inviteFromCategory((int) event.getPrimaryKey(), this.categoria.getValue().getY());
+				getStage().close();
 			}
 		} else {
 			if (descrizione.getText().equals("")) {
@@ -226,21 +200,16 @@ public class InsertEventView extends ViewImpl {
 				descrizioneLab.setTextFill(Color.BLACK);
 			}
 			if (this.flag) {
-				try {
-					Evento event = new Evento(
-							new DateTime(this.inizio.getValue().getYear(), this.inizio.getValue().getMonthValue(),
-									this.inizio.getValue().getDayOfMonth()),
-							new DateTime(this.fine.getValue().getYear(), this.fine.getValue().getMonthValue(),
-									this.fine.getValue().getDayOfMonth()),
-							Utilities.getSociety().getY().getPrimaryKey(), this.descrizione.getText());
-					event.insert();
-					Utilities.setEvent(event);
-					getStage().close();
-					ViewSwitcher.getInstance().switchView(new Stage(), ViewType.CONVOCATIONS);
-				} catch (SQLException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				Evento event = new Evento(
+						new DateTime(this.inizio.getValue().getYear(), this.inizio.getValue().getMonthValue(),
+								this.inizio.getValue().getDayOfMonth()),
+						new DateTime(this.fine.getValue().getYear(), this.fine.getValue().getMonthValue(),
+								this.fine.getValue().getDayOfMonth()),
+						Utilities.getSociety().getY().getPrimaryKey(), this.descrizione.getText());
+				event.insert();
+				Utilities.setEvent(event);
+				getStage().close();
+				ViewSwitcher.getInstance().switchView(new Stage(), ViewType.CONVOCATIONS);
 			}
 		}
 		this.flag = true;

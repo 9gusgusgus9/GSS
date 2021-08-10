@@ -1,12 +1,8 @@
 package view;
 
-import java.beans.EventHandler;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.stream.Collectors;
 
 import entity.Category;
-import entity.Evento;
 import entity.Person;
 import entity.Society;
 import javafx.collections.FXCollections;
@@ -94,12 +90,7 @@ public class SingleCategoryView extends ViewImpl{
 	
 	private void setSociety() {
 		Pair<Image, Society> society = null;
-		try {
-			society = Utilities.getSociety();
-		} catch (SQLException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		society = Utilities.getSociety();
 		this.logo.setImage(society.getX());
 		this.nameLabel.setText(society.getY().getNome());
 		this.color1.setFill(Color.valueOf(society.getY().getColor1()));
@@ -108,15 +99,11 @@ public class SingleCategoryView extends ViewImpl{
 	
 	private void setCategory() {
 		Pair<Image, Category> category = null;
-		try {
-			if(Utilities.getCategoria()==0) {
-				this.categoria.setText("Dirigenti");
-			} else {
-				category = Utilities.getCategory(Utilities.getCategoria());
-				this.categoria.setText(category.getY().getNome());
-			}
-		} catch (SQLException | IOException e) {
-			e.printStackTrace();
+		if(Utilities.getCategoria()==0) {
+			this.categoria.setText("Dirigenti");
+		} else {
+			category = Utilities.getCategory(Utilities.getCategoria());
+			this.categoria.setText(category.getY().getNome());
 		}
 	}
 	

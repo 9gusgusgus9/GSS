@@ -1,13 +1,7 @@
 package entity;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.reflect.Method;
 
 import javafx.beans.property.SimpleStringProperty;
 import utilities.DateTime;
@@ -53,11 +47,7 @@ public class Evento extends Entity {
 		this.nomeAvversario=avversario;
 		this.risultato="ND";
 		this.tipoEvento = "Partita";
-		try {
-			this.evento = new SimpleStringProperty(Utilities.getOnlyCategory(this.codCategoria).getNome() + " vs " + this.nomeAvversario);
-		} catch (SQLException | IOException e) {
-			e.printStackTrace();
-		}
+		this.evento = new SimpleStringProperty(Utilities.getOnlyCategory(this.codCategoria).getNome() + " vs " + this.nomeAvversario);
 	}
 	
 	//ALLENAMENTO
@@ -67,11 +57,7 @@ public class Evento extends Entity {
 		this.codPartitaIva=codPartitaIva;
 		this.codCategoria=codCategoria;
 		this.tipoEvento = "Allenamento";
-		try {
-			this.evento = new SimpleStringProperty("Allenamento "+ Utilities.getOnlyCategory(this.codCategoria).getNome());
-		} catch (SQLException | IOException e) {
-			e.printStackTrace();
-		}
+		this.evento = new SimpleStringProperty("Allenamento "+ Utilities.getOnlyCategory(this.codCategoria).getNome());
 	}
 	
 	public String getEvent() {
@@ -141,14 +127,8 @@ public class Evento extends Entity {
 	
 	@Override
 	public void insert() {
-		try {
-			Utilities.insertEntity(this);
-			Utilities.insertConvocati(this.convocati, this.getPrimaryKey());
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		Utilities.insertEntity(this);
+		Utilities.insertConvocati(this.convocati, this.getPrimaryKey());
 		
 	}
 	

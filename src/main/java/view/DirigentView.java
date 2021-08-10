@@ -1,7 +1,5 @@
 package view;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.stream.Collectors;
 
 import entity.Person;
@@ -64,12 +62,7 @@ public class DirigentView extends ViewImpl{
 
 	private void setSociety() {
 		Pair<Image, Society> society = null;
-		try {
-			society = Utilities.getSociety();
-		} catch (SQLException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		society = Utilities.getSociety();
 		this.logo.setImage(society.getX());
 		this.nameLabel.setText(society.getY().getNome());
 		this.color1.setFill(Color.valueOf(society.getY().getColor1()));
