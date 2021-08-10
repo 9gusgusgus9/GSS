@@ -8,7 +8,7 @@ import utilities.Utilities;
 import view.ViewSwitcher;
 import view.ViewType;
 
-public class Prova3 extends Application{
+public class Launcher extends Application{
 
 	public static void main(String[] args) throws SQLException, IOException {
 
