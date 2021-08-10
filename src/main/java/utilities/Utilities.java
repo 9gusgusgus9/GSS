@@ -383,7 +383,7 @@ public class Utilities {
 			ruolo = rs.getString("CodRuoloStaff");
 			categoria = rs.getInt("CodCategoria");
 		}
-		String query1 = "SELECT * FROM persona WHERE CF="+cf;
+		String query1 = "SELECT * FROM persona WHERE CF='" + cf + "'";
 		ResultSet rs1 = stmt.executeQuery(query1);
 		if(rs1.next()) {
 			out = new Staff(cf, rs1.getString("Nome"), rs1.getString("Cognome"),new DateTime(rs1.getString("Data")), rs1.getInt("CodPagamento"),rs1.getString("CodSesso"), rs1.getString("CodPartitaIva"), rs1.getInt("Matricola_tesserino"), ruolo, categoria);
