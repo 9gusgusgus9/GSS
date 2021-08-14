@@ -36,9 +36,6 @@ public class ViewSwitcher {
      */
     public void switchView(final Stage stage, final ViewType viewType) {
         View view = this.loadStyle(stage, viewType);
-        Controller controller = viewType.getController();
-        controller.attachView(view);
-        view.attachController(controller);
         view.setStage(stage);
         view.init();
         stage.setTitle("Test");

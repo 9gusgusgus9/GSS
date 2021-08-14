@@ -10,20 +10,6 @@ import javafx.stage.Stage;
 public interface View {
 
     /**
-     * Attach a MVC controller to the current View.
-     * 
-     * @param controller to attach
-     */
-    void attachController(Controller controller);
-
-    /**
-     * Get the Controller attached to the View.
-     * 
-     * @return the Controller
-     */
-    Controller getController();
-
-    /**
      * Initialize the View.
      */
     void init();

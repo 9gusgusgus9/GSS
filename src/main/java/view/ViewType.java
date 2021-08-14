@@ -13,21 +13,21 @@ public enum ViewType {
     /*
      * 
      */
-    START("StartView", new StartViewController()),
-	BASIC("HomeView", new StartViewController()),
-	CATEGORY("CategoryView", new StartViewController()),
-	CALENDAR("CalendarView", new StartViewController()),
-	SINGLECATEGORY("SingleCategoryView", new StartViewController()),
-	INSERTPLAYERVIEW("InsertPlayerView", new StartViewController()),
-	INSERTCATEGORY("InsertCategoryView", new StartViewController()),
-	SINGLEEVENT("SingleEventView", new StartViewController()),
-	EVENTCONVENE("ConveneToEventView", new StartViewController()),
-	DIRIGENT("DirigentView", new StartViewController()),
-	INSERTSTAFF("InsertStaffView", new StartViewController()),
-	SCHEDAGIOCATORE("SchedaGiocatoreView", new StartViewController()),
-	INSERTEVENT("InsertEventView", new StartViewController()),
-	CONVOCATIONS("Convocations", new StartViewController()),
-	INSERTDIRIGENT("InsertDirigentView", new StartViewController());
+    START("StartView"),
+	BASIC("HomeView"),
+	CATEGORY("CategoryView"),
+	CALENDAR("CalendarView"),
+	SINGLECATEGORY("SingleCategoryView"),
+	INSERTPLAYERVIEW("InsertPlayerView"),
+	INSERTCATEGORY("InsertCategoryView"),
+	SINGLEEVENT("SingleEventView"),
+	EVENTCONVENE("ConveneToEventView"),
+	DIRIGENT("DirigentView"),
+	INSERTSTAFF("InsertStaffView"),
+	SCHEDAGIOCATORE("SchedaGiocatoreView"),
+	INSERTEVENT("InsertEventView"),
+	CONVOCATIONS("Convocations"),
+	INSERTDIRIGENT("InsertDirigentView");
 	
 
     /**
@@ -37,11 +37,9 @@ public enum ViewType {
     private static final String FORMAT = ".fxml";
 
     private String fileName;
-    private Controller controller;
 
-    ViewType(final String string, final Controller controller) {
+    ViewType(final String string) {
         this.fileName = string;
-        this.controller = controller;
     }
 
     /**
@@ -52,15 +50,5 @@ public enum ViewType {
     public String getPath() {
         return DIRECTORY + this.fileName + FORMAT;
     }
-
-    /**
-     * Return the specific controller linked to the specific view.
-     * 
-     * @return the Controller
-     */
-    public Controller getController() {
-        return this.controller;
-    }
-
 }
 
