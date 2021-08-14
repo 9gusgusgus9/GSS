@@ -73,6 +73,9 @@ public class Utilities {
 		}
 	}
 
+	
+	/*Metodo per l'inserimento nel database di ogni entità*/
+	
 	public static void insertEntity(Entity entity){
 		dbConnection();
 		
@@ -100,8 +103,9 @@ public class Utilities {
 		}
 		
 
-	};
+	}
 
+	/*Metodo che popola il database con i ruoli corretti per lo sport selezionato al primo avvio*/
 	public static void insertSport(int codSport){
 		dbConnection();
 		String query = "";
@@ -126,64 +130,8 @@ public class Utilities {
 		}
 	}
 	
-	public static List<String> getSport(){
-		dbConnection();
-		List<String> list = new LinkedList<>();
-		String query = "SELECT * FROM ruolo_giocatore" ;
-		ResultSet rs;
-		try {
-			rs = stmt.executeQuery(query);
-			while(rs.next()) {
-				list.add(rs.getString("IdRuoloGiocatore"));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return list;
-	}
-	
-	public static void deleteEntity(Entity entity){
-		dbConnection();
 
-		try {
-			stmt.executeUpdate("DELETE FROM " + entity.getTableName() + " AS e WHERE e." + entity.getNamePrimaryKey() + "=" + entity.getPrimaryKey());
-			conn.close();
-			stmt.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-
-	public static void update(Entity entity, List<Pair<String, String>> fields){
-		dbConnection();
-
-		Iterator<Pair<String, String>> it = fields.iterator();
-
-		String query = "UPDATE " + entity.getTableName() + " SET";
-
-		boolean check = it.hasNext();
-
-		while (check) {
-			Pair<String, String> nxt = it.next();
-			query += " " + nxt.getX() + " = '" + nxt.getY() + "'";
-			check = it.hasNext();
-			if (check) {
-				query += ",";
-			}
-		}
-		query += " WHERE " + entity.getNamePrimaryKey() + " = '" + entity.getPrimaryKey() + "'";
-		try {
-			stmt.executeUpdate(query);
-			stmt.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	};
-
+	/*Metodo che inserisce l'immagine in input*/
 	public static void insertImage(Immagine image){
 		dbConnection();
 		PreparedStatement ps;
@@ -211,25 +159,7 @@ public class Utilities {
 		}
 	}
 
-	public static Image getImage(int x){
-		dbConnection();
-		String query = "SELECT DatiFile FROM Immagine WHERE IdImmagine=" + x;
-		ResultSet rs;
-		try {
-			rs = stmt.executeQuery(query);
-			if (rs.next()) {
-				InputStream image = rs.getBlob(1).getBinaryStream();
-				BufferedImage imagen = ImageIO.read(image);
-				Image out = SwingFXUtils.toFXImage(imagen, null);
-				return out;
-			}
-		} catch (SQLException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-
+	/*Metodo per l'inserimento dei convocati presi dalla lista in input, ed invitati all'evento in input*/
 	public static void insertConvocati(List<Object> convocati, Object codEvent){
 		dbConnection();
 		String query = null;
@@ -251,7 +181,93 @@ public class Utilities {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	/*Metodo per invitare tutte le persone appartenenti alla categoria in input*/
+	public static void inviteFromCategory(int codEvento, int codCategoria) {
+		dbConnection();
+		List<String> convocati =  Utilities.getCategoryCfFromCod(codCategoria);
+		String query = "INSERT INTO convocazioni (CodEvento, CF, Presenza) VALUES ";
+		Iterator<String> iter = convocati.iterator();
+		while(iter.hasNext()) {
+			query += "(" + codEvento + ", '" + iter.next() + "', false), ";
+		}
+		query = "" + query.subSequence(0, query.length() - 2);
+		try {
+			stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/*Metodo che restituisce la lista dei ruoli relativi allo sport selezionato al primo avvio*/
+	public static List<String> getSport(){
+		dbConnection();
+		List<String> list = new LinkedList<>();
+		String query = "SELECT * FROM ruolo_giocatore" ;
+		ResultSet rs;
+		try {
+			rs = stmt.executeQuery(query);
+			while(rs.next()) {
+				list.add(rs.getString("IdRuoloGiocatore"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
 
+	/*Metodo che si occupa di modificare le colonne richieste in input con il nuovo dato in input*/
+	public static void update(Entity entity, List<Pair<String, String>> fields){
+		dbConnection();
+
+		Iterator<Pair<String, String>> it = fields.iterator();
+
+		String query = "UPDATE " + entity.getTableName() + " SET";
+
+		boolean check = it.hasNext();
+
+		while (check) {
+			Pair<String, String> nxt = it.next();
+			query += " " + nxt.getX() + " = '" + nxt.getY() + "'";
+			check = it.hasNext();
+			if (check) {
+				query += ",";
+			}
+		}
+		query += " WHERE " + entity.getNamePrimaryKey() + " = '" + entity.getPrimaryKey() + "'";
+		try {
+			stmt.executeUpdate(query);
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	};
+
+	/*Metodo che restituisce l'immagine richiesta in input*/
+	public static Image getImage(int x){
+		dbConnection();
+		String query = "SELECT DatiFile FROM Immagine WHERE IdImmagine=" + x;
+		ResultSet rs;
+		try {
+			rs = stmt.executeQuery(query);
+			if (rs.next()) {
+				InputStream image = rs.getBlob(1).getBinaryStream();
+				BufferedImage imagen = ImageIO.read(image);
+				Image out = SwingFXUtils.toFXImage(imagen, null);
+				return out;
+			}
+		} catch (SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/*Metodo che controlla se è gia presente o meno una società all'interno del database*/
 	public static boolean isTheFirstStart(){
 		dbConnection();
 		String query = "SELECT * FROM societa";
@@ -270,6 +286,7 @@ public class Utilities {
 		return false;
 	}
 
+	/*Metodo che restituisce una lista contenente tutte le categorie e le ralitive immagini*/
 	public static List<Pair<Category, Image>> getCategories(){
 		dbConnection();
 		List<Pair<Category, Image>> out = new LinkedList<>();
@@ -291,6 +308,7 @@ public class Utilities {
 		return out;
 	}
 
+	/*Metodo che restituisce l'unica società presente nel database*/
 	public static Pair<Image, Society> getSociety(){
 		dbConnection();
 		String query = "SELECT * FROM societa";
@@ -317,6 +335,7 @@ public class Utilities {
 		return society;
 	}
 
+	/*Metodo che restituisce tutti gli eventi compresi tra le date in input*/
 	public static List<Evento> getEvents(DateTime lunedi, DateTime domenica){
 		dbConnection();
 		String query = "SELECT * FROM evento";
@@ -351,6 +370,7 @@ public class Utilities {
 		return filteredEvents;
 	}
 
+	/*Metodo che restituisce la categoria in input*/
 	public static Pair<Image, Category> getCategory(int idCategoria){
 		dbConnection();
 		String query = "SELECT * FROM categoria WHERE IdCategoria=" + idCategoria;
@@ -370,7 +390,8 @@ public class Utilities {
 		Pair<Image, Category> category = new Pair<>(image, out);
 		return category;
 	}
-	
+
+	/*Metodo che restituisce il player in input*/
 	public static Pair<Image,Player> getPlayer(String cf){
 		dbConnection();
 		String query = "SELECT * FROM giocatore WHERE CF='" + cf + "'";
@@ -416,7 +437,8 @@ public class Utilities {
 		
 		return new Pair<>(image, out);
 	}
-	
+
+	/*Metodo che restituisce il dirigente in input*/
 	public static Pair<Image,Manager> getDirigent(String cf){
 		dbConnection();
 		String query = "SELECT * FROM dirigente WHERE CF='" + cf + "'";
@@ -451,6 +473,7 @@ public class Utilities {
 		return new Pair<>(image, out);
 	}
 
+	/*Metodo che restituisce lo staff in input*/
 	public static Pair<Image,Staff> getStaff(String cf){
 		dbConnection();
 		String query = "SELECT * FROM staff WHERE CF='" + cf + "'";
@@ -485,35 +508,12 @@ public class Utilities {
 		return new Pair<>(image, out);
 	}
 	
-	
-	public static void setCategoria(int id) {
-		idCategoria = id;
-	}
-
-	public static int getCategoria() {
-		return idCategoria;
-	}
-	
-	public static void setCF(String CF) {
-		cf = CF;
-	}
-
-	public static String getCF() {
-		return cf;
-	}
-	
-	public static Evento getEvent() {
-		return actualEvent;
-	}
-	
-	public static void setEvent(Evento e) {
-		actualEvent = e;
-	}
-	
+	/*Metodo che restituisce la categoria richiesta in input*/
 	public static Category getOnlyCategory(int idCategoria){
 		return Utilities.getCategory(idCategoria).getY();
 	}
-
+	
+	/*Metodo che ritorna true se il cf in input non è presente nel database*/
 	public static boolean isFreeCF(String cf){
 		dbConnection();
 		String query = "SELECT * FROM persona WHERE CF = '" + cf + "'";
@@ -530,6 +530,7 @@ public class Utilities {
 		return true;
 	}
 	
+	/*Metodo che restituisce una ObservableList di CF invitati all'evento in input*/
 	public static ObservableList<Person> getConvocati(int idEvento){
 		ObservableList<Person> convocati = FXCollections.observableArrayList();
 		dbConnection();
@@ -560,6 +561,7 @@ public class Utilities {
 		return convocati;
 	}
 	
+	/*Metodo che restituisce il ruolo della persona in input*/
 	public static SimpleStringProperty getCodRuoloByCF(String CF){
 		dbConnection();
 		String qPlayer = "SELECT rg.Descrizione AS CodRuoloGiocatore FROM giocatore AS g INNER JOIN ruolo_giocatore AS rg ON g.CodRuoloGiocatore = rg.IdRuoloGiocatore WHERE g.CF='"+CF+"'";
@@ -586,6 +588,7 @@ public class Utilities {
 		return null;
 	}
 	
+	/*Metodo che restituisce la categoria a cui appartiene la persona con il CF in input*/
 	public static SimpleStringProperty getNomeCategoriaByCF(String CF){
 		dbConnection();
 		String qPlayer = "SELECT q2.Nome FROM (SELECT CodCategoria FROM giocatore WHERE CF='"+CF+"') AS q1 INNER JOIN categoria AS q2 ON q1.CodCategoria = q2.IdCategoria";
@@ -607,6 +610,7 @@ public class Utilities {
 		return new SimpleStringProperty("Dirigente");
 	}
 
+	/*Metgodo che restituisce l'evento richiesto in input*/
 	public static Pair<Evento, Optional<String>> getEvent(int id){
 		dbConnection();
 		String query = "SELECT * FROM event WHERE IdEvento = " + id;
@@ -631,6 +635,7 @@ public class Utilities {
 		return new Pair<>(event, result);
 	}
 	
+	/*Metodo che restituisce tutti i CF realtivi alla categoria in input*/
 	public static List<String> getCategoryCfFromCod(int codCategoria){
 		dbConnection();
 		List<String> out = new LinkedList<>();
@@ -668,23 +673,7 @@ public class Utilities {
 		return out;
 	}
 	
-	public static void inviteFromCategory(int codEvento, int codCategoria) {
-		dbConnection();
-		List<String> convocati =  Utilities.getCategoryCfFromCod(codCategoria);
-		String query = "INSERT INTO convocazioni (CodEvento, CF, Presenza) VALUES ";
-		Iterator<String> iter = convocati.iterator();
-		while(iter.hasNext()) {
-			query += "(" + codEvento + ", '" + iter.next() + "', false), ";
-		}
-		query = "" + query.subSequence(0, query.length() - 2);
-		try {
-			stmt.executeUpdate(query);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
+	/*Metodo che restituisce una ObservableList contenente tutte le persone iscritte nel database*/
 	public static ObservableList<Person> getAllPeople(){
 		ObservableList<Person> out = FXCollections.observableArrayList();
 		dbConnection();
@@ -707,6 +696,7 @@ public class Utilities {
 		return out;
 	}
 	
+	/*Metodo che restituisce la categoria e il ruolo in base al CF in input*/
 	public static SimpleStringProperty getMansionAndCategoryByCF(String cf) {
 		dbConnection();
 		String query = "SELECT c.Nome FROM giocatore AS g INNER JOIN categoria AS c ON g.CodCategoria = c.IdCategoria WHERE g.CF='" + cf + "'";
@@ -738,6 +728,7 @@ public class Utilities {
 		return new SimpleStringProperty("");
 	}
 	
+	/*Metodo che restituisce il ruolo a seconda del CF in input*/
 	public static String getMansionByCF(String cf) {
 		dbConnection();
 		String query = "SELECT * FROM giocatore WHERE CF='" + cf + "'";
@@ -766,33 +757,23 @@ public class Utilities {
 		}
 		return "";
 	}
-	
-	public static String getTypePerson(String cf){
+
+	/*Metodo che elimina l'entita in input*/
+	public static void deleteEntity(Entity entity){
 		dbConnection();
-		String qPlayer = "SELECT CodRuoloGiocatore FROM giocatore WHERE CF='"+cf+"'";
-		String qManager = "SELECT CodRuoloDirigente FROM dirigente WHERE CF='"+cf+"'";
-		String qStaff = "SELECT CodRuoloStaff FROM staff WHERE CF='"+cf+"'";
+
 		try {
-			ResultSet rsPlayer = stmt.executeQuery(qPlayer);
-			if(rsPlayer.next()) {
-				return "giocatore";
-			}
-			ResultSet rsManager = stmt.executeQuery(qManager);
-			if(rsManager.next()) {
-				return "dirigente";
-			}
-			ResultSet rsStaff = stmt.executeQuery(qStaff);
-			if(rsStaff.next()) {
-				return "staff";
-			}
+			stmt.executeUpdate("DELETE FROM " + entity.getTableName() + " AS e WHERE e." + entity.getNamePrimaryKey() + "=" + entity.getPrimaryKey());
+			conn.close();
+			stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
 		
 	}
 	
+	/*Metodo che elimina le convocazioni relative all'evento in input*/
 	public static void deleteConvocazioni(int codEvento) {
 		dbConnection();
 		String query = "DELETE FROM convocazioni WHERE CodEvento="+codEvento;
@@ -802,4 +783,30 @@ public class Utilities {
 			e.printStackTrace();
 		}
 	}
+	
+	/*Metodi utili per recuperare l'evento/la categoria /la persona da visualizzare*/
+	public static void setCategoria(int id) {
+		idCategoria = id;
+	}
+
+	public static int getCategoria() {
+		return idCategoria;
+	}
+	
+	public static void setCF(String CF) {
+		cf = CF;
+	}
+
+	public static String getCF() {
+		return cf;
+	}
+	
+	public static Evento getEvent() {
+		return actualEvent;
+	}
+	
+	public static void setEvent(Evento e) {
+		actualEvent = e;
+	}
+	
 }

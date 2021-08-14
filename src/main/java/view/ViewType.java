@@ -14,9 +14,7 @@ public enum ViewType {
      * 
      */
     START("StartView"),
-	BASIC("HomeView"),
 	CATEGORY("CategoryView"),
-	CALENDAR("CalendarView"),
 	SINGLECATEGORY("SingleCategoryView"),
 	INSERTPLAYERVIEW("InsertPlayerView"),
 	INSERTCATEGORY("InsertCategoryView"),

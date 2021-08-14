@@ -126,7 +126,7 @@ public class SchedaGiocatoreView extends ViewImpl{
 	}
 	
 	private void setPerson() throws SQLException {
-		if(Utilities.getTypePerson(CF).equals("giocatore")) {
+		if(Utilities.getMansionByCF(CF).equals("Giocatore")) {
 			Pair<Image, Player> player = null;
 			player = Utilities.getPlayer(CF);
 			this.playerImage.setImage(player.getX());
@@ -141,7 +141,7 @@ public class SchedaGiocatoreView extends ViewImpl{
 			this.matricolaText.setText(Integer.toString(player.getY().getPersona().getMatricola()));
 			this.preferenza.setText(player.getY().getCodPreferenza());
 			this.ruolo.setText(player.getY().getCodRuolo());
-		} else if(Utilities.getTypePerson(CF).equals("dirigente")){
+		} else if(Utilities.getMansionByCF(CF).equals("Dirigente")){
 			Pair<Image, Manager> manager = null;
 			manager = Utilities.getDirigent(CF);
 			this.playerImage.setImage(manager.getX());
