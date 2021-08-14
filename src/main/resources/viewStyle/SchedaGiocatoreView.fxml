@@ -128,15 +128,21 @@
                   </Pane>
                </children>
             </HBox>
-            <HBox prefHeight="192.0" prefWidth="1500.0">
+            <VBox prefHeight="200.0" prefWidth="1500.0">
                <children>
-                  <Pane prefHeight="192.0" prefWidth="1515.0">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="1500.0" spacing="70.0">
                      <children>
-                        <Button fx:id="closeButton" layoutX="572.0" layoutY="78.0" mnemonicParsing="false" onMouseClicked="#close" prefHeight="60.0" prefWidth="328.0" text="CHIUDI" />
+                        <Button fx:id="new_doc" mnemonicParsing="false" text="Inserisci documento" />
+                        <Button fx:id="doc" mnemonicParsing="false" text="Visualizza documenti" />
                      </children>
-                  </Pane>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="1500.0">
+                     <children>
+                        <Button fx:id="closeButton" mnemonicParsing="false" onMouseClicked="#close" prefHeight="60.0" prefWidth="328.0" text="CHIUDI" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
+            </VBox>
          </children>
       </VBox>
    </children>
