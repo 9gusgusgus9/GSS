@@ -73,6 +73,9 @@ public class SingleCategoryView extends ViewImpl{
     @FXML
     private Button addStaff;
     
+    @FXML 
+	Button refresh;
+    
 	@Override
 	public void init() {
 		this.setSociety();
@@ -160,5 +163,11 @@ public class SingleCategoryView extends ViewImpl{
 		    });
 		    return row ;
 		});
+	}
+	
+	@FXML
+	private void refreshStage() {
+		init();
+		
 	}
 }

@@ -126,24 +126,28 @@ public class InsertStaffView extends ViewImpl{
 	
 	public void insert() throws NumberFormatException, SQLException, IOException {
 		if(Utilities.isFreeCF(this.cfText.getText())) {
-			if(this.check()) {
-				Payment pagamento = new Payment(1000, false, Finanze.QUOTA);
-				pagamento.insert();
-				if(this.staffPath.getText().isEmpty()) {
-					Staff staff = new Staff(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getText()),
-						(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(), Integer.parseInt(this.matricolaText.getText()),
-						ruolo.getValue(), this.category);
-					staff.insert();
+			if(this.cfText.getText().length() == 16) {
+				if(this.check()) {
+					Payment pagamento = new Payment(1000, false, Finanze.QUOTA);
+					pagamento.insert();
+					if(this.staffPath.getText().isEmpty()) {
+						Staff staff = new Staff(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getText()),
+								(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(), Integer.parseInt(this.matricolaText.getText()),
+								ruolo.getValue(), this.category);
+						staff.insert();
+					} else {
+						Immagine image = new Immagine(staffPath.getText());
+						Staff staff = new Staff(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getText()),
+								(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(),image, Integer.parseInt(this.matricolaText.getText()),
+								ruolo.getValue(), this.category);
+						staff.insert();
+					}
+					this.getStage().close();
 				} else {
-					Immagine image = new Immagine(staffPath.getText());
-					Staff staff = new Staff(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getText()),
-						(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(),image, Integer.parseInt(this.matricolaText.getText()),
-						ruolo.getValue(), this.category);
-					staff.insert();
+					message.setText("Inserire tutte le informazioni");
 				}
-				this.getStage().close();
 			} else {
-				message.setText("Inserire tutte le informazioni");
+				message.setText("CF deve essere di 16 cifre");
 			}
 		} else {
 			message.setText("CF già in uso");

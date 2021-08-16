@@ -26,11 +26,11 @@ import utilities.DateTime;
 import utilities.Pair;
 import utilities.Utilities;
 
-public class InsertPlayerView extends ViewImpl{
+public class InsertPlayerView extends ViewImpl {
 
 	@FXML
 	private AnchorPane pane;
-	
+
 	@FXML
 	private Label nameLabel;
 
@@ -42,54 +42,54 @@ public class InsertPlayerView extends ViewImpl{
 
 	@FXML
 	private Rectangle color2;
-	
+
 	@FXML
 	TextField nameText;
-	
+
 	@FXML
 	TextField surnameText;
-	
+
 	@FXML
 	TextField cfText;
-	
+
 	@FXML
 	TextField dataText;
-	
+
 	@FXML
 	TextField matricolaText;
-	
+
 	@FXML
 	TextField pesoText;
-	
+
 	@FXML
 	TextField altezzaText;
-	
+
 	@FXML
 	TextField certificatoText;
-	
+
 	@FXML
 	TextField message;
 
 	@FXML
 	TextField playerPath;
-	
+
 	@FXML
 	Button insertButton;
-	
+
 	@FXML
 	Button browse;
-	
+
 	@FXML
 	ChoiceBox<String> sesso;
-	
+
 	@FXML
 	ChoiceBox<String> preferenza;
-	
+
 	@FXML
 	ChoiceBox<String> ruolo;
-	
+
 	private int category;
-	
+
 	@Override
 	public void init() {
 		this.setSociety();
@@ -99,27 +99,27 @@ public class InsertPlayerView extends ViewImpl{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.category=Utilities.getCategoria();
+		this.category = Utilities.getCategoria();
 	}
-	
+
 	private void setChoiceBox() throws SQLException {
-		sesso.setItems(FXCollections.observableArrayList("Maschio","Femmina","Altro"));
-		preferenza.setItems(FXCollections.observableArrayList("Dx","Sx","DS"));
+		sesso.setItems(FXCollections.observableArrayList("Maschio", "Femmina", "Altro"));
+		preferenza.setItems(FXCollections.observableArrayList("Dx", "Sx", "DS"));
 		ruolo.setItems(FXCollections.observableArrayList(Utilities.getSport()));
 	}
-	
+
 	public void setSesso() {
 		sesso.show();
 	}
-	
+
 	public void setPreferenza() {
 		preferenza.show();
 	}
-	
+
 	public void setRuolo() {
 		ruolo.show();
 	}
-	
+
 	private void setSociety() {
 		Pair<Image, Society> society = null;
 		society = Utilities.getSociety();
@@ -128,14 +128,17 @@ public class InsertPlayerView extends ViewImpl{
 		this.color1.setFill(Color.valueOf(society.getY().getColor1()));
 		this.color2.setFill(Color.valueOf(society.getY().getColor2()));
 	}
-	
+
 	private boolean check() {
-		if(nameText.getText().isEmpty() || surnameText.getText().isEmpty() || cfText.getText().isEmpty() || dataText.getText().isEmpty() || matricolaText.getText().isEmpty() || pesoText.getText().isEmpty() || altezzaText.getText().isEmpty() || certificatoText.getText().isEmpty() || sesso.getValue().isEmpty() || preferenza.getValue().isEmpty() || ruolo.getValue().isEmpty()) {
+		if (nameText.getText().isEmpty() || surnameText.getText().isEmpty() || cfText.getText().isEmpty()
+				|| dataText.getText().isEmpty() || matricolaText.getText().isEmpty() || pesoText.getText().isEmpty()
+				|| altezzaText.getText().isEmpty() || certificatoText.getText().isEmpty() || sesso.getValue().isEmpty()
+				|| preferenza.getValue().isEmpty() || ruolo.getValue().isEmpty()) {
 			return false;
 		}
 		return true;
 	}
-	
+
 	public void oneFileChooser() {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Selezionare un logo per la società");
@@ -145,27 +148,31 @@ public class InsertPlayerView extends ViewImpl{
 			playerPath.setText(file.getPath());
 		}
 	}
-	
+
 	public void insert() throws NumberFormatException, SQLException, IOException {
 		if(Utilities.isFreeCF(this.cfText.getText())) {
-			if(this.check()) {
-				Payment pagamento = new Payment(1000, false, Finanze.QUOTA);
-				pagamento.insert();
-				if(this.playerPath.getText().isEmpty()) {
-					Player player = new Player(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getText()),
-							(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(), Integer.parseInt(this.matricolaText.getText()), this.pesoText.getText(),
-							this.altezzaText.getText(), new DateTime(this.certificatoText.getText()), ruolo.getValue(), this.category, preferenza.getValue());
-					player.insert();
+			if(this.cfText.getText().length() == 16) {
+				if(this.check()) {
+					Payment pagamento = new Payment(1000, false, Finanze.QUOTA);
+					pagamento.insert();
+					if(this.playerPath.getText().isEmpty()) {
+						Player player = new Player(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getText()),
+								(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(), Integer.parseInt(this.matricolaText.getText()), this.pesoText.getText(),
+								this.altezzaText.getText(), new DateTime(this.certificatoText.getText()), ruolo.getValue(), this.category, preferenza.getValue());
+						player.insert();
+					} else {
+						Immagine image = new Immagine(playerPath.getText());
+						Player player = new Player(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getText()),
+								(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(),image, Integer.parseInt(this.matricolaText.getText()), this.pesoText.getText(),
+								this.altezzaText.getText(), new DateTime(this.certificatoText.getText()), ruolo.getValue(), this.category, preferenza.getValue());
+						player.insert();
+					}
+					this.getStage().close();
 				} else {
-					Immagine image = new Immagine(playerPath.getText());
-					Player player = new Player(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getText()),
-						(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(),image, Integer.parseInt(this.matricolaText.getText()), this.pesoText.getText(),
-						this.altezzaText.getText(), new DateTime(this.certificatoText.getText()), ruolo.getValue(), this.category, preferenza.getValue());
-					player.insert();
+					message.setText("Inserire tutte le informazioni");
 				}
-				this.getStage().close();
 			} else {
-				message.setText("Inserire tutte le informazioni");
+				message.setText("CF deve essere di 16 cifre");
 			}
 		} else {
 			message.setText("CF già in uso");

@@ -126,24 +126,28 @@ public class InsertDirigentView extends ViewImpl{
 	
 	public void insert() throws NumberFormatException, SQLException, IOException {
 		if(Utilities.isFreeCF(this.cfText.getText())) {
-			if(this.check()) {
-				Payment pagamento = new Payment(1000, false, Finanze.QUOTA);
-				pagamento.insert();
-				if(this.dirigentPath.getText().isEmpty()) {
-					Manager manager = new Manager(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getText()),
-						(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(), Integer.parseInt(this.matricolaText.getText()),
-						ruolo.getValue());
-					manager.insert();
+			if(this.cfText.getText().length() == 16) {
+				if(this.check()) {
+					Payment pagamento = new Payment(1000, false, Finanze.QUOTA);
+					pagamento.insert();
+					if(this.dirigentPath.getText().isEmpty()) {
+						Manager manager = new Manager(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getText()),
+								(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(), Integer.parseInt(this.matricolaText.getText()),
+								ruolo.getValue());
+						manager.insert();
+					} else {
+						Immagine image = new Immagine(dirigentPath.getText());
+						Manager manager = new Manager(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getText()),
+								(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(),image, Integer.parseInt(this.matricolaText.getText()),
+								ruolo.getValue());
+						manager.insert();
+					}
+					this.getStage().close();
 				} else {
-					Immagine image = new Immagine(dirigentPath.getText());
-					Manager manager = new Manager(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getText()),
-						(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(),image, Integer.parseInt(this.matricolaText.getText()),
-						ruolo.getValue());
-					manager.insert();
+					message.setText("Inserire tutte le informazioni");
 				}
-				this.getStage().close();
 			} else {
-				message.setText("Inserire tutte le informazioni");
+				message.setText("CF deve essere di 16 cifre");
 			}
 		} else {
 			message.setText("CF già in uso");

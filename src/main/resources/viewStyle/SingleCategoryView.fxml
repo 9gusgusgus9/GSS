@@ -40,6 +40,7 @@
                         <Font name="Georgia" size="36.0" />
                      </font>
                   </Label>
+                  <Button fx:id="refresh" layoutX="1358.0" layoutY="13.0" mnemonicParsing="false" onAction="#refreshStage" prefHeight="31.0" prefWidth="125.0" text="Refresh" />
                </children>
             </Pane>
             <SplitPane dividerPositions="0.5" prefHeight="560.0" prefWidth="1500.0">

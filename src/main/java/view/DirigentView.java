@@ -50,6 +50,9 @@ public class DirigentView extends ViewImpl{
     @FXML
     private Button addDirigent;
     
+	@FXML 
+	Button refresh;
+    
 	@Override
 	public void init() {
 		this.setSociety();
@@ -91,6 +94,12 @@ public class DirigentView extends ViewImpl{
 		    });
 		    return row ;
 		});
+	}
+	
+	@FXML
+	private void refreshStage() {
+		init();
+		
 	}
 }
 
