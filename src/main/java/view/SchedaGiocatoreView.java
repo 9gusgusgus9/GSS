@@ -144,7 +144,7 @@ public class SchedaGiocatoreView extends ViewImpl{
 			this.matricolaText.setText(Integer.toString(player.getY().getPersona().getMatricola()));
 			this.preferenza.setText(player.getY().getCodPreferenza());
 			this.ruolo.setText(player.getY().getCodRuolo());
-		} else if(Utilities.getMansionByCF(CF).equals("Dpirigente")){
+		} else if(Utilities.getMansionByCF(CF).equals("Dirigente")){
 			Pair<Image, Manager> manager = null;
 			manager = Utilities.getDirigent(CF);
 			this.playerImage.setImage(manager.getX());
