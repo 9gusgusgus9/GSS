@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import entity.Category;
 import entity.Manager;
+import entity.Person;
 import entity.Player;
 import entity.Society;
 import entity.Staff;
@@ -92,6 +93,9 @@ public class SchedaGiocatoreView extends ViewImpl{
 	
 	@FXML
 	Button new_doc, doc;
+	
+	@FXML
+	Button deleteButton;
 	
 	private int category;
 	
@@ -183,6 +187,29 @@ public class SchedaGiocatoreView extends ViewImpl{
 			this.altezza.setVisible(false);
 			this.scadenza.setVisible(false);
 		}
+	}
+	
+	public void delete() {
+		if(Utilities.getMansionByCF(CF).equals("Giocatore")) {
+			Pair<Image, Player> player = null;
+			player = Utilities.getPlayer(CF);
+			Person persona = player.getY().getPersona();
+			player.getY().delete();
+			persona.delete();
+		} else if(Utilities.getMansionByCF(CF).equals("Dirigente")){
+			Pair<Image, Manager> manager = null;
+			manager = Utilities.getDirigent(CF);
+			Person persona = manager.getY().getPersona();
+			manager.getY().delete();
+			persona.delete();
+		} else {
+			Pair<Image, Staff> staff = null;
+			staff = Utilities.getStaff(CF);
+			Person persona = staff.getY().getPersona();
+			staff.getY().delete();
+			persona.delete();
+		}
+		this.close();
 	}
 	
 	public void close() {
