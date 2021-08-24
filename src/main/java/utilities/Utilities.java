@@ -757,6 +757,14 @@ public class Utilities {
 		}
 		return "";
 	}
+	
+	public static List<Image> getAllDocuments(String cf){
+		List<Image> documents = new LinkedList<>();
+		dbConnection();
+		String sql = "SELECT pos.CF, p FROM possesso AS pos WHERE pos.CF = '" + cf + "'"; 
+		
+		return documents;
+	}
 
 	/*Metodo che elimina l'entita in input*/
 	public static void deleteEntity(Entity entity){
@@ -783,6 +791,8 @@ public class Utilities {
 			e.printStackTrace();
 		}
 	}
+	
+	
 	
 	/*Metodi utili per recuperare l'evento/la categoria /la persona da visualizzare*/
 	public static void setCategoria(int id) {

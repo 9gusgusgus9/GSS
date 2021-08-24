@@ -12,7 +12,6 @@ import view.ViewType;
 public class Launcher extends Application{
 
 	public static void main(String[] args) throws SQLException, IOException {
-
 		launch(args);
 		 
 	}
