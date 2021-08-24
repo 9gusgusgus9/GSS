@@ -1,10 +1,14 @@
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import entity.Evento;
 import entity.Society;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -47,13 +51,19 @@ public class SingleEventView extends ViewImpl{
 	HBox infoBox;
 	
 	@FXML
-	Label setRisultato;
+	TextField setRisultato;
 	
 	@FXML
 	Button showButton;
 	
 	@FXML
 	Button deleteEvent;
+	
+	@FXML
+	Button insertRisultato;
+	
+	@FXML
+	Button saveRisultato;
 	
 	private Evento e;
 
@@ -64,14 +74,26 @@ public class SingleEventView extends ViewImpl{
 		dataInizio.setText(Utilities.getEvent().getInizio().getDate());
 		dataFine.setText(Utilities.getEvent().getFine().getDate());
 		nomeEvento.setText(Utilities.getEvent().getEvent());
+		setRisultato.setText(e.getRisultato());
 		deleteEvent.setStyle("-fx-background-color: Red");
 		if (e.getTipoEvento() == "Partita") {
-			setRisultato.setText(e.getRisultato());
+			saveRisultato.setVisible(false);
+			setRisultato.setEditable(false);
+			insertRisultato.setOnMouseClicked(f->{
+				saveRisultato.setVisible(true);
+				setRisultato.setEditable(true);
+			});
+			saveRisultato.setOnMouseClicked(f->{
+				e.setRisultato(setRisultato.getText());
+				saveRisultato.setVisible(false);
+				setRisultato.setEditable(false);
+			});
 		}else if (e.getTipoEvento() == "Allenamento") {
-			setRisultato.setVisible(false);
-			risultato.setVisible(false);
+			infoBox.setVisible(false);
+			insertRisultato.setVisible(false);
 		}else {
 			infoBox.setVisible(false);
+			insertRisultato.setVisible(false);
 		}
 	}
 	
@@ -96,5 +118,5 @@ public class SingleEventView extends ViewImpl{
 		Utilities.deleteEntity(e);
 		getStage().close();
 	}
-
+	
 }
