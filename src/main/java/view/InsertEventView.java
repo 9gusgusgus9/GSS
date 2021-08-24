@@ -166,7 +166,7 @@ public class InsertEventView extends ViewImpl {
 						new DateTime(this.fine.getValue().getYear(), this.fine.getValue().getMonthValue(),
 								this.fine.getValue().getDayOfMonth()),
 						Utilities.getSociety().getY().getPrimaryKey(), this.nomeAvv.getText(),
-						this.categoria.getValue().getY());
+						this.categoria.getValue().getY(), null);
 				event.insert();
 				Utilities.setEvent(event);
 				Utilities.inviteFromCategory((int) event.getPrimaryKey(), this.categoria.getValue().getY());

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.control.*?>
@@ -48,7 +49,12 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="setRisultato" text="Label" />
+                  <TextField fx:id="setRisultato" prefHeight="31.0" prefWidth="74.0" />
+                  <Button fx:id="saveRisultato" mnemonicParsing="false" text="Salva">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="80.0" prefWidth="500.0" spacing="30.0">
@@ -75,6 +81,11 @@
                <children>
                   <Button fx:id="showButton" mnemonicParsing="false" onAction="#showConvocati" text="Modifica Convocati" />
                   <Button fx:id="deleteEvent" mnemonicParsing="false" onAction="#deleteEvent" text="Delete" textFill="#0a0a0a" />
+                  <Button fx:id="insertRisultato" mnemonicParsing="false" prefHeight="31.0" prefWidth="147.0" text="Modifica Risultato">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
             </HBox>
          </children>

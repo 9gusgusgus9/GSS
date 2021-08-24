@@ -39,13 +39,17 @@ public class Evento extends Entity {
 	}
 	
 	//PARTITA
-	public Evento(DateTime inizio, DateTime fine, String codPartitaIva, String avversario, int codiceCategoria){
+	public Evento(DateTime inizio, DateTime fine, String codPartitaIva, String avversario, int codiceCategoria, String risultato){
 		this.inizio=inizio;
 		this.fine=fine;
 		this.codPartitaIva=codPartitaIva;
 		this.codCategoria=codiceCategoria;
 		this.nomeAvversario=avversario;
-		this.risultato="ND";
+		if(risultato==null) {
+			this.risultato="ND";
+		} else {
+			this.risultato=risultato;
+		}
 		this.tipoEvento = "Partita";
 		this.evento = new SimpleStringProperty(Utilities.getOnlyCategory(this.codCategoria).getNome() + " vs " + this.nomeAvversario);
 	}
