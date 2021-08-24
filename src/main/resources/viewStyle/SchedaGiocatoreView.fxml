@@ -134,6 +134,7 @@
                      <children>
                         <Button fx:id="new_doc" mnemonicParsing="false" text="Inserisci documento" />
                         <Button fx:id="doc" mnemonicParsing="false" text="Visualizza documenti" />
+                        <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#delete" text="Delete" textFill="#0a0a0a" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="1500.0">

@@ -45,7 +45,7 @@ public class Utilities {
 	
 	private static Connection conn;
 	private static Statement stmt;
-	private static String password;
+	private static String password = "Tommasocalcio10";
 	static {
 
 	}
