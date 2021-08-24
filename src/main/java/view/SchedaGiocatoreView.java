@@ -17,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import utilities.Pair;
 import utilities.Utilities;
 
@@ -187,6 +188,10 @@ public class SchedaGiocatoreView extends ViewImpl{
 			this.altezza.setVisible(false);
 			this.scadenza.setVisible(false);
 		}
+	}
+	
+	public void insertDocument() {
+		ViewSwitcher.getInstance().switchView(new Stage(), ViewType.INSERTDOCUMENT);
 	}
 	
 	public void delete() {

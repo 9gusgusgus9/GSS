@@ -45,7 +45,7 @@ public class Utilities {
 	
 	private static Connection conn;
 	private static Statement stmt;
-	private static String password = "Tommasocalcio10";
+	private static String password = "Gu$tavo191199";
 	static {
 
 	}
@@ -182,6 +182,10 @@ public class Utilities {
 		}
 	}
 	
+	public static void insertDocument(String cf, Immagine document, int tipoDocumento) {
+		
+	}
+	
 	
 	/*Metodo per invitare tutte le persone appartenenti alla categoria in input*/
 	public static void inviteFromCategory(int codEvento, int codCategoria) {
@@ -214,6 +218,22 @@ public class Utilities {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public static List<Pair<Integer, String>> getDocumentsType(){
+		dbConnection();
+		List<Pair<Integer, String>> list = new LinkedList<>();
+		String query = "SELECT * FROM tipo_documento";
+		ResultSet rs;
+		try {
+			rs = stmt.executeQuery(query);
+			while(rs.next()) {
+				list.add(new Pair<>(rs.getInt("IdDocumento"), rs.getString("Nome")));
+			}
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return list;
@@ -347,7 +367,7 @@ public class Utilities {
 				String[] inizio = rs.getString("Inizio").split("/");
 				String[] fine = rs.getString("Fine").split("/");
 					if(rs.getString("NomeAvversario") != null) {
-						Evento e = new Evento(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[2]), Integer.parseInt(fine[1]), Integer.parseInt(fine[0])), rs.getString("CodPartitaIVA"), rs.getString("NomeAvversario"), rs.getInt("CodCategoria"));
+						Evento e = new Evento(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[2]), Integer.parseInt(fine[1]), Integer.parseInt(fine[0])), rs.getString("CodPartitaIVA"), rs.getString("NomeAvversario"), rs.getInt("CodCategoria"), rs.getString("IdCategoria"));
 						e.setPrimaryKey(rs.getInt("IdEvento"));
 						events.add(e);
 					} else if (rs.getString("CodCategoria") != null){
@@ -621,7 +641,7 @@ public class Utilities {
 			rs = stmt.executeQuery(query);
 			rs.next();
 			if(rs.getString("NomeAvversario") != null) {
-				event = new Evento(new DateTime(rs.getString("Inizio")), new DateTime(rs.getString("Fine")), rs.getString("CodPartitaIVA"), rs.getString("Avversario"), rs.getInt("CodCategoria"));
+				event = new Evento(new DateTime(rs.getString("Inizio")), new DateTime(rs.getString("Fine")), rs.getString("CodPartitaIVA"), rs.getString("Avversario"), rs.getInt("CodCategoria"), rs.getString("Risultato"));
 				result = Optional.of(rs.getString("Risultato"));
 			} else if(rs.getString("Descrizione_generico") != null) {
 				event = new Evento(new DateTime(rs.getString("Inizio")), new DateTime(rs.getString("Fine")), rs.getString("CodPartitaIVA"), rs.getString("Descrizione_generico"));

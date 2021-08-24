@@ -25,7 +25,9 @@ public enum ViewType {
 	SCHEDAGIOCATORE("SchedaGiocatoreView"),
 	INSERTEVENT("InsertEventView"),
 	CONVOCATIONS("Convocations"),
+	INSERTDOCUMENT("InsertDocument"),
 	INSERTDIRIGENT("InsertDirigentView");
+	
 	
 
     /**
