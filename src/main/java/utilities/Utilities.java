@@ -2,10 +2,13 @@ package utilities;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -183,9 +186,16 @@ public class Utilities {
 	}
 	
 	public static void insertDocument(String cf, Immagine document, int tipoDocumento) {
-		
+		document.insert();
+		dbConnection();
+		String query = "INSERT INTO possesso (CodDocumento, CF, CodImmagine) VALUES (" + tipoDocumento + ", '" + cf + "', " + (int) document.getPrimaryKey() + ")";
+		try {
+			stmt.execute(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	
 	
 	/*Metodo per invitare tutte le persone appartenenti alla categoria in input*/
 	public static void inviteFromCategory(int codEvento, int codCategoria) {
@@ -203,6 +213,36 @@ public class Utilities {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static List<Pair<File, String>> getAllDocumentsFromCF(String cf){
+		dbConnection();
+		List<Pair<File, String>> out = new LinkedList<>();
+		String query = "SELECT q2.Nome AS Tipo, q1.DatiFile, q1.Nome, q1.TipoFile FROM (SELECT * FROM immagine) AS q1 INNER JOIN (SELECT * FROM team_management.possesso AS p INNER JOIN tipo_documento AS t ON p.CodDocumento = t.IdDocumento WHERE p.CF = '" + cf + "') AS q2 WHERE q2.CodImmagine = q1.IdImmagine";
+		try {
+			ResultSet rs = stmt.executeQuery(query);
+			while(rs.next()) {
+				Blob blob = rs.getBlob("DatiFile");
+				
+			    byte [] array = blob.getBytes( 1, ( int ) blob.length() );
+			    File file;
+				try {
+					file = File.createTempFile(rs.getString("Nome"), rs.getString("TipoFile"), new File(System.getProperty("java.io.tmpdir")));
+					
+					FileOutputStream fileOut = new FileOutputStream( file );
+				    fileOut.write( array );
+				    fileOut.close();
+				    out.add(new Pair<>(file, rs.getString("Tipo")));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}			    
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return out;
 	}
 	
 	/*Metodo che restituisce la lista dei ruoli relativi allo sport selezionato al primo avvio*/
@@ -367,7 +407,7 @@ public class Utilities {
 				String[] inizio = rs.getString("Inizio").split("/");
 				String[] fine = rs.getString("Fine").split("/");
 					if(rs.getString("NomeAvversario") != null) {
-						Evento e = new Evento(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[2]), Integer.parseInt(fine[1]), Integer.parseInt(fine[0])), rs.getString("CodPartitaIVA"), rs.getString("NomeAvversario"), rs.getInt("CodCategoria"), rs.getString("IdCategoria"));
+						Evento e = new Evento(new DateTime(Integer.parseInt(inizio[2]), Integer.parseInt(inizio[1]), Integer.parseInt(inizio[0])), new DateTime(Integer.parseInt(fine[2]), Integer.parseInt(fine[1]), Integer.parseInt(fine[0])), rs.getString("CodPartitaIVA"), rs.getString("NomeAvversario"), rs.getInt("CodCategoria"), rs.getString("Risultato"));
 						e.setPrimaryKey(rs.getInt("IdEvento"));
 						events.add(e);
 					} else if (rs.getString("CodCategoria") != null){

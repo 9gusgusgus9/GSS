@@ -133,7 +133,7 @@
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="1500.0" spacing="70.0">
                      <children>
                         <Button fx:id="new_doc" mnemonicParsing="false" onAction="#insertDocument" text="Inserisci documento" />
-                        <Button fx:id="doc" mnemonicParsing="false" text="Visualizza documenti" />
+                        <Button fx:id="doc" mnemonicParsing="false" onAction="#viewAllDocuments" text="Visualizza documenti" />
                         <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#delete" text="Delete" textFill="#0a0a0a" />
                      </children>
                   </HBox>

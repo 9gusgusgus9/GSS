@@ -1,7 +1,11 @@
 package view;
 
 import java.io.File;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
+import entity.Document;
 import entity.Evento;
 import entity.Immagine;
 import entity.Society;
@@ -43,7 +47,7 @@ public class InsertDocument extends ViewImpl{
 	Rectangle color2;
 	
 	@FXML
-	ChoiceBox<Pair<Integer, String>> tipo;
+	ChoiceBox<String> tipo;
 	
 	@FXML
 	TextField path;
@@ -57,7 +61,11 @@ public class InsertDocument extends ViewImpl{
 	@Override
 	public void init() {
 		this.setSociety();
-		this.tipo.setItems(FXCollections.observableArrayList(Utilities.getDocumentsType()));
+		List<String> tipi = new LinkedList<>();
+		Utilities.getDocumentsType().forEach(p -> {
+			tipi.add(p.getY());
+		});
+		this.tipo.setItems(FXCollections.observableArrayList(tipi));
 	}
 	
 	public void oneFileChooser() {
@@ -71,12 +79,20 @@ public class InsertDocument extends ViewImpl{
 	}
 	
 	public void insertDocument() {
-		if(this.path.getText().isEmpty() || this.tipo.getValue().getY().isEmpty()) {
+		if(this.path.getText().isEmpty() || this.tipo.getValue().isEmpty()) {
 			System.out.println("OK");
 		} else {
-			System.out.println("NO");
-			//Immagine document = new Immagine(path.getText());
-			
+			Immagine document = new Immagine(path.getText());
+			int idTipo = 0;
+			Iterator<Pair<Integer, String>> iter = Utilities.getDocumentsType().iterator();
+			while(iter.hasNext()) {
+				Pair<Integer, String> pair = iter.next();
+				if(pair.getY().equals(tipo.getValue())) {
+					idTipo = pair.getX();
+				}
+			}
+			Utilities.insertDocument(Utilities.getCF(), document, idTipo);
+			getStage().close();
 		}
 	}
 	

@@ -1,6 +1,10 @@
 package view;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Iterator;
 
 import entity.Category;
 import entity.Manager;
@@ -192,6 +196,19 @@ public class SchedaGiocatoreView extends ViewImpl{
 	
 	public void insertDocument() {
 		ViewSwitcher.getInstance().switchView(new Stage(), ViewType.INSERTDOCUMENT);
+	}
+	
+	public void viewAllDocuments() {
+		Iterator<Pair<File, String>> iter = Utilities.getAllDocumentsFromCF(Utilities.getCF()).iterator();
+		while(iter.hasNext()) {
+			Pair<File, String> pair = iter.next();
+			try {
+				Desktop.getDesktop().open(pair.getX());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public void delete() {
