@@ -852,7 +852,7 @@ public class Utilities {
 		String query = "SELECT * FROM possesso WHERE CF = '" + cf + "'";
 		try {
 			ResultSet rs = stmt.executeQuery(query);
-			List<Integer> documents = new LinkedList();
+			List<Integer> documents = new LinkedList<>();
 			while(rs.next()) {
 				documents.add(rs.getInt("CodImmagine"));
 			}

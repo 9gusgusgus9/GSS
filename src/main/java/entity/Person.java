@@ -164,6 +164,7 @@ public class Person extends Entity{
 	@Override
 	public void delete() {
 		Utilities.deleteDocumentsFromCf(getCf());
+		Utilities.deletePersonInConvene(this);
 		super.delete();
 	}
 	
