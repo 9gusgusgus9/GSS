@@ -1,10 +1,7 @@
 package view;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
-
 import entity.Immagine;
 import entity.Society;
 import entity.Sport;
@@ -12,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -63,8 +59,6 @@ public class StartView extends ViewImpl {
 	private String societyName = null;
 	private String partitaIVA = null;
 	private String logo = null;
-	private String colorA = null;
-	private String colorB = null;
 	private Sport sport = Sport.NONSELEZIONATO;
 	private boolean flag = true;
 	

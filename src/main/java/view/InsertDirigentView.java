@@ -76,13 +76,10 @@ public class InsertDirigentView extends ViewImpl{
 	@FXML
 	ChoiceBox<String> ruolo;
 	
-	private int category;
-	
 	@Override
 	public void init() {
 		this.setSociety();
 		this.setChoiceBox();
-		this.category=Utilities.getCategoria();
 	}
 	
 	private void setChoiceBox() {

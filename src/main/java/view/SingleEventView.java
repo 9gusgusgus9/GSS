@@ -1,8 +1,5 @@
 package view;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import entity.Evento;
 import entity.Society;
 import javafx.fxml.FXML;

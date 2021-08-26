@@ -1,7 +1,5 @@
 package view;
 
-import controller.Controller;
-import controller.StartViewController;
 
 /**
  * Enum for the Views, each one has her Style-File ".fxml" and her specific

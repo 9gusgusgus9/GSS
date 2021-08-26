@@ -18,7 +18,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -51,16 +50,12 @@ public class CategoryView extends ViewImpl {
 
 	@FXML
 	private Label label1;
-
-	private int flag1 = 0;
-
+	
 	@FXML
 	private ImageView image2;
 
 	@FXML
 	private Label label2;
-
-	private int flag2 = 0;
 
 	@FXML
 	private ImageView image3;
@@ -68,15 +63,11 @@ public class CategoryView extends ViewImpl {
 	@FXML
 	private Label label3;
 
-	private int flag3 = 0;
-
 	@FXML
 	private ImageView image4;
 
 	@FXML
 	private Label label4;
-
-	private int flag4 = 0;
 
 	@FXML
 	private ImageView image5;
@@ -84,15 +75,11 @@ public class CategoryView extends ViewImpl {
 	@FXML
 	private Label label5;
 
-	private int flag5 = 0;
-
 	@FXML
 	private ImageView image6;
 
 	@FXML
 	private Label label6;
-
-	private int flag6 = 0;
 
 	@FXML
 	private ImageView image7;
@@ -100,15 +87,11 @@ public class CategoryView extends ViewImpl {
 	@FXML
 	private Label label7;
 
-	private int flag7 = 0;
-
 	@FXML
 	private ImageView image8;
 
 	@FXML
 	private Label label8;
-
-	private int flag8 = 0;
 
 	@FXML
 	private ImageView image9;
@@ -116,15 +99,11 @@ public class CategoryView extends ViewImpl {
 	@FXML
 	private Label label9;
 
-	private int flag9 = 0;
-
 	@FXML
 	private ImageView image10;
 
 	@FXML
 	private Label label10;
-
-	private int flag10 = 0;
 
 	@FXML
 	private ImageView image11;
@@ -132,15 +111,11 @@ public class CategoryView extends ViewImpl {
 	@FXML
 	private Label label11;
 
-	private int flag11 = 0;
-
 	@FXML
 	private ImageView image12;
 
 	@FXML
 	private Label label12;
-
-	private int flag12 = 0;
 
 	@FXML
 	private ImageView image13;
@@ -148,23 +123,17 @@ public class CategoryView extends ViewImpl {
 	@FXML
 	private Label label13;
 
-	private int flag13 = 0;
-
 	@FXML
 	private ImageView image14;
 
 	@FXML
 	private Label label14;
 
-	private int flag14 = 0;
-
 	@FXML
 	private ImageView image15;
 
 	@FXML
 	private Label label15;
-
-	private int flag15 = 0;
 
 	@FXML
 	private Button prec, succ, nuova;
@@ -274,7 +243,6 @@ public class CategoryView extends ViewImpl {
 			Pair<Category, Image> next = (Pair<Category, Image>) iter.next();
 			this.getLabel(c).setText(next.getX().getNome());
 			this.getImageView(c).setImage(next.getY());
-			this.setFlag(c, (int) next.getX().getPrimaryKey());
 			this.getImageView(c).setOnMouseClicked(new EventHandler<Event>() {
 
 				@Override
@@ -288,7 +256,6 @@ public class CategoryView extends ViewImpl {
 		while(c<=15) {
 			this.getLabel(c).setText("");
 			this.getImageView(c).setImage(null);
-			this.setFlag(c, 0);
 			this.getImageView(c).setOnMouseClicked(null);
 			c++;
 		}
@@ -379,77 +346,6 @@ public class CategoryView extends ViewImpl {
 			return this.image15;
 		}
 		return new ImageView();
-	}
-
-	private int getFlag(int x) {
-		switch (x) {
-		case 1:
-			return this.flag1;
-		case 2:
-			return this.flag2;
-		case 3:
-			return this.flag3;
-		case 4:
-			return this.flag4;
-		case 5:
-			return this.flag5;
-		case 6:
-			return this.flag6;
-		case 7:
-			return this.flag7;
-		case 8:
-			return this.flag8;
-		case 9:
-			return this.flag9;
-		case 10:
-			return this.flag10;
-		case 11:
-			return this.flag11;
-		case 12:
-			return this.flag12;
-		case 13:
-			return this.flag13;
-		case 14:
-			return this.flag14;
-		case 15:
-			return this.flag15;
-		}
-		return 0;
-	}
-
-	private void setFlag(int x, int id) {
-		switch (x) {
-		case 1:
-			this.flag1 = id;
-		case 2:
-			this.flag2 = id;
-		case 3:
-			this.flag3 = id;
-		case 4:
-			this.flag4 = id;
-		case 5:
-			this.flag5 = id;
-		case 6:
-			this.flag6 = id;
-		case 7:
-			this.flag7 = id;
-		case 8:
-			this.flag8 = id;
-		case 9:
-			this.flag9 = id;
-		case 10:
-			this.flag10 = id;
-		case 11:
-			this.flag11 = id;
-		case 12:
-			this.flag12 = id;
-		case 13:
-			this.flag13 = id;
-		case 14:
-			this.flag14 = id;
-		case 15:
-			this.flag15 = id;
-		}
 	}
 
 	@FXML
