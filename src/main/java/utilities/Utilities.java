@@ -3,7 +3,6 @@ package utilities;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -817,21 +816,13 @@ public class Utilities {
 		}
 		return "";
 	}
-	
-	public static List<Image> getAllDocuments(String cf){
-		List<Image> documents = new LinkedList<>();
-		dbConnection();
-		String sql = "SELECT pos.CF, p FROM possesso AS pos WHERE pos.CF = '" + cf + "'"; 
-		
-		return documents;
-	}
 
 	/*Metodo che elimina l'entita in input*/
 	public static void deleteEntity(Entity entity){
 		dbConnection();
 
 		try {
-			stmt.executeUpdate("DELETE FROM " + entity.getTableName() + " AS e WHERE e." + entity.getNamePrimaryKey() + "=" + entity.getPrimaryKey());
+			stmt.executeUpdate("DELETE FROM " + entity.getTableName() + " AS e WHERE e." + entity.getNamePrimaryKey() + "= '" + entity.getPrimaryKey() + "'");
 			conn.close();
 			stmt.close();
 		} catch (SQLException e) {
