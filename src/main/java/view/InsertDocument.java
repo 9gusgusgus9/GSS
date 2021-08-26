@@ -29,31 +29,31 @@ public class InsertDocument extends ViewImpl{
 	private AnchorPane pane;
 	
 	@FXML
-	Label nameLabel;
+	private Label nameLabel;
 	
 	@FXML
-	Button newEvento;
+	private Button newEvento;
 	
 	@FXML
-	ImageView logo;
+	private ImageView logo;
 	
 	@FXML
-	Rectangle color1;
+	private Rectangle color1;
 	
 	@FXML
-	Rectangle color2;
+	private Rectangle color2;
 	
 	@FXML
-	ChoiceBox<String> tipo;
+	private ChoiceBox<String> tipo;
 	
 	@FXML
-	TextField path;
+	private TextField path;
 	
 	@FXML
-	Button browse;
+	private Button browse;
 	
 	@FXML
-	Button inserisci;
+	private Button inserisci;
 	
 	@Override
 	public void init() {

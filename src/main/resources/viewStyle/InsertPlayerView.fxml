@@ -64,7 +64,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="certificatoText" layoutX="1287.0" layoutY="55.0" promptText="InserisciData" />
+                        <DatePicker fx:id="certificatoText" layoutX="1276.0" layoutY="55.0" />
                      </children>
                   </Pane>
                </children>
@@ -73,7 +73,6 @@
                <children>
                   <Pane prefHeight="100.0" prefWidth="1549.0">
                      <children>
-                        <TextField fx:id="dataText" layoutX="169.0" layoutY="35.0" promptText="Inserisci Data" />
                         <Label layoutX="65.0" layoutY="35.0" prefHeight="30.0" prefWidth="67.0" text="Nato il">
                            <font>
                               <Font size="20.0" />
@@ -103,6 +102,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
+                        <DatePicker fx:id="dataText" layoutX="141.0" layoutY="35.0" />
                      </children>
                   </Pane>
                </children>

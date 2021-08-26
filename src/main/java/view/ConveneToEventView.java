@@ -18,34 +18,34 @@ import utilities.Utilities;
 public class ConveneToEventView extends ViewImpl{
 	
 	@FXML
-	Label nameLabel;
+	private Label nameLabel;
 	
 	@FXML
-	ImageView logo;
+	private ImageView logo;
 	
 	@FXML
-	Rectangle color1;
+	private Rectangle color1;
 	
 	@FXML
-	Rectangle color2;
+	private Rectangle color2;
 	
 	@FXML
-	TableView<Person> gridConvene;
+	private TableView<Person> gridConvene;
 	
 	@FXML
-	TableColumn<Person, String> nome;
+	private TableColumn<Person, String> nome;
 	
 	@FXML
-	TableColumn<Person, String> cognome;
+	private TableColumn<Person, String> cognome;
 	
 	@FXML
-	TableColumn<Person, String> codRuolo;
+	private TableColumn<Person, String> codRuolo;
 	
 	@FXML
-	TableColumn<Person, String> codCategoria;
+	private TableColumn<Person, String> codCategoria;
 	
 	@FXML
-	Label event;
+	private Label event;
 	
 	@Override
 	public void init(){

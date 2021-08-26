@@ -18,49 +18,49 @@ import utilities.Utilities;
 public class SingleEventView extends ViewImpl{
 
 	@FXML
-	Label nameLabel;
+	private Label nameLabel;
 	
 	@FXML
-	Button newEvento;
+	private Button newEvento;
 	
 	@FXML
-	ImageView logo;
+	private ImageView logo;
 	
 	@FXML
-	Rectangle color1;
+	private Rectangle color1;
 	
 	@FXML
-	Rectangle color2;
+	private Rectangle color2;
 	
 	@FXML
-	Label nomeEvento;
+	private Label nomeEvento;
 	
 	@FXML
-	Label dataInizio;
+	private Label dataInizio;
 	
 	@FXML
-	Label dataFine;
+	private Label dataFine;
 	
 	@FXML
-	Label risultato;
+	private Label risultato;
 	
 	@FXML 
-	HBox infoBox;
+	private HBox infoBox;
 	
 	@FXML
-	TextField setRisultato;
+	private TextField setRisultato;
 	
 	@FXML
-	Button showButton;
+	private Button showButton;
 	
 	@FXML
-	Button deleteEvent;
+	private Button deleteEvent;
 	
 	@FXML
-	Button insertRisultato;
+	private Button insertRisultato;
 	
 	@FXML
-	Button saveRisultato;
+	private Button saveRisultato;
 	
 	private Evento e;
 

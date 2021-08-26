@@ -13,6 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -44,37 +45,37 @@ public class InsertStaffView extends ViewImpl{
 	private Rectangle color2;
 	
 	@FXML
-	TextField nameText;
+	private TextField nameText;
 	
 	@FXML
-	TextField surnameText;
+	private TextField surnameText;
 	
 	@FXML
-	TextField cfText;
+	private TextField cfText;
 	
 	@FXML
-	TextField dataText;
+	private DatePicker dataText;
 	
 	@FXML
-	TextField matricolaText;
+	private TextField matricolaText;
 
 	@FXML
-	TextField message;
+	private TextField message;
 
 	@FXML
-	TextField staffPath;
+	private TextField staffPath;
 	
 	@FXML
-	Button insertButton;
+	private Button insertButton;
 	
 	@FXML
-	Button browse;
+	private Button browse;
 	
 	@FXML
-	ChoiceBox<String> sesso;
+	private ChoiceBox<String> sesso;
 	
 	@FXML
-	ChoiceBox<String> ruolo;
+	private ChoiceBox<String> ruolo;
 	
 	private int category;
 	
@@ -108,7 +109,7 @@ public class InsertStaffView extends ViewImpl{
 	}
 	
 	private boolean check() {
-		if(nameText.getText().isEmpty() || surnameText.getText().isEmpty() || cfText.getText().isEmpty() || dataText.getText().isEmpty() || matricolaText.getText().isEmpty() || sesso.getValue().isEmpty() || ruolo.getValue().isEmpty()) {
+		if(nameText.getText().isEmpty() || surnameText.getText().isEmpty() || cfText.getText().isEmpty() || dataText.getValue() == null || matricolaText.getText().isEmpty() || sesso.getValue().isEmpty() || ruolo.getValue().isEmpty()) {
 			return false;
 		}
 		return true;
@@ -131,13 +132,13 @@ public class InsertStaffView extends ViewImpl{
 					Payment pagamento = new Payment(1000, false, Finanze.QUOTA);
 					pagamento.insert();
 					if(this.staffPath.getText().isEmpty()) {
-						Staff staff = new Staff(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getText()),
+						Staff staff = new Staff(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getValue().getYear(), this.dataText.getValue().getMonthValue(),this.dataText.getValue().getDayOfMonth()),
 								(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(), Integer.parseInt(this.matricolaText.getText()),
 								ruolo.getValue(), this.category);
 						staff.insert();
 					} else {
 						Immagine image = new Immagine(staffPath.getText());
-						Staff staff = new Staff(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getText()),
+						Staff staff = new Staff(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getValue().getYear(), this.dataText.getValue().getMonthValue(),this.dataText.getValue().getDayOfMonth()),
 								(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(),image, Integer.parseInt(this.matricolaText.getText()),
 								ruolo.getValue(), this.category);
 						staff.insert();

@@ -13,6 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -35,6 +36,9 @@ public class InsertPlayerView extends ViewImpl {
 	private Label nameLabel;
 
 	@FXML
+	private DatePicker dataText, certificatoText;
+	
+	@FXML
 	private ImageView logo;
 
 	@FXML
@@ -44,49 +48,43 @@ public class InsertPlayerView extends ViewImpl {
 	private Rectangle color2;
 
 	@FXML
-	TextField nameText;
+	private TextField nameText;
 
 	@FXML
-	TextField surnameText;
+	private TextField surnameText;
 
 	@FXML
-	TextField cfText;
+	private TextField cfText;
 
 	@FXML
-	TextField dataText;
+	private TextField matricolaText;
 
 	@FXML
-	TextField matricolaText;
+	private TextField pesoText;
 
 	@FXML
-	TextField pesoText;
+	private TextField altezzaText;
 
 	@FXML
-	TextField altezzaText;
+	private TextField message;
 
 	@FXML
-	TextField certificatoText;
+	private TextField playerPath;
 
 	@FXML
-	TextField message;
+	private Button insertButton;
 
 	@FXML
-	TextField playerPath;
+	private Button browse;
 
 	@FXML
-	Button insertButton;
+	private ChoiceBox<String> sesso;
 
 	@FXML
-	Button browse;
+	private ChoiceBox<String> preferenza;
 
 	@FXML
-	ChoiceBox<String> sesso;
-
-	@FXML
-	ChoiceBox<String> preferenza;
-
-	@FXML
-	ChoiceBox<String> ruolo;
+	private ChoiceBox<String> ruolo;
 
 	private int category;
 
@@ -131,8 +129,8 @@ public class InsertPlayerView extends ViewImpl {
 
 	private boolean check() {
 		if (nameText.getText().isEmpty() || surnameText.getText().isEmpty() || cfText.getText().isEmpty()
-				|| dataText.getText().isEmpty() || matricolaText.getText().isEmpty() || pesoText.getText().isEmpty()
-				|| altezzaText.getText().isEmpty() || certificatoText.getText().isEmpty() || sesso.getValue().isEmpty()
+				|| dataText.getValue() == null || matricolaText.getText().isEmpty() || pesoText.getText().isEmpty()
+				|| altezzaText.getText().isEmpty() || certificatoText.getValue() == null || sesso.getValue().isEmpty()
 				|| preferenza.getValue().isEmpty() || ruolo.getValue().isEmpty()) {
 			return false;
 		}
@@ -156,15 +154,16 @@ public class InsertPlayerView extends ViewImpl {
 					Payment pagamento = new Payment(1000, false, Finanze.QUOTA);
 					pagamento.insert();
 					if(this.playerPath.getText().isEmpty()) {
-						Player player = new Player(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getText()),
+						Player player = new Player(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getValue().getYear(), this.dataText.getValue().getMonthValue(),this.dataText.getValue().getDayOfMonth()), 
 								(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(), Integer.parseInt(this.matricolaText.getText()), this.pesoText.getText(),
-								this.altezzaText.getText(), new DateTime(this.certificatoText.getText()), ruolo.getValue(), this.category, preferenza.getValue());
+								this.altezzaText.getText(), new DateTime(this.certificatoText.getValue().getYear(), this.certificatoText.getValue().getMonthValue(),this.certificatoText.getValue().getDayOfMonth()), 
+								ruolo.getValue(), this.category, preferenza.getValue());
 						player.insert();
 					} else {
 						Immagine image = new Immagine(playerPath.getText());
-						Player player = new Player(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getText()),
+						Player player = new Player(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getValue().getYear(), this.dataText.getValue().getMonthValue(),this.dataText.getValue().getDayOfMonth()),
 								(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(),image, Integer.parseInt(this.matricolaText.getText()), this.pesoText.getText(),
-								this.altezzaText.getText(), new DateTime(this.certificatoText.getText()), ruolo.getValue(), this.category, preferenza.getValue());
+								this.altezzaText.getText(), new DateTime(this.certificatoText.getValue().getYear(), this.certificatoText.getValue().getMonthValue(),this.certificatoText.getValue().getDayOfMonth()), ruolo.getValue(), this.category, preferenza.getValue());
 						player.insert();
 					}
 					this.getStage().close();

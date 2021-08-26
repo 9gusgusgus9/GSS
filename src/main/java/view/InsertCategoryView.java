@@ -22,37 +22,37 @@ import utilities.Utilities;
 public class InsertCategoryView extends ViewImpl {
 
 	@FXML
-	AnchorPane pane;
+	private AnchorPane pane;
 	
 	@FXML
-	Label nameLabel;
+	private Label nameLabel;
 	
 	@FXML
-	ImageView logo;
+	private ImageView logo;
 	
 	@FXML
-	Rectangle color1;
+	private Rectangle color1;
 	
 	@FXML
-	Rectangle color2;
+	private Rectangle color2;
 	
 	@FXML
-	Label nomeLab;
+	private Label nomeLab;
 	
 	@FXML
-	TextField nome;
+	private TextField nome;
 	
 	@FXML
-	Label fotoSqLab;
+	private Label fotoSqLab;
 	
 	@FXML
-	TextField fotoSqPath;
+	private TextField fotoSqPath;
 	
 	@FXML
-	Button browseButton;
+	private Button browseButton;
 	
 	@FXML
-	Button insertButton;
+	private Button insertButton;
 	
 	private boolean image = false;
 	
