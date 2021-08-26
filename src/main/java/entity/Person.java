@@ -14,7 +14,6 @@ public class Person extends Entity{
 	public final static String PRIMARY_K_NAME = "CF";
 	public final static String COLUMNS="(CF, CodPagamento, Nome, Cognome, Data, Matricola_tesserino, CodSesso, CodPartitaIVA, CodImmagine)";
 	private String codiceFiscale;
-	private int codPagamento;
 	private StringProperty nome;
 	private StringProperty cognome;
 	private DateTime data;
@@ -24,13 +23,12 @@ public class Person extends Entity{
 	private String codPartitaIva;
 	private BooleanProperty invite = new SimpleBooleanProperty(false);
 		
-	public Person(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
+	public Person(String codiceFiscale, String nome, String cognome, DateTime data, String codSesso, String codPartitaIva,
 			Immagine image) {
 		this.codiceFiscale = codiceFiscale;
 		this.nome = new SimpleStringProperty(nome);
 		this.cognome = new SimpleStringProperty(cognome);
 		this.data = data;
-		this.codPagamento = codPagamento;
 		this.codSesso = codSesso;
 		image.insert();
 		this.codImmagine = (int) image.getPrimaryKey();
@@ -38,13 +36,12 @@ public class Person extends Entity{
 		this.codPartitaIva=codPartitaIva;
 	}
 
-	public Person(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
+	public Person(String codiceFiscale, String nome, String cognome, DateTime data, String codSesso, String codPartitaIva,
 			Immagine image, int matricola) {
 		this.codiceFiscale = codiceFiscale;
 		this.nome = new SimpleStringProperty(nome);
 		this.cognome = new SimpleStringProperty(cognome);
 		this.data = data;
-		this.codPagamento = codPagamento;
 		this.codSesso = codSesso;
 		image.insert();
 		this.codImmagine = (int) image.getPrimaryKey();
@@ -52,25 +49,23 @@ public class Person extends Entity{
 		this.codPartitaIva=codPartitaIva;
 	}
 
-	public Person(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva) {
+	public Person(String codiceFiscale, String nome, String cognome, DateTime data, String codSesso, String codPartitaIva) {
 		this.codiceFiscale = codiceFiscale;
 		this.nome = new SimpleStringProperty(nome);
 		this.cognome = new SimpleStringProperty(cognome);
 		this.data = data;
-		this.codPagamento = codPagamento;
 		this.codSesso = codSesso;
 		this.codImmagine=0;
 		this.matricola = 0;
 		this.codPartitaIva=codPartitaIva;
 	}
 
-	public Person(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
+	public Person(String codiceFiscale, String nome, String cognome, DateTime data, String codSesso, String codPartitaIva,
 			int matricola) {
 		this.codiceFiscale = codiceFiscale;
 		this.nome = new SimpleStringProperty(nome);
 		this.cognome = new SimpleStringProperty(cognome);
 		this.data = data;
-		this.codPagamento = codPagamento;
 		this.codSesso = codSesso;
 		this.codImmagine = 3;
 		this.matricola = matricola;
@@ -119,10 +114,6 @@ public class Person extends Entity{
 		return data;
 	}
 
-	public int getCodPagamento() {
-		return codPagamento;
-	}
-
 	public String getCodSesso() {
 		return codSesso;
 	}
@@ -153,7 +144,7 @@ public class Person extends Entity{
 
 	@Override
 	public String getValues() {
-		return "('" + this.codiceFiscale + "', '" + this.codPagamento + "', '" + this.nome.get() + "', '" + this.cognome.get() + "', '" + this.data.getDate() + "', '" + this.matricola + "', '" + this.codSesso + "', '" + this.codPartitaIva + "', " + this.codImmagine + ")";
+		return "('" + this.codiceFiscale + "', '" + this.nome.get() + "', '" + this.cognome.get() + "', '" + this.data.getDate() + "', '" + this.matricola + "', '" + this.codSesso + "', '" + this.codPartitaIva + "', " + this.codImmagine + ")";
 	}
 
 	@Override

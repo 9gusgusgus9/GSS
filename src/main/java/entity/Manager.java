@@ -11,27 +11,27 @@ public class Manager extends Entity {
 	private String codRuolo;
 	private Person person;
 	
-	public Manager(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
+	public Manager(String codiceFiscale, String nome, String cognome, DateTime data, String codSesso, String codPartitaIva,
 			Immagine image, int matricola, String codRuolo) {
-		person = new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, image, matricola);
+		person = new Person(codiceFiscale, nome, cognome, data, codSesso, codPartitaIva, image, matricola);
 		this.codRuolo = codRuolo;
 	}
 
 	public Manager(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
 			Immagine image, String codRuolo) {
-		person = new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, image);
+		person = new Person(codiceFiscale, nome, cognome, data, codSesso, codPartitaIva, image);
 		this.codRuolo = codRuolo;
 	}
 	
 	public Manager(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
 			int matricola, String codRuolo) {
-		person = new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, matricola);
+		person = new Person(codiceFiscale, nome, cognome, data, codSesso, codPartitaIva, matricola);
 		this.codRuolo = codRuolo;
 	}
 
-	public Manager(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
+	public Manager(String codiceFiscale, String nome, String cognome, DateTime data, String codSesso, String codPartitaIva,
 			String codRuolo) {
-		person = new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva);
+		person = new Person(codiceFiscale, nome, cognome, data, codSesso, codPartitaIva);
 		this.codRuolo = codRuolo;
 	}
 

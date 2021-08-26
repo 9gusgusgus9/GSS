@@ -12,29 +12,29 @@ public class Staff extends Entity {
 	private int codCategoria;
 	private Person person;
 	
-	public Staff(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva, Immagine image,
+	public Staff(String codiceFiscale, String nome, String cognome, DateTime data, String codSesso, String codPartitaIva, Immagine image,
 			int matricola, String codRuolo, int codCategoria) {
-		person = new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, image, matricola);
+		person = new Person(codiceFiscale, nome, cognome, data, codSesso, codPartitaIva, image, matricola);
 		this.codCategoria = codCategoria;
 		this.codRuolo = codRuolo;
 	}
 
-	public Staff(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
+	public Staff(String codiceFiscale, String nome, String cognome, DateTime data, String codSesso, String codPartitaIva,
 			Immagine image, String codRuolo, int codCategoria) {
-		person = new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, image);
+		person = new Person(codiceFiscale, nome, cognome, data, codSesso, codPartitaIva, image);
 		this.codCategoria = codCategoria;
 		this.codRuolo = codRuolo;
 	}
 
-	public Staff(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva, int matricola, String codRuolo, int codCategoria) {
-		person = new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva, matricola);
+	public Staff(String codiceFiscale, String nome, String cognome, DateTime data, String codSesso, String codPartitaIva, int matricola, String codRuolo, int codCategoria) {
+		person = new Person(codiceFiscale, nome, cognome, data, codSesso, codPartitaIva, matricola);
 		this.codCategoria = codCategoria;
 		this.codRuolo = codRuolo;
 	}
 
-	public Staff(String codiceFiscale, String nome, String cognome, DateTime data, int codPagamento, String codSesso, String codPartitaIva,
+	public Staff(String codiceFiscale, String nome, String cognome, DateTime data, String codSesso, String codPartitaIva,
 			String codRuolo, int codCategoria) {
-		person = new Person(codiceFiscale, nome, cognome, data, codPagamento, codSesso, codPartitaIva);
+		person = new Person(codiceFiscale, nome, cognome, data, codSesso, codPartitaIva);
 		this.codCategoria = codCategoria;
 		this.codRuolo = codRuolo;
 	}

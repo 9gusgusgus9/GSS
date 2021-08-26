@@ -484,7 +484,7 @@ public class Utilities {
 		try {
 			rs1 = stmt.executeQuery(query1);
 			if(rs1.next()) {
-				out = new Player(cf, rs1.getString("Nome"), rs1.getString("Cognome"),new DateTime(rs1.getString("Data")), rs1.getInt("CodPagamento"),rs1.getString("CodSesso"), rs1.getString("CodPartitaIva"), rs1.getInt("Matricola_tesserino"), peso, altezza, data, ruolo, codCategoria, preferenza);
+				out = new Player(cf, rs1.getString("Nome"), rs1.getString("Cognome"),new DateTime(rs1.getString("Data")), rs1.getString("CodSesso"), rs1.getString("CodPartitaIva"), rs1.getInt("Matricola_tesserino"), peso, altezza, data, ruolo, codCategoria, preferenza);
 				image = Utilities.getImage(rs1.getInt("CodImmagine"));
 			}
 			conn.close();
@@ -555,7 +555,7 @@ public class Utilities {
 		try {
 			rs1 = stmt.executeQuery(query1);
 			if(rs1.next()) {
-				out = new Staff(cf, rs1.getString("Nome"), rs1.getString("Cognome"),new DateTime(rs1.getString("Data")), rs1.getInt("CodPagamento"),rs1.getString("CodSesso"), rs1.getString("CodPartitaIva"), rs1.getInt("Matricola_tesserino"), ruolo, categoria);
+				out = new Staff(cf, rs1.getString("Nome"), rs1.getString("Cognome"),new DateTime(rs1.getString("Data")), rs1.getString("CodSesso"), rs1.getString("CodPartitaIva"), rs1.getInt("Matricola_tesserino"), ruolo, categoria);
 				image = Utilities.getImage(rs1.getInt("CodImmagine"));
 			}
 			conn.close();
