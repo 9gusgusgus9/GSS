@@ -47,7 +47,7 @@ public class Utilities {
 	
 	private static Connection conn;
 	private static Statement stmt;
-	private static String password = "Gu$tavo191199";
+	private static String password;
 	static {
 
 	}
@@ -76,7 +76,7 @@ public class Utilities {
 	}
 
 	
-	/*Metodo per l'inserimento nel database di ogni entità*/
+	/*Metodo per l'inserimento nel database di ogni entitï¿½*/
 	
 	public static void insertEntity(Entity entity){
 		dbConnection();
@@ -326,7 +326,7 @@ public class Utilities {
 		return null;
 	}
 
-	/*Metodo che controlla se è gia presente o meno una società all'interno del database*/
+	/*Metodo che controlla se ï¿½ gia presente o meno una societï¿½ all'interno del database*/
 	public static boolean isTheFirstStart(){
 		dbConnection();
 		String query = "SELECT * FROM societa";
@@ -367,7 +367,7 @@ public class Utilities {
 		return out;
 	}
 
-	/*Metodo che restituisce l'unica società presente nel database*/
+	/*Metodo che restituisce l'unica societï¿½ presente nel database*/
 	public static Pair<Image, Society> getSociety(){
 		dbConnection();
 		String query = "SELECT * FROM societa";
@@ -572,7 +572,7 @@ public class Utilities {
 		return Utilities.getCategory(idCategoria).getY();
 	}
 	
-	/*Metodo che ritorna true se il cf in input non è presente nel database*/
+	/*Metodo che ritorna true se il cf in input non ï¿½ presente nel database*/
 	public static boolean isFreeCF(String cf){
 		dbConnection();
 		String query = "SELECT * FROM persona WHERE CF = '" + cf + "'";
@@ -820,9 +820,13 @@ public class Utilities {
 	/*Metodo che elimina l'entita in input*/
 	public static void deleteEntity(Entity entity){
 		dbConnection();
-
+		
 		try {
-			stmt.executeUpdate("DELETE FROM " + entity.getTableName() + " AS e WHERE e." + entity.getNamePrimaryKey() + "= '" + entity.getPrimaryKey() + "'");
+			if (entity.getPrimaryKey().getClass() == int.class) {
+				stmt.executeUpdate("DELETE FROM " + entity.getTableName() + " AS e WHERE e." + entity.getNamePrimaryKey() + "= " + entity.getPrimaryKey());
+			} else {
+				stmt.executeUpdate("DELETE FROM " + entity.getTableName() + " AS e WHERE e." + entity.getNamePrimaryKey() + "= '" + entity.getPrimaryKey() + "'");
+			}
 			conn.close();
 			stmt.close();
 		} catch (SQLException e) {
