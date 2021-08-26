@@ -874,4 +874,17 @@ public class Utilities {
 		actualEvent = e;
 	}
 	
+	public static void deletePersonInConvene(Person persona) {
+		dbConnection();
+		
+		try {
+			stmt.executeUpdate("DELETE FROM convocazioni AS c WHERE c." + persona.getNamePrimaryKey() + "= '" + persona.getPrimaryKey() + "'");
+			conn.close();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }
