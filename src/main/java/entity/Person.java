@@ -162,6 +162,12 @@ public class Person extends Entity{
 	}
 
 	@Override
+	public void delete() {
+		Utilities.deleteDocumentsFromCf(getCf());
+		super.delete();
+	}
+	
+	@Override
 	public void setPrimaryKey(int primaryKey) {
 		// TODO Auto-generated method stub
 		

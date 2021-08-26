@@ -846,8 +846,29 @@ public class Utilities {
 			e.printStackTrace();
 		}
 	}
-	
-	
+	 
+	public static void deleteDocumentsFromCf(String cf) {
+		dbConnection();
+		String query = "SELECT * FROM possesso WHERE CF = '" + cf + "'";
+		try {
+			ResultSet rs = stmt.executeQuery(query);
+			List<Integer> documents = new LinkedList();
+			while(rs.next()) {
+				documents.add(rs.getInt("CodImmagine"));
+			}
+			Iterator<Integer> iter = documents.iterator();
+			query = "DELETE FROM possesso WHERE CF = '" + cf + "'";
+			stmt.executeUpdate(query);
+			while(iter.hasNext()) {
+				query = "DELETE FROM immagine WHERE IdImmagine = " + iter.next();
+				stmt.executeUpdate(query);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	
 	/*Metodi utili per recuperare l'evento/la categoria /la persona da visualizzare*/
 	public static void setCategoria(int id) {
