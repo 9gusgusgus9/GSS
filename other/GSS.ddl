@@ -30,7 +30,6 @@ create table CATEGORIA (
 create table CONVOCAZIONI (
      CodEvento int not null,
      CF varchar(16) not null,
-     Presenza bool default false not null,
      constraint IDCONVOCAZIONI primary key (CodEvento, CF));
 
 create table GIOCATORE (
@@ -76,16 +75,8 @@ create table MANO_PIEDE_PREFERITO (
      Preferenza varchar(2) not null,
      constraint IDMANO_PIEDE_PREFERITO primary key (Preferenza));
 
-create table PAGAMENTO (
-     IdPagamento int not null auto_increment,
-     Quota int,
-     Stipendio int,
-     Pagato bool default false not null,
-     constraint IDPAGAMENTO_ID primary key (IdPagamento));
-
 create table PERSONA (
      CF varchar(16) not null,
-     CodPagamento int not null,
      Nome varchar(25) not null,
      Cognome varchar(25) not null,
      Data varchar(20) not null,
@@ -232,10 +223,6 @@ alter table PERSONA add constraint FKtesserato
 alter table PERSONA add constraint FKrappresenta
      foreign key (CodImmagine)
      references IMMAGINE (IdImmagine);
-
-alter table PERSONA add constraint FKpagamento
-     foreign key (CodPagamento)
-     references PAGAMENTO (IdPagamento);
 
 alter table POSSESSO add constraint FKRCodPersona
      foreign key (CF)
