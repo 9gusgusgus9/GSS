@@ -115,7 +115,7 @@ public class SingleEventView extends ViewImpl{
 	@FXML
 	private void deleteEvent() {
 		Utilities.deleteConvocazioni((int)e.getPrimaryKey());
-		Utilities.deleteEntity(e);
+		e.delete();
 		getStage().close();
 	}
 	
