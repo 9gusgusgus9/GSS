@@ -37,7 +37,7 @@ public class ViewSwitcher {
         View view = this.loadStyle(stage, viewType);
         view.setStage(stage);
         view.init();
-        stage.setTitle("Test");
+        stage.setTitle("Team Management");
         stage.show();
     }
     
