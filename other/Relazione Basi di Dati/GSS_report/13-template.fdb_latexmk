@@ -4,10 +4,10 @@
   "13-template.aux" 0 -1 0 "pdflatex"
   "13-template.bib" 0 -1 0 ""
   (generated)
-  "13-template.bbl"
   "13-template.blg"
-["pdflatex"] 1630077184 "/Users/riccardorambaldi/Desktop/Team Management/GSS/other/Relazione Basi di Dati/GSS_report/13-template.tex" "/Users/riccardorambaldi/Desktop/Team Management/GSS/other/Relazione Basi di Dati/GSS_report/13-template.pdf" "13-template" 1630077184
-  "/Users/riccardorambaldi/Desktop/Team Management/GSS/other/Relazione Basi di Dati/GSS_report/13-template.aux" 1630077184 8 a94a2480d3289e625eea47cd1b285758 ""
+  "13-template.bbl"
+["pdflatex"] 1630077340 "/Users/riccardorambaldi/Desktop/Team Management/GSS/other/Relazione Basi di Dati/GSS_report/13-template.tex" "/Users/riccardorambaldi/Desktop/Team Management/GSS/other/Relazione Basi di Dati/GSS_report/13-template.pdf" "13-template" 1630077340
+  "/Users/riccardorambaldi/Desktop/Team Management/GSS/other/Relazione Basi di Dati/GSS_report/13-template.aux" 1630077340 8 a94a2480d3289e625eea47cd1b285758 ""
   "/Users/riccardorambaldi/Desktop/Team Management/GSS/other/Relazione Basi di Dati/GSS_report/13-template.tex" 1630077177 15039 5b123916f57f6b5ac64a5facfd9805ec ""
   "/Users/riccardorambaldi/Desktop/Team Management/GSS/other/Relazione Basi di Dati/GSS_report/GSS_report/img/ambiguità.png" 0 -1 0 ""
   "/Users/riccardorambaldi/Desktop/Team Management/GSS/other/Relazione Basi di Dati/GSS_report/GSS_report/img/categoria.png" 0 -1 0 ""
@@ -104,10 +104,10 @@
   "GSS_report/img/societa_raffinamento.png" 0 -1 0 ""
   "GSS_report/img/società.png" 0 -1 0 ""
   (generated)
-  "13-template.pdf"
   "13-template.aux"
-  "/Users/riccardorambaldi/Desktop/Team Management/GSS/other/Relazione Basi di Dati/GSS_report/13-template.log"
-  "13-template.log"
   "13-template.out"
   "13-template.toc"
+  "/Users/riccardorambaldi/Desktop/Team Management/GSS/other/Relazione Basi di Dati/GSS_report/13-template.log"
+  "13-template.log"
   "/Users/riccardorambaldi/Desktop/Team Management/GSS/other/Relazione Basi di Dati/GSS_report/13-template.pdf"
+  "13-template.pdf"
