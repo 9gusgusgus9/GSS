@@ -87,8 +87,10 @@ Lo schema scheletro della società comprende la principali entità in diretta re
     \caption{Schema scheletro della Società}
 \end{figure}
 \subsection{Raffinamenti proposti}
+
 L'entità \textbf{Società} deve avere una partita IVA che la identifica in modo univoco nel caso in cui, in un'ottica futura di aggiornamento, si volessero aggiungere più società al database. Inoltre, la \textbf{Società} deve avere un nome (non necessariamente univoco), due \textbf{colori sociali} (che l'utente potrà scegliere al primo avvio del programma) e infine uno stemma, rappresentato come \textbf{Immagine} (nel caso in cui non v engsa caricato uno stemma ne verrà inserito uno di default) in relazione 1-N \textbf{Rappresenta} con \textbf{Società}. \newline \newline
 Per quanto riguardo lo \textbf{Sport}, vista la necessità di popolare le tabelle dei ruoli dei giocatori a seconda dello sport scelto, abbiamo creato una relazione 1-N \textbf{Pratica} tra \textbf{Società} e \textbf{Sport}.
+
 \begin{figure}[htp]
     \centering
     \includegraphics[width = \textwidth]{GSS_report/img/societa_raffinamento.png}
@@ -105,12 +107,14 @@ Lo schema scheletro della Persona comprende la principali entità in diretta rel
     \caption{Schema scheletro della Persona}
 \end{figure}
 \subsection{Raffinamenti proposti}
+
 Una \textbf{Società} sportiva è composta da più persone (tesserate) che ricoprono vari ruoli.
 Per evitare ridondanze, l'entità \textbf{Persona} è stata specializzata delle tre entità \textbf{Giocatore}, \textbf{Dirigente} e \textbf{Staff} che ereditano da \textbf{Persona} l'identificatore  \textbf{CF}, il \textbf{Nome}, il \textbf{Cognome} e la \textbf{Data} di nascita.
 Questa generalizzazione è totale ed esclusiva; in questo senso, una persona può essere o un \textbf{Giocatore} o un \textbf{Dirigente} o far parte dello \textbf{Staff}, e non può essere altrimenti. \newline \newline
 Ogni persona può essere rappresentata da una foto (in caso contrario ne viene caricata una di default) e possiede un documento sotto forma di immagine di cui viene specificata anche la tipologia (es. carta d'identità) in \textbf{Tipo Documento}, di conseguenza \textbf{Persona} possiede due relazioni differenti con \textbf{Immagine}: una 1-N \textbf{Rappresenta} e una 0-N \textbf{Possiede}. \newline \newline
 Sia \textbf{Staff}, \textbf{Giocatore} e \textbf{Dirigente} devono ricoprire ognuno un determinato ruolo, ma solo \textbf{Staff} e \textbf{Giocatore} devono far parte di una e soltanto una \textbf{Categoria}. Ogni ruolo ha un identificatore e una breve \textbf{Descrizione}.
 Alla creazione del database verranno popolate le tabelle \textbf{Sesso}, \textbf{Mano Piede Preferito}, \textbf{RuoloStaff} e \textbf{RuoloDirigente}, mentre la tabella \textbf{RuoloGiocatore} verrà popolata solo in base alla scelta dello sport alla creazione della società.
+
 \begin{figure}[htp]
     \centering
     \includegraphics[width = \textwidth]{GSS_report/img/persona_raffinamento}
@@ -127,8 +131,10 @@ Lo schema scheletro della Categoria comprende la principali entità in diretta r
     \caption{Schema scheletro della Categoria}
 \end{figure}
 \subsection{Raffinamenti proposti}
+
 Una \textbf{Categoria} all'interno di una società sportiva è una squadra composta da giocatori (di una determinata età) e da un rispettivo staff.
 Ogni \textbf{Categoria} ha un identificatore numerico incrementale e un \textbf{Nome}; Inoltre, possiede un'\textbf{Immagine} (tipicamente una foto della squadra) e può disputare partite e allenamenti .
+
 \begin{figure}[htp]
     \centering
     \includegraphics[width = \textwidth]{GSS_report/img/categoria_raffinamento.png}
@@ -145,9 +151,10 @@ Lo schema scheletro dell'Evento comprende la principali entità in diretta relaz
     \caption{Schema scheletro dell'Evento}
 \end{figure}
 \subsection{Raffinamenti proposti}
+
 \begin{figure}[htp]
     \centering
-    \includegraphics[width = \textwidth]{GSS_report/img/categoria_raffinamento.png}
+    \includegraphics[width = \textwidth]{GSS_report/img/evento_raffinamento.png}
     \caption{Schema E/R parziale dell'Evento}
 \end{figure}
 \newpage
@@ -187,12 +194,13 @@ all'interno del DB e conseguentemente, in base allo sport selezionato, verrà ri
 \end{figure}
 
 \newpage
-Una volta terminata l'operazione di primo avvio, si presenterà la schermata home del programma, quella che si presenterà a tutti i successivi
-avvii successivi al primo.
-La schermata home si presenterà con una doppia scheda, la prima mostrerà a video tutte le categorie inserite, oltre alla "categoria" \textbf{Dirigenti},
-la quale conterrà tutte le persone iscritte che non hanno una vera e propria categoria, oltre ai bottoni per 
-Nella seconda scheda, tramite un menu a schede, sarà possibile spostarsi nella visualizzazione del calendario, il quale presenterà
-la settimana corrente ma con la possibilità di vedere le settimane passate e future.
+Una volta terminata l'operazione di primo avvio, si presenterà la schermata home del programma, quella che si visualizzerà a tutti i successivi
+avvii rispetto al primo.
+La schermata home presenterà una doppia scheda, la prima mostrerà a video tutte le categorie inserite oltre alla "categoria" \textbf{Dirigenti},
+la quale conterrà tutte le persone iscritti come dirigenti e che quindi non appartengono a nessuna squadra, oltre ai bottoni per scorrere le varie
+pagine (nel caso in cui siano più di 14), al bottone per l'inserimento di una nuova categoria e al bottone per effettuare il refresh della scheda.
+Ogni singola categoria è cliccabile per poter accedere alla visualizzazione di questa nello specifico. Ad esclusione 
+Nella seconda scheda, sarà presente il calendario della settimana corrente, ma con la possibilità di vedere le settimane passate e future.
 Il login vero e proprio con inserimento di id e password non viene gestito poiché le password non vengono memorizzate nel DB. 
 Viene effettuata però una cosa molto simile, infatti nel caso del login di un dipendente esso deve 
 specificare il suo id univoco. La correttezza di tale inserimento viene confermata se viene inserito un id che 
