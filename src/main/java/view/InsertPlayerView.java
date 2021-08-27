@@ -155,14 +155,14 @@ public class InsertPlayerView extends ViewImpl {
 					pagamento.insert();
 					if(this.playerPath.getText().isEmpty()) {
 						Player player = new Player(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getValue().getYear(), this.dataText.getValue().getMonthValue(),this.dataText.getValue().getDayOfMonth()), 
-								(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(), Integer.parseInt(this.matricolaText.getText()), this.pesoText.getText(),
+								sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(), Integer.parseInt(this.matricolaText.getText()), this.pesoText.getText(),
 								this.altezzaText.getText(), new DateTime(this.certificatoText.getValue().getYear(), this.certificatoText.getValue().getMonthValue(),this.certificatoText.getValue().getDayOfMonth()), 
 								ruolo.getValue(), this.category, preferenza.getValue());
 						player.insert();
 					} else {
 						Immagine image = new Immagine(playerPath.getText());
 						Player player = new Player(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getValue().getYear(), this.dataText.getValue().getMonthValue(),this.dataText.getValue().getDayOfMonth()),
-								(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(),image, Integer.parseInt(this.matricolaText.getText()), this.pesoText.getText(),
+								sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(),image, Integer.parseInt(this.matricolaText.getText()), this.pesoText.getText(),
 								this.altezzaText.getText(), new DateTime(this.certificatoText.getValue().getYear(), this.certificatoText.getValue().getMonthValue(),this.certificatoText.getValue().getDayOfMonth()), ruolo.getValue(), this.category, preferenza.getValue());
 						player.insert();
 					}

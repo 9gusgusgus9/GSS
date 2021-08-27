@@ -136,7 +136,7 @@ public class InsertDirigentView extends ViewImpl{
 					} else {
 						Immagine image = new Immagine(dirigentPath.getText());
 						Manager manager = new Manager(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getValue().getYear(), this.dataText.getValue().getMonthValue(),this.dataText.getValue().getDayOfMonth()),
-								(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(),image, Integer.parseInt(this.matricolaText.getText()),
+								sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(),image, Integer.parseInt(this.matricolaText.getText()),
 								ruolo.getValue());
 						manager.insert();
 					}
