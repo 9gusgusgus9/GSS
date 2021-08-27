@@ -77,37 +77,80 @@ A ogni allenamento e a ogni partita può partecipare una sola categoria. Per gli
 
 
 \chapter{Progettazione concettuale}
-\section{Schema Scheletro}
-\subsection{Società}
-\subsubsection{Progettazione dello schema E/R}
+\section{Società}
+\subsection{Progettazione dello schema E/R}
 Lo schema scheletro della società comprende la principali entità in diretta relazione con essa.
 \newline
 \begin{figure}[htp]
     \centering
     \includegraphics[width = \textwidth]{GSS_report/img/società.png}
     \caption{Schema scheletro della Società}
-    \label{fig:umlAnalisys}
 \end{figure}
-\subsubsection{Raffinamenti proposti}
-L'entità \textbf{Società} deve avere una partita IVA che la identifica in modo univoco nel caso in cui, in un'ottica futura di aggiornamento, si volessero aggiungere più società al database. Inoltre, la \textbf{Società} deve avere un nome (non necessariamente univoco), due \textbf{colori sociali} (che l'utente potrà scegliere al primo avvio del programma) e infine uno stemma, rappresentato come \textbf{Immagine} in relazione 1-N \textbf{Rappresenta} con \textbf{Società}. \newline \newline
+\subsection{Raffinamenti proposti}
+L'entità \textbf{Società} deve avere una partita IVA che la identifica in modo univoco nel caso in cui, in un'ottica futura di aggiornamento, si volessero aggiungere più società al database. Inoltre, la \textbf{Società} deve avere un nome (non necessariamente univoco), due \textbf{colori sociali} (che l'utente potrà scegliere al primo avvio del programma) e infine uno stemma, rappresentato come \textbf{Immagine} (nel caso in cui non v engsa caricato uno stemma ne verrà inserito uno di default) in relazione 1-N \textbf{Rappresenta} con \textbf{Società}. \newline \newline
 Per quanto riguardo lo \textbf{Sport}, vista la necessità di popolare le tabelle dei ruoli dei giocatori a seconda dello sport scelto, abbiamo creato una relazione 1-N \textbf{Pratica} tra \textbf{Società} e \textbf{Sport}.
 \begin{figure}[htp]
     \centering
     \includegraphics[width = \textwidth]{GSS_report/img/societa_raffinamento.png}
     \caption{Schema E/R parziale della Società}
-    \label{fig:umlAnalisys}
 \end{figure}
 
 \newpage
-\subsection{Persona}
-\subsubsection{Progettazione dello schema E/R}
+\section{Persona}
+\subsection{Progettazione dello schema E/R}
+Lo schema scheletro della Persona comprende la principali entità in diretta relazione con essa.
 \begin{figure}[htp]
     \centering
     \includegraphics[width = \textwidth]{GSS_report/img/persona.png}
     \caption{Schema scheletro della Persona}
-    \label{fig:umlAnalisys}
 \end{figure}
-\subsubsection{Raffinamenti proposti}
+\subsection{Raffinamenti proposti}
+Una \textbf{Società} sportiva è composta da più persone (tesserate) che ricoprono vari ruoli.
+Per evitare ridondanze, l'entità \textbf{Persona} è stata specializzata delle tre entità \textbf{Giocatore}, \textbf{Dirigente} e \textbf{Staff} che ereditano da \textbf{Persona} l'identificatore  \textbf{CF}, il \textbf{Nome}, il \textbf{Cognome} e la \textbf{Data} di nascita.
+Questa generalizzazione è totale ed esclusiva; in questo senso, una persona può essere o un \textbf{Giocatore} o un \textbf{Dirigente} o far parte dello \textbf{Staff}, e non può essere altrimenti. \newline \newline
+Ogni persona può essere rappresentata da una foto (in caso contrario ne viene caricata una di default) e possiede un documento sotto forma di immagine di cui viene specificata anche la tipologia (es. carta d'identità) in \textbf{Tipo Documento}, di conseguenza \textbf{Persona} possiede due relazioni differenti con \textbf{Immagine}: una 1-N \textbf{Rappresenta} e una 0-N \textbf{Possiede}. \newline \newline
+Sia \textbf{Staff}, \textbf{Giocatore} e \textbf{Dirigente} devono ricoprire ognuno un determinato ruolo, ma solo \textbf{Staff} e \textbf{Giocatore} devono far parte di una e soltanto una \textbf{Categoria}. Ogni ruolo ha un identificatore e una breve \textbf{Descrizione}.
+Alla creazione del database verranno popolate le tabelle \textbf{Sesso}, \textbf{Mano Piede Preferito}, \textbf{RuoloStaff} e \textbf{RuoloDirigente}, mentre la tabella \textbf{RuoloGiocatore} verrà popolata solo in base alla scelta dello sport alla creazione della società.
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width = \textwidth]{GSS_report/img/persona_raffinamento}
+    \caption{Schema E/R parziale della Persona}
+\end{figure}
+
+\newpage
+\section{Categoria}
+\subsection{Progettazione dello schema E/R}
+Lo schema scheletro della Categoria comprende la principali entità in diretta relazione con essa.
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width = \textwidth]{GSS_report/img/categoria.png}
+    \caption{Schema scheletro della Categoria}
+\end{figure}
+\subsection{Raffinamenti proposti}
+Una \textbf{Categoria} all'interno di una società sportiva è una squadra composta da giocatori (di una determinata età) e da un rispettivo staff.
+Ogni \textbf{Categoria} ha un identificatore numerico incrementale e un \textbf{Nome}; Inoltre, possiede un'\textbf{Immagine} (tipicamente una foto della squadra) e può disputare partite e allenamenti .
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width = \textwidth]{GSS_report/img/categoria_raffinamento.png}
+    \caption{Schema E/R parziale della Categoria}
+\end{figure}
+
+\newpage
+\section{Evento}
+\subsection{Progettazione dello schema E/R}
+Lo schema scheletro dell'Evento comprende la principali entità in diretta relazione con esso.
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width = \textwidth]{GSS_report/img/evento.png}
+    \caption{Schema scheletro dell'Evento}
+\end{figure}
+\subsection{Raffinamenti proposti}
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width = \textwidth]{GSS_report/img/categoria_raffinamento.png}
+    \caption{Schema E/R parziale dell'Evento}
+\end{figure}
+\newpage
 \section{Schema Finale}
 
 \chapter{Progettazione logica}
@@ -121,6 +164,42 @@ Per quanto riguardo lo \textbf{Sport}, vista la necessità di popolare le tabell
 
 \chapter{Progettazione dell'applicazione}
 \section{Descrizione dell'architettura}
+Si sviluppa una applicazione molto semplice per la gestione del database in linguaggio Java, che renda 
+possibile la messa in pratica delle operazioni richieste dalle varie viste. L’approccio verso il DB è gestito 
+tramite JDBC. Il DB risiede in locale e usa MySQL Server come DBMS.  
+Per ogni tabella contenuta nel DB viene creata una corrispettiva classe che la rappresenta all’interno del 
+model dell’applicazione, tutte queste classi estendono una classe univoca chiamata Entity tramite la quale
+sarà possibile implementare dei metodi univoci per tutte le entità come il metodo di inserimento e cancellazione sul DB,
+in alcune classi finali, come \textbf{Person, Event...}, sono stati sovrascritti alcuni metodi comuni per poter adattare
+meglio la classe alla struttura del DB.
+Tutte le query utili per inserimento, modifica, visulizzazione e cancellazione si troveranno all'interno di una classe
+statica chiamata \textbf{Utilities}.
+Al primo avvio viene proposta una schermata iniziale che richiederà le informazioni della società, come
+\textbf{nome della società, Partita Iva, colori sociali, lo sport di riferimento ed eventualmente un logo} (La scelta dei colori
+potrà essere evitata scegliendo in entrambi i campi il colore "White", il sistema in questo caso inserirà i colori di default),
+una volta terminato l'inserimento della società, la classe Society si occuperà di popolare la tabella con i dati appena inseriti
+all'interno del DB e conseguentemente, in base allo sport selezionato, verrà riempita la tabella \textbf{ruolo giocatore} con i ruoli predefiniti.
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width = \textwidth]{GSS_report/img/schermata_iniziale.png}
+    \caption{Schermata iniziale di inserimento della categoria}
+    \label{fig:umlAnalisys}
+\end{figure}
+
+\newpage
+Una volta terminata l'operazione di primo avvio, si presenterà la schermata home del programma, quella che si presenterà a tutti i successivi
+avvii successivi al primo.
+La schermata home si presenterà con una doppia scheda, la prima mostrerà a video tutte le categorie inserite, oltre alla "categoria" \textbf{Dirigenti},
+la quale conterrà tutte le persone iscritte che non hanno una vera e propria categoria, oltre ai bottoni per 
+Nella seconda scheda, tramite un menu a schede, sarà possibile spostarsi nella visualizzazione del calendario, il quale presenterà
+la settimana corrente ma con la possibilità di vedere le settimane passate e future.
+Il login vero e proprio con inserimento di id e password non viene gestito poiché le password non vengono memorizzate nel DB. 
+Viene effettuata però una cosa molto simile, infatti nel caso del login di un dipendente esso deve 
+specificare il suo id univoco. La correttezza di tale inserimento viene confermata se viene inserito un id che 
+effettivamente è presente nel database. In tal caso tutte le operazioni che vengono effettuate da quel 
+momento in poi, vengono registrate con autore: quel dipendente. Nel caso invece volesse accedere 
+l’amministratore, egli dovrebbe specificare una password che solo lui conosce. A quel punto avrebbe 
+accesso alla schermata di amministrazione, in cui potrebbe eseguire le operazioni da lui richieste.
 
 \bibliographystyle{alpha}
 \bibliography{13-template}
