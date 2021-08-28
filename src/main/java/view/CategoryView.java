@@ -13,6 +13,7 @@ import entity.Category;
 import entity.Evento;
 import entity.Society;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -203,7 +204,6 @@ public class CategoryView extends ViewImpl {
 		this.currentPage = 0;
 		this.loadCategories(currentPage);
         this.printWeekCalendar();
-        this.setOnMouseClick();
 	}
 
 	private void loadCategories(int page) {
@@ -399,32 +399,46 @@ public class CategoryView extends ViewImpl {
 	
 	
 	private void setEventOnDay() {
+		ObservableList<Evento> lnd = FXCollections.observableArrayList();
+		ObservableList<Evento> mrd = FXCollections.observableArrayList();
+		ObservableList<Evento> mrc = FXCollections.observableArrayList();
+		ObservableList<Evento> gvd = FXCollections.observableArrayList();
+		ObservableList<Evento> vnd = FXCollections.observableArrayList();
+		ObservableList<Evento> sbt = FXCollections.observableArrayList();
+		ObservableList<Evento> dmc = FXCollections.observableArrayList();
     	this.setOnChangeWeek();
 		for(Evento e : Utilities.getEvents(new DateTime(this.first.getYear(), this.first.getMonthValue(), this.first.getDayOfMonth()), new DateTime(this.last.getYear(), this.last.getMonthValue(), this.last.getDayOfMonth()))) {
 			DayOfWeek day = this.getDayOfWeek(e);
 			if (day == DayOfWeek.MONDAY) {
-				lunedi.setItems(FXCollections.observableArrayList(e));
-				lun.setCellValueFactory(new PropertyValueFactory<Event, String>("event"));
+				lnd.add(e);
 			} else if (day == DayOfWeek.TUESDAY) {
-				martedi.setItems(FXCollections.observableArrayList(e));
-				mar.setCellValueFactory(new PropertyValueFactory<Event, String>("event"));
+				mrd.add(e);
 			} else if (day == DayOfWeek.WEDNESDAY) {
-				mercoledi.setItems(FXCollections.observableArrayList(e));
-				mer.setCellValueFactory(new PropertyValueFactory<Event, String>("event"));
+				mrc.add(e);
 			} else if (day == DayOfWeek.THURSDAY) {
-				giovedi.setItems(FXCollections.observableArrayList(e));
-				giov.setCellValueFactory(new PropertyValueFactory<Event, String>("event"));
+				gvd.add(e);
 			} else if (day == DayOfWeek.FRIDAY) {
-				venerdi.setItems(FXCollections.observableArrayList(e));
-				ven.setCellValueFactory(new PropertyValueFactory<Event, String>("event"));
+				vnd.add(e);
 			} else if (day == DayOfWeek.SATURDAY) {
-				sabato.setItems(FXCollections.observableArrayList(e));
-				sab.setCellValueFactory(new PropertyValueFactory<Event, String>("event"));
+				sbt.add(e);
 			} else {
-				domenica.setItems(FXCollections.observableArrayList(e));
-				dom.setCellValueFactory(new PropertyValueFactory<Event, String>("event"));
+				dmc.add(e);
 			}
 		}
+		lunedi.setItems(lnd);
+		lun.setCellValueFactory(new PropertyValueFactory<Event, String>("event"));
+		martedi.setItems(mrd);
+		mar.setCellValueFactory(new PropertyValueFactory<Event, String>("event"));
+		mercoledi.setItems(mrc);
+		mer.setCellValueFactory(new PropertyValueFactory<Event, String>("event"));
+		giovedi.setItems(gvd);
+		giov.setCellValueFactory(new PropertyValueFactory<Event, String>("event"));
+		venerdi.setItems(vnd);
+		ven.setCellValueFactory(new PropertyValueFactory<Event, String>("event"));
+		sabato.setItems(sbt);
+		sab.setCellValueFactory(new PropertyValueFactory<Event, String>("event"));
+		domenica.setItems(dmc);
+		dom.setCellValueFactory(new PropertyValueFactory<Event, String>("event"));
 	}
 	
 	private void setOnChangeWeek() {
