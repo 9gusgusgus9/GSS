@@ -12,7 +12,7 @@ import utilities.Utilities;
 public class Person extends Entity{
 	public final static String TABLENAME="persona";
 	public final static String PRIMARY_K_NAME = "CF";
-	public final static String COLUMNS="(CF, CodPagamento, Nome, Cognome, Data, Matricola_tesserino, CodSesso, CodPartitaIVA, CodImmagine)";
+	public final static String COLUMNS="(CF, Nome, Cognome, Data, Matricola_tesserino, CodSesso, CodPartitaIVA, CodImmagine)";
 	private String codiceFiscale;
 	private StringProperty nome;
 	private StringProperty cognome;
