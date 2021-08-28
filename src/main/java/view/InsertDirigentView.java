@@ -4,10 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import entity.Finanze;
 import entity.Immagine;
 import entity.Manager;
-import entity.Payment;
 import entity.Society;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -126,11 +124,9 @@ public class InsertDirigentView extends ViewImpl{
 		if(Utilities.isFreeCF(this.cfText.getText())) {
 			if(this.cfText.getText().length() == 16) {
 				if(this.check()) {
-					Payment pagamento = new Payment(1000, false, Finanze.QUOTA);
-					pagamento.insert();
 					if(this.dirigentPath.getText().isEmpty()) {
 						Manager manager = new Manager(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getValue().getYear(), this.dataText.getValue().getMonthValue(),this.dataText.getValue().getDayOfMonth()),
-								(int) pagamento.getPrimaryKey(), sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(), Integer.parseInt(this.matricolaText.getText()),
+								sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(), Integer.parseInt(this.matricolaText.getText()),
 								ruolo.getValue());
 						manager.insert();
 					} else {

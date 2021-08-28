@@ -26,7 +26,6 @@ import entity.Category;
 import entity.Entity;
 import entity.Evento;
 import entity.Immagine;
-import entity.Payment;
 import entity.Person;
 import entity.Player;
 import entity.Manager;
@@ -93,8 +92,7 @@ public class Utilities {
 		ResultSet rs;
 		try {
 			rs = stmt.executeQuery(query);
-			if (rs.next() && (entity.getClass().equals(Category.class) || entity.getClass().equals(Evento.class)
-					|| entity.getClass().equals(Payment.class))) {
+			if (rs.next() && (entity.getClass().equals(Category.class) || entity.getClass().equals(Evento.class))) {
 				entity.setPrimaryKey(Integer.parseInt(rs.getString(1)));
 			}
 			conn.close();
@@ -198,19 +196,22 @@ public class Utilities {
 	
 	/*Metodo per invitare tutte le persone appartenenti alla categoria in input*/
 	public static void inviteFromCategory(int codEvento, int codCategoria) {
-		dbConnection();
 		List<String> convocati =  Utilities.getCategoryCfFromCod(codCategoria);
-		String query = "INSERT INTO convocazioni (CodEvento, CF, Presenza) VALUES ";
+		dbConnection();
+		String query = "INSERT INTO convocazioni (CodEvento, CF) VALUES ";
 		Iterator<String> iter = convocati.iterator();
-		while(iter.hasNext()) {
-			query += "(" + codEvento + ", '" + iter.next() + "', false), ";
-		}
-		query = "" + query.subSequence(0, query.length() - 2);
-		try {
-			stmt.executeUpdate(query);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(iter.hasNext()) {
+			query += "(" + codEvento + ", '" + iter.next() + "'), ";
+			while(iter.hasNext()) {
+				query += "(" + codEvento + ", '" + iter.next() + "'), ";
+			}
+			query = "" + query.subSequence(0, query.length() - 2);
+			try {
+				stmt.executeUpdate(query);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -519,7 +520,7 @@ public class Utilities {
 		try {
 			rs1 = stmt.executeQuery(query1);
 			if(rs1.next()) {
-				out = new Manager(cf, rs1.getString("Nome"), rs1.getString("Cognome"),new DateTime(rs1.getString("Data")), rs1.getInt("CodPagamento"),rs1.getString("CodSesso"), rs1.getString("CodPartitaIva"), rs1.getInt("Matricola_tesserino"), ruolo);
+				out = new Manager(cf, rs1.getString("Nome"), rs1.getString("Cognome"),new DateTime(rs1.getString("Data")), rs1.getString("CodSesso"), rs1.getString("CodPartitaIva"), rs1.getInt("Matricola_tesserino"), ruolo);
 				image = Utilities.getImage(rs1.getInt("CodImmagine"));
 			}
 			conn.close();

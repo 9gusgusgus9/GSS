@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="pane" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ViewDocuments">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="300.0" prefWidth="500.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="150.0" prefWidth="500.0">
+               <children>
+                  <Pane prefHeight="160.0" prefWidth="500.0">
+                     <children>
+                        <Rectangle fx:id="color1" arcHeight="5.0" arcWidth="5.0" fill="#9c9c9ce5" height="29.0" layoutY="42.0" stroke="BLACK" strokeType="INSIDE" width="500.0" />
+                        <Rectangle fx:id="color2" arcHeight="5.0" arcWidth="5.0" fill="#e4f267" height="29.0" layoutY="70.0" stroke="BLACK" strokeType="INSIDE" width="500.0" />
+                        <Label fx:id="nameLabel" alignment="CENTER" layoutX="1.0" layoutY="47.0" prefHeight="40.0" prefWidth="500.0" text="TEAM NAME">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="logo" fitHeight="116.0" fitWidth="125.0" layoutX="20.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/default/stemma.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="150.0" prefWidth="500.0">
+               <children>
+                  <ListView prefHeight="150.0" prefWidth="450.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="140.0" prefWidth="500.0" spacing="20.0">
+               <children>
+                  <TableView fx:id="table" prefHeight="140.0" prefWidth="450.0">
+                    <columns>
+                      <TableColumn fx:id="tipo" prefWidth="150.0" text="Tipo" />
+                      <TableColumn fx:id="nome" prefWidth="150.0" text="Nome" />
+                        <TableColumn fx:id="open" prefWidth="150.0" text="Open" />
+                    </columns>
+                  </TableView>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

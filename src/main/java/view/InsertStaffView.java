@@ -4,9 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import entity.Finanze;
 import entity.Immagine;
-import entity.Payment;
 import entity.Society;
 import entity.Staff;
 import javafx.collections.FXCollections;
@@ -129,8 +127,6 @@ public class InsertStaffView extends ViewImpl{
 		if(Utilities.isFreeCF(this.cfText.getText())) {
 			if(this.cfText.getText().length() == 16) {
 				if(this.check()) {
-					Payment pagamento = new Payment(1000, false, Finanze.QUOTA);
-					pagamento.insert();
 					if(this.staffPath.getText().isEmpty()) {
 						Staff staff = new Staff(this.cfText.getText(), this.nameText.getText(), this.surnameText.getText(), new DateTime(this.dataText.getValue().getYear(), this.dataText.getValue().getMonthValue(),this.dataText.getValue().getDayOfMonth()),
 								sesso.getValue(), Utilities.getSociety().getY().getPrimaryKey(), Integer.parseInt(this.matricolaText.getText()),
