@@ -130,10 +130,11 @@ public class Utilities {
 			e.printStackTrace();
 		}
 	}
-
+	
 	/*Metodo che elimina l'entita in input*/
 	public static void deleteEntity(Entity entity){
 		dbConnection();
+		
 		try {
 			if (entity.getPrimaryKey().getClass() == int.class) {
 				stmt.executeUpdate("DELETE FROM " + entity.getTableName() + " AS e WHERE e." + entity.getNamePrimaryKey() + "= " + entity.getPrimaryKey());
@@ -874,7 +875,8 @@ public class Utilities {
 	public static void deletePersonInConvene(Person persona) {
 		dbConnection();
 		try {
-			stmt.executeUpdate("DELETE FROM convocazioni AS c WHERE c." + persona.getNamePrimaryKey() + "= '" + persona.getPrimaryKey() + "'");
+			String query = "DELETE FROM convocazioni AS c WHERE c." + persona.getNamePrimaryKey() + "= '" + persona.getPrimaryKey() + "'";
+			stmt.executeUpdate(query);
 			conn.close();
 			stmt.close();
 		} catch (SQLException e) {
