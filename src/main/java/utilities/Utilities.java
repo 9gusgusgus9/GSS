@@ -101,10 +101,54 @@ public class Utilities {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-
 	}
 
+	/*Metodo che si occupa di modificare le colonne richieste in input con il nuovo dato in input*/
+	public static void update(Entity entity, List<Pair<String, String>> fields){
+		dbConnection();
+
+		Iterator<Pair<String, String>> it = fields.iterator();
+
+		String query = "UPDATE " + entity.getTableName() + " SET";
+
+		boolean check = it.hasNext();
+
+		while (check) {
+			Pair<String, String> nxt = it.next();
+			query += " " + nxt.getX() + " = '" + nxt.getY() + "'";
+			check = it.hasNext();
+			if (check) {
+				query += ",";
+			}
+		}
+		query += " WHERE " + entity.getNamePrimaryKey() + " = '" + entity.getPrimaryKey() + "'";
+		try {
+			stmt.executeUpdate(query);
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/*Metodo che elimina l'entita in input*/
+	public static void deleteEntity(Entity entity){
+		dbConnection();
+		try {
+			if (entity.getPrimaryKey().getClass() == int.class) {
+				stmt.executeUpdate("DELETE FROM " + entity.getTableName() + " AS e WHERE e." + entity.getNamePrimaryKey() + "= " + entity.getPrimaryKey());
+			} else {
+				stmt.executeUpdate("DELETE FROM " + entity.getTableName() + " AS e WHERE e." + entity.getNamePrimaryKey() + "= '" + entity.getPrimaryKey() + "'");
+			}
+			conn.close();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 	/*Metodo che popola il database con i ruoli corretti per lo sport selezionato al primo avvio*/
 	public static void insertSport(int codSport){
 		dbConnection();
@@ -182,6 +226,7 @@ public class Utilities {
 		}
 	}
 	
+	/*Query di inserimento di un qualsiasi documento*/
 	public static void insertDocument(String cf, Immagine document, int tipoDocumento) {
 		document.insert();
 		dbConnection();
@@ -214,7 +259,44 @@ public class Utilities {
 			}
 		}
 	}
+
+	/*Metodo che controlla se e' gia presente o meno una societa' all'interno del database*/
+	public static boolean isTheFirstStart(){
+		dbConnection();
+		String query = "SELECT * FROM societa";
+		ResultSet rs;
+		try {
+			rs = stmt.executeQuery(query);
+			if (rs.next()) {
+				return false;
+			} else {
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
 	
+	/*Metodo che ritorna true se il cf in input non � presente nel database*/
+	public static boolean isFreeCF(String cf){
+		dbConnection();
+		String query = "SELECT * FROM persona WHERE CF = '" + cf + "'";
+		ResultSet rs;
+		try {
+			rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return true;
+	}
+	
+	/*Ritorna una lista contenente dei Pair con documento e la stringa che contiene il tipo documento, in base al CF in input*/
 	public static List<Pair<File, String>> getAllDocumentsFromCF(String cf){
 		dbConnection();
 		List<Pair<File, String>> out = new LinkedList<>();
@@ -263,6 +345,7 @@ public class Utilities {
 		return list;
 	}
 	
+	/*Ritorna una lista di pair contenente  */
 	public static List<Pair<Integer, String>> getDocumentsType(){
 		dbConnection();
 		List<Pair<Integer, String>> list = new LinkedList<>();
@@ -278,34 +361,6 @@ public class Utilities {
 		}
 		return list;
 	}
-
-	/*Metodo che si occupa di modificare le colonne richieste in input con il nuovo dato in input*/
-	public static void update(Entity entity, List<Pair<String, String>> fields){
-		dbConnection();
-
-		Iterator<Pair<String, String>> it = fields.iterator();
-
-		String query = "UPDATE " + entity.getTableName() + " SET";
-
-		boolean check = it.hasNext();
-
-		while (check) {
-			Pair<String, String> nxt = it.next();
-			query += " " + nxt.getX() + " = '" + nxt.getY() + "'";
-			check = it.hasNext();
-			if (check) {
-				query += ",";
-			}
-		}
-		query += " WHERE " + entity.getNamePrimaryKey() + " = '" + entity.getPrimaryKey() + "'";
-		try {
-			stmt.executeUpdate(query);
-			stmt.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	};
 
 	/*Metodo che restituisce l'immagine richiesta in input*/
 	public static Image getImage(int x){
@@ -327,26 +382,7 @@ public class Utilities {
 		return null;
 	}
 
-	/*Metodo che controlla se � gia presente o meno una societ� all'interno del database*/
-	public static boolean isTheFirstStart(){
-		dbConnection();
-		String query = "SELECT * FROM societa";
-		ResultSet rs;
-		try {
-			rs = stmt.executeQuery(query);
-			if (rs.next()) {
-				return false;
-			} else {
-				return true;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
-	}
-
-	/*Metodo che restituisce una lista contenente tutte le categorie e le ralitive immagini*/
+	/*Metodo che restituisce una lista contenente tutte le categorie e le relative immagini*/
 	public static List<Pair<Category, Image>> getCategories(){
 		dbConnection();
 		List<Pair<Category, Image>> out = new LinkedList<>();
@@ -368,7 +404,7 @@ public class Utilities {
 		return out;
 	}
 
-	/*Metodo che restituisce l'unica societ� presente nel database*/
+	/*Metodo che restituisce l'unica societa' presente nel database*/
 	public static Pair<Image, Society> getSociety(){
 		dbConnection();
 		String query = "SELECT * FROM societa";
@@ -571,23 +607,6 @@ public class Utilities {
 	/*Metodo che restituisce la categoria richiesta in input*/
 	public static Category getOnlyCategory(int idCategoria){
 		return Utilities.getCategory(idCategoria).getY();
-	}
-	
-	/*Metodo che ritorna true se il cf in input non � presente nel database*/
-	public static boolean isFreeCF(String cf){
-		dbConnection();
-		String query = "SELECT * FROM persona WHERE CF = '" + cf + "'";
-		ResultSet rs;
-		try {
-			rs = stmt.executeQuery(query);
-			while (rs.next()) {
-				return false;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return true;
 	}
 	
 	/*Metodo che restituisce una ObservableList di CF invitati all'evento in input*/
@@ -816,25 +835,6 @@ public class Utilities {
 			e.printStackTrace();
 		}
 		return "";
-	}
-
-	/*Metodo che elimina l'entita in input*/
-	public static void deleteEntity(Entity entity){
-		dbConnection();
-		
-		try {
-			if (entity.getPrimaryKey().getClass() == int.class) {
-				stmt.executeUpdate("DELETE FROM " + entity.getTableName() + " AS e WHERE e." + entity.getNamePrimaryKey() + "= " + entity.getPrimaryKey());
-			} else {
-				stmt.executeUpdate("DELETE FROM " + entity.getTableName() + " AS e WHERE e." + entity.getNamePrimaryKey() + "= '" + entity.getPrimaryKey() + "'");
-			}
-			conn.close();
-			stmt.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 	}
 	
 	/*Metodo che elimina le convocazioni relative all'evento in input*/
