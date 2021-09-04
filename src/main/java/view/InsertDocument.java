@@ -76,9 +76,7 @@ public class InsertDocument extends ViewImpl{
 	}
 	
 	public void insertDocument() {
-		if(this.path.getText().isEmpty() || this.tipo.getValue().isEmpty()) {
-			System.out.println("OK");
-		} else {
+		if(!(this.path.getText().isEmpty() || this.tipo.getValue().isEmpty())) {
 			Immagine document = new Immagine(path.getText());
 			int idTipo = 0;
 			Iterator<Pair<Integer, String>> iter = Utilities.getDocumentsType().iterator();
