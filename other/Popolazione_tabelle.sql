@@ -27,23 +27,3 @@
 ('Certificato COVID'),
 ('Contratto'),
 ('Altro');
-
-##### INSERT INTO ruolo_giocatore (IdRuoloGiocatore, Descrizione) VALUES
-##### ('POR','Portiere'),
-##### ('DIF','Difensore'),
-##### ('CEN','Centrocampista'),
-##### ('ATT','Attaccante');
-
-#### INSERT INTO ruolo_giocatore (IdRuoloGiocatore, Descrizione) VALUES
-##### ('PM','Playmaker'),
-##### ('GU','Guardia'),
-##### ('AP','Ala Piccola'),
-##### ('AG','Ala Grande'),
-##### ('CEN','Centro);
-
-##### INSERT INTO ruolo_giocatore (IdRuoloGiocatore, Descrizione) VALUES
-##### ('PAL','Palleggiatore'),
-##### ('CENT','Centrale'),
-##### ('SL','Schiacciatore Laterale'),
-##### ('SO','Schiacciatore Opposto'),
-##### ('LIB','Libero');
